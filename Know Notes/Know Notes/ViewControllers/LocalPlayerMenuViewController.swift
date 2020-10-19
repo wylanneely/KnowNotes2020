@@ -15,6 +15,8 @@ class LocalPlayerMenuViewController: UIViewController{
         super.viewDidLoad()
      //   GameCenterManager.manager.viewController = self
         displayGKAccessPoint()
+        
+        
     
     }
     

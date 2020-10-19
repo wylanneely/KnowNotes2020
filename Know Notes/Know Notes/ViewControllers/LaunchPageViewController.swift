@@ -13,6 +13,7 @@ class LaunchPageViewController: UIViewController {
         super.viewDidLoad()
        // GameCenterManager.manager.viewController = self
         registerNotification()
+        parent
     }
     
     //MARK: Outlets & Actions
@@ -48,6 +49,7 @@ class LaunchPageViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? LocalPlayerMenuViewController {
+            
             GameCenterManager.manager.viewController = vc
         }
     }

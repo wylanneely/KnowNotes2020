@@ -16,27 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
-                                <rect key="frame" x="166" y="506" width="82" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Sign In"/>
-                                <connections>
-                                    <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="l0s-uf-DmX"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCz-u4-bjo">
-                                <rect key="frame" x="120" y="612" width="174" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Guest Session">
+                                <rect key="frame" x="181" y="826" width="52" height="36"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="20"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" title="Guest">
                                     <color key="titleColor" systemColor="systemPurpleColor"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaM-Lb-ZUI">
-                                <rect key="frame" x="20" y="128" width="374" height="309"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="309" id="udZ-dN-6sb"/>
-                                </constraints>
-                            </imageView>
                             <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1K-A6-Ro2" userLabel="seguePlaceholder">
                                 <rect key="frame" x="338" y="816" width="30" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -46,18 +34,57 @@
                                     <segue destination="Wfy-ZV-M7y" kind="show" identifier="toLocalPlayerMenu" id="Wx9-P4-db0"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-wf-Ytb">
+                                <rect key="frame" x="40" y="222" width="175.5" height="232.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Know" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6t-gl-rTD">
+                                        <rect key="frame" x="0.0" y="0.0" width="175.5" height="77.5"/>
+                                        <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
+                                        <color key="textColor" systemColor="systemTealColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" systemColor="systemPurpleColor"/>
+                                        <size key="shadowOffset" width="5" height="1"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZN-vh-pw5">
+                                        <rect key="frame" x="0.0" y="77.5" width="175.5" height="77.5"/>
+                                        <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
+                                        <color key="textColor" systemColor="systemTealColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" systemColor="systemPurpleColor"/>
+                                        <size key="shadowOffset" width="5" height="1"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or9-Za-Dvm">
+                                        <rect key="frame" x="0.0" y="155" width="175.5" height="77.5"/>
+                                        <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
+                                        <color key="textColor" systemColor="systemTealColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" systemColor="systemPurpleColor"/>
+                                        <size key="shadowOffset" width="5" height="1"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
+                                <rect key="frame" x="166" y="720" width="82" height="46"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="28"/>
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" systemColor="systemIndigoColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="l0s-uf-DmX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5as-jn-5st"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jaM-Lb-ZUI" firstAttribute="top" secondItem="5as-jn-5st" secondAttribute="top" constant="84" id="0eS-El-iwW"/>
                             <constraint firstItem="TCz-u4-bjo" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="CAx-NO-8Gm"/>
-                            <constraint firstItem="jaM-Lb-ZUI" firstAttribute="leading" secondItem="5as-jn-5st" secondAttribute="leading" constant="20" id="L0t-rw-tnc"/>
                             <constraint firstItem="FQM-Hf-IE3" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="R4n-Qs-Rnf"/>
-                            <constraint firstItem="TCz-u4-bjo" firstAttribute="top" secondItem="FQM-Hf-IE3" secondAttribute="bottom" constant="60" id="g68-Pv-aVY"/>
-                            <constraint firstItem="jaM-Lb-ZUI" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="giI-19-yN3"/>
-                            <constraint firstItem="FQM-Hf-IE3" firstAttribute="top" secondItem="jaM-Lb-ZUI" secondAttribute="bottom" constant="69" id="gv6-dX-c6y"/>
-                            <constraint firstItem="5as-jn-5st" firstAttribute="trailing" secondItem="jaM-Lb-ZUI" secondAttribute="trailing" constant="20" id="vYk-8R-nNT"/>
+                            <constraint firstItem="x8P-wf-Ytb" firstAttribute="leading" secondItem="5as-jn-5st" secondAttribute="leading" constant="40" id="Svm-G4-Hje"/>
+                            <constraint firstItem="x8P-wf-Ytb" firstAttribute="top" secondItem="5as-jn-5st" secondAttribute="top" constant="178" id="W4y-qr-OpV"/>
+                            <constraint firstItem="TCz-u4-bjo" firstAttribute="top" secondItem="FQM-Hf-IE3" secondAttribute="bottom" constant="60" id="enc-A3-1eG"/>
+                            <constraint firstItem="TCz-u4-bjo" firstAttribute="bottom" secondItem="5as-jn-5st" secondAttribute="bottom" id="oZB-86-axe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -85,9 +112,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
-                                <rect key="frame" x="166.5" y="398" width="81" height="46"/>
+                                <rect key="frame" x="130" y="398" width="154" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="GameCenter"/>
                                 <connections>
                                     <action selector="showGameCenterDashboard:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="CO9-wE-Ooo"/>
                                 </connections>
@@ -104,15 +131,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="935" y="378"/>
+            <point key="canvasLocation" x="1545" y="351"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

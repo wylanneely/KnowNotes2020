@@ -20,6 +20,11 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
     func authenticateGKLocalPlayer() {
         GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
             if GKLocalPlayer.local.isAuthenticated {
+                GKLocalPlayer.local.loadPhoto(for: .normal) { (image, error) in
+                    if let image = image {
+                        self.localPlayerPhoto = image
+                    }
+                }
                 NotificationCenter.default.post(name: .authenticationChanged, object: GKLocalPlayer.local.isAuthenticated)
                 GKLocalPlayer.local.register(self)
             } else if let vc = gcAuthVC {
@@ -45,6 +50,7 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
     
     typealias CompletionBlock = (Error?) -> Void
     
+    var localPlayerPhoto: UIImage?
     
     
     enum GameCenterHelperError: Error {
@@ -54,8 +60,7 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
     
     
     //MARK: GKGameCenter ViewControllers
-    var gameCenterDashboardVC = GKGameCenterViewController(
-        state: .default)
+    var gameCenterDashboardVC = GKGameCenterViewController(state: .achievements)
     
     func presentGameCenterDashboard(){
         let vc = gameCenterDashboardVC

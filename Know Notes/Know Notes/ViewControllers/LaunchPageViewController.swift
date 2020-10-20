@@ -13,6 +13,22 @@ class LaunchPageViewController: UIViewController {
         super.viewDidLoad()
        // GameCenterManager.manager.viewController = self
         registerNotification()
+        self.animateBackgroundWithtwoColors()
+    }
+    
+    func animateBackgroundWithtwoColors(){
+        UIView.animate(withDuration: 1.5) {
+            self.view.backgroundColor = UIColor.deepSea
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {
+                self.view.backgroundColor = UIColor.seaFoamBlue
+            } completion: { (completed: Bool) -> Void in
+                self.animateBackgroundWithtwoColors()
+            }
+            
+        }
+        
     }
     
     //MARK: Outlets & Actions
@@ -38,8 +54,7 @@ class LaunchPageViewController: UIViewController {
           )
       }
 
-    @objc private func authenticationChanged(_ notification: Notification) {
-        
+    @objc private func authenticationChanged(_ notification: Notification) {        
       signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
     }

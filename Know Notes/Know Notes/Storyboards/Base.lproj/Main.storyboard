@@ -38,36 +38,39 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-wf-Ytb">
-                                <rect key="frame" x="40" y="222" width="175.5" height="232.5"/>
+                                <rect key="frame" x="40" y="222" width="173.5" height="232.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Know" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6t-gl-rTD">
-                                        <rect key="frame" x="0.0" y="0.0" width="175.5" height="77.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="OxfordBlue"/>
+                                        <color key="textColor" name="Banana"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="CaribbeanBlue"/>
-                                        <size key="shadowOffset" width="5" height="1"/>
+                                        <color key="shadowColor" name="CoralRed"/>
+                                        <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZN-vh-pw5">
-                                        <rect key="frame" x="0.0" y="77.5" width="175.5" height="77.5"/>
+                                        <rect key="frame" x="0.0" y="77.5" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="OxfordBlue"/>
+                                        <color key="textColor" name="Banana"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="CaribbeanBlue"/>
-                                        <size key="shadowOffset" width="5" height="1"/>
+                                        <color key="shadowColor" name="CoralRed"/>
+                                        <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or9-Za-Dvm">
-                                        <rect key="frame" x="0.0" y="155" width="175.5" height="77.5"/>
+                                        <rect key="frame" x="0.0" y="155" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="OxfordBlue"/>
+                                        <color key="textColor" name="Banana"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="CaribbeanBlue"/>
-                                        <size key="shadowOffset" width="5" height="1"/>
+                                        <color key="shadowColor" name="CoralRed"/>
+                                        <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
                                 <rect key="frame" x="166" y="720" width="82" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="BG2-7s-3pc"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="28"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
                                 <state key="normal" title="Sign In">
@@ -80,7 +83,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5as-jn-5st"/>
-                        <color key="backgroundColor" name="KobiPurple"/>
+                        <color key="backgroundColor" name="CaribbeanBlue"/>
                         <constraints>
                             <constraint firstItem="TCz-u4-bjo" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="CAx-NO-8Gm"/>
                             <constraint firstItem="FQM-Hf-IE3" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="R4n-Qs-Rnf"/>
@@ -98,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="-46.376811594202906" y="378.34821428571428"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--GamePlay-->
         <scene sceneID="mMj-QP-22j">
             <objects>
-                <viewControllerPlaceholder id="Xt2-hK-hW8" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="GamePlay" id="Xt2-hK-hW8" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="1YZ-Ze-BaI"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWp-N0-cbV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -117,9 +120,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
-                                <rect key="frame" x="20" y="20" width="40" height="46"/>
+                                <rect key="frame" x="20" y="20" width="154" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="GC"/>
+                                <state key="normal" title="GameCenter">
+                                    <color key="titleColor" name="OxfordBlue"/>
+                                </state>
                                 <connections>
                                     <action selector="showGameCenterDashboard:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="CO9-wE-Ooo"/>
                                 </connections>
@@ -152,6 +157,17 @@
                                                     <constraint firstAttribute="width" constant="128" id="Rj2-Au-w9t"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ha-jV-Hny">
+                                                <rect key="frame" x="144" y="53" width="182" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                                <state key="normal" title="Acoustic Guitar">
+                                                    <color key="titleColor" name="OxfordBlue"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="40y-gm-W49" kind="show" identifier="AcousticGuitarGameMode" id="hKb-1r-9BR"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="CaribbeanBlue"/>
                                         <constraints>
@@ -171,6 +187,17 @@
                                                     <constraint firstAttribute="height" constant="128" id="u4w-UE-Vo0"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLj-bq-vMh">
+                                                <rect key="frame" x="144" y="53" width="145" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                                <state key="normal" title="Grand Piano">
+                                                    <color key="titleColor" name="OxfordBlue"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="40y-gm-W49" kind="show" identifier="grandPianoGameMode" id="gcC-KA-p3L"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" name="CaribbeanBlue"/>
                                         <constraints>
@@ -215,9 +242,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1053.6231884057972" y="377.67857142857139"/>
+            <point key="canvasLocation" x="1051" y="378"/>
+        </scene>
+        <!--GamePlay-->
+        <scene sceneID="TtS-7Y-bOH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GamePlay" id="40y-gm-W49" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="nOA-RS-45h"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ws6-AS-b8Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1893" y="538"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hKb-1r-9BR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="acoustic_Guitar" width="256" height="256"/>
         <image name="grand_Piano" width="256" height="256"/>
@@ -226,6 +266,9 @@
         </namedColor>
         <namedColor name="CaribbeanBlue">
             <color red="0.22745098039215686" green="0.68235294117647061" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CoralRed">
+            <color red="0.6588235294117647" green="0.12549019607843137" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="JazzBerry">
             <color red="0.61960784313725492" green="0.12941176470588237" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

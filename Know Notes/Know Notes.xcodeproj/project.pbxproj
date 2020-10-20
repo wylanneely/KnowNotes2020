@@ -22,6 +22,7 @@
 		E9799893253DB7E100BCCD05 /* InstrumentOverviewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799891253DB7E100BCCD05 /* InstrumentOverviewViewCell.swift */; };
 		E9799894253DB7E100BCCD05 /* InstrumentOverviewViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9799892253DB7E100BCCD05 /* InstrumentOverviewViewCell.xib */; };
 		E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */; };
+		E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979989A253E747300BCCD05 /* ClassExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		E9799891253DB7E100BCCD05 /* InstrumentOverviewViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentOverviewViewCell.swift; sourceTree = "<group>"; };
 		E9799892253DB7E100BCCD05 /* InstrumentOverviewViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstrumentOverviewViewCell.xib; sourceTree = "<group>"; };
 		E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
+		E979989A253E747300BCCD05 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		E9799880253D386F00BCCD05 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E979989A253E747300BCCD05 /* ClassExtensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				E9799888253D390A00BCCD05 /* LocalPlayerMenuViewController.swift in Sources */,
 				E9799885253D389500BCCD05 /* AchievementsManager.swift in Sources */,
 				E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */,
+				E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */,
 				E9799893253DB7E100BCCD05 /* InstrumentOverviewViewCell.swift in Sources */,
 				E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */,
 				E9799855253D2A5100BCCD05 /* Know_Notes.xcdatamodeld in Sources */,

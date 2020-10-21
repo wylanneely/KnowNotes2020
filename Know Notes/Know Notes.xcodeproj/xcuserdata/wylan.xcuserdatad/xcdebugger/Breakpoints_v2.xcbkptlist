@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "144709AB-9275-4977-A6AD-23AE775A2708"
-            shouldBeEnabled = "Yes"
+            uuid = "5E739543-4674-4330-A095-383EDB22C5FC"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Know Notes/Controllers/GameCenterManager.swift"
+            filePath = "Know Notes/ViewControllers/LaunchPageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "authenticateGKLocalPlayer()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "signInButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

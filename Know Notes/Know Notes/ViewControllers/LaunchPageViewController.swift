@@ -11,9 +11,9 @@ class LaunchPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // GameCenterManager.manager.viewController = self
+        GameCenterManager.manager.viewController = self
         registerNotification()
-        self.animateBackgroundWithtwoColors()
+    //    self.animateBackgroundWithtwoColors()
     }
     
     func animateBackgroundWithtwoColors(){

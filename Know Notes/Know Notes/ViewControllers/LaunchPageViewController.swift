@@ -13,7 +13,7 @@ class LaunchPageViewController: UIViewController {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
         registerNotification()
-    //    self.animateBackgroundWithtwoColors()
+    //   self.animateBackgroundWithtwoColors()
     }
     
     func animateBackgroundWithtwoColors(){

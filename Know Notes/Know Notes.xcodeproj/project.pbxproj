@@ -19,8 +19,11 @@
 		E91662D4254102EA003918C3 /* BeginEditNotesLessonViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662D2254102EA003918C3 /* BeginEditNotesLessonViewCell.xib */; };
 		E91662DE2541437E003918C3 /* HalfNotesLockedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */; };
 		E91662DF2541437E003918C3 /* HalfNotesLockedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */; };
-		E91662E225434FC1003918C3 /* GameLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E125434FC1003918C3 /* GameLesson.swift */; };
+		E91662E225434FC1003918C3 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E125434FC1003918C3 /* Lesson.swift */; };
 		E91662E6254363DC003918C3 /* GameLessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E5254363DC003918C3 /* GameLessonManager.swift */; };
+		E91662EB25438F04003918C3 /* GamePlayRound1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */; };
+		E91662EE25438F1C003918C3 /* GamePlayRound2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */; };
+		E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */; };
 		E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984A253D2A5100BCCD05 /* AppDelegate.swift */; };
 		E979984D253D2A5100BCCD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984C253D2A5100BCCD05 /* SceneDelegate.swift */; };
 		E979984F253D2A5100BCCD05 /* LaunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */; };
@@ -50,8 +53,11 @@
 		E91662D2254102EA003918C3 /* BeginEditNotesLessonViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeginEditNotesLessonViewCell.xib; sourceTree = "<group>"; };
 		E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfNotesLockedViewCell.swift; sourceTree = "<group>"; };
 		E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HalfNotesLockedViewCell.xib; sourceTree = "<group>"; };
-		E91662E125434FC1003918C3 /* GameLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLesson.swift; sourceTree = "<group>"; };
+		E91662E125434FC1003918C3 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		E91662E5254363DC003918C3 /* GameLessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLessonManager.swift; sourceTree = "<group>"; };
+		E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound1ViewController.swift; sourceTree = "<group>"; };
+		E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound2ViewController.swift; sourceTree = "<group>"; };
+		E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound3ViewController.swift; sourceTree = "<group>"; };
 		E9799847253D2A5100BCCD05 /* Know Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E979984A253D2A5100BCCD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E979984C253D2A5100BCCD05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 				E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */,
 				E9166295253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift */,
 				E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */,
+				E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */,
+				E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */,
+				E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -170,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				E979989A253E747300BCCD05 /* ClassExtensions.swift */,
-				E91662E125434FC1003918C3 /* GameLesson.swift */,
+				E91662E125434FC1003918C3 /* Lesson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,9 +277,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9166297253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift in Sources */,
+				E91662EB25438F04003918C3 /* GamePlayRound1ViewController.swift in Sources */,
+				E91662EE25438F1C003918C3 /* GamePlayRound2ViewController.swift in Sources */,
 				E91662BE25410090003918C3 /* PlayerKnownInstrumentNotesHeaderViewCell.swift in Sources */,
 				E91662DE2541437E003918C3 /* HalfNotesLockedViewCell.swift in Sources */,
-				E91662E225434FC1003918C3 /* GameLesson.swift in Sources */,
+				E91662E225434FC1003918C3 /* Lesson.swift in Sources */,
 				E91662B22540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift in Sources */,
 				E979984F253D2A5100BCCD05 /* LaunchPageViewController.swift in Sources */,
 				E9799882253D388700BCCD05 /* LeaderboardsManager.swift in Sources */,
@@ -280,6 +291,7 @@
 				E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */,
 				E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */,
 				E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */,
+				E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */,
 				E9799855253D2A5100BCCD05 /* Know_Notes.xcdatamodeld in Sources */,
 				E979987E253D385400BCCD05 /* GameCenterManager.swift in Sources */,
 				E91662D3254102EA003918C3 /* BeginEditNotesLessonViewCell.swift in Sources */,

@@ -10,15 +10,16 @@ import UIKit
 class GamePlayViewController: UIViewController {
 
     //Example to display buttons
-    var gameLesson: GameLesson = GameLesson(instrument: "Grand Piano", noteGroups: .allNotes)
+    var gameLesson: Lesson = Lesson(instrument: "Grand Piano", noteGroups: .wholeNotes)
     
     let gameController = GameLessonManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUsedNoteButtons()
-        gameController.setSessionNotes()
+        hideAllButtonsViews()
+        setPlayableNoteButtons(with: gameLesson.round1Notes)
     }
+    
     
     func setUsedNoteButtons(){
         switch gameLesson.noteGroup {
@@ -79,6 +80,10 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var GView: UIView!
     @IBOutlet weak var gSView: UIView!
     
+    lazy var buttonViews: [UIView] = [aView,bBView,bView,cView,
+                                      cSView,dView,eBView,eView,
+                                      fView,fSView,GView,gSView]
+    
     @IBOutlet weak var noteAButton: UIButton!
     @IBOutlet weak var noteBflatASharpButton: UIButton!
     @IBOutlet weak var noteBButton: UIButton!
@@ -92,11 +97,60 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var noteGButton: UIButton!
     @IBOutlet weak var noteGsharpButton: UIButton!
     
+    lazy var noteButtons: [UIButton] = [noteAButton,noteBflatASharpButton,
+    noteBButton,noteCButton,noteCsharpDflatButton,noteDButton,noteEflatButton,
+    noteEButton,noteFsharpButton,noteFButton,noteGButton,noteGsharpButton]
+    
+    private func hideAllButtonsViews(){
+        for button in noteButtons {
+            button.isHidden = true
+        }
+        for view in buttonViews {
+            view.isHidden = true
+        }
+    }
+    
+    func setPlayableNoteButtons(with notes: [Note]) {
+        
+        for note in notes {
+            switch note.id {
+            case 0: noteAButton.isHidden = false
+                aView.isHidden = false
+            case 1:noteBflatASharpButton.isHidden = false
+                bBView.isHidden = false
+            case 2:noteBButton.isHidden = false
+                bView.isHidden = false
+            case 3:noteCButton.isHidden = false
+                cView.isHidden = false
+            case 4:noteCsharpDflatButton.isHidden = false
+                cSView.isHidden = false
+            case 5:noteDButton.isHidden = false
+                dView.isHidden = false
+            case 6:noteEflatButton.isHidden = false
+                eBView.isHidden = false
+            case 7:noteEButton.isHidden = false
+                eView.isHidden = false
+            case 8:noteFButton.isHidden = false
+                fView.isHidden = false
+            case 9:noteFsharpButton.isHidden = false
+                fSView.isHidden = false
+            case 10:noteGButton.isHidden = false
+                GView.isHidden = false
+            case 11:noteGsharpButton.isHidden = false
+                gSView.isHidden = false
+            default: return
+            }
+        }
+        
+        
+    }
+    
     
     @IBAction func aButtonTapped(_ sender: Any) {
         gameController.checkUpdateSessionWith(note: Note(name: "A", id: 0))
     }
     @IBAction func bButtonTapped(_ sender: Any) {
+        setPlayableNoteButtons(with: gameLesson.round2Notes)
     }
     @IBAction func cButtonTapped(_ sender: Any) {
     }

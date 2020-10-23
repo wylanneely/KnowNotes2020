@@ -12,24 +12,21 @@ class GameLessonManager {
     
     static let manager = GameLessonManager()
     
-    var lesson: GameLesson? = GameLesson(instrument: "Grand Piano", noteGroups: .allNotes)
+    var lesson: Lesson = Lesson(instrument: "Grand Piano", noteGroups: .wholeNotes)
     
-    func setLesson(lesson:GameLesson) {
+    func setLesson(lesson: Lesson) {
         self.lesson = lesson
     }
-    
 
     var lifes: Int = 5
     var score: Int = 0
     
-    var sessionNotes: [Note] = []
+    var sessionNotes: [Note] {
+        return lesson.round1Notes
+    }
     
     var currentNote: Note?
     
-    
-    func setSessionNotes(){
-            self.sessionNotes = lesson?.lessonNotes
-    }
     
     func getNextNote() -> Note? {
         let newNote = sessionNotes.randomElement()
@@ -45,11 +42,13 @@ class GameLessonManager {
         }
     }
     
-    func checkUpdateSessionWith(note: Note) {
+    func checkUpdateSessionWith(note: Note) -> Bool {
         if isNoteSelectionCorrect(note: note) {
             score += 1
+            return true
         } else {
             lifes -= 1
+            return false
         }
     }
     

@@ -55,7 +55,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="UrchintPurple"/>
+                        <color key="backgroundColor" name="DeepSea"/>
                         <constraints>
                             <constraint firstItem="6ea-4v-I6e" firstAttribute="centerX" secondItem="Qiy-xI-Ko6" secondAttribute="centerX" id="AsM-dY-y9U"/>
                             <constraint firstItem="6ea-4v-I6e" firstAttribute="centerY" secondItem="Qiy-xI-Ko6" secondAttribute="centerY" id="G1B-HH-EKZ"/>
@@ -72,6 +72,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="firstSelectedNoteLabel" destination="Uwa-ml-VBb" id="hac-po-Epv"/>
+                <outlet property="middleBGView" destination="Qiy-xI-Ko6" id="KN1-MB-xgd"/>
                 <outlet property="secondSelectedNoteButton" destination="git-KB-eWY" id="SS9-qg-EIj"/>
             </connections>
             <point key="canvasLocation" x="-291.304347826087" y="-596.65178571428567"/>
@@ -89,9 +90,6 @@
         </namedColor>
         <namedColor name="SeaFoam">
             <color red="0.031372549019607843" green="0.69803921568627447" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="UrchintPurple">
-            <color red="0.52549019607843139" green="0.086274509803921567" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -38,6 +38,9 @@
                     <constraint firstItem="4kj-fL-LUk" firstAttribute="centerX" secondItem="Qf5-W5-YcS" secondAttribute="centerX" id="syE-9a-5y3"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="beginButton" destination="4kj-fL-LUk" id="1ra-ZQ-sfn"/>
+            </connections>
             <point key="canvasLocation" x="-291.304347826087" y="-388.39285714285711"/>
         </tableViewCell>
     </objects>

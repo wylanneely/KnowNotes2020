@@ -17,7 +17,7 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setUPViews()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,7 +32,13 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
             self.secondSelectedNoteButton.setTitle(note, for: .normal)
         }
     }
+    func setUPViews(){
+        middleBGView.layer.borderWidth = 2
+        middleBGView.layer.borderColor = UIColor.coralRed.cgColor
+        middleBGView.layer.cornerRadius = 10
+    }
     
+    @IBOutlet weak var middleBGView: UIView!
     @IBOutlet weak var firstSelectedNoteLabel: UILabel!
     @IBOutlet weak var secondSelectedNoteButton: UIButton!
 }

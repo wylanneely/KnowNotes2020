@@ -17,6 +17,10 @@
 		E91662C625410250003918C3 /* SecondRoundKnownNotesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662C425410250003918C3 /* SecondRoundKnownNotesViewCell.xib */; };
 		E91662D3254102EA003918C3 /* BeginEditNotesLessonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662D1254102E9003918C3 /* BeginEditNotesLessonViewCell.swift */; };
 		E91662D4254102EA003918C3 /* BeginEditNotesLessonViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662D2254102EA003918C3 /* BeginEditNotesLessonViewCell.xib */; };
+		E91662DE2541437E003918C3 /* HalfNotesLockedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */; };
+		E91662DF2541437E003918C3 /* HalfNotesLockedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */; };
+		E91662E225434FC1003918C3 /* GameLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E125434FC1003918C3 /* GameLesson.swift */; };
+		E91662E6254363DC003918C3 /* GameLessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E5254363DC003918C3 /* GameLessonManager.swift */; };
 		E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984A253D2A5100BCCD05 /* AppDelegate.swift */; };
 		E979984D253D2A5100BCCD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984C253D2A5100BCCD05 /* SceneDelegate.swift */; };
 		E979984F253D2A5100BCCD05 /* LaunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */; };
@@ -44,6 +48,10 @@
 		E91662C425410250003918C3 /* SecondRoundKnownNotesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondRoundKnownNotesViewCell.xib; sourceTree = "<group>"; };
 		E91662D1254102E9003918C3 /* BeginEditNotesLessonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginEditNotesLessonViewCell.swift; sourceTree = "<group>"; };
 		E91662D2254102EA003918C3 /* BeginEditNotesLessonViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeginEditNotesLessonViewCell.xib; sourceTree = "<group>"; };
+		E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfNotesLockedViewCell.swift; sourceTree = "<group>"; };
+		E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HalfNotesLockedViewCell.xib; sourceTree = "<group>"; };
+		E91662E125434FC1003918C3 /* GameLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLesson.swift; sourceTree = "<group>"; };
+		E91662E5254363DC003918C3 /* GameLessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLessonManager.swift; sourceTree = "<group>"; };
 		E9799847253D2A5100BCCD05 /* Know Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E979984A253D2A5100BCCD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E979984C253D2A5100BCCD05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +152,7 @@
 				E979987D253D385400BCCD05 /* GameCenterManager.swift */,
 				E9799881253D388700BCCD05 /* LeaderboardsManager.swift */,
 				E9799884253D389500BCCD05 /* AchievementsManager.swift */,
+				E91662E5254363DC003918C3 /* GameLessonManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -161,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				E979989A253E747300BCCD05 /* ClassExtensions.swift */,
+				E91662E125434FC1003918C3 /* GameLesson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,6 +186,8 @@
 				E91662C425410250003918C3 /* SecondRoundKnownNotesViewCell.xib */,
 				E91662D1254102E9003918C3 /* BeginEditNotesLessonViewCell.swift */,
 				E91662D2254102EA003918C3 /* BeginEditNotesLessonViewCell.xib */,
+				E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */,
+				E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +254,7 @@
 				E91662B82540CFE2003918C3 /* FirstKownNotesViewCell.xib in Resources */,
 				E9799857253D2A5400BCCD05 /* Assets.xcassets in Resources */,
 				E91662D4254102EA003918C3 /* BeginEditNotesLessonViewCell.xib in Resources */,
+				E91662DF2541437E003918C3 /* HalfNotesLockedViewCell.xib in Resources */,
 				E9799852253D2A5100BCCD05 /* Main.storyboard in Resources */,
 				E91662C625410250003918C3 /* SecondRoundKnownNotesViewCell.xib in Resources */,
 			);
@@ -256,6 +269,8 @@
 			files = (
 				E9166297253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift in Sources */,
 				E91662BE25410090003918C3 /* PlayerKnownInstrumentNotesHeaderViewCell.swift in Sources */,
+				E91662DE2541437E003918C3 /* HalfNotesLockedViewCell.swift in Sources */,
+				E91662E225434FC1003918C3 /* GameLesson.swift in Sources */,
 				E91662B22540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift in Sources */,
 				E979984F253D2A5100BCCD05 /* LaunchPageViewController.swift in Sources */,
 				E9799882253D388700BCCD05 /* LeaderboardsManager.swift in Sources */,
@@ -270,6 +285,7 @@
 				E91662D3254102EA003918C3 /* BeginEditNotesLessonViewCell.swift in Sources */,
 				E91662B72540CFE2003918C3 /* FirstKownNotesViewCell.swift in Sources */,
 				E979984D253D2A5100BCCD05 /* SceneDelegate.swift in Sources */,
+				E91662E6254363DC003918C3 /* GameLessonManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

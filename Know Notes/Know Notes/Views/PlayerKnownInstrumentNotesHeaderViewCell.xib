@@ -65,17 +65,26 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="__________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFp-Gm-UEk">
+                        <rect key="frame" x="48" y="147" width="319" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" name="CoralRed"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="DeepSea"/>
                 <constraints>
                     <constraint firstItem="vJY-Lk-Lc9" firstAttribute="top" secondItem="oMf-A8-8t3" secondAttribute="top" constant="12" id="0KM-rY-J4S"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="CFp-Gm-UEk" secondAttribute="trailing" constant="27" id="7hm-5E-b3a"/>
                     <constraint firstItem="1Y4-WE-Ifa" firstAttribute="leading" secondItem="te3-YO-Lsa" secondAttribute="trailing" constant="60" id="DuA-jI-ApV"/>
                     <constraint firstItem="1Y4-WE-Ifa" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="KkE-ba-WQB"/>
                     <constraint firstItem="te3-YO-Lsa" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="c48-3O-GHN"/>
                     <constraint firstItem="Cci-nq-jzu" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="exX-Bp-uD2"/>
+                    <constraint firstItem="CFp-Gm-UEk" firstAttribute="top" secondItem="te3-YO-Lsa" secondAttribute="bottom" constant="31.5" id="fah-lF-tP4"/>
                     <constraint firstItem="Cci-nq-jzu" firstAttribute="leading" secondItem="oMf-A8-8t3" secondAttribute="leading" constant="20" symbolic="YES" id="h6O-su-pRN"/>
                     <constraint firstItem="te3-YO-Lsa" firstAttribute="centerX" secondItem="oMf-A8-8t3" secondAttribute="centerX" id="iNz-9c-YGH"/>
                     <constraint firstItem="vJY-Lk-Lc9" firstAttribute="centerX" secondItem="oMf-A8-8t3" secondAttribute="centerX" id="w3t-Ee-tDr"/>
+                    <constraint firstItem="CFp-Gm-UEk" firstAttribute="leading" secondItem="oMf-A8-8t3" secondAttribute="leadingMargin" constant="28" id="xYr-bP-9ma"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -89,6 +98,9 @@
         <image name="grand_Piano" width="256" height="256"/>
         <namedColor name="Banana">
             <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CoralRed">
+            <color red="0.6589999794960022" green="0.125" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DeepSea">
             <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

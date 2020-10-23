@@ -17,7 +17,7 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setUpViews()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +28,11 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
     
     var delegate: BeginLessonDelegate?
     
+    func setUpViews(){
+        beginButton.layer.cornerRadius = 10
+    }
+    
+    @IBOutlet weak var beginButton: UIButton!
     @IBAction func beginButtonTapped(_ sender: Any) {
         DispatchQueue.main.async {
             self.delegate?.beginLesssonButtonTapped()

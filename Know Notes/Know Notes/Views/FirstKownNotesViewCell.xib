@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="crJ-1u-zoN" customClass="FirstNotesGroupForWholeNotesViewCell" customModule="Know_Notes" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="crJ-1u-zoN" customClass="FirstKownNotesViewCell" customModule="Know_Notes" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="crJ-1u-zoN" id="uP4-wT-a4f">
@@ -56,7 +56,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" name="UrchintPurple"/>
+                        <color key="backgroundColor" name="DeepSea"/>
                         <constraints>
                             <constraint firstItem="UiF-Sm-H0F" firstAttribute="leading" secondItem="EPl-4p-Fw3" secondAttribute="trailing" constant="20" id="82A-Ap-YUB"/>
                             <constraint firstItem="EPl-4p-Fw3" firstAttribute="leading" secondItem="lHQ-tH-zi7" secondAttribute="trailing" constant="20" id="9sk-dG-EHL"/>
@@ -75,6 +75,9 @@
                     <constraint firstItem="4oG-99-qLj" firstAttribute="top" secondItem="uP4-wT-a4f" secondAttribute="top" constant="4" id="lgP-EK-KUi"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="middleBGView" destination="4oG-99-qLj" id="Gmc-as-1Zc"/>
+            </connections>
             <point key="canvasLocation" x="-291.304347826087" y="-719.86607142857144"/>
         </tableViewCell>
     </objects>
@@ -87,9 +90,6 @@
         </namedColor>
         <namedColor name="DeepSea">
             <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="UrchintPurple">
-            <color red="0.52549019607843139" green="0.086274509803921567" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

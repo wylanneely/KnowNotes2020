@@ -11,6 +11,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     //MARK: Delegate
     func beginLesssonButtonTapped() {
+        self.performSegue(withIdentifier: "toGamePlay", sender: self)
+        
     }
     
 

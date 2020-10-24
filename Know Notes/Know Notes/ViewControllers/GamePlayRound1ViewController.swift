@@ -15,6 +15,8 @@ class GamePlayRound1ViewController: UIViewController {
     var note2: Note?
     var note3: Note?
     
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
@@ -68,23 +70,25 @@ class GamePlayRound1ViewController: UIViewController {
         if let note1 = note1 {
             if GameLessonManager.manager.checkUpdateSessionWith(note: note1) {
                 //correct
+                hapticGenerator.notificationOccurred(.success)
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
             } else {
                 //wrong
+                hapticGenerator.notificationOccurred(.error)
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
-
             }
         }
         checkRoundEnd()
     }
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if let note2 = note2 {
-
             if GameLessonManager.manager.checkUpdateSessionWith(note: note2) {
                 //correct
+                hapticGenerator.notificationOccurred(.success)
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
             } else {
                 //wrong
+                hapticGenerator.notificationOccurred(.error)
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
             }
         }
@@ -92,15 +96,14 @@ class GamePlayRound1ViewController: UIViewController {
     }
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if let note3 = note3 {
-
             if GameLessonManager.manager.checkUpdateSessionWith(note: note3) {
                 //correct
+                hapticGenerator.notificationOccurred(.success)
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
-
             } else {
                 //wrong
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
-
+                hapticGenerator.notificationOccurred(.error)
             }
         }
         checkRoundEnd()

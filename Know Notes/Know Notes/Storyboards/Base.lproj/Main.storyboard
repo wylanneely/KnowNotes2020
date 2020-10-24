@@ -29,9 +29,8 @@
                                     <segue destination="Xt2-hK-hW8" kind="show" id="04y-ls-1ec"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1K-A6-Ro2" userLabel="seguePlaceholder">
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1K-A6-Ro2" userLabel="seguePlaceholder">
                                 <rect key="frame" x="338" y="816" width="30" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <connections>
                                     <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="n8u-0H-OnL"/>
@@ -39,7 +38,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-wf-Ytb">
-                                <rect key="frame" x="40" y="222" width="173.5" height="232.5"/>
+                                <rect key="frame" x="40" y="184" width="173.5" height="232.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Know" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6t-gl-rTD">
                                         <rect key="frame" x="0.0" y="0.0" width="173.5" height="77.5"/>
@@ -68,10 +67,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
-                                <rect key="frame" x="166" y="720" width="82" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="82" id="BG2-7s-3pc"/>
-                                </constraints>
+                                <rect key="frame" x="166" y="760" width="82" height="46"/>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="28"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
                                 <state key="normal" title="Sign In">
@@ -82,19 +78,43 @@
                                     <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="l0s-uf-DmX"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guitars" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o4G-LK-oVa">
+                                <rect key="frame" x="6" y="424" width="240" height="192"/>
+                                <color key="tintColor" name="UrchintPurple"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="192" id="1zm-OE-ufa"/>
+                                    <constraint firstAttribute="width" constant="240" id="ghc-VV-Se5"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pianokeys" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="35m-9Z-QxL">
+                                <rect key="frame" x="166" y="602.5" width="202" height="136"/>
+                                <color key="tintColor" name="GoldenSun"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="202" id="aKz-wN-9c8"/>
+                                    <constraint firstAttribute="height" constant="138.5" id="sqz-cc-5oZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5as-jn-5st"/>
                         <color key="backgroundColor" name="CaribbeanBlue"/>
                         <constraints>
                             <constraint firstItem="TCz-u4-bjo" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="CAx-NO-8Gm"/>
+                            <constraint firstItem="35m-9Z-QxL" firstAttribute="leading" secondItem="FQM-Hf-IE3" secondAttribute="leading" id="DZb-Ro-k0Y"/>
+                            <constraint firstItem="o4G-LK-oVa" firstAttribute="leading" secondItem="5as-jn-5st" secondAttribute="leading" constant="6" id="OBu-nu-eky"/>
+                            <constraint firstItem="o4G-LK-oVa" firstAttribute="top" secondItem="x8P-wf-Ytb" secondAttribute="bottom" constant="7.5" id="Paa-Sh-86F"/>
+                            <constraint firstItem="FQM-Hf-IE3" firstAttribute="top" secondItem="35m-9Z-QxL" secondAttribute="bottom" constant="20" id="PrG-hw-Yc9"/>
                             <constraint firstItem="FQM-Hf-IE3" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="R4n-Qs-Rnf"/>
                             <constraint firstItem="x8P-wf-Ytb" firstAttribute="leading" secondItem="5as-jn-5st" secondAttribute="leading" constant="40" id="Svm-G4-Hje"/>
-                            <constraint firstItem="x8P-wf-Ytb" firstAttribute="top" secondItem="5as-jn-5st" secondAttribute="top" constant="178" id="W4y-qr-OpV"/>
-                            <constraint firstItem="TCz-u4-bjo" firstAttribute="top" secondItem="FQM-Hf-IE3" secondAttribute="bottom" constant="60" id="enc-A3-1eG"/>
+                            <constraint firstItem="x8P-wf-Ytb" firstAttribute="top" secondItem="5as-jn-5st" secondAttribute="top" constant="140" id="W4y-qr-OpV"/>
+                            <constraint firstItem="TCz-u4-bjo" firstAttribute="top" secondItem="FQM-Hf-IE3" secondAttribute="bottom" constant="20" id="enc-A3-1eG"/>
+                            <constraint firstItem="35m-9Z-QxL" firstAttribute="trailing" secondItem="S1K-A6-Ro2" secondAttribute="trailing" id="g8G-eM-AiR"/>
+                            <constraint firstItem="S1K-A6-Ro2" firstAttribute="bottom" secondItem="TCz-u4-bjo" secondAttribute="bottom" id="hWS-ek-wp5"/>
                             <constraint firstItem="TCz-u4-bjo" firstAttribute="bottom" secondItem="5as-jn-5st" secondAttribute="bottom" id="oZB-86-axe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="guitarsImage" destination="o4G-LK-oVa" id="wwF-Yw-dp7"/>
+                        <outlet property="pianosImage" destination="35m-9Z-QxL" id="EZz-6s-m60"/>
                         <outlet property="signInButton" destination="FQM-Hf-IE3" id="fdv-9Z-cpu"/>
                     </connections>
                 </viewController>
@@ -349,6 +369,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="a9o-wV-hkY"/>
+                    <connections>
+                        <segue destination="40y-gm-W49" kind="show" identifier="toGamePlay" id="ROw-WV-D4q"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-gY-1tV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -366,11 +389,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8Id-zs-avP"/>
+        <segue reference="kKb-E9-46o"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="acoustic_Guitar" width="256" height="256"/>
         <image name="grand_Piano" width="256" height="256"/>
+        <image name="guitars" catalog="system" width="128" height="100"/>
+        <image name="pianokeys" catalog="system" width="128" height="93"/>
         <namedColor name="Banana">
             <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -380,6 +405,9 @@
         <namedColor name="CoralRed">
             <color red="0.6589999794960022" green="0.125" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="GoldenSun">
+            <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="JazzBerry">
             <color red="0.62000000476837158" green="0.1289999932050705" blue="0.33300000429153442" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -388,6 +416,9 @@
         </namedColor>
         <namedColor name="OxfordBlue">
             <color red="0.0040000001899898052" green="0.086000002920627594" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UrchintPurple">
+            <color red="0.52549019607843139" green="0.086274509803921567" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

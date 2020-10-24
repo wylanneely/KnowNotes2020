@@ -13,7 +13,6 @@ class LaunchPageViewController: UIViewController {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
         registerNotification()
-    //   self.animateBackgroundWithtwoColors()
     }
     
     func animateBackgroundWithtwoColors(){
@@ -26,14 +25,34 @@ class LaunchPageViewController: UIViewController {
             } completion: { (completed: Bool) -> Void in
                 self.animateBackgroundWithtwoColors()
             }
-            
         }
-        
+    }
+    
+    func animateimagesWithtwoColors(){
+        UIView.animate(withDuration: 1.5) {
+            self.pianosImage.tintColor = UIColor.goldenSun
+            self.guitarsImage.tintColor = UIColor.urchintPurple
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {
+                
+                
+                self.pianosImage.tintColor = UIColor.urchintPurple
+                self.guitarsImage.tintColor = UIColor.goldenSun
+                
+            } completion: { (completed: Bool) -> Void in
+                self.animateBackgroundWithtwoColors()
+            }
+        }
     }
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var signInButton: UIButton!
+    
+    @IBOutlet weak var guitarsImage: UIImageView!
+    @IBOutlet weak var pianosImage: UIImageView!
+    
     
     @IBAction func signInButtonTapped(_ sender: Any) {
         if GKLocalPlayer.local.isAuthenticated {

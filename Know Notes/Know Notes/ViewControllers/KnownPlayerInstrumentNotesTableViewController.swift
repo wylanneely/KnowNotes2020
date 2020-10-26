@@ -18,7 +18,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     //MARK: Properties
     
     var instrumentImage: UIImage?
-    
+ 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,16 +75,17 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
-                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
+                
+                
+                if let instrumentImage = instrumentImage {
                     
-                    if let instrumentImage = instrumentImage {
-                        notesCellExample.instrumentImage.image = instrumentImage
-                        return notesCellExample
-                    }
+                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell(with: instrumentImage) {
+                    
+
                     return notesCellExample
+
+                    }
                 }
-                return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FirstNoteCell", for: indexPath)
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {

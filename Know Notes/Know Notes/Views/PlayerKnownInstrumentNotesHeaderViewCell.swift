@@ -9,11 +9,16 @@ import UIKit
 
 class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
-    class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
+    class func createCell(with image: UIImage) -> PlayerKnownInstrumentNotesHeaderViewCell? {
            let nib = UINib(nibName: "PlayerKnownInstrumentNotesHeaderViewCell", bundle: nil)
         let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
+        cell?.commonInit(image)
            return cell
        }
+    
+    func commonInit(_ image: UIImage) {
+        instrumentImage.image = image
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

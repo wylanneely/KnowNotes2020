@@ -177,6 +177,7 @@
 		E979986E253D326B00BCCD05 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E9AC8A52254692DB00470E2F /* Images */,
 				E91662F825450E4F003918C3 /* Sounds */,
 				E9799856253D2A5400BCCD05 /* Assets.xcassets */,
 				E9799853253D2A5100BCCD05 /* Know_Notes.xcdatamodeld */,
@@ -243,6 +244,13 @@
 				E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E9AC8A52254692DB00470E2F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

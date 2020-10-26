@@ -190,8 +190,8 @@
 			children = (
 				E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */,
 				E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */,
-				E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */,
 				E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */,
+				E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */,
 				E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */,
 				E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */,
 				E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */,

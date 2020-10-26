@@ -9,15 +9,16 @@ import UIKit
 
 class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
-    class func createCell(with image: UIImage) -> PlayerKnownInstrumentNotesHeaderViewCell? {
+    class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
            let nib = UINib(nibName: "PlayerKnownInstrumentNotesHeaderViewCell", bundle: nil)
         let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
-        cell?.commonInit(image)
            return cell
        }
     
-    func commonInit(_ image: UIImage) {
+    func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
         instrumentImage.image = image
+        instrumentProficiencyRankingLabel.text = rank
+        completedNotesLabel.text = "\(completedNotes)"
     }
 
     override func awakeFromNib() {
@@ -35,5 +36,6 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
     
+    @IBOutlet weak var completedNotesLabel: UILabel!
     
 }

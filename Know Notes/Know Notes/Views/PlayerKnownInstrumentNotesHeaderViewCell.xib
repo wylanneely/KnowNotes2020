@@ -88,6 +88,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="completedNotesLabel" destination="0ed-Ft-xzl" id="GkM-pA-oog"/>
                 <outlet property="instrumentImage" destination="Cci-nq-jzu" id="Nab-z5-SS7"/>
                 <outlet property="instrumentProficiencyRankingLabel" destination="vJY-Lk-Lc9" id="WaK-mH-mDZ"/>
             </connections>

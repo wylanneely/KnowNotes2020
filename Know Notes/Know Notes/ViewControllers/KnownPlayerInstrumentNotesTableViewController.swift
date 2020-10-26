@@ -75,31 +75,22 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                
-                
                 if let instrumentImage = instrumentImage {
-                    
-                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell(with: instrumentImage) {
-                    
-
+                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
+                    notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 7)
                     return notesCellExample
 
                     }
                 }
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "FirstNoteCell", for: indexPath)
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
                 }
-                return cell
             case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "secondRoundCell", for: indexPath)
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
                     return notesCellExample
                 }
-                return cell
             case 3:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "secondRoundCell", for: indexPath)
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
                     //TODO: Set these buttons upso the user can select which note to learn
                     DispatchQueue.main.async {
@@ -108,20 +99,16 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                     }
                     return notesCellExample
                 }
-                return cell
             case 4:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beginCell", for: indexPath)
+                
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
-                return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "FirstNoteCell", for: indexPath)
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
                 }
-                return cell
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "lockedHalfNotes", for: indexPath)

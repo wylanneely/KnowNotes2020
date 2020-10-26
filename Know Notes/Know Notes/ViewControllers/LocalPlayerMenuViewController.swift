@@ -54,6 +54,28 @@ class LocalPlayerMenuViewController: UIViewController{
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
            self.dismiss(animated: true, completion: nil)
        }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
+            
+            switch segue.identifier {
+            case "toAcousticNotes" : vc.instrumentImage = UIImage(named: "acoustic_Guitar")
+            case "toGrandPianoNotes" : vc.instrumentImage = UIImage(named: "grand_Piano")
+            default:
+                return
+            }
+            
+            
+            
+            
+        }
+        
+    }
+    
+    
+    
+    
 
 }
 
@@ -76,4 +98,8 @@ extension UIImage {
                 .draw(in: .init(origin: .zero, size: breadthSize))
             }
         }
+    
+    
+    
+    
 }

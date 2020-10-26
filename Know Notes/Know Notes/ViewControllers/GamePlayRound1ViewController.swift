@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class GamePlayRound1ViewController: UIViewController {
     
@@ -15,7 +17,9 @@ class GamePlayRound1ViewController: UIViewController {
     var note2: Note?
     var note3: Note?
     
+    var currentNote: Note?
     let hapticGenerator = UINotificationFeedbackGenerator()
+    var musicSound: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +52,8 @@ class GamePlayRound1ViewController: UIViewController {
         scoreLabel.text = "\(GameLessonManager.manager.score)"
     }
     
-    var currentNote: Note?
     
+
     func checkRoundEnd(){
         if GameLessonManager.manager.score >= 10 {
             self.performSegue(withIdentifier: "toRound2", sender: self)
@@ -59,15 +63,35 @@ class GamePlayRound1ViewController: UIViewController {
         }
     }
     
+    func playSoundFromNote(path: String? ) {
+        if let url = GameLessonManager.manager.getSoundPathURLFromNote(path: path) {
+        do {
+            musicSound = try AVAudioPlayer(contentsOf: url)
+            musicSound?.play()
+        } catch {
+            // couldn't load file :(
+        }
+            
+        }
+    }
+    
     //MARK: Actions
     @IBAction func playButtonTapped(_ sender: Any) {
        let newNote = GameLessonManager.manager.getNextNote()
         currentNote = newNote
+        playSoundFromNote(path: newNote?.soundPath )
         //PlaySound
     }
     
+    
+    
+    
     @IBAction func note1ButtonTapped(_ sender: Any) {
+        
+        
         if let note1 = note1 {
+            playSoundFromNote(path: note1.soundPath)
+            
             if GameLessonManager.manager.checkUpdateSessionWith(note: note1) {
                 //correct
                 hapticGenerator.notificationOccurred(.success)
@@ -82,6 +106,8 @@ class GamePlayRound1ViewController: UIViewController {
     }
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if let note2 = note2 {
+            playSoundFromNote(path: note2.soundPath)
+
             if GameLessonManager.manager.checkUpdateSessionWith(note: note2) {
                 //correct
                 hapticGenerator.notificationOccurred(.success)
@@ -96,6 +122,8 @@ class GamePlayRound1ViewController: UIViewController {
     }
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if let note3 = note3 {
+            playSoundFromNote(path: note3.soundPath)
+
             if GameLessonManager.manager.checkUpdateSessionWith(note: note3) {
                 //correct
                 hapticGenerator.notificationOccurred(.success)

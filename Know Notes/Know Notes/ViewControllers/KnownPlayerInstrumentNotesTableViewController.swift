@@ -15,6 +15,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         
     }
     
+    //MARK: Properties
+    
+    var instrumentImage: UIImage?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +77,11 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
                 if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
+                    
+                    if let instrumentImage = instrumentImage {
+                        notesCellExample.instrumentImage.image = instrumentImage
+                        return notesCellExample
+                    }
                     return notesCellExample
                 }
                 return cell
@@ -185,5 +194,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         
     }
     
+
 
 }

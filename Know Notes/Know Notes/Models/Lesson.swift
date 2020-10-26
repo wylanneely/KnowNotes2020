@@ -37,17 +37,18 @@ class Lesson {
     
     //MARK: Instrument Notes
     
-    let A_note = Note(name: "A", id: 0)
+    let A_note = Note(name: "A", id: 0, soundPath: "piano_A.wav")
+    
     let Bb_note = Note(name: "Bflat", id: 1)
-    let B_note = Note(name: "B", id: 2)
-    let C_note = Note(name: "C", id: 3)
+    let B_note = Note(name: "B", id: 2, soundPath: "piano_B.wav")
+    let C_note = Note(name: "C", id: 3, soundPath: "piano_C.wav")
     let Cs_note = Note(name: "Csharp", id: 4)
-    let D_note = Note(name: "D", id: 5)
+    let D_note = Note(name: "D", id: 5, soundPath: "piano_D.wav")
     let Eb_note = Note(name: "Eflat", id: 6)
-    let E_note = Note(name: "E", id: 7)
-    let F_note = Note(name: "F", id: 8)
+    let E_note = Note(name: "E", id: 7, soundPath: "piano_E.wav")
+    let F_note = Note(name: "F", id: 8, soundPath: "piano_F.wav")
     let Fs_note = Note(name: "Fsharp", id: 9)
-    let G_note = Note(name: "G", id: 10)
+    let G_note = Note(name: "G", id: 10, soundPath: "piano_G.wav")
     let Gs_note = Note(name: "Gsharp", id: 11)
 
     
@@ -94,7 +95,12 @@ enum NoteGroups: String {
 }
 
 
+
 struct Note {
+    
+    
     let name: String
     let id: Int
+    var soundPath: String?
+    
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GamePlayRound2ViewController: UIViewController {
     
@@ -16,10 +17,14 @@ class GamePlayRound2ViewController: UIViewController {
     var note3: Note?
     var note4: Note?
     var note5: Note?
+    
+    
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    var musicSound: AVAudioPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        assignNotesToButtons()
         // Do any additional setup after loading the view.
     }
     
@@ -64,12 +69,25 @@ class GamePlayRound2ViewController: UIViewController {
         }
     }
     
+    func playSoundFromNote(path: String? ) {
+        if let url = GameLessonManager.manager.getSoundPathURLFromNote(path: path) {
+        do {
+            musicSound = try AVAudioPlayer(contentsOf: url)
+            musicSound?.play()
+        } catch {
+            // couldn't load file :(
+        }
+            
+        }
+    }
+    
     //MARK: Actions
     
     @IBAction func playButtonTapped(_ sender: Any) {
         let newNote = GameLessonManager.manager.getNextNote()
          currentNote = newNote
          //PlaySound
+        playSoundFromNote(path: newNote?.soundPath)
     }
     
 
@@ -78,6 +96,9 @@ class GamePlayRound2ViewController: UIViewController {
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
         if let note1 = note1 {
+            playSoundFromNote(path: note1.soundPath)
+
+            
             if GameLessonManager.manager.checkUpdateSessionWith(note: note1) {
                 //correct
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
@@ -89,8 +110,12 @@ class GamePlayRound2ViewController: UIViewController {
         }
         checkRoundEnd()
     }
+    
+    
+    
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if let note2 = note2 {
+            playSoundFromNote(path: note2.soundPath)
 
             if GameLessonManager.manager.checkUpdateSessionWith(note: note2) {
                 //correct
@@ -105,6 +130,7 @@ class GamePlayRound2ViewController: UIViewController {
     }
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if let note3 = note3 {
+            playSoundFromNote(path: note3.soundPath)
 
             if GameLessonManager.manager.checkUpdateSessionWith(note: note3) {
                 //correct
@@ -119,6 +145,7 @@ class GamePlayRound2ViewController: UIViewController {
     }
     @IBAction func note4ButtonTapped(_ sender: Any) {
         if let note4 = note4 {
+            playSoundFromNote(path: note4.soundPath)
 
             if GameLessonManager.manager.checkUpdateSessionWith(note: note4) {
                 //correct
@@ -133,6 +160,7 @@ class GamePlayRound2ViewController: UIViewController {
     }
     @IBAction func note5ButtonTapped(_ sender: Any) {
         if let note5 = note5 {
+            playSoundFromNote(path: note5.soundPath)
 
             if GameLessonManager.manager.checkUpdateSessionWith(note: note5) {
                 //correct

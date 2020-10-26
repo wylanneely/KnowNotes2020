@@ -130,7 +130,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWp-N0-cbV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="502" y="538"/>
+            <point key="canvasLocation" x="591" y="540"/>
         </scene>
         <!--Local Player Menu View Controller-->
         <scene sceneID="AwL-Co-CJa">
@@ -186,7 +186,7 @@
                                                     <color key="titleColor" name="OxfordBlue"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="lqg-RY-0Yp" kind="presentation" id="kKb-E9-46o"/>
+                                                    <segue destination="lqg-RY-0Yp" kind="presentation" identifier="toAcousticNotes" id="kKb-E9-46o"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -216,7 +216,7 @@
                                                     <color key="titleColor" name="OxfordBlue"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="lqg-RY-0Yp" kind="show" id="8Id-zs-avP"/>
+                                                    <segue destination="lqg-RY-0Yp" kind="show" identifier="toGrandPianoNotes" id="8Id-zs-avP"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1051" y="378"/>
+            <point key="canvasLocation" x="1136" y="378"/>
         </scene>
         <!--Known Player Instrument Notes Table View Controller-->
         <scene sceneID="Ple-6p-SOO">
@@ -375,7 +375,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-gY-1tV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2169.5652173913045" y="377.67857142857139"/>
+            <point key="canvasLocation" x="2236" y="378"/>
         </scene>
         <!--GamePlay-->
         <scene sceneID="TtS-7Y-bOH">
@@ -389,7 +389,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kKb-E9-46o"/>
+        <segue reference="8Id-zs-avP"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="acoustic_Guitar" width="256" height="256"/>

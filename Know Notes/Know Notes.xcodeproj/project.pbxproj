@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E9166297253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9166295253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift */; };
 		E91662B22540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */; };
 		E91662B72540CFE2003918C3 /* FirstKownNotesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662B52540CFE2003918C3 /* FirstKownNotesViewCell.swift */; };
 		E91662B82540CFE2003918C3 /* FirstKownNotesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662B62540CFE2003918C3 /* FirstKownNotesViewCell.xib */; };
@@ -24,6 +23,19 @@
 		E91662EB25438F04003918C3 /* GamePlayRound1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */; };
 		E91662EE25438F1C003918C3 /* GamePlayRound2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */; };
 		E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */; };
+		E91662F6254502EF003918C3 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662F5254502EF003918C3 /* Instrument.swift */; };
+		E916630525450E86003918C3 /* piano_D#.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662F925450E85003918C3 /* piano_D#.wav */; };
+		E916630625450E86003918C3 /* piano_A#.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FA25450E85003918C3 /* piano_A#.wav */; };
+		E916630725450E86003918C3 /* piano_F.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FB25450E85003918C3 /* piano_F.wav */; };
+		E916630825450E86003918C3 /* piano_A.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FC25450E85003918C3 /* piano_A.wav */; };
+		E916630925450E86003918C3 /* piano_C#.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FD25450E85003918C3 /* piano_C#.wav */; };
+		E916630A25450E86003918C3 /* piano_D.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FE25450E85003918C3 /* piano_D.wav */; };
+		E916630B25450E86003918C3 /* piano_C.wav in Resources */ = {isa = PBXBuildFile; fileRef = E91662FF25450E86003918C3 /* piano_C.wav */; };
+		E916630C25450E86003918C3 /* piano_B.wav in Resources */ = {isa = PBXBuildFile; fileRef = E916630025450E86003918C3 /* piano_B.wav */; };
+		E916630D25450E86003918C3 /* piano_E.wav in Resources */ = {isa = PBXBuildFile; fileRef = E916630125450E86003918C3 /* piano_E.wav */; };
+		E916630E25450E86003918C3 /* piano_F#.wav in Resources */ = {isa = PBXBuildFile; fileRef = E916630225450E86003918C3 /* piano_F#.wav */; };
+		E916630F25450E86003918C3 /* piano_G.wav in Resources */ = {isa = PBXBuildFile; fileRef = E916630325450E86003918C3 /* piano_G.wav */; };
+		E916631025450E86003918C3 /* piano_G#.wav in Resources */ = {isa = PBXBuildFile; fileRef = E916630425450E86003918C3 /* piano_G#.wav */; };
 		E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984A253D2A5100BCCD05 /* AppDelegate.swift */; };
 		E979984D253D2A5100BCCD05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984C253D2A5100BCCD05 /* SceneDelegate.swift */; };
 		E979984F253D2A5100BCCD05 /* LaunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */; };
@@ -41,7 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E9166295253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerKnownInstrumentNotesViewController.swift; sourceTree = "<group>"; };
 		E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownPlayerInstrumentNotesTableViewController.swift; sourceTree = "<group>"; };
 		E91662B52540CFE2003918C3 /* FirstKownNotesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstKownNotesViewCell.swift; sourceTree = "<group>"; };
 		E91662B62540CFE2003918C3 /* FirstKownNotesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstKownNotesViewCell.xib; sourceTree = "<group>"; };
@@ -58,6 +69,19 @@
 		E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound1ViewController.swift; sourceTree = "<group>"; };
 		E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound2ViewController.swift; sourceTree = "<group>"; };
 		E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound3ViewController.swift; sourceTree = "<group>"; };
+		E91662F5254502EF003918C3 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		E91662F925450E85003918C3 /* piano_D#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "piano_D#.wav"; sourceTree = "<group>"; };
+		E91662FA25450E85003918C3 /* piano_A#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "piano_A#.wav"; sourceTree = "<group>"; };
+		E91662FB25450E85003918C3 /* piano_F.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_F.wav; sourceTree = "<group>"; };
+		E91662FC25450E85003918C3 /* piano_A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_A.wav; sourceTree = "<group>"; };
+		E91662FD25450E85003918C3 /* piano_C#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "piano_C#.wav"; sourceTree = "<group>"; };
+		E91662FE25450E85003918C3 /* piano_D.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_D.wav; sourceTree = "<group>"; };
+		E91662FF25450E86003918C3 /* piano_C.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_C.wav; sourceTree = "<group>"; };
+		E916630025450E86003918C3 /* piano_B.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_B.wav; sourceTree = "<group>"; };
+		E916630125450E86003918C3 /* piano_E.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_E.wav; sourceTree = "<group>"; };
+		E916630225450E86003918C3 /* piano_F#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "piano_F#.wav"; sourceTree = "<group>"; };
+		E916630325450E86003918C3 /* piano_G.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = piano_G.wav; sourceTree = "<group>"; };
+		E916630425450E86003918C3 /* piano_G#.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "piano_G#.wav"; sourceTree = "<group>"; };
 		E9799847253D2A5100BCCD05 /* Know Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Know Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E979984A253D2A5100BCCD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E979984C253D2A5100BCCD05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +113,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E91662F825450E4F003918C3 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E91662FC25450E85003918C3 /* piano_A.wav */,
+				E91662FA25450E85003918C3 /* piano_A#.wav */,
+				E916630025450E86003918C3 /* piano_B.wav */,
+				E91662FF25450E86003918C3 /* piano_C.wav */,
+				E91662FD25450E85003918C3 /* piano_C#.wav */,
+				E91662FE25450E85003918C3 /* piano_D.wav */,
+				E91662F925450E85003918C3 /* piano_D#.wav */,
+				E916630125450E86003918C3 /* piano_E.wav */,
+				E91662FB25450E85003918C3 /* piano_F.wav */,
+				E916630225450E86003918C3 /* piano_F#.wav */,
+				E916630325450E86003918C3 /* piano_G.wav */,
+				E916630425450E86003918C3 /* piano_G#.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		E979983E253D2A5100BCCD05 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +177,7 @@
 		E979986E253D326B00BCCD05 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E91662F825450E4F003918C3 /* Sounds */,
 				E9799856253D2A5400BCCD05 /* Assets.xcassets */,
 				E9799853253D2A5100BCCD05 /* Know_Notes.xcdatamodeld */,
 			);
@@ -146,7 +190,6 @@
 				E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */,
 				E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */,
 				E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */,
-				E9166295253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift */,
 				E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */,
 				E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */,
 				E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */,
@@ -180,6 +223,7 @@
 			children = (
 				E979989A253E747300BCCD05 /* ClassExtensions.swift */,
 				E91662E125434FC1003918C3 /* Lesson.swift */,
+				E91662F5254502EF003918C3 /* Instrument.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,9 +307,21 @@
 				E91662B82540CFE2003918C3 /* FirstKownNotesViewCell.xib in Resources */,
 				E9799857253D2A5400BCCD05 /* Assets.xcassets in Resources */,
 				E91662D4254102EA003918C3 /* BeginEditNotesLessonViewCell.xib in Resources */,
+				E916630F25450E86003918C3 /* piano_G.wav in Resources */,
+				E916630D25450E86003918C3 /* piano_E.wav in Resources */,
 				E91662DF2541437E003918C3 /* HalfNotesLockedViewCell.xib in Resources */,
+				E916630925450E86003918C3 /* piano_C#.wav in Resources */,
+				E916630825450E86003918C3 /* piano_A.wav in Resources */,
+				E916630625450E86003918C3 /* piano_A#.wav in Resources */,
 				E9799852253D2A5100BCCD05 /* Main.storyboard in Resources */,
 				E91662C625410250003918C3 /* SecondRoundKnownNotesViewCell.xib in Resources */,
+				E916630A25450E86003918C3 /* piano_D.wav in Resources */,
+				E916630B25450E86003918C3 /* piano_C.wav in Resources */,
+				E916630725450E86003918C3 /* piano_F.wav in Resources */,
+				E916631025450E86003918C3 /* piano_G#.wav in Resources */,
+				E916630525450E86003918C3 /* piano_D#.wav in Resources */,
+				E916630C25450E86003918C3 /* piano_B.wav in Resources */,
+				E916630E25450E86003918C3 /* piano_F#.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +332,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9166297253F79A0003918C3 /* PlayerKnownInstrumentNotesViewController.swift in Sources */,
 				E91662EB25438F04003918C3 /* GamePlayRound1ViewController.swift in Sources */,
 				E91662EE25438F1C003918C3 /* GamePlayRound2ViewController.swift in Sources */,
 				E91662BE25410090003918C3 /* PlayerKnownInstrumentNotesHeaderViewCell.swift in Sources */,
@@ -291,6 +346,7 @@
 				E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */,
 				E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */,
 				E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */,
+				E91662F6254502EF003918C3 /* Instrument.swift in Sources */,
 				E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */,
 				E9799855253D2A5100BCCD05 /* Know_Notes.xcdatamodeld in Sources */,
 				E979987E253D385400BCCD05 /* GameCenterManager.swift in Sources */,

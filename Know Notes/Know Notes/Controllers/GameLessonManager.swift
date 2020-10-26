@@ -52,4 +52,13 @@ class GameLessonManager {
         }
     }
     
+    func getSoundPathURLFromNote(path: String?) -> URL? {
+        if let path = path {
+            let soundPath = Bundle.main.path(forResource: path, ofType: nil)!
+            let url = URL(fileURLWithPath: soundPath)
+            return url
+        }
+        return nil
+    }
+    
 }

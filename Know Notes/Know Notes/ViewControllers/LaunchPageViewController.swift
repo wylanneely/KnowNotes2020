@@ -59,7 +59,8 @@ class LaunchPageViewController: UIViewController {
             self.performSegue(withIdentifier: "toLocalPlayerMenu", sender: self)
         } else {
             GameCenterManager.manager.viewController = self
-            GameCenterManager.manager.authenticateGKLocalPlayer()
+            GameCenterManager.manager.authenticateGKLocalPlayer { (success) in
+            }
         }
     }
     
@@ -83,6 +84,7 @@ class LaunchPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? LocalPlayerMenuViewController {
             GameCenterManager.manager.viewController = vc
+            vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
     }
 }

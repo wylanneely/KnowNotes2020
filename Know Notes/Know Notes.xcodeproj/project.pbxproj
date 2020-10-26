@@ -50,6 +50,7 @@
 		E9799888253D390A00BCCD05 /* LocalPlayerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */; };
 		E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */; };
 		E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979989A253E747300BCCD05 /* ClassExtensions.swift */; };
+		E9AC8A5A2546A4D000470E2F /* Game Center - Color.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AC8A572546A4D000470E2F /* Game Center - Color.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerMenuViewController.swift; sourceTree = "<group>"; };
 		E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
 		E979989A253E747300BCCD05 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
+		E9AC8A572546A4D000470E2F /* Game Center - Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Game Center - Color.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 		E9AC8A52254692DB00470E2F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E9AC8A572546A4D000470E2F /* Game Center - Color.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9799878253D370A00BCCD05 /* GamePlay.storyboard in Resources */,
+				E9AC8A5A2546A4D000470E2F /* Game Center - Color.png in Resources */,
 				E91662BF25410090003918C3 /* PlayerKnownInstrumentNotesHeaderViewCell.xib in Resources */,
 				E91662B82540CFE2003918C3 /* FirstKownNotesViewCell.xib in Resources */,
 				E9799857253D2A5400BCCD05 /* Assets.xcassets in Resources */,

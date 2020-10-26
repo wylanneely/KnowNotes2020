@@ -9,21 +9,17 @@ import GameKit
 
 class LocalPlayerMenuViewController: UIViewController{
     
-   
+   //MARK: Unlocked Instruments
+    
+    var isAcousticGuitarUnlocked: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
-        //displayGKAccessPoint()
         localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         setInstrumentStatusView()
     }
     
-    func displayGKAccessPoint(){
-        GKAccessPoint.shared.location = .topLeading
-        GKAccessPoint.shared.isActive = true
-    }
- 
     //MARK: Outlets & Actions
     
     @IBOutlet weak var acousticGuitarStatusView: UIView!
@@ -35,6 +31,17 @@ class LocalPlayerMenuViewController: UIViewController{
     @IBAction func showGameCenterDashboard(_ sender: Any) {
         GameCenterManager.manager.presentGameCenterDashboard()
     }
+    @IBAction func AcousticGuitarButtonTapped(_ sender: Any) {
+        if let isAcousticGuitarUnlocked = isAcousticGuitarUnlocked {
+            if isAcousticGuitarUnlocked {
+                
+            } else {
+                
+            }
+        }
+    }
+    
+    
     
     //MARK: Set Up
     
@@ -42,12 +49,6 @@ class LocalPlayerMenuViewController: UIViewController{
         acousticGuitarStatusView.layer.cornerRadius = 10
         grandPianoStatusView.layer.cornerRadius = 10
     }
-//    
-//    func setImageCircle() {
-//        var localPlayerCircularPhoto = localPlayerProfilePhoto.image?.circleMasked
-//        localPlayerProfilePhoto.layer
-//    }
-//    
     
     //MARK: Delegate
     
@@ -55,20 +56,28 @@ class LocalPlayerMenuViewController: UIViewController{
            self.dismiss(animated: true, completion: nil)
        }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "toAcousticNotes" {
+            if let isAcousticGuitarUnlocked = isAcousticGuitarUnlocked {
+                if isAcousticGuitarUnlocked {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
-            
             switch segue.identifier {
             case "toAcousticNotes" : vc.instrumentImage = UIImage(named: "acoustic_Guitar")
             case "toGrandPianoNotes" : vc.instrumentImage = UIImage(named: "grand_Piano")
             default:
                 return
             }
-            
-            
-            
-            
         }
         
     }

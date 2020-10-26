@@ -11,7 +11,7 @@ import GameKit
 struct LeaderboardsManager {
     
     
-    func submit(score: Int, to leaderboard: LeaderboardIDs){
+    func submit(score: Int, to leaderboard: LeaderboardBundleIDs){
         GKLeaderboard.submitScore(score, context: 0,
                                   player: GKLocalPlayer.local,
                                   leaderboardIDs: [leaderboard.rawValue]) { (error) in
@@ -20,9 +20,11 @@ struct LeaderboardsManager {
     }
     
     
+    
+    
 }
 
-enum LeaderboardIDs: String {
+enum LeaderboardBundleIDs: String {
     case regularGrandPiano = "com.wylan.knowNotes2.leaderboard.GPRHS"
     case regularAcousticGuitar = "com.wylan.knowNotes2.leaderboard.AGRHS"
     case advancedGrandPiano = "com.wylan.knowNotes2.leaderboard.GPAHS"

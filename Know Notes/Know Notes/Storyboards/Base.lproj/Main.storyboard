@@ -140,16 +140,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
-                                <rect key="frame" x="20" y="20" width="154" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="GameCenter">
-                                    <color key="titleColor" name="OxfordBlue"/>
-                                </state>
-                                <connections>
-                                    <action selector="showGameCenterDashboard:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="CO9-wE-Ooo"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVR-Ef-g7t">
                                 <rect key="frame" x="87" y="80" width="240" height="240"/>
                                 <constraints>
@@ -168,8 +158,38 @@
                             <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalSpacing" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="rP6-uf-gSv" userLabel="Instruments Stack View">
                                 <rect key="frame" x="20" y="419.5" width="374" height="325"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWB-sG-cvb">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-Jo-EaJ">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" translatesAutoresizingMaskIntoConstraints="NO" id="Dei-LG-utk">
+                                                <rect key="frame" x="8" y="11" width="128" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Dei-LG-utk" secondAttribute="height" multiplier="1:1" id="ZhT-aU-fuz"/>
+                                                    <constraint firstAttribute="width" constant="128" id="jgj-NS-qoB"/>
+                                                    <constraint firstAttribute="height" constant="128" id="u4w-UE-Vo0"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLj-bq-vMh">
+                                                <rect key="frame" x="136" y="53" width="161" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                                <state key="normal" title="   Grand Piano">
+                                                    <color key="titleColor" name="OxfordBlue"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="lqg-RY-0Yp" kind="show" identifier="toGrandPianoNotes" id="8Id-zs-avP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" name="CaribbeanBlue"/>
+                                        <constraints>
+                                            <constraint firstItem="Dei-LG-utk" firstAttribute="centerY" secondItem="IW7-Jo-EaJ" secondAttribute="centerY" id="SBc-4C-N1F"/>
+                                            <constraint firstAttribute="height" constant="150" id="a1m-C3-bR0"/>
+                                            <constraint firstItem="Dei-LG-utk" firstAttribute="leading" secondItem="IW7-Jo-EaJ" secondAttribute="leading" constant="8" id="cMn-Ms-0cJ"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWB-sG-cvb">
+                                        <rect key="frame" x="0.0" y="175" width="374" height="150"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acoustic_Guitar" translatesAutoresizingMaskIntoConstraints="NO" id="Cc0-dj-ogk">
                                                 <rect key="frame" x="8" y="11" width="128" height="128"/>
@@ -186,6 +206,7 @@
                                                     <color key="titleColor" name="OxfordBlue"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="AcousticGuitarButtonTapped:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="pdm-na-WRV"/>
                                                     <segue destination="lqg-RY-0Yp" kind="presentation" identifier="toAcousticNotes" id="kKb-E9-46o"/>
                                                 </connections>
                                             </button>
@@ -197,36 +218,6 @@
                                             <constraint firstItem="Cc0-dj-ogk" firstAttribute="centerY" secondItem="SWB-sG-cvb" secondAttribute="centerY" id="nUa-j0-piC"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-Jo-EaJ">
-                                        <rect key="frame" x="0.0" y="175" width="374" height="150"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" translatesAutoresizingMaskIntoConstraints="NO" id="Dei-LG-utk">
-                                                <rect key="frame" x="8" y="11" width="128" height="128"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Dei-LG-utk" secondAttribute="height" multiplier="1:1" id="ZhT-aU-fuz"/>
-                                                    <constraint firstAttribute="width" constant="128" id="jgj-NS-qoB"/>
-                                                    <constraint firstAttribute="height" constant="128" id="u4w-UE-Vo0"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLj-bq-vMh">
-                                                <rect key="frame" x="144" y="53" width="145" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
-                                                <state key="normal" title="Grand Piano">
-                                                    <color key="titleColor" name="OxfordBlue"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="lqg-RY-0Yp" kind="show" identifier="toGrandPianoNotes" id="8Id-zs-avP"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" name="CaribbeanBlue"/>
-                                        <constraints>
-                                            <constraint firstItem="Dei-LG-utk" firstAttribute="centerY" secondItem="IW7-Jo-EaJ" secondAttribute="centerY" id="SBc-4C-N1F"/>
-                                            <constraint firstAttribute="height" constant="150" id="a1m-C3-bR0"/>
-                                            <constraint firstItem="Dei-LG-utk" firstAttribute="leading" secondItem="IW7-Jo-EaJ" secondAttribute="leading" constant="8" id="cMn-Ms-0cJ"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Coming" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qro-Nr-V72">
@@ -235,22 +226,42 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPb-Bq-21J">
+                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="DAK-QA-dYW"/>
+                                    <constraint firstAttribute="height" constant="44" id="vSU-Ex-ySo"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
+                                <rect key="frame" x="72" y="20" width="144" height="41"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <state key="normal" title="Game Center">
+                                    <color key="titleColor" name="DeepSea"/>
+                                </state>
+                                <connections>
+                                    <action selector="showGameCenterDashboard:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="CO9-wE-Ooo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="V4x-Hu-0hh"/>
                         <color key="backgroundColor" name="KobiPurple"/>
                         <constraints>
+                            <constraint firstItem="OKA-IU-DZ9" firstAttribute="leading" secondItem="rPb-Bq-21J" secondAttribute="trailing" constant="8" id="0fQ-WR-sAU"/>
                             <constraint firstItem="Fjb-ao-SFp" firstAttribute="top" secondItem="RVR-Ef-g7t" secondAttribute="bottom" constant="40" id="2FW-0P-s4W"/>
                             <constraint firstItem="qro-Nr-V72" firstAttribute="bottom" secondItem="V4x-Hu-0hh" secondAttribute="bottom" id="4RA-v2-MED"/>
+                            <constraint firstItem="rPb-Bq-21J" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="20" id="7e7-jG-Sx9"/>
                             <constraint firstItem="rP6-uf-gSv" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="8jZ-bo-UQi"/>
                             <constraint firstItem="qro-Nr-V72" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="AnK-DU-DjK"/>
                             <constraint firstItem="RVR-Ef-g7t" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="80" id="C1g-QS-pK4"/>
+                            <constraint firstItem="rPb-Bq-21J" firstAttribute="leading" secondItem="V4x-Hu-0hh" secondAttribute="leading" constant="20" id="Er2-vh-Apo"/>
                             <constraint firstItem="rP6-uf-gSv" firstAttribute="top" secondItem="Fjb-ao-SFp" secondAttribute="bottom" constant="20" id="GLc-b9-gy1"/>
+                            <constraint firstItem="V4x-Hu-0hh" firstAttribute="trailing" secondItem="rP6-uf-gSv" secondAttribute="trailing" constant="20" id="KU3-SN-h45"/>
                             <constraint firstItem="Fjb-ao-SFp" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="TZg-nJ-8hJ"/>
-                            <constraint firstItem="OKA-IU-DZ9" firstAttribute="leading" secondItem="V4x-Hu-0hh" secondAttribute="leading" constant="20" id="VJU-dg-2C1"/>
                             <constraint firstItem="V4x-Hu-0hh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OKA-IU-DZ9" secondAttribute="trailing" symbolic="YES" id="Wbg-jc-2fE"/>
                             <constraint firstItem="OKA-IU-DZ9" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="20" id="bdC-aR-Xz3"/>
-                            <constraint firstItem="rP6-uf-gSv" firstAttribute="leading" secondItem="OKA-IU-DZ9" secondAttribute="leading" id="bl5-Dv-EFp"/>
                             <constraint firstItem="RVR-Ef-g7t" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="dwa-03-WDx"/>
+                            <constraint firstItem="rP6-uf-gSv" firstAttribute="leading" secondItem="V4x-Hu-0hh" secondAttribute="leading" constant="20" id="hXS-ar-Q54"/>
                             <constraint firstItem="qro-Nr-V72" firstAttribute="top" secondItem="rP6-uf-gSv" secondAttribute="bottom" constant="40" id="tBB-Q0-AfL"/>
                         </constraints>
                     </view>
@@ -263,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1136" y="378"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="377.67857142857139"/>
         </scene>
         <!--Known Player Instrument Notes Table View Controller-->
         <scene sceneID="Ple-6p-SOO">
@@ -389,9 +400,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8Id-zs-avP"/>
+        <segue reference="kKb-E9-46o"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="Game Center - Color.png" width="1920" height="1920"/>
         <image name="acoustic_Guitar" width="256" height="256"/>
         <image name="grand_Piano" width="256" height="256"/>
         <image name="guitars" catalog="system" width="128" height="100"/>
@@ -404,6 +416,9 @@
         </namedColor>
         <namedColor name="CoralRed">
             <color red="0.6589999794960022" green="0.125" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DeepSea">
+            <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GoldenSun">
             <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

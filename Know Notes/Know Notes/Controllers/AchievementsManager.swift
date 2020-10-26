@@ -9,21 +9,49 @@
 import GameKit
 
 
-struct AchievementsManager {
+ class AchievementsManager {
     
     
-    let acousticGuitarInstrumentAchievement = GKAchievement(identifier: "")
+    var playerAchievements: [GKAchievement]?
+    //MARK: Achievements
+    let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     
-    func unlockAcousticGuitar(score: Int) {
+    var isAcousticGuitarUnlocked: Bool?
+    
+    func loadAchievements() {
+        GKAchievement.loadAchievements { (achievements, error) in
+            if let achievements = achievements {
+                self.playerAchievements = achievements
+                self.sortCompletedAchievements()
+            }
+        }
+    }
+    
+   func sortCompletedAchievements(){
+        if let pAchievements = playerAchievements {
+            for achievement in pAchievements {
+                switch achievement.identifier {
+                case AchievementsBundleIDs.unlockAcousticGuitar.rawValue :
+                    self.isAcousticGuitarUnlocked = achievement.isCompleted
+              default:
+                    return
+                }
+            }
+        }
+   }
+    
+    
+
+    
+    func reportUnlockAcousticGuitarProgress(with score: Int) {
         if score >= 20 {
-            acousticGuitarInstrumentAchievement.percentComplete = 100.00
-            reportAchievement(acousticGuitarInstrumentAchievement)
+            acousticGuitarAchievement.percentComplete = 100.00
+            reportAchievement(acousticGuitarAchievement)
         } else {
            let completePercent =  Double(score) / 20
-            acousticGuitarInstrumentAchievement.percentComplete = completePercent
-            reportAchievement(acousticGuitarInstrumentAchievement)
-        }
-        
+            acousticGuitarAchievement.percentComplete = completePercent
+            reportAchievement(acousticGuitarAchievement)
+        }   
     }
     
     
@@ -34,5 +62,7 @@ struct AchievementsManager {
         }
     }
 
-    
+}
+enum AchievementsBundleIDs: String {
+    case unlockAcousticGuitar = "com.wylan.KnowYourNote2020.Achievements.AcousticGuitar"
 }

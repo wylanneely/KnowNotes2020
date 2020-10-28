@@ -9,10 +9,22 @@ import GameKit
 
 class LocalPlayerMenuViewController: UIViewController{
     
-   //MARK: Unlocked Instruments
-    
+   //MARK: Unlock Instruments
+    var unlockAlertController: UIAlertController {
+      var alert = UIAlertController(title: "Instrument Locked", message: "Unlock the Acoustic Guitar by scoring 20 or more points with the Grand Piano.", preferredStyle: .alert)
+        alert.addAction(unlockAcousticGuitarAlert)
+        return alert
+    }
     var isAcousticGuitarUnlocked: Bool?
-
+    let unlockAcousticGuitarAlert: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    
+    //MARK: Set Up
+       
+       func setInstrumentStatusView(){
+           acousticGuitarStatusView.layer.cornerRadius = 10
+           grandPianoStatusView.layer.cornerRadius = 10
+       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
@@ -31,24 +43,20 @@ class LocalPlayerMenuViewController: UIViewController{
     @IBAction func showGameCenterDashboard(_ sender: Any) {
         GameCenterManager.manager.presentGameCenterDashboard()
     }
+    
     @IBAction func AcousticGuitarButtonTapped(_ sender: Any) {
         if let isAcousticGuitarUnlocked = isAcousticGuitarUnlocked {
             if isAcousticGuitarUnlocked {
                 
             } else {
-                
+                self.present(unlockAlertController, animated: true, completion: nil)
             }
         }
     }
     
     
     
-    //MARK: Set Up
-    
-    func setInstrumentStatusView(){
-        acousticGuitarStatusView.layer.cornerRadius = 10
-        grandPianoStatusView.layer.cornerRadius = 10
-    }
+   
     
     //MARK: Delegate
     

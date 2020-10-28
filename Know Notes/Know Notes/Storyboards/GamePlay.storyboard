@@ -775,6 +775,7 @@
                         <outlet property="note2ButtonView" destination="utd-ln-3ng" id="9gW-72-K0t"/>
                         <outlet property="note3Button" destination="q5C-xj-NOY" id="3la-Ju-bZT"/>
                         <outlet property="note3ButtonView" destination="Pyf-eH-Pcw" id="s39-VE-xtY"/>
+                        <outlet property="playButton" destination="BbN-R3-7VP" id="9nN-bh-4fY"/>
                         <outlet property="scoreLabel" destination="QTk-kH-DHR" id="U2Q-Ao-voY"/>
                     </connections>
                 </viewController>

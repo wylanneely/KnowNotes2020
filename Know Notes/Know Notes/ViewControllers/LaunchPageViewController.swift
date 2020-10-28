@@ -84,7 +84,10 @@ class LaunchPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? LocalPlayerMenuViewController {
             GameCenterManager.manager.viewController = vc
-            vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+            
+            //NOTE: change to test unlocked instruments vs live
+            vc.isAcousticGuitarUnlocked = false
+          //  vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
     }
 }

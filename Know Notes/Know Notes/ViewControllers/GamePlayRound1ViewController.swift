@@ -21,12 +21,15 @@ class GamePlayRound1ViewController: UIViewController {
     let hapticGenerator = UINotificationFeedbackGenerator()
     var musicSound: AVAudioPlayer?
     
+    var doesGameNeedNewNote: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
-        setUpScoresLifes()
+        setUpLabelsButtonsViews()
         // Do any additional setup after loading the view.
     }
+    
     
     
     //MARK: SetUp
@@ -47,9 +50,10 @@ class GamePlayRound1ViewController: UIViewController {
 
     }
     
-    func setUpScoresLifes(){
+    func setUpLabelsButtonsViews(){
         lifesLabel.text = "\(GameLessonManager.manager.lifes)"
         scoreLabel.text = "\(GameLessonManager.manager.score)"
+        playButton.layer.cornerRadius = 10
     }
     
     
@@ -75,59 +79,90 @@ class GamePlayRound1ViewController: UIViewController {
         }
     }
     
+    func handleWrongAnswerWithHaptic(){
+        self.hapticGenerator.notificationOccurred(.error)
+        
+        UIView.animate(withDuration: 0.33) {
+                self.view.backgroundColor = UIColor.systemRed
+            } completion: {
+                (completed: Bool) -> Void in
+                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    self.view.backgroundColor = UIColor.deepSea
+                }
+            }
+        }
+    func handleCorrectAnswerWithHaptic(){
+        self.hapticGenerator.notificationOccurred(.success)
+        
+        UIView.animate(withDuration: 0.33) {
+                self.view.backgroundColor = UIColor.systemGreen
+            } completion: {
+                (completed: Bool) -> Void in
+                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    self.view.backgroundColor = UIColor.deepSea
+                }
+            }
+        }
+
     //MARK: Actions
     @IBAction func playButtonTapped(_ sender: Any) {
-       let newNote = GameLessonManager.manager.getNextNote()
-        currentNote = newNote
-        playSoundFromNote(path: newNote?.soundPath )
-        //PlaySound
+        if doesGameNeedNewNote {
+            let newNote = GameLessonManager.manager.getNextNote()
+             currentNote = newNote
+             playSoundFromNote(path: newNote?.soundPath )
+            doesGameNeedNewNote = false
+        } else {
+            playSoundFromNote(path: currentNote?.soundPath)
+        }
+        
+        
+        
     }
-    
-    
     
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
-        
-        
         if let note1 = note1 {
             playSoundFromNote(path: note1.soundPath)
-            
             if GameLessonManager.manager.checkUpdateSessionWith(note: note1) {
                 //correct
-                hapticGenerator.notificationOccurred(.success)
+                handleCorrectAnswerWithHaptic()
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
+                doesGameNeedNewNote = true
             } else {
                 //wrong
-                hapticGenerator.notificationOccurred(.error)
+                handleWrongAnswerWithHaptic()
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
             }
         }
         checkRoundEnd()
     }
+    
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if let note2 = note2 {
             playSoundFromNote(path: note2.soundPath)
-
             if GameLessonManager.manager.checkUpdateSessionWith(note: note2) {
                 //correct
-                hapticGenerator.notificationOccurred(.success)
+                handleCorrectAnswerWithHaptic()
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
+                doesGameNeedNewNote = true
             } else {
                 //wrong
-                hapticGenerator.notificationOccurred(.error)
+                handleWrongAnswerWithHaptic()
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
             }
         }
         checkRoundEnd()
     }
+    
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
-
             if GameLessonManager.manager.checkUpdateSessionWith(note: note3) {
                 //correct
-                hapticGenerator.notificationOccurred(.success)
+                handleCorrectAnswerWithHaptic()
                 scoreLabel.text = "\(GameLessonManager.manager.score)"
+                doesGameNeedNewNote = true
+                
             } else {
                 //wrong
                 lifesLabel.text = "\(GameLessonManager.manager.lifes)"
@@ -148,6 +183,7 @@ class GamePlayRound1ViewController: UIViewController {
     @IBOutlet weak var note3ButtonView: UIView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var lifesLabel: UILabel!
+    @IBOutlet weak var playButton: UIButton!
     
     /*
     // MARK: - Navigation

@@ -77,6 +77,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="middleBGView" destination="4oG-99-qLj" id="Gmc-as-1Zc"/>
+                <outlet property="note1Button" destination="lHQ-tH-zi7" id="Vr2-iI-bsp"/>
+                <outlet property="note2Button" destination="EPl-4p-Fw3" id="5MB-Qc-SaT"/>
+                <outlet property="note3Button" destination="UiF-Sm-H0F" id="EF8-hh-juB"/>
             </connections>
             <point key="canvasLocation" x="-291.304347826087" y="-719.86607142857144"/>
         </tableViewCell>

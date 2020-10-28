@@ -34,7 +34,7 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <connections>
                                     <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="n8u-0H-OnL"/>
-                                    <segue destination="Wfy-ZV-M7y" kind="show" identifier="toLocalPlayerMenu" id="Wx9-P4-db0"/>
+                                    <segue destination="Oda-HD-ULr" kind="show" identifier="toLocalPlayerMenu" id="Wx9-P4-db0"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-wf-Ytb">
@@ -141,14 +141,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVR-Ef-g7t">
-                                <rect key="frame" x="87" y="80" width="240" height="240"/>
+                                <rect key="frame" x="87" y="136" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RVR-Ef-g7t" secondAttribute="height" multiplier="1:1" id="9xP-kY-JfT"/>
                                     <constraint firstAttribute="width" constant="240" id="HHi-3z-QAT"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjb-ao-SFp">
-                                <rect key="frame" x="122" y="360" width="170" height="39.5"/>
+                                <rect key="frame" x="122" y="416" width="170" height="7"/>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="32"/>
                                 <color key="textColor" name="OxfordBlue"/>
                                 <nil key="highlightedColor"/>
@@ -156,7 +156,7 @@
                                 <size key="shadowOffset" width="2" height="1"/>
                             </label>
                             <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalSpacing" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="rP6-uf-gSv" userLabel="Instruments Stack View">
-                                <rect key="frame" x="20" y="419.5" width="374" height="325"/>
+                                <rect key="frame" x="20" y="443" width="374" height="325"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-Jo-EaJ">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
@@ -221,20 +221,20 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Coming" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qro-Nr-V72">
-                                <rect key="frame" x="148" y="784.5" width="118.5" height="23.5"/>
+                                <rect key="frame" x="148" y="808" width="118.5" height="0.0"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPb-Bq-21J">
-                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <rect key="frame" x="20" y="76" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="DAK-QA-dYW"/>
                                     <constraint firstAttribute="height" constant="44" id="vSU-Ex-ySo"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
-                                <rect key="frame" x="72" y="20" width="144" height="41"/>
+                                <rect key="frame" x="72" y="76" width="144" height="41"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <state key="normal" title="Game Center">
                                     <color key="titleColor" name="DeepSea"/>
@@ -274,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1134.7826086956522" y="377.67857142857139"/>
+            <point key="canvasLocation" x="2044.9275362318842" y="377.67857142857139"/>
         </scene>
         <!--Known Player Instrument Notes Table View Controller-->
         <scene sceneID="Ple-6p-SOO">
@@ -386,7 +386,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-gY-1tV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2236" y="378"/>
+            <point key="canvasLocation" x="3144.9275362318845" y="377.67857142857139"/>
         </scene>
         <!--GamePlay-->
         <scene sceneID="TtS-7Y-bOH">
@@ -396,7 +396,26 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ws6-AS-b8Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3082" y="473"/>
+            <point key="canvasLocation" x="3992.0289855072465" y="472.76785714285711"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uLm-WF-eMI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oda-HD-ULr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="IfD-bV-Red"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g4z-k2-Edu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wfy-ZV-M7y" kind="relationship" relationship="rootViewController" id="fiN-Yu-zr6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="doU-6h-ZUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1134.7826086956522" y="377.67857142857139"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

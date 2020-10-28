@@ -86,8 +86,7 @@ class LaunchPageViewController: UIViewController {
             GameCenterManager.manager.viewController = vc
             
             //NOTE: change to test unlocked instruments vs live
-            vc.isAcousticGuitarUnlocked = false
-          //  vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+           vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
     }
 }

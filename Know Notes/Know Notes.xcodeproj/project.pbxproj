@@ -19,7 +19,7 @@
 		E91662DE2541437E003918C3 /* HalfNotesLockedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */; };
 		E91662DF2541437E003918C3 /* HalfNotesLockedViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */; };
 		E91662E225434FC1003918C3 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E125434FC1003918C3 /* Lesson.swift */; };
-		E91662E6254363DC003918C3 /* GameLessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E5254363DC003918C3 /* GameLessonManager.swift */; };
+		E91662E6254363DC003918C3 /* LessonSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662E5254363DC003918C3 /* LessonSession.swift */; };
 		E91662EB25438F04003918C3 /* GamePlayRound1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */; };
 		E91662EE25438F1C003918C3 /* GamePlayRound2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */; };
 		E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */; };
@@ -48,7 +48,6 @@
 		E9799882253D388700BCCD05 /* LeaderboardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799881253D388700BCCD05 /* LeaderboardsManager.swift */; };
 		E9799885253D389500BCCD05 /* AchievementsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799884253D389500BCCD05 /* AchievementsManager.swift */; };
 		E9799888253D390A00BCCD05 /* LocalPlayerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */; };
-		E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */; };
 		E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979989A253E747300BCCD05 /* ClassExtensions.swift */; };
 		E9AC8A5A2546A4D000470E2F /* Game Center - Color.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AC8A572546A4D000470E2F /* Game Center - Color.png */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,7 @@
 		E91662DC2541437E003918C3 /* HalfNotesLockedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfNotesLockedViewCell.swift; sourceTree = "<group>"; };
 		E91662DD2541437E003918C3 /* HalfNotesLockedViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HalfNotesLockedViewCell.xib; sourceTree = "<group>"; };
 		E91662E125434FC1003918C3 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		E91662E5254363DC003918C3 /* GameLessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLessonManager.swift; sourceTree = "<group>"; };
+		E91662E5254363DC003918C3 /* LessonSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSession.swift; sourceTree = "<group>"; };
 		E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound1ViewController.swift; sourceTree = "<group>"; };
 		E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound2ViewController.swift; sourceTree = "<group>"; };
 		E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayRound3ViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +97,6 @@
 		E9799881253D388700BCCD05 /* LeaderboardsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardsManager.swift; sourceTree = "<group>"; };
 		E9799884253D389500BCCD05 /* AchievementsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsManager.swift; sourceTree = "<group>"; };
 		E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPlayerMenuViewController.swift; sourceTree = "<group>"; };
-		E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
 		E979989A253E747300BCCD05 /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		E9AC8A572546A4D000470E2F /* Game Center - Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Game Center - Color.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,7 +191,6 @@
 				E979984E253D2A5100BCCD05 /* LaunchPageViewController.swift */,
 				E9799887253D390A00BCCD05 /* LocalPlayerMenuViewController.swift */,
 				E91662B12540B8D2003918C3 /* KnownPlayerInstrumentNotesTableViewController.swift */,
-				E9799897253DBC0700BCCD05 /* GamePlayViewController.swift */,
 				E91662EA25438F04003918C3 /* GamePlayRound1ViewController.swift */,
 				E91662ED25438F1C003918C3 /* GamePlayRound2ViewController.swift */,
 				E91662F025438F33003918C3 /* GamePlayRound3ViewController.swift */,
@@ -207,7 +204,7 @@
 				E979987D253D385400BCCD05 /* GameCenterManager.swift */,
 				E9799881253D388700BCCD05 /* LeaderboardsManager.swift */,
 				E9799884253D389500BCCD05 /* AchievementsManager.swift */,
-				E91662E5254363DC003918C3 /* GameLessonManager.swift */,
+				E91662E5254363DC003918C3 /* LessonSession.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -357,7 +354,6 @@
 				E91662C525410250003918C3 /* SecondRoundKnownNotesViewCell.swift in Sources */,
 				E979984B253D2A5100BCCD05 /* AppDelegate.swift in Sources */,
 				E979989B253E747300BCCD05 /* ClassExtensions.swift in Sources */,
-				E9799898253DBC0700BCCD05 /* GamePlayViewController.swift in Sources */,
 				E91662F6254502EF003918C3 /* Instrument.swift in Sources */,
 				E91662F125438F33003918C3 /* GamePlayRound3ViewController.swift in Sources */,
 				E9799855253D2A5100BCCD05 /* Know_Notes.xcdatamodeld in Sources */,
@@ -365,7 +361,7 @@
 				E91662D3254102EA003918C3 /* BeginEditNotesLessonViewCell.swift in Sources */,
 				E91662B72540CFE2003918C3 /* FirstKownNotesViewCell.swift in Sources */,
 				E979984D253D2A5100BCCD05 /* SceneDelegate.swift in Sources */,
-				E91662E6254363DC003918C3 /* GameLessonManager.swift in Sources */,
+				E91662E6254363DC003918C3 /* LessonSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

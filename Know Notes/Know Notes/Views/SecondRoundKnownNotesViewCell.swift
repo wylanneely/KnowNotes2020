@@ -34,10 +34,13 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     }
     func setUPViews(){
         middleBGView.layer.borderWidth = 2
-        middleBGView.layer.borderColor = UIColor.coralRed.cgColor
+        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         middleBGView.layer.cornerRadius = 10
+        firstNoteView.layer.cornerRadius = 10
+        secondSelectedNoteButton.layer.cornerRadius = 10
     }
     
+    @IBOutlet weak var firstNoteView: UIView!
     @IBOutlet weak var middleBGView: UIView!
     @IBOutlet weak var firstSelectedNoteLabel: UILabel!
     @IBOutlet weak var secondSelectedNoteButton: UIButton!

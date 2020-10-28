@@ -12,7 +12,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     //MARK: Delegate
     func beginLesssonButtonTapped() {
         self.performSegue(withIdentifier: "toGamePlay", sender: self)
-        
     }
     
     //MARK: Properties
@@ -28,6 +27,19 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        LessonSession.manager.resetScores()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func registerCellXibs(){

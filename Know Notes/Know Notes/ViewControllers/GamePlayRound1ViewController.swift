@@ -11,26 +11,65 @@ import AVFoundation
 
 class GamePlayRound1ViewController: UIViewController {
     
-    var gameRoundNotes: [Note] = GameLessonManager.manager.lesson.round1Notes
+    var gameRoundNotes: [Note] = LessonSession.manager.lesson.round1Notes
     
     var note1: Note?
     var note2: Note?
     var note3: Note?
     
     var currentNote: Note?
+    
     let hapticGenerator = UINotificationFeedbackGenerator()
     var musicSound: AVAudioPlayer?
     
     var doesGameNeedNewNote: Bool = true
     
+    var finishedGameAlert: UIAlertController {
+        let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Submit", style: .default) { (_) in
+            let score: Int = LessonSession.manager.score
+            GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+            GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
+            self.dismiss(animated: true, completion: nil)
+        }
+        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        alert.addAction(action2)
+        return alert
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
         // Do any additional setup after loading the view.
+       // scoreUpdate()
+        viewNavController()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    func viewNavController(){
+        if let navs = self.navigationController?.viewControllers {
+        for controller in navs {
+            controller
+        }
+        }
     }
     
     
+    //test to skip to round 3
+    func scoreUpdate(){
+        LessonSession.manager.score = 24
+    }
     
     //MARK: SetUp
     
@@ -51,24 +90,26 @@ class GamePlayRound1ViewController: UIViewController {
     }
     
     func setUpLabelsButtonsViews(){
-        lifesLabel.text = "\(GameLessonManager.manager.lifes)"
-        scoreLabel.text = "\(GameLessonManager.manager.score)"
+        lifesLabel.text = "\(LessonSession.manager.lifes)"
+        scoreLabel.text = "\(LessonSession.manager.score)"
         playButton.layer.cornerRadius = 10
     }
     
     
 
     func checkRoundEnd(){
-        if GameLessonManager.manager.score >= 10 {
+        if LessonSession.manager.score >= 10 {
             self.performSegue(withIdentifier: "toRound2", sender: self)
         }
-        if GameLessonManager.manager.lifes == 0 {
-            self.dismiss(animated: true, completion: nil)
+        if LessonSession.manager.lifes == 0 {
+            self.present(finishedGameAlert, animated: true) {
+                //Possible unwind segue area
+            }
         }
     }
     
     func playSoundFromNote(path: String? ) {
-        if let url = GameLessonManager.manager.getSoundPathURLFromNote(path: path) {
+        if let url = LessonSession.manager.getSoundPathURLFromNote(path: path) {
         do {
             musicSound = try AVAudioPlayer(contentsOf: url)
             musicSound?.play()
@@ -107,65 +148,84 @@ class GamePlayRound1ViewController: UIViewController {
     //MARK: Actions
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
-            let newNote = GameLessonManager.manager.getNextNote()
+            let newNote = LessonSession.manager.getNextNote()
              currentNote = newNote
              playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
+            DispatchQueue.main.async {
+                self.playButton.setTitle("Repeat", for: .normal)
+            }
         } else {
             playSoundFromNote(path: currentNote?.soundPath)
         }
-        
-        
-        
     }
     
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
+        if doesGameNeedNewNote {
+            return
+        }
+        
         if let note1 = note1 {
             playSoundFromNote(path: note1.soundPath)
-            if GameLessonManager.manager.checkUpdateSessionWith(note: note1) {
+            if LessonSession.manager.checkUpdateSessionWith(note: note1) {
                 //correct
                 handleCorrectAnswerWithHaptic()
-                scoreLabel.text = "\(GameLessonManager.manager.score)"
+                DispatchQueue.main.async {
+                    self.playButton.setTitle("Play", for: .normal)
+                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(GameLessonManager.manager.lifes)"
+                lifesLabel.text = "\(LessonSession.manager.lifes)"
             }
         }
         checkRoundEnd()
     }
     
     @IBAction func note2ButtonTapped(_ sender: Any) {
+        if doesGameNeedNewNote {
+            return
+        }
         if let note2 = note2 {
             playSoundFromNote(path: note2.soundPath)
-            if GameLessonManager.manager.checkUpdateSessionWith(note: note2) {
+            if LessonSession.manager.checkUpdateSessionWith(note: note2) {
                 //correct
                 handleCorrectAnswerWithHaptic()
-                scoreLabel.text = "\(GameLessonManager.manager.score)"
+                DispatchQueue.main.async {
+                    self.playButton.setTitle("Play", for: .normal)
+                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(GameLessonManager.manager.lifes)"
+                lifesLabel.text = "\(LessonSession.manager.lifes)"
             }
         }
         checkRoundEnd()
     }
     
     @IBAction func note3ButtonTapped(_ sender: Any) {
+        if doesGameNeedNewNote {
+            return
+        }
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
-            if GameLessonManager.manager.checkUpdateSessionWith(note: note3) {
+            if LessonSession.manager.checkUpdateSessionWith(note: note3) {
                 //correct
                 handleCorrectAnswerWithHaptic()
-                scoreLabel.text = "\(GameLessonManager.manager.score)"
+                DispatchQueue.main.async {
+                    self.playButton.setTitle("Play", for: .normal)
+                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                }
                 doesGameNeedNewNote = true
                 
             } else {
                 //wrong
-                lifesLabel.text = "\(GameLessonManager.manager.lifes)"
+                lifesLabel.text = "\(LessonSession.manager.lifes)"
                 hapticGenerator.notificationOccurred(.error)
             }
         }
@@ -185,14 +245,17 @@ class GamePlayRound1ViewController: UIViewController {
     @IBOutlet weak var lifesLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toRound2" {
+                LessonSession.manager.setRound2Notes()
+        }
+        
     }
-    */
+    
 
 }

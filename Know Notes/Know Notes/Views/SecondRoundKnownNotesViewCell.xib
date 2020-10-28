@@ -71,6 +71,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="firstNoteView" destination="2FQ-LC-8Cf" id="hI0-gJ-ezm"/>
                 <outlet property="firstSelectedNoteLabel" destination="Uwa-ml-VBb" id="hac-po-Epv"/>
                 <outlet property="middleBGView" destination="Qiy-xI-Ko6" id="KN1-MB-xgd"/>
                 <outlet property="secondSelectedNoteButton" destination="git-KB-eWY" id="SS9-qg-EIj"/>

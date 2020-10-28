@@ -48,27 +48,16 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="1Y4-WE-Ifa" userLabel="knownChordsStack">
-                        <rect key="frame" x="277.5" y="51.5" width="128.5" height="77"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes Learned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDw-Vx-LRk">
-                                <rect key="frame" x="0.0" y="0.0" width="128.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" name="Banana"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSb-o9-F4r">
-                                <rect key="frame" x="0.0" y="27" width="128.5" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" name="Banana"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="__________________________________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFp-Gm-UEk">
                         <rect key="frame" x="48" y="147" width="319" height="21.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" name="CoralRed"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes Learned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDw-Vx-LRk">
+                        <rect key="frame" x="143" y="139" width="128.5" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" name="Banana"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -76,14 +65,14 @@
                 <constraints>
                     <constraint firstItem="vJY-Lk-Lc9" firstAttribute="top" secondItem="oMf-A8-8t3" secondAttribute="top" constant="12" id="0KM-rY-J4S"/>
                     <constraint firstAttribute="trailingMargin" secondItem="CFp-Gm-UEk" secondAttribute="trailing" constant="27" id="7hm-5E-b3a"/>
-                    <constraint firstItem="1Y4-WE-Ifa" firstAttribute="leading" secondItem="te3-YO-Lsa" secondAttribute="trailing" constant="60" id="DuA-jI-ApV"/>
-                    <constraint firstItem="1Y4-WE-Ifa" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="KkE-ba-WQB"/>
                     <constraint firstItem="te3-YO-Lsa" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="c48-3O-GHN"/>
                     <constraint firstItem="Cci-nq-jzu" firstAttribute="centerY" secondItem="oMf-A8-8t3" secondAttribute="centerY" id="exX-Bp-uD2"/>
                     <constraint firstItem="CFp-Gm-UEk" firstAttribute="top" secondItem="te3-YO-Lsa" secondAttribute="bottom" constant="31.5" id="fah-lF-tP4"/>
                     <constraint firstItem="Cci-nq-jzu" firstAttribute="leading" secondItem="oMf-A8-8t3" secondAttribute="leading" constant="20" symbolic="YES" id="h6O-su-pRN"/>
                     <constraint firstItem="te3-YO-Lsa" firstAttribute="centerX" secondItem="oMf-A8-8t3" secondAttribute="centerX" id="iNz-9c-YGH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="DDw-Vx-LRk" secondAttribute="bottom" constant="6" id="nI3-0Z-LeQ"/>
                     <constraint firstItem="vJY-Lk-Lc9" firstAttribute="centerX" secondItem="oMf-A8-8t3" secondAttribute="centerX" id="w3t-Ee-tDr"/>
+                    <constraint firstItem="DDw-Vx-LRk" firstAttribute="centerX" secondItem="oMf-A8-8t3" secondAttribute="centerX" id="wAP-B1-dPU"/>
                     <constraint firstItem="CFp-Gm-UEk" firstAttribute="leading" secondItem="oMf-A8-8t3" secondAttribute="leadingMargin" constant="28" id="xYr-bP-9ma"/>
                 </constraints>
             </tableViewCellContentView>

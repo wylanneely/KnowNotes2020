@@ -32,22 +32,16 @@ class GamePlayRound2ViewController: UIViewController {
             GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
             GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
             
-            for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: KnownPlayerInstrumentNotesTableViewController.self) {
-                        _ =  self.navigationController!.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            
             
         }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             
-            for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: KnownPlayerInstrumentNotesTableViewController.self) {
-                        _ =  self.navigationController!.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
+            
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+
+            
         }
         alert.addAction(action)
         alert.addAction(action2)
@@ -59,14 +53,21 @@ class GamePlayRound2ViewController: UIViewController {
         assignNotesToButtons()
         setUpScoresLifes()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
+   
     
    
     

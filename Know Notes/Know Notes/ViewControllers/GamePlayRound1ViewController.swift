@@ -46,8 +46,13 @@ class GamePlayRound1ViewController: UIViewController {
         assignNotesToButtons()
         setUpLabelsButtonsViews()
         // Do any additional setup after loading the view.
-       // scoreUpdate()
+        scoreUpdate()
         viewNavController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -68,7 +73,7 @@ class GamePlayRound1ViewController: UIViewController {
     
     //test to skip to round 3
     func scoreUpdate(){
-        LessonSession.manager.score = 24
+        LessonSession.manager.score = 10
     }
     
     //MARK: SetUp

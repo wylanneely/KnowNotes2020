@@ -11,6 +11,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     //MARK: Delegate
     func beginLesssonButtonTapped() {
+        LessonSession.manager.resetScores()
         self.performSegue(withIdentifier: "toGamePlay", sender: self)
     }
     
@@ -31,7 +32,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        LessonSession.manager.resetScores()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

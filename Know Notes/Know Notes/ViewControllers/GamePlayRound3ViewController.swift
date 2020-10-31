@@ -34,21 +34,15 @@ class GamePlayRound3ViewController: UIViewController {
             let score: Int = LessonSession.manager.score
             GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
             GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-            for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: KnownPlayerInstrumentNotesTableViewController.self) {
-                        _ =  self.navigationController!.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
+           
+            self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+
+            
         }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: KnownPlayerInstrumentNotesTableViewController.self) {
-                        _ =  self.navigationController!.popToViewController(controller, animated: true)
-                        break
-                    }
-                }
+            self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
         }
+        
         alert.addAction(action)
         alert.addAction(action2)
         return alert

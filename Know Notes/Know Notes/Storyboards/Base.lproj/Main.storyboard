@@ -381,7 +381,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="a9o-wV-hkY"/>
                     <connections>
-                        <segue destination="40y-gm-W49" kind="show" identifier="toGamePlay" id="ROw-WV-D4q"/>
+                        <segue destination="40y-gm-W49" kind="showDetail" identifier="toGamePlay" id="ROw-WV-D4q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-gY-1tV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

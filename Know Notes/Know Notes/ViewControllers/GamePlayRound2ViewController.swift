@@ -31,12 +31,15 @@ class GamePlayRound2ViewController: UIViewController {
             let score: Int = LessonSession.manager.score
             GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
             GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
+            
             for controller in self.navigationController!.viewControllers as Array {
                     if controller.isKind(of: KnownPlayerInstrumentNotesTableViewController.self) {
                         _ =  self.navigationController!.popToViewController(controller, animated: true)
                         break
                     }
-                }        }
+                }
+            
+        }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             
             for controller in self.navigationController!.viewControllers as Array {

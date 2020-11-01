@@ -18,26 +18,27 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kj-fL-LUk">
                         <rect key="frame" x="117" y="8" width="180" height="44"/>
-                        <color key="backgroundColor" name="GoldenSun"/>
+                        <color key="backgroundColor" name="Banana"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="nIe-bs-cii"/>
                             <constraint firstAttribute="width" constant="180" id="pWC-gR-V0i"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <state key="normal" title="Begin Lesson">
-                            <color key="titleColor" name="CoralRed"/>
+                            <color key="titleColor" name="CeriseRed"/>
                         </state>
                         <connections>
                             <action selector="beginButtonTapped:" destination="Auo-3N-Ppp" eventType="touchUpInside" id="qDi-nP-8RB"/>
                         </connections>
                     </button>
                 </subviews>
-                <color key="backgroundColor" name="DeepSea"/>
+                <color key="backgroundColor" name="StarBlue"/>
                 <constraints>
                     <constraint firstItem="4kj-fL-LUk" firstAttribute="centerY" secondItem="Qf5-W5-YcS" secondAttribute="centerY" id="1sB-GM-PcV"/>
                     <constraint firstItem="4kj-fL-LUk" firstAttribute="centerX" secondItem="Qf5-W5-YcS" secondAttribute="centerX" id="syE-9a-5y3"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="StarBlue"/>
             <connections>
                 <outlet property="beginButton" destination="4kj-fL-LUk" id="1ra-ZQ-sfn"/>
             </connections>
@@ -45,14 +46,14 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="CoralRed">
-            <color red="0.6589999794960022" green="0.125" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Banana">
+            <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="DeepSea">
-            <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="CeriseRed">
+            <color red="0.81960784313725488" green="0.20392156862745098" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="GoldenSun">
-            <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

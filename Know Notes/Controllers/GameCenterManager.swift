@@ -12,14 +12,19 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
     
     static let manager = GameCenterManager()
     
-    //MARK: Authentication
-    
+    typealias CompletionBlock = (Error?) -> Void
+    typealias SuccessHandler = (Bool) -> Void
+
     override init() {
         super.init()
-        authenticateGKLocalPlayer()
+        authenticateGKLocalPlayer { (success) in
+            if success {
+                achievementsManager.loadAchievements()
+            }
+        }
     }
     
-    func authenticateGKLocalPlayer() {
+    func authenticateGKLocalPlayer(completion: SuccessHandler) {
         GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
             if GKLocalPlayer.local.isAuthenticated {
                 self.getSetLocalPlayerPhoto()
@@ -31,16 +36,20 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
                 print("Error authentication to GameCenter: " +
                         "\(error?.localizedDescription ?? "none")") }
         }
+        completion(true)
     }
     
     
-    //MARK: Properties
-    
+    //MARK: Authentication
+
     static var isAuthenticated: Bool {
             return GKLocalPlayer.local.isAuthenticated
         }
+    enum GameCenterHelperError: Error {
+           case matchNotFound
+       }
+       
 
-    
 
     var localPlayerPhoto: UIImage?
     func getSetLocalPlayerPhoto(){
@@ -50,24 +59,18 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
         } }
     
     
-    let leaderboardsManager = LeaderboardsManager()
-    
+
     var viewController: UIViewController?
     var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
     var currentMatch: GKTurnBasedMatch?
     
-    typealias CompletionBlock = (Error?) -> Void
-    
 
+
+    var leaderboardsManager = LeaderboardsManager()
+    var achievementsManager = AchievementsManager()
     
-    enum GameCenterHelperError: Error {
-        case matchNotFound
-    }
-    
-    
-    
-    //MARK: GKGameCenter ViewControllers
-    var gameCenterDashboardVC = GKGameCenterViewController(state: .achievements)
+    //MARK: View GameCenter dashboards
+    var gameCenterDashboardVC = GKGameCenterViewController(state: .default)
     
     func presentGameCenterDashboard(){
         let vc = gameCenterDashboardVC
@@ -84,11 +87,6 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
         viewController?.present(vc, animated: true, completion: nil)
     }
     
-//    func submitScoreToLeaderboard(){
-//        GKLeaderboard.submitScore(10, context: 0, player: GKLocalPlayer.local, leaderboardIDs: ["com.wylan.nineknights.leaderboards"]) { (error) in
-//
-//        }
-//    }
       
     //MARK: Delegate
     

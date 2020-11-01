@@ -14,6 +14,14 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
         let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
            return cell
        }
+    
+    func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
+        instrumentImage.image = image
+        instrumentProficiencyRankingLabel.text = rank
+        completedNotesLabel.text = "\(completedNotes)"
+    }
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,5 +38,6 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
     
+    @IBOutlet weak var completedNotesLabel: UILabel!
     
 }

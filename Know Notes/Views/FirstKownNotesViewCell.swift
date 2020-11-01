@@ -28,11 +28,23 @@ class FirstKownNotesViewCell: UITableViewCell {
     
     func setUPViews(){
         middleBGView.layer.borderWidth = 2
-        middleBGView.layer.borderColor = UIColor.coralRed.cgColor
+        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         middleBGView.layer.cornerRadius = 10
+        note1Button.layer.cornerRadius = 10
+        note2Button.layer.cornerRadius = 10
+        note3Button.layer.cornerRadius = 10
+        note1Button.layer.borderWidth = 2
+        note2Button.layer.borderWidth = 2
+        note3Button.layer.borderWidth = 2
+        note1Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        note2Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        note3Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
     }
     
     @IBOutlet weak var middleBGView: UIView!
     
+    @IBOutlet weak var note2Button: UIButton!
+    @IBOutlet weak var note1Button: UIButton!
+    @IBOutlet weak var note3Button: UIButton!
     
 }

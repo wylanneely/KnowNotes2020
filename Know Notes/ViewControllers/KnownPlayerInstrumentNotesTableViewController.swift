@@ -11,17 +11,32 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     //MARK: Delegate
     func beginLesssonButtonTapped() {
+        LessonSession.manager.resetScores()
+        self.performSegue(withIdentifier: "toGamePlay", sender: self)
     }
     
-
+    //MARK: Properties
+    
+    var instrumentName: String = InstrumentType.grandPiano.rawValue
+    var instrumentImage: UIImage?
+    
+    var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellXibs()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func registerCellXibs(){
@@ -61,55 +76,55 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             return 1
         }
     }
-
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell", for: indexPath)
-                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
-                    return notesCellExample
+                if let instrumentImage = instrumentImage {
+                    if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
+                        notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 7)
+                        return notesCellExample
+                    }
                 }
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "FirstNoteCell", for: indexPath)
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
                 }
-                return cell
             case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "secondRoundCell", for: indexPath)
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
-                    return notesCellExample
+                    
+                    if leaderboardsManager.didFinishGrandPianoRound1 {
+                        return notesCellExample
+                    } else {
+                        notesCellExample.setLockedNotesViews()
+                        return notesCellExample
+                    }
                 }
-                return cell
             case 3:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "secondRoundCell", for: indexPath)
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
-                    //TODO: Set these buttons upso the user can select which note to learn
                     DispatchQueue.main.async {
+                        notesCellExample.setLockedNotesViews()
                         notesCellExample.firstSelectedNoteLabel.text = "F"
                         notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
                     }
-                    return notesCellExample
+                    if leaderboardsManager.didFinishGrandPianoRound2 {
+                        return notesCellExample
+                    } else {
+                        notesCellExample.setLockedNotesViews()
+                        return notesCellExample
+                    }
                 }
-                return cell
             case 4:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "beginCell", for: indexPath)
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
-                return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "FirstNoteCell", for: indexPath)
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
                 }
-                return cell
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "lockedHalfNotes", for: indexPath)
@@ -117,9 +132,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             return lockedHalfNotesCell
         }
         return cell
-        
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -129,52 +141,15 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         }
         
         switch indexPath.row {
-        case 0: return 180
+        case 0: return 200
         case 1: return 120
         case 2: return 120
         case 3: return 120
-        case 4: return 60
-        default: return 120
+        case 4: return 70
+        default: return 900
         }
             
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -183,5 +158,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         
     }
     
+
 
 }

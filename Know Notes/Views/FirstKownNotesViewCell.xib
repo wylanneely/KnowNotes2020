@@ -21,42 +21,42 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHQ-tH-zi7">
                                 <rect key="frame" x="35" y="12" width="88" height="88"/>
-                                <color key="backgroundColor" name="CaribbeanBlue"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="wME-II-M4K"/>
                                     <constraint firstAttribute="width" constant="88" id="zOb-xl-AWG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                 <state key="normal" title="A">
-                                    <color key="titleColor" name="CoralRed"/>
+                                    <color key="titleColor" name="CeriseRed"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPl-4p-Fw3">
                                 <rect key="frame" x="143" y="12" width="88" height="88"/>
-                                <color key="backgroundColor" name="CaribbeanBlue"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="DG2-1E-7B6"/>
                                     <constraint firstAttribute="width" constant="88" id="s7c-EN-xFd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                 <state key="normal" title="B">
-                                    <color key="titleColor" name="CoralRed"/>
+                                    <color key="titleColor" name="CeriseRed"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiF-Sm-H0F">
                                 <rect key="frame" x="251" y="12" width="88" height="88"/>
-                                <color key="backgroundColor" name="CaribbeanBlue"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="ign-s3-gZI"/>
                                     <constraint firstAttribute="width" constant="88" id="wBT-vl-s7D"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
                                 <state key="normal" title="C">
-                                    <color key="titleColor" name="CoralRed"/>
+                                    <color key="titleColor" name="CeriseRed"/>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" name="DeepSea"/>
+                        <color key="backgroundColor" name="StarBlue"/>
                         <constraints>
                             <constraint firstItem="UiF-Sm-H0F" firstAttribute="leading" secondItem="EPl-4p-Fw3" secondAttribute="trailing" constant="20" id="82A-Ap-YUB"/>
                             <constraint firstItem="EPl-4p-Fw3" firstAttribute="leading" secondItem="lHQ-tH-zi7" secondAttribute="trailing" constant="20" id="9sk-dG-EHL"/>
@@ -67,7 +67,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" name="DeepSea"/>
+                <color key="backgroundColor" name="StarBlue"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="4oG-99-qLj" secondAttribute="bottom" constant="4" id="8DQ-en-CzV"/>
                     <constraint firstItem="4oG-99-qLj" firstAttribute="leading" secondItem="uP4-wT-a4f" secondAttribute="leading" constant="20" symbolic="YES" id="Pqt-dS-4F4"/>
@@ -77,19 +77,22 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="middleBGView" destination="4oG-99-qLj" id="Gmc-as-1Zc"/>
+                <outlet property="note1Button" destination="lHQ-tH-zi7" id="Vr2-iI-bsp"/>
+                <outlet property="note2Button" destination="EPl-4p-Fw3" id="5MB-Qc-SaT"/>
+                <outlet property="note3Button" destination="UiF-Sm-H0F" id="EF8-hh-juB"/>
             </connections>
             <point key="canvasLocation" x="-291.304347826087" y="-719.86607142857144"/>
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="CaribbeanBlue">
-            <color red="0.22745098039215686" green="0.68235294117647061" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="CeriseRed">
+            <color red="0.81960784313725488" green="0.20392156862745098" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="CoralRed">
-            <color red="0.6589999794960022" green="0.125" blue="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="SeaFoam">
+            <color red="0.031372549019607843" green="0.69803921568627447" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="DeepSea">
-            <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

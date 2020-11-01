@@ -40,6 +40,9 @@ extension UIColor {
     static var ceriseRed: UIColor {
         return UIColor(displayP3Red: 209/255, green: 52/255, blue: 91/255, alpha: 1.0)
     }
+    static var beauBlue: UIColor {
+        return UIColor(displayP3Red: 196/255, green: 224/255, blue: 249/255, alpha: 1.0)
+    }
 }
 
 

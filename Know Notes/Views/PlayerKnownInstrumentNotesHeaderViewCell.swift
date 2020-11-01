@@ -18,7 +18,7 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
         instrumentImage.image = image
         instrumentProficiencyRankingLabel.text = rank
-        completedNotesLabel.text = "\(completedNotes)"
+        completedNotesLabel.text = "\(completedNotes) Notes Unlocked"
     }
     
     

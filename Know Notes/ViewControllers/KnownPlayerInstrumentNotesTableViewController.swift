@@ -84,37 +84,71 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             case 0:
                 if let instrumentImage = instrumentImage {
                     if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
-                        notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 7)
-                        return notesCellExample
+                        
+                        switch instrumentName {
+                        case InstrumentType.grandPiano.rawValue:
+                            if leaderboardsManager.didFinishGrandPianoRound2 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
+                                return notesCellExample
+                            } else if leaderboardsManager.didFinishGrandPianoRound1 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
+                                return notesCellExample
+                            }
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
+                            return notesCellExample
+                        case InstrumentType.acousticGuitar.rawValue:
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
+                            return notesCellExample
+                        default:
+                            return notesCellExample
+                        }
                     }
                 }
+                
             case 1:
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
                 }
             case 2:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
-                    
-                    if leaderboardsManager.didFinishGrandPianoRound1 {
-                        return notesCellExample
-                    } else {
+                    switch instrumentName {
+                    case InstrumentType.grandPiano.rawValue:
+                        if leaderboardsManager.didFinishGrandPianoRound1 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
+                    case InstrumentType.acousticGuitar.rawValue:
                         notesCellExample.setLockedNotesViews()
+                        return notesCellExample
+                    default:
                         return notesCellExample
                     }
                 }
+                
             case 3:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
-                    DispatchQueue.main.async {
+                    switch instrumentName {
+                    case InstrumentType.grandPiano.rawValue:
+                        DispatchQueue.main.async {
+                            notesCellExample.setLockedNotesViews()
+                            notesCellExample.firstSelectedNoteLabel.text = "F"
+                            notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
+                        }
+                        if leaderboardsManager.didFinishGrandPianoRound2 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
+                    case InstrumentType.acousticGuitar.rawValue:
                         notesCellExample.setLockedNotesViews()
-                        notesCellExample.firstSelectedNoteLabel.text = "F"
-                        notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
-                    }
-                    if leaderboardsManager.didFinishGrandPianoRound2 {
                         return notesCellExample
-                    } else {
-                        notesCellExample.setLockedNotesViews()
+                    default:
                         return notesCellExample
                     }
+                   
                 }
             case 4:
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
@@ -139,7 +173,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         if indexPath.section == 1 {
             return 80
         }
-        
+    
         switch indexPath.row {
         case 0: return 200
         case 1: return 120

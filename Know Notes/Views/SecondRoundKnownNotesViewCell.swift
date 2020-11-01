@@ -34,6 +34,7 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     }
     
     func setUnlockedViews(){
+        lockImageView.tintColor = UIColor.starCommandBlue
         middleBGView.layer.borderWidth = 2
         middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         middleBGView.layer.cornerRadius = 10
@@ -48,6 +49,8 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     }
     
     func setLockedNotesViews(){
+        lockImageView.tintColor = UIColor.beauBlue
+
         middleBGView.layer.borderWidth = 2
         middleBGView.layer.borderColor = UIColor.lightGray.cgColor
         middleBGView.layer.cornerRadius = 10
@@ -68,4 +71,7 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     @IBOutlet weak var middleBGView: UIView!
     @IBOutlet weak var firstSelectedNoteLabel: UILabel!
     @IBOutlet weak var secondSelectedNoteButton: UIButton!
+    @IBOutlet weak var lockImageView: UIImageView!
+    
+    
 }

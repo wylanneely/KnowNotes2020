@@ -53,7 +53,6 @@ class LaunchPageViewController: UIViewController {
     @IBOutlet weak var guitarsImage: UIImageView!
     @IBOutlet weak var pianosImage: UIImageView!
     
-    
     @IBAction func signInButtonTapped(_ sender: Any) {
         if GKLocalPlayer.local.isAuthenticated {
             self.performSegue(withIdentifier: "toLocalPlayerMenu", sender: self)
@@ -65,29 +64,30 @@ class LaunchPageViewController: UIViewController {
     }
     
     // MARK: - Notifications
-      func registerNotification(){
-          NotificationCenter.default.addObserver(
+    func registerNotification(){
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(authenticationChanged(_:)),
             name: .authenticationChanged,
             object: nil
-          )
-      }
-
+        )
+    }
+    
     @objc private func authenticationChanged(_ notification: Notification) {        
-      signInButton.isEnabled = notification.object as? Bool ?? false
+        signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
     }
     
     //MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? LocalPlayerMenuViewController {
-            GameCenterManager.manager.viewController = vc
-            
+       // if let vc = segue.destination as? LocalPlayerMenuViewController {
+          //  GameCenterManager.manager.viewController = vc
             //NOTE: change to test unlocked instruments vs live
-           vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
-        }
+           // vc.isAcousticGuitarUnlocked = false
+          //  vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+       // }
     }
+    
 }
 

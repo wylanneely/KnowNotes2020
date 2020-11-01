@@ -45,9 +45,7 @@ class GamePlayRound1ViewController: UIViewController {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
-        // Do any additional setup after loading the view.
-        scoreUpdate()
-        viewNavController()
+        //scoreUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,14 +60,6 @@ class GamePlayRound1ViewController: UIViewController {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    func viewNavController(){
-        if let navs = self.navigationController?.viewControllers {
-        for controller in navs {
-            controller
-        }
-        }
-    }
-    
     
     //test to skip to round 3
     func scoreUpdate(){

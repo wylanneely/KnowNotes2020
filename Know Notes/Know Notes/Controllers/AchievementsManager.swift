@@ -16,7 +16,7 @@ import GameKit
     //MARK: Achievements
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     
-    var isAcousticGuitarUnlocked: Bool?
+    var isAcousticGuitarUnlocked: Bool = false
     
     func loadAchievements() {
         GKAchievement.loadAchievements { (achievements, error) in

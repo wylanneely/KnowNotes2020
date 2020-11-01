@@ -27,7 +27,7 @@
                                 </state>
                             </button>
                             <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1K-A6-Ro2" userLabel="seguePlaceholder">
-                                <rect key="frame" x="338" y="816" width="30" height="46"/>
+                                <rect key="frame" x="334" y="816" width="30" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <connections>
                                     <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="n8u-0H-OnL"/>
@@ -64,7 +64,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
-                                <rect key="frame" x="166" y="760" width="82" height="46"/>
+                                <rect key="frame" x="162" y="760" width="90" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="nwc-Vz-UgI"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="28"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
                                 <state key="normal" title="Sign In">
@@ -84,7 +87,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pianokeys" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="35m-9Z-QxL">
-                                <rect key="frame" x="166" y="602.5" width="202" height="136"/>
+                                <rect key="frame" x="162" y="602.5" width="202" height="136"/>
                                 <color key="tintColor" name="GoldenSun"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="aKz-wN-9c8"/>
@@ -118,16 +121,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoE-Hv-HvC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="590" y="77"/>
-        </scene>
-        <!--GamePlay-->
-        <scene sceneID="mMj-QP-22j">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GamePlay" id="Xt2-hK-hW8" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="1YZ-Ze-BaI"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KWp-N0-cbV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="591" y="540"/>
         </scene>
         <!--Local Player Menu View Controller-->
         <scene sceneID="AwL-Co-CJa">
@@ -178,7 +171,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="CaribbeanBlue"/>
+                                        <color key="backgroundColor" name="GoldenSun"/>
                                         <constraints>
                                             <constraint firstItem="Dei-LG-utk" firstAttribute="centerY" secondItem="IW7-Jo-EaJ" secondAttribute="centerY" id="SBc-4C-N1F"/>
                                             <constraint firstAttribute="height" constant="150" id="a1m-C3-bR0"/>
@@ -208,7 +201,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="CaribbeanBlue"/>
+                                        <color key="backgroundColor" name="GoldenSun"/>
                                         <constraints>
                                             <constraint firstItem="Cc0-dj-ogk" firstAttribute="leading" secondItem="SWB-sG-cvb" secondAttribute="leading" constant="8" id="Abd-Ks-i54"/>
                                             <constraint firstAttribute="height" constant="150" id="J5l-Zz-kag"/>
@@ -265,6 +258,7 @@
                     <navigationItem key="navigationItem" id="rY4-fb-52O"/>
                     <connections>
                         <outlet property="acousticGuitarStatusView" destination="SWB-sG-cvb" id="1Ii-9k-310"/>
+                        <outlet property="buttonAcousticGuitar" destination="7ha-jV-Hny" id="bW0-qM-dvO"/>
                         <outlet property="grandPianoStatusView" destination="IW7-Jo-EaJ" id="YuB-pg-xfX"/>
                         <outlet property="localPlayerProfilePhoto" destination="RVR-Ef-g7t" id="tMI-Sl-ytX"/>
                     </connections>

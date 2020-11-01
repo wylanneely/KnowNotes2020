@@ -27,22 +27,18 @@ class GamePlayRound2ViewController: UIViewController {
 
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
             GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
             GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-            
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            
-            
         }
+        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            
-            
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-
-            
         }
+        
         alert.addAction(action)
         alert.addAction(action2)
         return alert
@@ -313,7 +309,13 @@ class GamePlayRound2ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         if segue.identifier == "toRound3" {
-                LessonSession.manager.setRound3Notes()
+            LessonSession.manager.setRound3Notes()
+        }
+        
+        if segue.identifier == "toLocalProfile" {
+            if let vc = segue.destination as? LocalPlayerMenuViewController {
+                
+            }
         }
     }
     

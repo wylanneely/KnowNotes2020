@@ -18,16 +18,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     //MARK: Properties
     
     var instrumentImage: UIImage?
- 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellXibs()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,8 +73,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             return 1
         }
     }
-
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -88,10 +80,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             switch indexPath.row {
             case 0:
                 if let instrumentImage = instrumentImage {
-                if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
-                    notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 7)
-                    return notesCellExample
-
+                    if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
+                        notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 7)
+                        return notesCellExample
                     }
                 }
             case 1:
@@ -112,7 +103,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                     return notesCellExample
                 }
             case 4:
-                
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
                     return notesCellExample
@@ -128,9 +118,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
             return lockedHalfNotesCell
         }
         return cell
-        
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -149,43 +136,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         }
             
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 

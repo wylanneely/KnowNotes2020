@@ -11,42 +11,57 @@ class LocalPlayerMenuViewController: UIViewController{
     
    //MARK: Unlock Instruments
     var unlockAlertController: UIAlertController {
-      var alert = UIAlertController(title: "Instrument Locked", message: "Unlock the Acoustic Guitar by scoring 20 or more points with the Grand Piano.", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Instrument Locked", message: "Unlock the Acoustic Guitar by scoring 20 or more points with the Grand Piano.", preferredStyle: .alert)
         alert.addAction(unlockAcousticGuitarAlert)
         return alert
     }
-    var isAcousticGuitarUnlocked: Bool?
+    var isAcousticGuitarUnlocked: Bool {
+        return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+    }
     let unlockAcousticGuitarAlert: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
     
     //MARK: Set Up
-       
-       func setInstrumentStatusView(){
-           acousticGuitarStatusView.layer.cornerRadius = 10
-           grandPianoStatusView.layer.cornerRadius = 10
-       }
-    
+      
     override func viewDidLoad() {
         super.viewDidLoad()
-        GameCenterManager.manager.viewController = self
+   //     GameCenterManager.manager.viewController = self
         localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         setInstrumentStatusView()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    
+    func setInstrumentStatusView(){
+        grandPianoStatusView.layer.cornerRadius = 10
+        grandPianoStatusView.layer.borderWidth = 2
+        grandPianoStatusView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        acousticGuitarStatusView.layer.cornerRadius = 10
+        acousticGuitarStatusView.layer.borderWidth = 2
+       
+            if isAcousticGuitarUnlocked {
+                DispatchQueue.main.async {
+                    //unlocked
+                    self.acousticGuitarStatusView.layer.backgroundColor = UIColor.goldenSun.cgColor
+                    self.acousticGuitarStatusView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+                    self.buttonAcousticGuitar.setTitleColor(UIColor.black, for: .normal)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    //locked
+                    self.acousticGuitarStatusView.layer.backgroundColor = UIColor.gray.cgColor
+                    self.acousticGuitarStatusView.layer.borderColor = UIColor.coralRed.cgColor
+                    self.buttonAcousticGuitar.setTitleColor(UIColor.lightGray, for: .normal)
+                }
+            }
+        
     }
     
-   
+    @IBOutlet weak var buttonAcousticGuitar: UIButton!
+    
+
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var acousticGuitarStatusView: UIView!
     @IBOutlet weak var grandPianoStatusView: UIView!
-    
     
     @IBOutlet weak var localPlayerProfilePhoto: UIImageView!
     
@@ -55,34 +70,28 @@ class LocalPlayerMenuViewController: UIViewController{
     }
     
     @IBAction func AcousticGuitarButtonTapped(_ sender: Any) {
-        if let isAcousticGuitarUnlocked = isAcousticGuitarUnlocked {
+      
             if isAcousticGuitarUnlocked {
-                
+                return
             } else {
                 self.present(unlockAlertController, animated: true, completion: nil)
             }
-        }
+        
     }
-    
-    
-    
-   
     
     //MARK: Delegate
     
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-           self.dismiss(animated: true, completion: nil)
-       }
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "toAcousticNotes" {
-            if let isAcousticGuitarUnlocked = isAcousticGuitarUnlocked {
                 if isAcousticGuitarUnlocked {
                     return true
                 } else {
-                    return false
-                }
-            }
+                    return false }
+            
         }
         return true
     }
@@ -97,15 +106,12 @@ class LocalPlayerMenuViewController: UIViewController{
                 return
             }
         }
-        
     }
-    
-    
-    
-    
 
 }
 
+
+//For the circle cropped image
 extension UIImage {
     var isPortrait:  Bool    { size.height > size.width }
     var isLandscape: Bool    { size.width > size.height }

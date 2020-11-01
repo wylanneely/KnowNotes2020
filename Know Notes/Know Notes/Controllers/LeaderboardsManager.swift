@@ -25,8 +25,8 @@ struct LeaderboardsManager {
 }
 
 enum LeaderboardBundleIDs: String {
-    case regularGrandPiano = "com.wylan.knowNotes2.leaderboard.GPRHS"
-    case regularAcousticGuitar = "com.wylan.knowNotes2.leaderboard.AGRHS"
-    case advancedGrandPiano = "com.wylan.knowNotes2.leaderboard.GPAHS"
-    case advancedAcousticGuitar = "com.wylan.knowNotes2.leaderboard.AGAHS"
+    case regularGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPNHS"
+    case regularAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGRHS"
+    case advancedGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPAHS"
+    case advancedAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGAHS"
 }

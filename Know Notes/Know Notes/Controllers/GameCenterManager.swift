@@ -36,6 +36,7 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
                 print("Error authentication to GameCenter: " +
                         "\(error?.localizedDescription ?? "none")") }
         }
+        completion(true)
     }
     
     

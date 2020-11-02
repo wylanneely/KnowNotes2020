@@ -13,6 +13,13 @@ class LaunchPageViewController: UIViewController {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
         registerNotification()
+        setUPButtons()
+    }
+    
+    func setUPButtons(){
+        signInButton.layer.borderWidth = 2
+        signInButton.layer.cornerRadius = 10
+        signInButton.layer.borderColor = UIColor.imperialRed.cgColor
     }
     
     func animateBackgroundWithtwoColors(){
@@ -77,6 +84,7 @@ class LaunchPageViewController: UIViewController {
         signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
         signInButton.setTitleColor(UIColor.pastelGReen, for: .normal)
+        signInButton.layer.borderColor = UIColor.pastelGReen.cgColor
     }
     
     //MARK: Navigation

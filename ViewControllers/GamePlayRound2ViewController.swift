@@ -26,6 +26,14 @@ class GamePlayRound2ViewController: UIViewController {
     let hapticGenerator = UINotificationFeedbackGenerator()
     var musicSound: AVAudioPlayer?
     
+    func byPassSilentMode(){
+        do {
+              try AVAudioSession.sharedInstance().setCategory(.playback)
+           } catch(let error) {
+               print(error.localizedDescription)
+           }
+    }
+    
     var doesGameNeedNewNote: Bool = true
 
     var finishedGameAlert: UIAlertController {
@@ -115,6 +123,7 @@ class GamePlayRound2ViewController: UIViewController {
     func playSoundFromNote(path: String? ) {
         if let url = LessonSession.manager.getSoundPathURLFromNote(path: path) {
         do {
+            byPassSilentMode()
             musicSound = try AVAudioPlayer(contentsOf: url)
             musicSound?.play()
         } catch {

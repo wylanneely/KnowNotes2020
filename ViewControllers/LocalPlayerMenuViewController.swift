@@ -26,7 +26,7 @@ class LocalPlayerMenuViewController: UIViewController{
       
     override func viewDidLoad() {
         super.viewDidLoad()
-   //     GameCenterManager.manager.viewController = self
+       GameCenterManager.manager.viewController = self
         localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         setInstrumentStatusView()
     }

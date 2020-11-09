@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="HalfNotesLockedViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybI-VT-e6b">
+                        <rect key="frame" x="8" y="4" width="304" height="52"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sharps &amp; Flats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIu-0B-EGu">
+                                <rect key="frame" x="16" y="11" width="163.5" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" name="Banana"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="CeriseRed"/>
+                                <size key="shadowOffset" width="2" height="1"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-JM-mcN">
+                                <rect key="frame" x="256" y="12.5" width="28" height="26.5"/>
+                                <color key="tintColor" name="CeriseRed"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="10A-Xo-mVD"/>
+                                    <constraint firstAttribute="height" constant="28" id="AQJ-65-dfI"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="StarBlue"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sbu-JM-mcN" secondAttribute="trailing" constant="20" id="BiG-l0-U5b"/>
+                            <constraint firstItem="sIu-0B-EGu" firstAttribute="centerY" secondItem="ybI-VT-e6b" secondAttribute="centerY" id="Cxm-bv-205"/>
+                            <constraint firstItem="sIu-0B-EGu" firstAttribute="leading" secondItem="ybI-VT-e6b" secondAttribute="leading" constant="16" id="QxD-0t-1MT"/>
+                            <constraint firstItem="sbu-JM-mcN" firstAttribute="centerY" secondItem="sIu-0B-EGu" secondAttribute="centerY" id="wHr-5H-cMk"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ybI-VT-e6b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="5dp-l1-7TV"/>
+                    <constraint firstItem="ybI-VT-e6b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="M1s-P9-JcZ"/>
+                    <constraint firstAttribute="bottom" secondItem="ybI-VT-e6b" secondAttribute="bottom" constant="4" id="Oa9-Kc-RWY"/>
+                    <constraint firstAttribute="trailing" secondItem="ybI-VT-e6b" secondAttribute="trailing" constant="8" id="jjx-Ef-EXq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="StarBlue"/>
+            <connections>
+                <outlet property="borderView" destination="ybI-VT-e6b" id="WSH-IB-9U8"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="121.875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="lock.fill" catalog="system" width="128" height="128"/>
+        <namedColor name="Banana">
+            <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CeriseRed">
+            <color red="0.81960784313725488" green="0.20392156862745098" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

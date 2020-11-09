@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Auo-3N-Ppp" customClass="BeginEditNotesLessonViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Auo-3N-Ppp" id="Qf5-W5-YcS">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kj-fL-LUk">
+                        <rect key="frame" x="117" y="8" width="180" height="44"/>
+                        <color key="backgroundColor" name="Banana"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="nIe-bs-cii"/>
+                            <constraint firstAttribute="width" constant="180" id="pWC-gR-V0i"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <state key="normal" title="Begin Lesson">
+                            <color key="titleColor" name="CeriseRed"/>
+                        </state>
+                        <connections>
+                            <action selector="beginButtonTapped:" destination="Auo-3N-Ppp" eventType="touchUpInside" id="qDi-nP-8RB"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" name="StarBlue"/>
+                <constraints>
+                    <constraint firstItem="4kj-fL-LUk" firstAttribute="centerY" secondItem="Qf5-W5-YcS" secondAttribute="centerY" id="1sB-GM-PcV"/>
+                    <constraint firstItem="4kj-fL-LUk" firstAttribute="centerX" secondItem="Qf5-W5-YcS" secondAttribute="centerX" id="syE-9a-5y3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="StarBlue"/>
+            <connections>
+                <outlet property="beginButton" destination="4kj-fL-LUk" id="1ra-ZQ-sfn"/>
+            </connections>
+            <point key="canvasLocation" x="-291.304347826087" y="-388.39285714285711"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Banana">
+            <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CeriseRed">
+            <color red="0.81960784313725488" green="0.20392156862745098" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

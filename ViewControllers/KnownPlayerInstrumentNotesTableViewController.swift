@@ -9,19 +9,14 @@ import UIKit
 
 class KnownPlayerInstrumentNotesTableViewController: UITableViewController,BeginLessonDelegate {
     
-    //MARK: Delegate
-    func beginLesssonButtonTapped() {
-        LessonSession.manager.resetScores()
-        LessonSession.manager.setRound1Notes()
-        self.performSegue(withIdentifier: "toGamePlay", sender: self)
-    }
-    
     //MARK: Properties
     
     var instrumentName: String = InstrumentType.grandPiano.rawValue
     var instrumentImage: UIImage?
     
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
+    
+    //MARK: LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +26,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -41,27 +37,26 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     }
     
     private func registerCellXibs(){
-        let firstNoteCell = UINib(nibName: "FirstKownNotesViewCell",
-                                  bundle: nil)
-        let headerNoteCell = UINib(nibName: "PlayerKnownInstrumentNotesHeaderViewCell",
-                                          bundle: nil)
-        let secondRoundNoteCell = UINib(nibName: "SecondRoundKnownNotesViewCell",
-                                        bundle: nil)
-        let beginNoteCell = UINib(nibName: "BeginEditNotesLessonViewCell",
-                                          bundle: nil)
-        let lockedHalfNotesCell = UINib(nibName: "HalfNotesLockedViewCell",
-                                        bundle: nil)
-        
+        let firstNoteCell = UINib(nibName: "FirstKownNotesViewCell", bundle: nil)
+        let headerNoteCell = UINib(nibName: PlayerKnownInstrumentNotesHeaderViewCell.xibRID, bundle: nil)
+        let secondRoundNoteCell = UINib(nibName: "SecondRoundKnownNotesViewCell",bundle: nil)
+        let beginNoteCell = UINib(nibName: "BeginEditNotesLessonViewCell", bundle: nil)
+        let lockedHalfNotesCell = UINib(nibName: "HalfNotesLockedViewCell", bundle: nil)
         self.tableView.register(firstNoteCell, forCellReuseIdentifier: "FirstNoteCell")
         self.tableView.register(lockedHalfNotesCell, forCellReuseIdentifier: "lockedHalfNotes")
-       
         self.tableView.register(headerNoteCell, forCellReuseIdentifier: "headerCell")
-        
         self.tableView.register(secondRoundNoteCell, forCellReuseIdentifier: "secondRoundCell")
-        
         self.tableView.register(beginNoteCell, forCellReuseIdentifier: "beginCell")
     }
-
+    
+    
+    //MARK: Delegate
+            func beginLesssonButtonTapped() {
+                LessonSession.manager.resetScores()
+                LessonSession.manager.setRound1Notes()
+                self.performSegue(withIdentifier: "toGamePlay", sender: self)
+            }
+            
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,17 +75,22 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+                        //MARK: Tableview Layout
         if indexPath.section == 0 {
             switch indexPath.row {
+            
             case 0:
                 if let instrumentImage = instrumentImage {
                     if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
                         
                         switch instrumentName {
                         case InstrumentType.grandPiano.rawValue:
+                            //NOTE: FIX
                             if leaderboardsManager.didFinishGrandPianoRound2 {
+                                                                //                  //                     //
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
                                 return notesCellExample
+                                
                             } else if leaderboardsManager.didFinishGrandPianoRound1 {
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
                                 return notesCellExample
@@ -137,25 +137,28 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                             notesCellExample.firstSelectedNoteLabel.text = "F"
                             notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
                         }
+                        
                         if leaderboardsManager.didFinishGrandPianoRound2 {
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
+                        
                     case InstrumentType.acousticGuitar.rawValue:
                         notesCellExample.setLockedNotesViews()
                         return notesCellExample
                     default:
                         return notesCellExample
                     }
-                   
                 }
+                
             case 4:
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
+                
             default:
                 if let notesCellExample = FirstKownNotesViewCell.createCell() {
                     return notesCellExample
@@ -183,7 +186,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         case 4: return 70
         default: return 900
         }
-            
     }
     
     // MARK: - Navigation
@@ -193,6 +195,4 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         
     }
     
-
-
 }

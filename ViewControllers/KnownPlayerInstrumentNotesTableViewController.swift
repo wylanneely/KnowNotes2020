@@ -71,34 +71,29 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                        //MARK: Layout Order
+        //MARK: Layout Order
         if indexPath.section == 0 {
             switch indexPath.row {
-            
             case 0:
                 if let instrumentImage = instrumentImage {
                     if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
                         
                         switch instrumentName {
                         case InstrumentType.grandPiano.rawValue:
-                            //NOTE: FIX
-                            if leaderboardsManager.didFinishGrandPianoRound2 {
-                                                                //                  //                     //
+                            if leaderboardsManager.didFinishGrandPianoRound2 {    //NOTE: FIX way to record progress
+
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
-                                return notesCellExample
-                                
-                            } else if leaderboardsManager.didFinishGrandPianoRound1 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
-                                return notesCellExample
-                            }
+                                return notesCellExample } else if leaderboardsManager.didFinishGrandPianoRound1 {
+                                    notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
+                                    return notesCellExample }
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
                             return notesCellExample
                         case InstrumentType.acousticGuitar.rawValue:
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
                             return notesCellExample
                         default:
-                            return notesCellExample
-                        }
+                            return notesCellExample }
+                        
                     }
                 }
                 

@@ -28,8 +28,8 @@ class LocalPlayerMenuViewController: UIViewController {
         if isAcousticGuitarUnlocked {
             DispatchQueue.main.async { //unlocked
                 self.acousticGuitarStatusView.layer.backgroundColor = UIColor.starCommandBlue.cgColor
-                self.acousticGuitarStatusView.layer.borderColor = UIColor.mediumTurqouise.cgColor
-                self.buttonAcousticGuitar.setTitleColor(UIColor.black, for: .normal) } }
+                self.acousticGuitarStatusView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+                self.buttonAcousticGuitar.setTitleColor(UIColor.mediumTurqouise, for: .normal) } }
         else {
             DispatchQueue.main.async { //locked
                 self.acousticGuitarStatusView.layer.backgroundColor = UIColor.gray.cgColor
@@ -41,7 +41,7 @@ class LocalPlayerMenuViewController: UIViewController {
     //MARK: Unlock Instruments
     
     var isAcousticGuitarUnlocked: Bool {
-           // return false
+          //  return false
            return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
        }
     

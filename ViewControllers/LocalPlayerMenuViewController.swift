@@ -84,14 +84,17 @@ class LocalPlayerMenuViewController: UIViewController {
         if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
             switch segue.identifier {
             case "toAcousticNotes" :
+                LessonSession.manager.setAcousticLesson()
                 vc.instrumentImage = UIImage(named: "acoustic_Guitar")
                 vc.instrumentName = InstrumentType.acousticGuitar.rawValue
             case "toGrandPianoNotes" :
+                LessonSession.manager.setGrandPianoLesson()
                 vc.instrumentImage = UIImage(named: "grand_Piano")
                 vc.instrumentName = InstrumentType.grandPiano.rawValue
             default:
                 return } }
     }
+    
 }
 
 //For the circle cropped image

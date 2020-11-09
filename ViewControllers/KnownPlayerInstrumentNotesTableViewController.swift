@@ -93,7 +93,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                             return notesCellExample
                         default:
                             return notesCellExample }
-                        
                     }
                 }
                 

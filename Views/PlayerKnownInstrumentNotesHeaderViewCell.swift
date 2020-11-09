@@ -9,18 +9,6 @@ import UIKit
 
 class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
-    class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
-           let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
-           return cell
-       }
-    
-    func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
-        instrumentImage.image = image
-        instrumentProficiencyRankingLabel.text = rank
-        completedNotesLabel.text = "\(completedNotes) Notes Unlocked"
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -29,11 +17,21 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
+           instrumentImage.image = image
+           instrumentProficiencyRankingLabel.text = rank
+           completedNotesLabel.text = "\(completedNotes) Notes Unlocked"
+       }
+    
+    class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
+           let nib = UINib(nibName: xibRID, bundle: nil)
+        let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
+           return cell
+       }
+
     //MARK: Properties
     @IBOutlet weak var instrumentImage: UIImageView!
-    
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
-    
     @IBOutlet weak var completedNotesLabel: UILabel!
     
     static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"

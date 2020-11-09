@@ -13,16 +13,16 @@ class HalfNotesLockedViewCell: UITableViewCell {
         super.awakeFromNib()
         setUpViews()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
     class func createCell() -> HalfNotesLockedViewCell? {
-           let nib = UINib(nibName: "HalfNotesLockedViewCell", bundle: nil)
+        let nib = UINib(nibName: xibRID, bundle: nil)
         let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
-           return cell
-       }
+        return cell
+    }
     
     func setUpViews(){
         borderView.layer.borderWidth = 2
@@ -31,5 +31,6 @@ class HalfNotesLockedViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var borderView: UIView!
+    static let xibRID:String = "HalfNotesLockedViewCell"
     
 }

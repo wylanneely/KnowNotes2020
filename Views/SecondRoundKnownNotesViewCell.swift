@@ -8,12 +8,6 @@
 import UIKit
 
 class SecondRoundKnownNotesViewCell: UITableViewCell {
-
-    class func createCell() -> SecondRoundKnownNotesViewCell? {
-           let nib = UINib(nibName: "SecondRoundKnownNotesViewCell", bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? SecondRoundKnownNotesViewCell
-           return cell
-       }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,11 +16,14 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-  
+    class func createCell() -> SecondRoundKnownNotesViewCell? {
+        let nib = UINib(nibName: self.xibRID, bundle: nil)
+        let cell = nib.instantiate(withOwner: self, options: nil).first as? SecondRoundKnownNotesViewCell
+           return cell
+       }
+    
     func setSecondNoteTo(note: String){
         DispatchQueue.main.async {
             self.secondSelectedNoteButton.setTitle(note, for: .normal)
@@ -34,16 +31,16 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     }
     
     func setUnlockedViews(){
-        lockImageView.tintColor = UIColor.starCommandBlue
         middleBGView.layer.borderWidth = 2
-        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        firstNoteView.layer.borderWidth = 2
+        secondSelectedNoteButton.layer.borderWidth = 2
+
         middleBGView.layer.cornerRadius = 10
         firstNoteView.layer.cornerRadius = 10
         secondSelectedNoteButton.layer.cornerRadius = 10
-        
-        firstNoteView.layer.borderWidth = 2
-        secondSelectedNoteButton.layer.borderWidth = 2
-        
+
+        lockImageView.tintColor = UIColor.starCommandBlue
+        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         firstNoteView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         secondSelectedNoteButton.layer.borderColor = UIColor.seaFoamBlue.cgColor
     }
@@ -73,5 +70,6 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     @IBOutlet weak var secondSelectedNoteButton: UIButton!
     @IBOutlet weak var lockImageView: UIImageView!
     
-    
+    static let xibRID: String = "SecondRoundKnownNotesViewCell"
+
 }

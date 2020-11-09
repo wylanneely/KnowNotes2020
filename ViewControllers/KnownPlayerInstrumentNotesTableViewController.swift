@@ -13,7 +13,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     
     var instrumentName: String = InstrumentType.grandPiano.rawValue
     var instrumentImage: UIImage?
-    
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
     //MARK: LifeCycle
@@ -22,11 +21,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         super.viewDidLoad()
         registerCellXibs()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -37,18 +34,18 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     }
     
     private func registerCellXibs(){
-        let firstNoteCell = UINib(nibName: "FirstKownNotesViewCell", bundle: nil)
+        let firstNoteCell = UINib(nibName: FirstKnownNotesViewCell.xibRID, bundle: nil)
         let headerNoteCell = UINib(nibName: PlayerKnownInstrumentNotesHeaderViewCell.xibRID, bundle: nil)
-        let secondRoundNoteCell = UINib(nibName: "SecondRoundKnownNotesViewCell",bundle: nil)
-        let beginNoteCell = UINib(nibName: "BeginEditNotesLessonViewCell", bundle: nil)
-        let lockedHalfNotesCell = UINib(nibName: "HalfNotesLockedViewCell", bundle: nil)
+        let secondRoundNoteCell = UINib(nibName:SecondRoundKnownNotesViewCell.xibRID,bundle: nil)
+        let beginNoteCell = UINib(nibName: BeginEditNotesLessonViewCell.xibRID, bundle: nil)
+        let lockedHalfNotesCell = UINib(nibName: HalfNotesLockedViewCell.xibRID, bundle: nil)
+        //TODO: finish organizing this file                  Lock These in code
         self.tableView.register(firstNoteCell, forCellReuseIdentifier: "FirstNoteCell")
         self.tableView.register(lockedHalfNotesCell, forCellReuseIdentifier: "lockedHalfNotes")
         self.tableView.register(headerNoteCell, forCellReuseIdentifier: "headerCell")
         self.tableView.register(secondRoundNoteCell, forCellReuseIdentifier: "secondRoundCell")
         self.tableView.register(beginNoteCell, forCellReuseIdentifier: "beginCell")
     }
-    
     
     //MARK: Delegate
             func beginLesssonButtonTapped() {
@@ -57,10 +54,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                 self.performSegue(withIdentifier: "toGamePlay", sender: self)
             }
             
-    // MARK: - Table view data source
+    // MARK: TableView Basi
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        //NOTE: to display what sounds you have unlocked
         return 2
     }
 
@@ -74,8 +71,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-                        //MARK: Tableview Layout
+                        //MARK: Layout Order
         if indexPath.section == 0 {
             switch indexPath.row {
             
@@ -107,9 +103,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                 }
                 
             case 1:
-                if let notesCellExample = FirstKownNotesViewCell.createCell() {
+                if let notesCellExample = FirstKnownNotesViewCell.createCell() {
                     return notesCellExample
                 }
+                
             case 2:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
                     switch instrumentName {
@@ -160,7 +157,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                 }
                 
             default:
-                if let notesCellExample = FirstKownNotesViewCell.createCell() {
+                if let notesCellExample = FirstKnownNotesViewCell.createCell() {
                     return notesCellExample
                 }
             }

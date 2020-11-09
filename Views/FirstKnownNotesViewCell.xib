@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="crJ-1u-zoN" customClass="FirstKnownNotesViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="crJ-1u-zoN" id="uP4-wT-a4f">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-99-qLj">
+                        <rect key="frame" x="20" y="4" width="374" height="112"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHQ-tH-zi7">
+                                <rect key="frame" x="35" y="12" width="88" height="88"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="wME-II-M4K"/>
+                                    <constraint firstAttribute="width" constant="88" id="zOb-xl-AWG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                <state key="normal" title="A">
+                                    <color key="titleColor" name="CeriseRed"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPl-4p-Fw3">
+                                <rect key="frame" x="143" y="12" width="88" height="88"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="DG2-1E-7B6"/>
+                                    <constraint firstAttribute="width" constant="88" id="s7c-EN-xFd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                <state key="normal" title="B">
+                                    <color key="titleColor" name="CeriseRed"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiF-Sm-H0F">
+                                <rect key="frame" x="251" y="12" width="88" height="88"/>
+                                <color key="backgroundColor" name="SeaFoam"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="ign-s3-gZI"/>
+                                    <constraint firstAttribute="width" constant="88" id="wBT-vl-s7D"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
+                                <state key="normal" title="C">
+                                    <color key="titleColor" name="CeriseRed"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="StarBlue"/>
+                        <constraints>
+                            <constraint firstItem="UiF-Sm-H0F" firstAttribute="leading" secondItem="EPl-4p-Fw3" secondAttribute="trailing" constant="20" id="82A-Ap-YUB"/>
+                            <constraint firstItem="EPl-4p-Fw3" firstAttribute="leading" secondItem="lHQ-tH-zi7" secondAttribute="trailing" constant="20" id="9sk-dG-EHL"/>
+                            <constraint firstItem="UiF-Sm-H0F" firstAttribute="centerY" secondItem="4oG-99-qLj" secondAttribute="centerY" id="D9Q-dh-Rrk"/>
+                            <constraint firstItem="lHQ-tH-zi7" firstAttribute="centerY" secondItem="4oG-99-qLj" secondAttribute="centerY" id="Ox7-So-1fG"/>
+                            <constraint firstItem="EPl-4p-Fw3" firstAttribute="centerY" secondItem="4oG-99-qLj" secondAttribute="centerY" id="pOh-RZ-EgZ"/>
+                            <constraint firstItem="EPl-4p-Fw3" firstAttribute="centerX" secondItem="4oG-99-qLj" secondAttribute="centerX" id="uqI-fh-tCP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="StarBlue"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="4oG-99-qLj" secondAttribute="bottom" constant="4" id="8DQ-en-CzV"/>
+                    <constraint firstItem="4oG-99-qLj" firstAttribute="leading" secondItem="uP4-wT-a4f" secondAttribute="leading" constant="20" symbolic="YES" id="Pqt-dS-4F4"/>
+                    <constraint firstAttribute="trailing" secondItem="4oG-99-qLj" secondAttribute="trailing" constant="20" symbolic="YES" id="hK3-Aw-zxg"/>
+                    <constraint firstItem="4oG-99-qLj" firstAttribute="top" secondItem="uP4-wT-a4f" secondAttribute="top" constant="4" id="lgP-EK-KUi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="middleBGView" destination="4oG-99-qLj" id="Gmc-as-1Zc"/>
+                <outlet property="note1Button" destination="lHQ-tH-zi7" id="Vr2-iI-bsp"/>
+                <outlet property="note2Button" destination="EPl-4p-Fw3" id="5MB-Qc-SaT"/>
+                <outlet property="note3Button" destination="UiF-Sm-H0F" id="EF8-hh-juB"/>
+            </connections>
+            <point key="canvasLocation" x="-291.304347826087" y="-719.86607142857144"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="CeriseRed">
+            <color red="0.81999999284744263" green="0.20399999618530273" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SeaFoam">
+            <color red="0.031372549019607843" green="0.69803921568627447" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

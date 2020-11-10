@@ -8,10 +8,16 @@
 import UIKit
 
 class SecondRoundKnownNotesViewCell: UITableViewCell {
+    //MARK: Properties
+    static let xibRID: String = "SecondRoundKnownNotesViewCell"
+    var delegate: secondThirdNoteGroupDelegate?
+    var isGroup2: Bool = true
+    var isLocked: Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setUnlockedViews()
+        setGestureRecognizer()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,6 +29,20 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         let cell = nib.instantiate(withOwner: self, options: nil).first as? SecondRoundKnownNotesViewCell
            return cell
        }
+    
+    func setGestureRecognizer(){
+        self.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FirstKnownNotesViewCell.tapEdit(sender:)))
+        addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func tapEdit(sender: UITapGestureRecognizer) {
+        if isGroup2 {
+            delegate?.secondGroupTapped()
+        } else {
+            delegate?.thirdGroupTapped()
+        }
+    }
     
     func setSecondNoteTo(note: String){
         DispatchQueue.main.async {
@@ -69,7 +89,10 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     @IBOutlet weak var firstSelectedNoteLabel: UILabel!
     @IBOutlet weak var secondSelectedNoteButton: UIButton!
     @IBOutlet weak var lockImageView: UIImageView!
-    
-    static let xibRID: String = "SecondRoundKnownNotesViewCell"
 
+}
+
+protocol secondThirdNoteGroupDelegate {
+    func secondGroupTapped()
+    func thirdGroupTapped()
 }

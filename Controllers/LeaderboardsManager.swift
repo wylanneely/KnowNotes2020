@@ -9,8 +9,7 @@ import GameKit
 
 
 struct LeaderboardsManager {
-    
-    
+       
     func submit(score: Int, to leaderboard: LeaderboardBundleIDs){
         GKLeaderboard.submitScore(score, context: 0,
                                   player: GKLocalPlayer.local,

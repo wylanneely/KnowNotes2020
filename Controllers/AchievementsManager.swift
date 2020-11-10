@@ -40,9 +40,6 @@ import GameKit
         }
    }
     
-    
-
-    
     func reportUnlockAcousticGuitarProgress(with score: Int) {
         if score >= 20 {
             acousticGuitarAchievement.percentComplete = 100.00
@@ -53,7 +50,6 @@ import GameKit
             reportAchievement(acousticGuitarAchievement)
         }   
     }
-    
     
     func reportAchievement(_ achievement: GKAchievement) {
         GKAchievement.report([achievement]) {  error in

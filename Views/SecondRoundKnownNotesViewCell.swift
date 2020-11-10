@@ -8,11 +8,12 @@
 import UIKit
 
 class SecondRoundKnownNotesViewCell: UITableViewCell {
+    
     //MARK: Properties
     static let xibRID: String = "SecondRoundKnownNotesViewCell"
     var delegate: secondThirdNoteGroupDelegate?
     var isGroup2: Bool = true
-    var isLocked: Bool = true
+    var isLocked: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,9 +38,12 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     }
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
-        if isGroup2 {
+        if isLocked {
+            return
+        } else if isGroup2 {
             delegate?.secondGroupTapped()
         } else {
+            setSelectedView()
             delegate?.thirdGroupTapped()
         }
     }
@@ -50,24 +54,32 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         }
     }
     
+    func setSelectedView(){
+        DispatchQueue.main.async {
+            self.middleBGView.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.firstNoteView.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.secondSelectedNoteButton.layer.borderColor = UIColor.pastelGReen.cgColor
+        }
+    }
+    
     func setUnlockedViews(){
         middleBGView.layer.borderWidth = 2
         firstNoteView.layer.borderWidth = 2
         secondSelectedNoteButton.layer.borderWidth = 2
-
         middleBGView.layer.cornerRadius = 10
         firstNoteView.layer.cornerRadius = 10
         secondSelectedNoteButton.layer.cornerRadius = 10
-
         lockImageView.tintColor = UIColor.starCommandBlue
         middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         firstNoteView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         secondSelectedNoteButton.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        self.firstSelectedNoteLabel.textColor = UIColor.imperialRed
+        self.secondSelectedNoteButton.setTitleColor(UIColor.imperialRed, for: .normal)
     }
     
     func setLockedNotesViews(){
+        isLocked = true
         lockImageView.tintColor = UIColor.beauBlue
-
         middleBGView.layer.borderWidth = 2
         middleBGView.layer.borderColor = UIColor.lightGray.cgColor
         middleBGView.layer.cornerRadius = 10
@@ -77,7 +89,6 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         secondSelectedNoteButton.layer.borderWidth = 2
         firstNoteView.layer.backgroundColor = UIColor.lightGray.cgColor
         secondSelectedNoteButton.layer.backgroundColor = UIColor.lightGray.cgColor
-        
         firstNoteView.layer.borderColor = UIColor.black.cgColor
         secondSelectedNoteButton.layer.borderColor = UIColor.black.cgColor
         secondSelectedNoteButton.setTitleColor(UIColor.white, for: .normal)

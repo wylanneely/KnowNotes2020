@@ -7,13 +7,14 @@
 
 import UIKit
 
-class KnownPlayerInstrumentNotesTableViewController: UITableViewController,BeginLessonDelegate {
+class KnownPlayerInstrumentNotesTableViewController: UITableViewController, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate {
     
     //MARK: Properties
     
-    var instrumentName: String = InstrumentType.grandPiano.rawValue
+    var instrumentName: String = LessonSession.manager.lesson.instrumentName.type.rawValue
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
+    var groupStartNumber: Int = 1
     
     //MARK: LifeCycle
     
@@ -33,6 +34,19 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+//   @objc func tapEdit(recognizer: UITapGestureRecognizer)  {
+//            if recognizer.state == UIGestureRecognizer.State.ended {
+//                let tapLocation = recognizer.location(in: self.tableView)
+//                if let tapIndexPath = self.tableView.indexPathForRow(at: tapLocation) {
+//
+//                    if let firstNoteRoundCell = self.tableView.cellForRow(at: tapIndexPath) as? FirstKnownNotesViewCell {
+//                    }
+//                    if let secondNoteRoundCell = self.tableView.cellForRow(at: tapIndexPath) as? SecondRoundKnownNotesViewCell {
+//                    }
+//                }
+//            }
+//        }
+    
     private func registerCellXibs(){
         let firstNoteCell = UINib(nibName: FirstKnownNotesViewCell.xibRID, bundle: nil)
         let headerNoteCell = UINib(nibName: PlayerKnownInstrumentNotesHeaderViewCell.xibRID, bundle: nil)
@@ -48,12 +62,34 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
     }
     
     //MARK: Delegate
-            func beginLesssonButtonTapped() {
-                LessonSession.manager.resetScores()
-                LessonSession.manager.setRound1Notes()
-                self.performSegue(withIdentifier: "toGamePlay", sender: self)
-            }
-            
+    func beginLesssonButtonTapped() {
+        LessonSession.manager.resetScores()
+        LessonSession.manager.setRound1Notes()
+        self.performSegue(withIdentifier: "toGamePlay", sender: self)
+    }
+    
+    func firstGroupTapped() {
+        groupStartNumber = 1
+        
+        let indexp1 = IndexPath(row: 2, section: 0)
+        let indexp3 = IndexPath(row: 3, section: 0)
+        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+    }
+    
+    func secondGroupTapped() {
+        groupStartNumber = 2
+        let indexp1 = IndexPath(row: 1, section: 0)
+        let indexp3 = IndexPath(row: 3, section: 0)
+        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+   }
+    
+    func thirdGroupTapped() {
+        groupStartNumber = 3
+        let indexp1 = IndexPath(row: 1, section: 0)
+        let indexp3 = IndexPath(row: 2, section: 0)
+        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+    }
+    
     // MARK: TableView Basi
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,11 +134,19 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                 
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
+                    if groupStartNumber == 1 {
+                        
+                    }
+                    notesCellExample.delegate = self
                     return notesCellExample
                 }
                 
             case 2:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
+                    if groupStartNumber == 2 {
+                        
+                    }
+                    notesCellExample.delegate = self
                     switch instrumentName {
                     case InstrumentType.grandPiano.rawValue:
                         if leaderboardsManager.didFinishGrandPianoRound1 {
@@ -121,10 +165,13 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,Begin
                 
             case 3:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
+                    if groupStartNumber == 3 {
+                        
+                    }
+                    notesCellExample.delegate = self
                     switch instrumentName {
                     case InstrumentType.grandPiano.rawValue:
                         DispatchQueue.main.async {
-                            notesCellExample.setLockedNotesViews()
                             notesCellExample.firstSelectedNoteLabel.text = "F"
                             notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
                         }

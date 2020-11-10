@@ -28,7 +28,7 @@ class LocalPlayerMenuViewController: UIViewController {
         if isAcousticGuitarUnlocked {
             DispatchQueue.main.async { //unlocked
                 self.acousticGuitarStatusView.layer.backgroundColor = UIColor.starCommandBlue.cgColor
-                self.acousticGuitarStatusView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+                self.acousticGuitarStatusView.layer.borderColor = UIColor.mediumTurqouise.cgColor
                 self.buttonAcousticGuitar.setTitleColor(UIColor.mediumTurqouise, for: .normal) } }
         else {
             DispatchQueue.main.async { //locked
@@ -94,7 +94,6 @@ class LocalPlayerMenuViewController: UIViewController {
             default:
                 return } }
     }
-    
 }
 
 //For the circle cropped image

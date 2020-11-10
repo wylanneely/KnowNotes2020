@@ -14,6 +14,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
     var instrumentName: String = LessonSession.manager.lesson.instrumentName.type.rawValue
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
+    
     var groupStartNumber: Int = 1
     
     //MARK: LifeCycle
@@ -64,30 +65,42 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
     //MARK: Delegate
     func beginLesssonButtonTapped() {
         LessonSession.manager.resetScores()
-        LessonSession.manager.setRound1Notes()
-        self.performSegue(withIdentifier: "toGamePlay", sender: self)
+        
+        switch groupStartNumber {
+        case 2:
+            LessonSession.manager.setRound2Notes()
+            self.performSegue(withIdentifier: "skipToRound2", sender: self)
+        case 3:
+            LessonSession.manager.setRound3Notes()
+            self.performSegue(withIdentifier: "skipToRound3", sender: self)
+        default:
+            LessonSession.manager.setRound1Notes()
+            self.performSegue(withIdentifier: "toGamePlay", sender: self)
+        }
     }
     
     func firstGroupTapped() {
         groupStartNumber = 1
-        
-        let indexp1 = IndexPath(row: 2, section: 0)
+        let indexp1 = IndexPath(row: 1, section: 0)
+        let indexp2 = IndexPath(row: 2, section: 0)
         let indexp3 = IndexPath(row: 3, section: 0)
-        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+        tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
     
     func secondGroupTapped() {
         groupStartNumber = 2
         let indexp1 = IndexPath(row: 1, section: 0)
+        let indexp2 = IndexPath(row: 2, section: 0)
         let indexp3 = IndexPath(row: 3, section: 0)
-        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+        tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
    }
     
     func thirdGroupTapped() {
         groupStartNumber = 3
         let indexp1 = IndexPath(row: 1, section: 0)
-        let indexp3 = IndexPath(row: 2, section: 0)
-        tableView.reloadRows(at: [indexp1,indexp3], with: .automatic)
+        let indexp2 = IndexPath(row: 2, section: 0)
+        let indexp3 = IndexPath(row: 3, section: 0)
+        tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
     
     // MARK: TableView Basi
@@ -135,7 +148,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
                     if groupStartNumber == 1 {
-                        
+                        notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
                     return notesCellExample
@@ -144,11 +157,12 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
             case 2:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
                     if groupStartNumber == 2 {
-                        
+                        notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
                     switch instrumentName {
                     case InstrumentType.grandPiano.rawValue:
+                        
                         if leaderboardsManager.didFinishGrandPianoRound1 {
                             return notesCellExample
                         } else {
@@ -165,8 +179,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
                 
             case 3:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell() {
+                    notesCellExample.isGroup2 = false
                     if groupStartNumber == 3 {
-                        
+                        notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
                     switch instrumentName {

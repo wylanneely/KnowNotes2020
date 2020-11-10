@@ -29,7 +29,17 @@ class FirstKnownNotesViewCell: UITableViewCell {
         delegate?.firstGroupTapped()
     }
     
+    func setSelectedView(){
+        DispatchQueue.main.async {
+            self.middleBGView.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.note1Button.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.note2Button.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.note3Button.layer.borderColor = UIColor.pastelGReen.cgColor
+        }
+    }
+    
     //MARK:Properties
+    
     
     func setUPViews(){
         middleBGView.layer.borderWidth = 2

@@ -11,7 +11,6 @@ import AVFoundation
 class GamePlayRound3ViewController: UIViewController {
 
     var instrumentType: InstrumentType = .grandPiano
-
     
     var gameRoundNotes: [Note] = LessonSession.manager.lesson.round3Notes
     
@@ -44,25 +43,24 @@ class GamePlayRound3ViewController: UIViewController {
             let score: Int = LessonSession.manager.score
             GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
             GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-           
+            GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
             self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
-
-            
         }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
             self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
         }
-        
         alert.addAction(action)
         alert.addAction(action2)
         return alert
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpScoresLifes()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -121,14 +119,13 @@ class GamePlayRound3ViewController: UIViewController {
     
     func playSoundFromNote(path: String? ) {
         if let url = LessonSession.manager.getSoundPathURLFromNote(path: path) {
-        do {
-            byPassSilentMode()
-            musicSound = try AVAudioPlayer(contentsOf: url)
-            musicSound?.play()
-        } catch {
-            // couldn't load file :(
-        }
-            
+            do {
+                byPassSilentMode()
+                musicSound = try AVAudioPlayer(contentsOf: url)
+                musicSound?.play()
+            } catch {
+                // couldn't load file :(
+            }
         }
     }
     
@@ -136,35 +133,35 @@ class GamePlayRound3ViewController: UIViewController {
         self.hapticGenerator.notificationOccurred(.error)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemRed
-            } completion: {
-                (completed: Bool) -> Void in
-                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
-                }
+            self.view.backgroundColor = UIColor.systemRed
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                self.view.backgroundColor = UIColor.deepSea
             }
         }
+    }
     
     func handleCorrectAnswerWithHaptic(){
         self.hapticGenerator.notificationOccurred(.success)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemGreen
-            } completion: {
-                (completed: Bool) -> Void in
-                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
-                }
+            self.view.backgroundColor = UIColor.systemGreen
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                self.view.backgroundColor = UIColor.deepSea
             }
         }
+    }
     
     //MARK: Actions
     
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             let newNote = LessonSession.manager.getNextNote()
-             currentNote = newNote
-             playSoundFromNote(path: newNote?.soundPath )
+            currentNote = newNote
+            playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
             DispatchQueue.main.async {
                 self.playButton.setTitle("Repeat", for: .normal)
@@ -193,7 +190,7 @@ class GamePlayRound3ViewController: UIViewController {
                 //wrong
                 handleWrongAnswerWithHaptic()
                 lifesLabel.text = "\(LessonSession.manager.lifes)"
-
+                
             }
         }
         checkRoundEnd()

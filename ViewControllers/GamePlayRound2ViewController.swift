@@ -175,10 +175,6 @@ class GamePlayRound2ViewController: UIViewController {
         }
     }
     
-
-    
-    
-    
     @IBAction func note1ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             return
@@ -197,13 +193,10 @@ class GamePlayRound2ViewController: UIViewController {
                 //wrong
                 handleWrongAnswerWithHaptic()
                 lifesLabel.text = "\(LessonSession.manager.lifes)"
-
             }
         }
         checkRoundEnd()
     }
-    
-    
     
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
@@ -216,18 +209,16 @@ class GamePlayRound2ViewController: UIViewController {
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
-                }
+                    self.scoreLabel.text = "\(LessonSession.manager.score)" }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
-            }
+                lifesLabel.text = "\(LessonSession.manager.lifes)" }
         }
         checkRoundEnd()
-
     }
+    
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             return
@@ -251,6 +242,7 @@ class GamePlayRound2ViewController: UIViewController {
         }
         checkRoundEnd()
     }
+    
     @IBAction func note4ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             return
@@ -325,11 +317,8 @@ class GamePlayRound2ViewController: UIViewController {
             LessonSession.manager.setRound3Notes()
             GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
         }
-        
         if segue.identifier == "toLocalProfile" {
-            if let vc = segue.destination as? LocalPlayerMenuViewController {
-                
-            }
+            if let vc = segue.destination as? LocalPlayerMenuViewController { }
         }
     }
     

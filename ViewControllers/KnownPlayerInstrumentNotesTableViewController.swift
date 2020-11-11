@@ -11,7 +11,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
     
     //MARK: Properties
     
-    var instrumentName: String = LessonSession.manager.lesson.instrumentName.type.rawValue
+    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrumentName.type
+   //v var instrumentNam: String = LessonSession.manager.lesson.instrumentName.type.rawValue
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
@@ -127,20 +128,18 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
                 if let instrumentImage = instrumentImage {
                     if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
                         
-                        switch instrumentName {
-                        case InstrumentType.grandPiano.rawValue:
+                        switch instrumentType {
+                        case InstrumentType.grandPiano:
                             if leaderboardsManager.didFinishGrandPianoRound2 {    //NOTE: FIX way to record progress
-
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
                                 return notesCellExample } else if leaderboardsManager.didFinishGrandPianoRound1 {
                                     notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
                                     return notesCellExample }
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
                             return notesCellExample
-                        case InstrumentType.acousticGuitar.rawValue:
+                            
+                        case InstrumentType.acousticGuitar:
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
-                            return notesCellExample
-                        default:
                             return notesCellExample }
                     }
                 }
@@ -160,20 +159,23 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
                         notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
-                    switch instrumentName {
-                    case InstrumentType.grandPiano.rawValue:
-                        
+                    
+                    switch instrumentType{
+                    
+                    case InstrumentType.grandPiano:
                         if leaderboardsManager.didFinishGrandPianoRound1 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample }
+                        
+                    case InstrumentType.acousticGuitar:
+                        if leaderboardsManager.didFinishAcousticGuitarRound1 {
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
-                    case InstrumentType.acousticGuitar.rawValue:
-                        notesCellExample.setLockedNotesViews()
-                        return notesCellExample
-                    default:
-                        return notesCellExample
                     }
                 }
                 
@@ -184,13 +186,12 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
                         notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
-                    switch instrumentName {
-                    case InstrumentType.grandPiano.rawValue:
+                    switch instrumentType {
+                    case InstrumentType.grandPiano:
                         DispatchQueue.main.async {
                             notesCellExample.firstSelectedNoteLabel.text = "F"
                             notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
                         }
-                        
                         if leaderboardsManager.didFinishGrandPianoRound2 {
                             return notesCellExample
                         } else {
@@ -198,11 +199,13 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
                             return notesCellExample
                         }
                         
-                    case InstrumentType.acousticGuitar.rawValue:
-                        notesCellExample.setLockedNotesViews()
-                        return notesCellExample
-                    default:
-                        return notesCellExample
+                    case InstrumentType.acousticGuitar:
+                        if leaderboardsManager.didFinishAcousticGuitarRound2 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
                     }
                 }
                 
@@ -245,7 +248,15 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController, Begi
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if let vc = segue.destination as? GamePlayRound1ViewController {
+            vc.instrumentType = self.instrumentType
+        }
+        if let vc = segue.destination as? GamePlayRound2ViewController {
+            vc.instrumentType = self.instrumentType
+        }
+        if let vc = segue.destination as? GamePlayRound3ViewController {
+            vc.instrumentType = self.instrumentType
+        }
     }
     
 }

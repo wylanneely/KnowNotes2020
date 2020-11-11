@@ -41,9 +41,15 @@ class GamePlayRound2ViewController: UIViewController {
         
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
-            GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-            GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            if self.instrumentType == .grandPiano {
+            GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            } else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            }
         }
         
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
@@ -260,8 +266,7 @@ class GamePlayRound2ViewController: UIViewController {
             } else {
                 //wrong
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
-            }
+                lifesLabel.text = "\(LessonSession.manager.lifes)" }
         }
         checkRoundEnd()
     }
@@ -299,14 +304,11 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var note4Button: UIButton!
     @IBOutlet weak var note5Button: UIButton!
     
-    
-    
     @IBOutlet weak var note5ButtonView: UIView!
     @IBOutlet weak var note1ButtonView: UIView!
     @IBOutlet weak var note2ButtonView: UIView!
     @IBOutlet weak var note3ButtonView: UIView!
     @IBOutlet weak var note4ButtonView: UIView!
-    
     
     // MARK: - Navigation
 
@@ -314,11 +316,20 @@ class GamePlayRound2ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         if segue.identifier == "toRound3" {
-            LessonSession.manager.setRound3Notes()
-            GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+            if let vc = segue.destination as? GamePlayRound2ViewController {
+                vc.instrumentType = self.instrumentType
+                LessonSession.manager.setRound3Notes()
+                if instrumentType == .grandPiano {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+                } else if instrumentType == .acousticGuitar {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
+                }
+            }
         }
         if segue.identifier == "toLocalProfile" {
-            if let vc = segue.destination as? LocalPlayerMenuViewController { }
+            if let vc = segue.destination as? LocalPlayerMenuViewController {
+                
+            }
         }
     }
     

@@ -86,11 +86,11 @@ class LocalPlayerMenuViewController: UIViewController {
             case "toAcousticNotes" :
                 LessonSession.manager.setAcousticLesson()
                 vc.instrumentImage = UIImage(named: "acoustic_Guitar")
-                vc.instrumentName = InstrumentType.acousticGuitar.rawValue
+                vc.instrumentType = InstrumentType.acousticGuitar
             case "toGrandPianoNotes" :
                 LessonSession.manager.setGrandPianoLesson()
                 vc.instrumentImage = UIImage(named: "grand_Piano")
-                vc.instrumentName = InstrumentType.grandPiano.rawValue
+                vc.instrumentType = InstrumentType.grandPiano
             default:
                 return } }
     }

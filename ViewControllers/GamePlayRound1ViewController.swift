@@ -38,10 +38,19 @@ class GamePlayRound1ViewController: UIViewController {
         let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
-            GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-            GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-            self.dismiss(animated: true, completion: nil)
+            
+            if self.instrumentType == .grandPiano {
+                GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                self.dismiss(animated: true, completion: nil)
+                
+            } else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                self.dismiss(animated: true, completion: nil)
+            }
         }
+        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
@@ -166,7 +175,6 @@ class GamePlayRound1ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func note1ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             return
@@ -228,11 +236,10 @@ class GamePlayRound1ViewController: UIViewController {
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
                 }
                 doesGameNeedNewNote = true
-                
             } else {
                 //wrong
+                handleWrongAnswerWithHaptic()
                 lifesLabel.text = "\(LessonSession.manager.lifes)"
-                hapticGenerator.notificationOccurred(.error)
             }
         }
         checkRoundEnd()
@@ -251,17 +258,23 @@ class GamePlayRound1ViewController: UIViewController {
     @IBOutlet weak var lifesLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         if segue.identifier == "toRound2" {
+            if let vc = segue.destination as? GamePlayRound2ViewController {
                 LessonSession.manager.setRound2Notes()
-            GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
+                vc.instrumentType = self.instrumentType
+                if instrumentType == .grandPiano {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
+                } else if instrumentType == .acousticGuitar {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
+                }
+            }
+            
         }
-        
     }
     
 

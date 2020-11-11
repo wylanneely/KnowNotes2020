@@ -27,14 +27,6 @@ class GamePlayRound3ViewController: UIViewController {
     let hapticGenerator = UINotificationFeedbackGenerator()
     var musicSound: AVAudioPlayer?
     
-    func byPassSilentMode(){
-        do {
-              try AVAudioSession.sharedInstance().setCategory(.playback)
-           } catch(let error) {
-               print(error.localizedDescription)
-           }
-    }
-    
     var doesGameNeedNewNote: Bool = true
     
     var finishedGameAlert: UIAlertController {
@@ -47,7 +39,10 @@ class GamePlayRound3ViewController: UIViewController {
             self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
         }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+            if self.instrumentType == .grandPiano {
+                GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+            } else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes() }
             self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
         }
         alert.addAction(action)
@@ -154,6 +149,14 @@ class GamePlayRound3ViewController: UIViewController {
             }
         }
     }
+    
+    func byPassSilentMode(){
+        do {
+              try AVAudioSession.sharedInstance().setCategory(.playback)
+           } catch(let error) {
+               print(error.localizedDescription)
+           }
+    }    
     
     //MARK: Actions
     

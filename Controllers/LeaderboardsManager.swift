@@ -22,6 +22,8 @@ struct LeaderboardsManager {
     
     let defaults = UserDefaults.standard
     
+    //MARK: check if round isFinished
+    
     var didFinishGrandPianoRound1: Bool {
         return defaults.bool(forKey: kGrandPianoRound1)
     }
@@ -34,7 +36,8 @@ struct LeaderboardsManager {
     var didFinishAcousticGuitarRound2: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
-   
+    
+    //MARK: Round Completed Functions
     //call after completing rounds
     func finishedRound1GrandPianoNotes(){
         defaults.setValue(true, forKey: kGrandPianoRound1)

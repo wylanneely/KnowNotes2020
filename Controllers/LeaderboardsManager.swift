@@ -37,8 +37,26 @@ struct LeaderboardsManager {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
     
+    
+    var highScoreGrandPiano: Int {
+        return defaults.integer(forKey: kHighScoreGrandPiano)
+    }
+    var highScoreAcousticGuitar: Int {
+        return defaults.integer(forKey: kHighScoreAGuitar)
+    }
+    
+    
     //MARK: Round Completed Functions
     //call after completing rounds
+    
+    func setPersonalGranPianoHighScore(score: Int){
+        defaults.setValue(score, forKey: kHighScoreGrandPiano)
+    }
+    func setPersonalAcouGuitarHighScore(score: Int){
+        defaults.setValue(score, forKey: kHighScoreAGuitar)
+    }
+    
+    
     func finishedRound1GrandPianoNotes(){
         defaults.setValue(true, forKey: kGrandPianoRound1)
     }
@@ -52,11 +70,14 @@ struct LeaderboardsManager {
         defaults.setValue(true, forKey: kAcousticGuitarRound2)
     }
     
+    
     let kGrandPianoRound1 = "GrandPianoRound1"
     let kGrandPianoRound2 = "GrandPianoRound2"
     let kAcousticGuitarRound1 = "AcousticGuitarRound1"
     let kAcousticGuitarRound2 = "AcousticGuitarRound2"
    
+    let kHighScoreGrandPiano = "GrandPianoHS"
+    let kHighScoreAGuitar = "AcousticGuitarHS"
 }
 
 enum LeaderboardBundleIDs: String {

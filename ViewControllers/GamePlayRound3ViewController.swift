@@ -13,6 +13,7 @@ class GamePlayRound3ViewController: UIViewController {
     var instrumentType: InstrumentType = .grandPiano
     
     var gameRoundNotes: [Note] = LessonSession.manager.lesson.round3Notes
+    var isStartingRound: Bool = false
     
     var note1: Note?
     var note2: Note?
@@ -32,18 +33,33 @@ class GamePlayRound3ViewController: UIViewController {
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
+            
+            
             let score: Int = LessonSession.manager.score
-            GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-            GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-            GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
-            self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            if self.instrumentType == .grandPiano {
+                GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
+                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            }
+            else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            }
+            
+            
         }
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             if self.instrumentType == .grandPiano {
                 GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes() }
-            self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            }
         }
         alert.addAction(action)
         alert.addAction(action2)
@@ -134,7 +150,7 @@ class GamePlayRound3ViewController: UIViewController {
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                self.view.backgroundColor = UIColor.deepSea
+                self.view.backgroundColor = UIColor.gameplayBlue
             }
         }
     }
@@ -147,7 +163,7 @@ class GamePlayRound3ViewController: UIViewController {
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                self.view.backgroundColor = UIColor.deepSea
+                self.view.backgroundColor = UIColor.gameplayBlue
             }
         }
     }
@@ -164,7 +180,7 @@ class GamePlayRound3ViewController: UIViewController {
         let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to leave? Any progress made will not be saved.", preferredStyle: .actionSheet)
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
             self.isModalInPresentation = false
-            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
         }
         let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
             return
@@ -359,17 +375,38 @@ class GamePlayRound3ViewController: UIViewController {
         checkRoundEnd()
     }
     
+    //MARK: Helper Functions
+
+    func setUpGif(){
+          circleProgressBar.labelSize = 60
+          circleProgressBar.lineWidth = 12
+          circleProgressBar.safePercent = 5
+          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
+        circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
+        circleProgressBar.clipsToBounds = true
+        view.sendSubviewToBack(backgroundGif)
+          let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+         // self.view.largeContentImage = gifImage
+          backgroundGif.image = gifImage?.circleMasked
+        
+          view.sendSubviewToBack(circleProgressBar)
+      }
+
+    var totalGroupRounds: Double = 25.00
+    var currentRound: Double = 1.00
+    
+    func updateProgressBar(){
+        let progress = currentRound/totalGroupRounds
+        circleProgressBar.setProgress(to: progress , withAnimation: false)
+        self.currentRound = currentRound + 1.0
+    }
+    
+    
     
     //MARK: Outlets
     
     @IBOutlet weak var backgroundGif: UIImageView!
-    
-    func setUpGif(){
-        let gifImage = UIImage.gifImageWithName(name: "musicBackground")
-       // self.view.largeContentImage = gifImage
-        backgroundGif.image = gifImage
-        view.sendSubviewToBack(backgroundGif)
-    }
+    @IBOutlet weak var circleProgressBar: CircularProgressBar!
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!

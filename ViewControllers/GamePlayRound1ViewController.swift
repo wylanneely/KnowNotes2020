@@ -36,19 +36,23 @@ class GamePlayRound1ViewController: UIViewController {
     
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
             
             if self.instrumentType == .grandPiano {
                 GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
             } else if self.instrumentType == .acousticGuitar {
                 GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
             }
         }
+        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
@@ -134,11 +138,11 @@ class GamePlayRound1ViewController: UIViewController {
         self.hapticGenerator.notificationOccurred(.error)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemRed
+            self.view.backgroundColor = UIColor.imperialRed
             } completion: {
                 (completed: Bool) -> Void in
                 UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
+                    self.view.backgroundColor = UIColor.gameplayBlue
                 }
             }
         }
@@ -146,11 +150,11 @@ class GamePlayRound1ViewController: UIViewController {
         self.hapticGenerator.notificationOccurred(.success)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemGreen
+            self.view.backgroundColor = UIColor.pastelGReen
             } completion: {
                 (completed: Bool) -> Void in
                 UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
+                    self.view.backgroundColor = UIColor.gameplayBlue
                 }
             }
         }
@@ -176,6 +180,8 @@ class GamePlayRound1ViewController: UIViewController {
     }
     
     @IBAction func playButtonTapped(_ sender: Any) {
+        //circleProgressBar.setProgress(to: 100, withAnimation: true)
+
         if doesGameNeedNewNote {
             let newNote = LessonSession.manager.getNextNote()
              currentNote = newNote
@@ -202,6 +208,7 @@ class GamePlayRound1ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.updateProgressBar()
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -225,6 +232,7 @@ class GamePlayRound1ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.updateProgressBar()
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -248,6 +256,7 @@ class GamePlayRound1ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.updateProgressBar()
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -259,19 +268,37 @@ class GamePlayRound1ViewController: UIViewController {
         checkRoundEnd()
     }
     
+    //MARK: Helper Functions
+
+    func setUpGif(){
+          circleProgressBar.labelSize = 60
+          circleProgressBar.safePercent = 100
+          circleProgressBar.lineWidth = 20
+          circleProgressBar.safePercent = 100
+          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
+        circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
+        circleProgressBar.clipsToBounds = true
+          view.sendSubviewToBack(backgroundGif)
+          let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+         // self.view.largeContentImage = gifImage
+          backgroundGif.image = gifImage?.circleMasked
+          view.sendSubviewToBack(circleProgressBar)
+      }
+
+    let totalGroupRounds: Double = 10.00
+    var currentRound: Double = 1.00
+    
+    
+    func updateProgressBar(){
+        let progress = currentRound/totalGroupRounds
+        circleProgressBar.setProgress(to: progress , withAnimation: false)
+        self.currentRound = currentRound + 1.0
+    }
     
     //MARK: Outlets
     
     @IBOutlet weak var backgroundGif: UIImageView!
-    
-    func setUpGif(){
-        let gifImage = UIImage.gifImageWithName(name: "musicBackground")
-       // self.view.largeContentImage = gifImage
-        backgroundGif.image = gifImage
-        view.sendSubviewToBack(backgroundGif)
-    }
-    
-
+    @IBOutlet weak var circleProgressBar: CircularProgressBar!
     @IBOutlet weak var note1Button: UIButton!
     @IBOutlet weak var note2Button: UIButton!
     @IBOutlet weak var note3Button: UIButton!

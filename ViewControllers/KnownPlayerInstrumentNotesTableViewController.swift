@@ -249,12 +249,15 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? GamePlayRound1ViewController {
+            
             vc.instrumentType = self.instrumentType
         }
         if let vc = segue.destination as? GamePlayRound2ViewController {
+            vc.isStartingRound = true
             vc.instrumentType = self.instrumentType
         }
         if let vc = segue.destination as? GamePlayRound3ViewController {
+            vc.isStartingRound = true
             vc.instrumentType = self.instrumentType
         }
     }

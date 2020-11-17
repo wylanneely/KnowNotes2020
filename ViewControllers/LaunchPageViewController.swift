@@ -24,7 +24,7 @@ class LaunchPageViewController: UIViewController {
     
     func animateBackgroundWithtwoColors(){
         UIView.animate(withDuration: 1.5) {
-            self.view.backgroundColor = UIColor.deepSea
+            self.view.backgroundColor = UIColor.gameplayBlue
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {

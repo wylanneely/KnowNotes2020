@@ -963,7 +963,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlu-vE-i8L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4895.652173913044" y="377.67857142857139"/>
+            <point key="canvasLocation" x="5042" y="-378"/>
         </scene>
         <!--Game Play Round3 View Controller-->
         <scene sceneID="GRX-Ve-U8y">
@@ -974,7 +974,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6L-uL-ITj">
-                                <rect key="frame" x="40" y="324" width="120" height="120"/>
+                                <rect key="frame" x="20" y="324" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="xka-1m-ktS">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1005,7 +1005,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOC-ae-CJn">
-                                <rect key="frame" x="254" y="324" width="120" height="120"/>
+                                <rect key="frame" x="274" y="324" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="GPU-6a-ekr">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1050,7 +1050,7 @@
                                 </connections>
                             </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rR6-SM-UNO" userLabel="View4">
-                                <rect key="frame" x="40" y="604" width="120" height="120"/>
+                                <rect key="frame" x="20" y="604" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="nX7-ee-IGp">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1082,7 +1082,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-4Q-jTr">
-                                <rect key="frame" x="40" y="464" width="120" height="120"/>
+                                <rect key="frame" x="20" y="464" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="r1F-7x-dh6">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1112,7 +1112,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vm-SJ-2jy">
-                                <rect key="frame" x="254" y="464" width="120" height="120"/>
+                                <rect key="frame" x="274" y="464" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6WK-W1-uuB">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1144,7 +1144,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Lt-XJ-cfZ" userLabel="View7">
-                                <rect key="frame" x="254" y="604" width="120" height="120"/>
+                                <rect key="frame" x="274" y="604" width="120" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="GGa-Vh-z9c">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1289,7 +1289,7 @@
                         <viewLayoutGuide key="safeArea" id="5eR-rw-v56"/>
                         <color key="backgroundColor" red="0.16101491449999999" green="0.56606894730000001" blue="0.79055315260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5eR-rw-v56" firstAttribute="trailing" secondItem="1Lt-XJ-cfZ" secondAttribute="trailing" constant="40" id="0I9-vl-Rr3"/>
+                            <constraint firstItem="5eR-rw-v56" firstAttribute="trailing" secondItem="1Lt-XJ-cfZ" secondAttribute="trailing" constant="20" id="0I9-vl-Rr3"/>
                             <constraint firstItem="n6P-pt-SFe" firstAttribute="leading" secondItem="XOm-HC-Vr9" secondAttribute="leading" constant="20" id="4t9-5F-CsB"/>
                             <constraint firstItem="1Lt-XJ-cfZ" firstAttribute="leading" secondItem="WOC-ae-CJn" secondAttribute="leading" id="8ET-uc-5dZ"/>
                             <constraint firstItem="nOw-4Q-jTr" firstAttribute="top" secondItem="s6L-uL-ITj" secondAttribute="bottom" constant="20" id="Ayo-Uf-453"/>
@@ -1313,7 +1313,7 @@
                             <constraint firstItem="1Lt-XJ-cfZ" firstAttribute="leading" secondItem="6Vm-SJ-2jy" secondAttribute="leading" id="tby-Th-3oU"/>
                             <constraint firstItem="nOw-4Q-jTr" firstAttribute="top" secondItem="6Vm-SJ-2jy" secondAttribute="top" id="teY-Pj-VJK"/>
                             <constraint firstItem="wJb-0X-0x6" firstAttribute="centerX" secondItem="XOm-HC-Vr9" secondAttribute="centerX" id="wHp-6o-Xcc"/>
-                            <constraint firstItem="rR6-SM-UNO" firstAttribute="leading" secondItem="5eR-rw-v56" secondAttribute="leading" constant="40" id="xez-Lc-sVD"/>
+                            <constraint firstItem="rR6-SM-UNO" firstAttribute="leading" secondItem="5eR-rw-v56" secondAttribute="leading" constant="20" id="xez-Lc-sVD"/>
                             <constraint firstItem="5eR-rw-v56" firstAttribute="trailing" secondItem="IO1-Bx-uXJ" secondAttribute="trailing" constant="60" id="xzw-xC-EPJ"/>
                         </constraints>
                     </view>
@@ -1335,7 +1335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9w-NV-qf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5695.652173913044" y="377.67857142857139"/>
+            <point key="canvasLocation" x="6562" y="406"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

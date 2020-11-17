@@ -142,7 +142,6 @@ extension UIImage {
 
     internal class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
-
         // Get dictionaries
         let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
         let gifPropertiesPointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 0)
@@ -171,7 +170,6 @@ extension UIImage {
         } else {
             delay = 0.1 // Make sure they're not too fast
         }
-
         return delay
     }
 
@@ -200,7 +198,6 @@ extension UIImage {
         var rest: Int
         while true {
             rest = lhs! % rhs!
-
             if rest == 0 {
                 return rhs! // Found it
             } else {
@@ -214,13 +211,11 @@ extension UIImage {
         if array.isEmpty {
             return 1
         }
-
         var gcd = array[0]
 
         for val in array {
             gcd = UIImage.gcdForPair(val, gcd)
         }
-
         return gcd
     }
 
@@ -228,7 +223,6 @@ extension UIImage {
         let count = CGImageSourceGetCount(source)
         var images = [CGImage]()
         var delays = [Int]()
-
         // Fill arrays
         for index in 0..<count {
             // Add image
@@ -241,7 +235,6 @@ extension UIImage {
                 source: source)
             delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
         }
-
         // Calculate full duration
         let duration: Int = {
             var sum = 0
@@ -249,10 +242,8 @@ extension UIImage {
             for val: Int in delays {
                 sum += val
             }
-
             return sum
             }()
-
         // Get frames
         let gcd = gcdForArray(delays)
         var frames = [UIImage]()
@@ -267,7 +258,6 @@ extension UIImage {
                 frames.append(frame)
             }
         }
-
         // Heyhey
         let animation = UIImage.animatedImage(with: frames,
             duration: Double(duration) / 1000.0)

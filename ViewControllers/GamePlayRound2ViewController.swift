@@ -11,7 +11,6 @@ import AVFoundation
 class GamePlayRound2ViewController: UIViewController {
     
     var instrumentType: InstrumentType = .grandPiano
-
     
     var gameRoundNotes: [Note] = LessonSession.manager.lesson.round2Notes
     
@@ -51,7 +50,6 @@ class GamePlayRound2ViewController: UIViewController {
                 self.performSegue(withIdentifier: "toLocalProfile", sender: self)
             }
         }
-        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
         }
@@ -65,10 +63,12 @@ class GamePlayRound2ViewController: UIViewController {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpScoresLifes()
+        self.isModalInPresentation = true
+        setUpGif()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,9 +81,6 @@ class GamePlayRound2ViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
    
-    
-   
-    
     //MARK: SetUp
     
     func assignNotesToButtons(){
@@ -128,14 +125,13 @@ class GamePlayRound2ViewController: UIViewController {
     
     func playSoundFromNote(path: String? ) {
         if let url = LessonSession.manager.getSoundPathURLFromNote(path: path) {
-        do {
-            byPassSilentMode()
-            musicSound = try AVAudioPlayer(contentsOf: url)
-            musicSound?.play()
-        } catch {
-            // couldn't load file :(
-        }
-            
+            do {
+                byPassSilentMode()
+                musicSound = try AVAudioPlayer(contentsOf: url)
+                musicSound?.play()
+            } catch {
+                // couldn't load file :(
+            }
         }
     }
     
@@ -143,35 +139,53 @@ class GamePlayRound2ViewController: UIViewController {
         self.hapticGenerator.notificationOccurred(.error)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemRed
-            } completion: {
-                (completed: Bool) -> Void in
-                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
-                }
+            self.view.backgroundColor = UIColor.systemRed
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                self.view.backgroundColor = UIColor.deepSea
             }
         }
+    }
     
     func handleCorrectAnswerWithHaptic(){
         self.hapticGenerator.notificationOccurred(.success)
         
         UIView.animate(withDuration: 0.33) {
-                self.view.backgroundColor = UIColor.systemGreen
-            } completion: {
-                (completed: Bool) -> Void in
-                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                    self.view.backgroundColor = UIColor.deepSea
-                }
+            self.view.backgroundColor = UIColor.systemGreen
+        } completion: {
+            (completed: Bool) -> Void in
+            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                self.view.backgroundColor = UIColor.deepSea
             }
         }
+    }
+    
+    var quitGameActionSheet: UIAlertController {
+        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to go back? Any progress made will not be saved.", preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.isModalInPresentation = false
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            return
+        }
+        quitGameActionSheet.addAction(noAction)
+        quitGameActionSheet.addAction(yesAction)
+        return quitGameActionSheet
+    }
     
     //MARK: Actions
+    @IBAction func leaveButtonTapped(_ sender: Any) {
+        self.present(quitGameActionSheet, animated: true, completion: nil)
+    }
+    
     
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             let newNote = LessonSession.manager.getNextNote()
-             currentNote = newNote
-             playSoundFromNote(path: newNote?.soundPath )
+            currentNote = newNote
+            playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
             DispatchQueue.main.async {
                 self.playButton.setTitle("Repeat", for: .normal)
@@ -231,7 +245,7 @@ class GamePlayRound2ViewController: UIViewController {
         }
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
-
+            
             if LessonSession.manager.checkUpdateSessionWith(note: note3) {
                 //correct
                 handleCorrectAnswerWithHaptic()
@@ -277,7 +291,7 @@ class GamePlayRound2ViewController: UIViewController {
         }
         if let note5 = note5 {
             playSoundFromNote(path: note5.soundPath)
-
+            
             if LessonSession.manager.checkUpdateSessionWith(note: note5) {
                 //correct
                 handleCorrectAnswerWithHaptic()
@@ -294,6 +308,17 @@ class GamePlayRound2ViewController: UIViewController {
         }
         checkRoundEnd()
     }
+    //MARK: Outlets
+    
+    @IBOutlet weak var backgroundGif: UIImageView!
+    
+    func setUpGif(){
+        let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+       // self.view.largeContentImage = gifImage
+        backgroundGif.image = gifImage
+        view.sendSubviewToBack(backgroundGif)
+    }
+
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!

@@ -54,6 +54,8 @@ class GamePlayRound3ViewController: UIViewController {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpScoresLifes()
+        self.isModalInPresentation = true
+        setUpGif()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,9 +158,27 @@ class GamePlayRound3ViewController: UIViewController {
            } catch(let error) {
                print(error.localizedDescription)
            }
-    }    
+    }
+    
+    var quitGameActionSheet: UIAlertController {
+        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to leave? Any progress made will not be saved.", preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.isModalInPresentation = false
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            return
+        }
+        quitGameActionSheet.addAction(noAction)
+        quitGameActionSheet.addAction(yesAction)
+        return quitGameActionSheet
+    }
     
     //MARK: Actions
+    
+    @IBAction func leaveButtonTapped(_ sender: Any) {
+        self.present(quitGameActionSheet, animated: true, completion: nil)
+    }
     
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
@@ -341,6 +361,15 @@ class GamePlayRound3ViewController: UIViewController {
     
     
     //MARK: Outlets
+    
+    @IBOutlet weak var backgroundGif: UIImageView!
+    
+    func setUpGif(){
+        let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+       // self.view.largeContentImage = gifImage
+        backgroundGif.image = gifImage
+        view.sendSubviewToBack(backgroundGif)
+    }
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!

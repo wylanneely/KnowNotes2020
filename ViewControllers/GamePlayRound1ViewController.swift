@@ -43,14 +43,12 @@ class GamePlayRound1ViewController: UIViewController {
                 GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 self.dismiss(animated: true, completion: nil)
-                
             } else if self.instrumentType == .acousticGuitar {
                 GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
@@ -58,15 +56,15 @@ class GamePlayRound1ViewController: UIViewController {
         alert.addAction(action2)
         return alert
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
+        self.isModalInPresentation = true
+        setUpGif()
         //scoreUpdate()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         
@@ -100,7 +98,6 @@ class GamePlayRound1ViewController: UIViewController {
         note1Button.setTitle("\(note_1.name)", for: .normal)
         note2Button.setTitle("\(note_2.name)", for: .normal)
         note3Button.setTitle("\(note_3.name)", for: .normal)
-
     }
     
     func setUpLabelsButtonsViews(){
@@ -108,8 +105,6 @@ class GamePlayRound1ViewController: UIViewController {
         scoreLabel.text = "\(LessonSession.manager.score)"
         playButton.layer.cornerRadius = 10
     }
-    
-    
 
     func checkRoundEnd(){
         if LessonSession.manager.score >= 10 {
@@ -159,8 +154,27 @@ class GamePlayRound1ViewController: UIViewController {
                 }
             }
         }
+    
+    var quitGameActionSheet: UIAlertController {
+        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to leave? Any progress made will not be saved.", preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.isModalInPresentation = false
+            self.dismiss(animated: true, completion: nil)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            return
+        }
+        quitGameActionSheet.addAction(noAction)
+        quitGameActionSheet.addAction(yesAction)
+        return quitGameActionSheet
+    }
 
     //MARK: Actions
+    
+    @IBAction func leaveButtonTapped(_ sender: Any) {
+        self.present(quitGameActionSheet, animated: true, completion: nil)
+    }
+    
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
             let newNote = LessonSession.manager.getNextNote()
@@ -247,6 +261,16 @@ class GamePlayRound1ViewController: UIViewController {
     
     
     //MARK: Outlets
+    
+    @IBOutlet weak var backgroundGif: UIImageView!
+    
+    func setUpGif(){
+        let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+       // self.view.largeContentImage = gifImage
+        backgroundGif.image = gifImage
+        view.sendSubviewToBack(backgroundGif)
+    }
+    
 
     @IBOutlet weak var note1Button: UIButton!
     @IBOutlet weak var note2Button: UIButton!

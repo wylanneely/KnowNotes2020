@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KnownPlayerInstrumentNotesTableViewController: UITableViewController, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate {
+class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate {
     
     //MARK: Properties
     

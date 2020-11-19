@@ -30,8 +30,9 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
     
     
     
-    func setUp(type: InstrumentType, isLocked: Bool){
-        self.isLocked = isLocked
+    func setUp(type: InstrumentType, isUnlocked: Bool){
+        
+        self.isLocked = !isUnlocked
         
         switch type {
         case .grandPiano:
@@ -40,12 +41,11 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         case .acousticGuitar:
             self.instrumentType = type
             setLockedState()
-
+            instrumentButton.setTitle("Acoustic Guitar", for: .normal)
         case .violin:
             self.instrumentType = type
             setLockedState()
-
-      
+            instrumentButton.setTitle("Violin", for: .normal)
         }
         
         

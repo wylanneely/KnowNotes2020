@@ -21,19 +21,11 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     let cellScale: CGFloat = 0.06
     
     func setupCollectionView(){
-        
-//        let screenSize = UIScreen.main.bounds.size
-//        let cellWidth = floor(screenSize.width * cellScale)
-//        let cellHeight = floor(screenSize.height * cellScale)
-//        let insetX = (view.bounds.width - cellWidth) / 2.0
-//        let insetY = (view.bounds.height - cellHeight) / 2.0
-//
-//        let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-//        
-//        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-//        
-//        collectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX
-//        )
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+            layout.itemSize = CGSize(width: 250, height: 400)
+
+            collectionView?.setCollectionViewLayout(layout, animated: false)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -118,15 +110,15 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         
         switch indexPath.item {
         case 0:
-            cell.setUp(type: .grandPiano, isLocked: false)
+            cell.setUp(type: .grandPiano, isUnlocked: true)
             return cell
 
         case 1:
-            cell.setUp(type: .acousticGuitar, isLocked: isAcousticGuitarUnlocked)
+            cell.setUp(type: .acousticGuitar, isUnlocked: isAcousticGuitarUnlocked)
             return cell
 
         case 2:
-            cell.setUp(type: .violin, isLocked: isViolinUnlocked)
+            cell.setUp(type: .violin, isUnlocked: isViolinUnlocked)
             return cell
 
         default:

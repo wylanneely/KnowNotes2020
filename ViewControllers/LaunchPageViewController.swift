@@ -9,6 +9,9 @@ import GameKit
 
 class LaunchPageViewController: UIViewController {
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
@@ -90,12 +93,15 @@ class LaunchPageViewController: UIViewController {
     //MARK: Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       // if let vc = segue.destination as? LocalPlayerMenuViewController {
-          //  GameCenterManager.manager.viewController = vc
+        if let vc = segue.destination as? PlayerGameMenuViewController {
+            
+            GameCenterManager.manager.viewController = vc
+            
             //NOTE: change to test unlocked instruments vs live
-           // vc.isAcousticGuitarUnlocked = false
-          //  vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
-       // }
+            
+            vc.isViolinUnlocked =  GameCenterManager.manager.achievementsManager.isViolinUnlocked
+            vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+        }
     }
     
 }

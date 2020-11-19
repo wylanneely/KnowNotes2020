@@ -129,8 +129,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                     if let notesCellExample = PlayerKnownInstrumentNotesHeaderViewCell.createCell() {
                         
                         switch instrumentType {
-                        case InstrumentType.grandPiano:
-                            if leaderboardsManager.didFinishGrandPianoRound2 {    //NOTE: FIX way to record progress
+                        case .grandPiano:
+                            if leaderboardsManager.didFinishGrandPianoRound2 {
+                                //NOTE: FIX way to record progress
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
                                 return notesCellExample } else if leaderboardsManager.didFinishGrandPianoRound1 {
                                     notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
@@ -138,9 +139,12 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
                             return notesCellExample
                             
-                        case InstrumentType.acousticGuitar:
+                        case .acousticGuitar:
                             notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
-                            return notesCellExample }
+                            return notesCellExample
+                        case .violin:
+                                return notesCellExample
+                        }
                     }
                 }
                 
@@ -176,6 +180,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
+                    case .violin:
+                        return notesCellExample
+
                     }
                 }
                 
@@ -206,6 +213,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
+                    case .violin:
+                        return notesCellExample
+
                     }
                 }
                 

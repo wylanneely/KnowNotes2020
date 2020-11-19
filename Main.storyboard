@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,13 +26,16 @@
                                     <color key="titleColor" name="StarBlue"/>
                                     <color key="titleShadowColor" name="purpleOrchid"/>
                                 </state>
+                                <connections>
+                                    <segue destination="z0x-37-w7E" kind="show" id="NHd-fT-NTl"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1K-A6-Ro2" userLabel="seguePlaceholder">
                                 <rect key="frame" x="329" y="816" width="30" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <connections>
                                     <action selector="signInButtonTapped:" destination="axP-8n-Ooc" eventType="touchUpInside" id="n8u-0H-OnL"/>
-                                    <segue destination="Wfy-ZV-M7y" kind="show" identifier="toLocalPlayerMenu" id="ocq-rD-sbG"/>
+                                    <segue destination="mI2-hl-11M" kind="show" identifier="toLocalPlayerMenu" id="GOe-8V-P0b"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x8P-wf-Ytb">
@@ -120,7 +124,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PoE-Hv-HvC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="378"/>
+            <point key="canvasLocation" x="145" y="442"/>
+        </scene>
+        <!--GamePlay-->
+        <scene sceneID="W63-9G-5Ut">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GamePlay" id="z0x-37-w7E" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="OCF-AF-FIY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gN6-bB-eyH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="427" y="1106"/>
         </scene>
         <!--Local Player Menu View Controller-->
         <scene sceneID="AwL-Co-CJa">
@@ -170,9 +184,6 @@
                                                     <color key="titleColor" name="mTurqouise"/>
                                                     <color key="titleShadowColor" name="SeaFoam"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="lqg-RY-0Yp" kind="show" identifier="toGrandPianoNotes" id="8Id-zs-avP"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="StarBlue"/>
@@ -204,7 +215,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="AcousticGuitarButtonTapped:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="pdm-na-WRV"/>
-                                                    <segue destination="lqg-RY-0Yp" kind="presentation" identifier="toAcousticNotes" id="kKb-E9-46o"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -265,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044.9275362318842" y="377.67857142857139"/>
+            <point key="canvasLocation" x="1203" y="289"/>
         </scene>
         <!--Known Player Instrument Notes Table View Controller-->
         <scene sceneID="Ple-6p-SOO">
@@ -971,7 +981,7 @@
                         <outlet property="note5ButtonView" destination="GVW-y5-JMf" id="Uyn-sF-CY2"/>
                         <outlet property="playButton" destination="gKr-63-wkj" id="z7f-Hy-DaG"/>
                         <outlet property="scoreLabel" destination="bVf-9T-Y0X" id="uSw-6X-xg0"/>
-                        <segue destination="Wfy-ZV-M7y" kind="show" identifier="toLocalProfile" id="ATu-CN-aar"/>
+                        <segue destination="mI2-hl-11M" kind="show" identifier="toLocalProfile" id="O9z-j4-FT8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vlu-vE-i8L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1352,19 +1362,169 @@
                         <outlet property="note7Button" destination="GGa-Vh-z9c" id="Zcr-jl-J98"/>
                         <outlet property="playButton" destination="wJb-0X-0x6" id="8mQ-3u-epf"/>
                         <outlet property="scoreLabel" destination="v9W-s5-quM" id="Gta-fH-RrR"/>
-                        <segue destination="Wfy-ZV-M7y" kind="show" identifier="toLocalProfile2" id="fBu-BT-niS"/>
+                        <segue destination="mI2-hl-11M" kind="show" identifier="toLocalProfile2" id="fKx-EV-k2C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9w-NV-qf7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5740.579710144928" y="369.64285714285711"/>
         </scene>
+        <!--Player Game Menu View Controller-->
+        <scene sceneID="xq6-0I-Klg">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="mI2-hl-11M" customClass="PlayerGameMenuViewController" customModule="Know_Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kmW-Kh-CxJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Ym-qyB">
+                                <rect key="frame" x="122" y="368" width="170" height="40"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="32"/>
+                                <color key="textColor" name="beauBlue"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="ImperialRed"/>
+                                <size key="shadowOffset" width="2" height="1"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="36T-hl-cA4">
+                                <rect key="frame" x="20" y="60" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="eRf-4B-y1M"/>
+                                    <constraint firstAttribute="width" constant="44" id="tLf-Mb-qS5"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2m-aL-b63">
+                                <rect key="frame" x="72" y="64" width="144" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <state key="normal" title="Game Center">
+                                    <color key="titleColor" name="StarBlue"/>
+                                </state>
+                                <connections>
+                                    <action selector="showGameCenterDashboard:" destination="mI2-hl-11M" eventType="touchUpInside" id="6Zc-fu-EL6"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrb-ZY-kGK">
+                                <rect key="frame" x="87" y="120" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vrb-ZY-kGK" secondAttribute="height" multiplier="1:1" id="mq3-eM-adH"/>
+                                </constraints>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zaT-Jn-MZ8">
+                                <rect key="frame" x="20" y="416" width="374" height="446"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="300" id="qZM-Gc-bWc"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="daA-ML-dlD">
+                                    <size key="itemSize" width="250" height="400"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstrumentCCell" id="ZcC-Nm-e4q" customClass="InstrumentCollectionViewCell" customModule="Know_Notes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="23" width="250" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l2x-Jp-ES9">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-as-VaU" userLabel="BackgroundColorView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJy-9C-y8o">
+                                                            <rect key="frame" x="44" y="342" width="162" height="50"/>
+                                                            <color key="backgroundColor" name="DeepSea"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="rwc-1j-AEp" userLabel="height = 55"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                                            <size key="titleShadowOffset" width="2" height="1"/>
+                                                            <state key="normal" title="   Grand Piano ">
+                                                                <color key="titleColor" name="mTurqouise"/>
+                                                                <color key="titleShadowColor" name="SeaFoam"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="instrumentButtonTapped:" destination="ZcC-Nm-e4q" eventType="touchUpInside" id="7Ue-hT-FJE"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Piano" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-yL-egX">
+                                                            <rect key="frame" x="57" y="8" width="136.5" height="29"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                            <color key="textColor" name="mTurqouise"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="byzythPurple"/>
+                                                    <constraints>
+                                                        <constraint firstItem="H0Y-yL-egX" firstAttribute="top" secondItem="dcP-as-VaU" secondAttribute="top" constant="8" id="Fsc-sW-ajA"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NJy-9C-y8o" secondAttribute="bottom" constant="8" id="NeN-Mk-0wD"/>
+                                                        <constraint firstItem="H0Y-yL-egX" firstAttribute="centerX" secondItem="dcP-as-VaU" secondAttribute="centerX" id="dLW-oq-Ef6"/>
+                                                        <constraint firstItem="NJy-9C-y8o" firstAttribute="centerX" secondItem="dcP-as-VaU" secondAttribute="centerX" id="ykg-pp-xGR"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-OP-hkw">
+                                                    <rect key="frame" x="0.0" y="72" width="250" height="256"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dcP-as-VaU" firstAttribute="leading" secondItem="l2x-Jp-ES9" secondAttribute="leading" id="0f7-yM-lJg"/>
+                                                <constraint firstItem="FA8-OP-hkw" firstAttribute="centerY" secondItem="l2x-Jp-ES9" secondAttribute="centerY" id="6I8-NK-wHU"/>
+                                                <constraint firstAttribute="trailing" secondItem="FA8-OP-hkw" secondAttribute="trailing" id="8vp-sG-wb0"/>
+                                                <constraint firstItem="dcP-as-VaU" firstAttribute="top" secondItem="l2x-Jp-ES9" secondAttribute="top" id="CIS-3d-DF5"/>
+                                                <constraint firstAttribute="trailing" secondItem="dcP-as-VaU" secondAttribute="trailing" id="CYj-qB-A7c"/>
+                                                <constraint firstItem="FA8-OP-hkw" firstAttribute="leading" secondItem="l2x-Jp-ES9" secondAttribute="leading" id="JHk-LS-hgJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="dcP-as-VaU" secondAttribute="bottom" id="gyU-rI-TD8"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="250" height="400"/>
+                                        <connections>
+                                            <outlet property="backgroundColorView" destination="dcP-as-VaU" id="peN-3I-beB"/>
+                                            <outlet property="instrumentButton" destination="NJy-9C-y8o" id="UoY-dh-frC"/>
+                                            <outlet property="instrumentImage" destination="FA8-OP-hkw" id="G88-Wu-PQ4"/>
+                                            <outlet property="instrumentLabel" destination="H0Y-yL-egX" id="fdJ-XB-V7G"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="a82-p9-h7G"/>
+                        <color key="backgroundColor" name="Peach"/>
+                        <constraints>
+                            <constraint firstItem="36T-hl-cA4" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" constant="16" id="3AG-AC-fwE"/>
+                            <constraint firstItem="k2m-aL-b63" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" constant="20" id="AV2-Lc-I79"/>
+                            <constraint firstItem="36T-hl-cA4" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" constant="20" id="HHA-WN-lAx"/>
+                            <constraint firstItem="k2m-aL-b63" firstAttribute="centerY" secondItem="36T-hl-cA4" secondAttribute="centerY" id="MSd-M0-COD"/>
+                            <constraint firstItem="a82-p9-h7G" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k2m-aL-b63" secondAttribute="trailing" symbolic="YES" id="N1t-8A-PHK"/>
+                            <constraint firstItem="18G-Ym-qyB" firstAttribute="centerY" secondItem="kmW-Kh-CxJ" secondAttribute="centerY" constant="-60" id="QuN-id-izJ"/>
+                            <constraint firstItem="a82-p9-h7G" firstAttribute="trailing" secondItem="zaT-Jn-MZ8" secondAttribute="trailing" constant="20" id="Tka-Pl-r6c"/>
+                            <constraint firstItem="18G-Ym-qyB" firstAttribute="centerX" secondItem="kmW-Kh-CxJ" secondAttribute="centerX" id="dlZ-6U-Go0"/>
+                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="bottom" secondItem="a82-p9-h7G" secondAttribute="bottom" id="dwE-7o-s2a"/>
+                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="top" secondItem="18G-Ym-qyB" secondAttribute="bottom" constant="8" symbolic="YES" id="fhK-9Q-I01"/>
+                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" constant="20" id="jtp-KU-41t"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="centerX" secondItem="kmW-Kh-CxJ" secondAttribute="centerX" id="ssb-WV-CQ2"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="top" secondItem="k2m-aL-b63" secondAttribute="bottom" constant="20" id="vAE-Of-171"/>
+                            <constraint firstItem="18G-Ym-qyB" firstAttribute="top" secondItem="vrb-ZY-kGK" secondAttribute="bottom" constant="8" id="zD2-0I-Ir8"/>
+                            <constraint firstItem="k2m-aL-b63" firstAttribute="leading" secondItem="36T-hl-cA4" secondAttribute="trailing" constant="8" id="zqC-C8-8sW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JQS-CR-0Zf"/>
+                    <connections>
+                        <outlet property="collectionView" destination="zaT-Jn-MZ8" id="Gdt-Li-VG0"/>
+                        <outlet property="localPlayerProfilePhoto" destination="vrb-ZY-kGK" id="y1V-AX-J7d"/>
+                        <segue destination="lqg-RY-0Yp" kind="showDetail" identifier="toGrandPianoNotes" id="9Uo-aP-PJH"/>
+                        <segue destination="lqg-RY-0Yp" kind="show" identifier="toAcousticNotes" id="qBl-PS-clb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CN3-sY-KzK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1635" y="1045"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G0N-4Q-Auo"/>
-        <segue reference="jfw-HG-feo"/>
-        <segue reference="kKb-E9-46o"/>
-        <segue reference="fBu-BT-niS"/>
+        <segue reference="GOe-8V-P0b"/>
+        <segue reference="KZ4-4r-X98"/>
+        <segue reference="qIK-oL-1lT"/>
+        <segue reference="9Uo-aP-PJH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Center - Color.png" width="1920" height="1920"/>
@@ -1375,6 +1535,9 @@
         <image name="pip.exit" catalog="system" width="128" height="96"/>
         <namedColor name="CeriseRed">
             <color red="0.81999999284744263" green="0.20399999618530273" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DeepSea">
+            <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GoldenSun">
             <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1396,6 +1559,9 @@
         </namedColor>
         <namedColor name="beauBlue">
             <color red="0.7686274509803922" green="0.8784313725490196" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="byzythPurple">
+            <color red="0.47843137254901963" green="0.18823529411764706" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mTurqouise">
             <color red="0.45882352941176469" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

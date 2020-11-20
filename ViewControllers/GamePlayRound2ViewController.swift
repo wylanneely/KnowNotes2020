@@ -339,6 +339,8 @@ class GamePlayRound2ViewController: UIViewController {
     }
     
     func checkRoundEnd(){
+        
+        
         if isStartingRound {
             if currentRound >= 15 {
                 self.performSegue(withIdentifier: "toRound3", sender: self)
@@ -348,6 +350,7 @@ class GamePlayRound2ViewController: UIViewController {
                 }
             }
         } else {
+          
             if LessonSession.manager.score >= 25 {
                 self.performSegue(withIdentifier: "toRound3", sender: self)
             }
@@ -357,6 +360,8 @@ class GamePlayRound2ViewController: UIViewController {
                 }
             }
         }
+        
+        
         
     }
     

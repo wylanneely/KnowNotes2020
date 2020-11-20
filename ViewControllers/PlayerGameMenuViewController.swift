@@ -21,7 +21,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     func setupCollectionView(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 250, height: 400)
+        layout.itemSize = CGSize(width: 300, height: 500)
         
         collectionView?.setCollectionViewLayout(layout, animated: false)
         
@@ -31,8 +31,12 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         
     //MARK: Unlock Instruments
     
-    var isAcousticGuitarUnlocked: Bool = false
-    var isViolinUnlocked: Bool = false
+    var isAcousticGuitarUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isAcousticGuitarUnlocked
+    }
+    var isViolinUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
+    }
     
     typealias SuccessHandler = (Bool) -> Void
     

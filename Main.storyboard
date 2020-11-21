@@ -23,7 +23,7 @@
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Guest Play">
-                                    <color key="titleColor" name="StarBlue"/>
+                                    <color key="titleColor" name="beauBlue"/>
                                     <color key="titleShadowColor" name="purpleOrchid"/>
                                 </state>
                                 <connections>
@@ -44,25 +44,25 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Know" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6t-gl-rTD">
                                         <rect key="frame" x="0.0" y="0.0" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="ImperialRed"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="StarBlue"/>
+                                        <color key="shadowColor" name="polarCapBlue"/>
                                         <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZN-vh-pw5">
                                         <rect key="frame" x="0.0" y="77.5" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="ImperialRed"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="StarBlue"/>
+                                        <color key="shadowColor" name="polarCapBlue"/>
                                         <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or9-Za-Dvm">
                                         <rect key="frame" x="0.0" y="155" width="173.5" height="77.5"/>
                                         <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="64"/>
-                                        <color key="textColor" name="ImperialRed"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" name="StarBlue"/>
+                                        <color key="shadowColor" name="polarCapBlue"/>
                                         <size key="shadowOffset" width="3" height="1"/>
                                     </label>
                                 </subviews>
@@ -84,7 +84,7 @@
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guitars" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o4G-LK-oVa">
                                 <rect key="frame" x="6" y="372" width="240" height="192"/>
-                                <color key="tintColor" name="StarBlue"/>
+                                <color key="tintColor" name="sharkGReen"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="192" id="1zm-OE-ufa"/>
                                     <constraint firstAttribute="width" constant="240" id="ghc-VV-Se5"/>
@@ -92,7 +92,7 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pianokeys" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="35m-9Z-QxL">
                                 <rect key="frame" x="157" y="565" width="202" height="136"/>
-                                <color key="tintColor" name="purpleOrchid"/>
+                                <color key="tintColor" name="foamyGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="aKz-wN-9c8"/>
                                     <constraint firstAttribute="height" constant="138.5" id="sqz-cc-5oZ"/>
@@ -100,7 +100,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5as-jn-5st"/>
-                        <color key="backgroundColor" name="beauBlue"/>
+                        <color key="backgroundColor" name="niceNight"/>
                         <constraints>
                             <constraint firstItem="TCz-u4-bjo" firstAttribute="centerX" secondItem="dqS-V3-IT7" secondAttribute="centerX" id="CAx-NO-8Gm"/>
                             <constraint firstItem="35m-9Z-QxL" firstAttribute="leading" secondItem="FQM-Hf-IE3" secondAttribute="leading" constant="10" id="DZb-Ro-k0Y"/>
@@ -135,147 +135,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gN6-bB-eyH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="427" y="1106"/>
-        </scene>
-        <!--Local Player Menu View Controller-->
-        <scene sceneID="AwL-Co-CJa">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Wfy-ZV-M7y" customClass="LocalPlayerMenuViewController" customModule="Know_Notes" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="JdK-Od-wjK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjb-ao-SFp">
-                                <rect key="frame" x="122" y="465.5" width="170" height="39.5"/>
-                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="32"/>
-                                <color key="textColor" name="beauBlue"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" name="ImperialRed"/>
-                                <size key="shadowOffset" width="2" height="1"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVR-Ef-g7t">
-                                <rect key="frame" x="87" y="124" width="240" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="RVR-Ef-g7t" secondAttribute="height" multiplier="1:1" id="9xP-kY-JfT"/>
-                                    <constraint firstAttribute="width" constant="240" id="HHi-3z-QAT"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalSpacing" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="rP6-uf-gSv" userLabel="Instruments Stack View">
-                                <rect key="frame" x="20" y="521" width="374" height="325"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IW7-Jo-EaJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" translatesAutoresizingMaskIntoConstraints="NO" id="Dei-LG-utk">
-                                                <rect key="frame" x="8" y="11" width="128" height="128"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Dei-LG-utk" secondAttribute="height" multiplier="1:1" id="ZhT-aU-fuz"/>
-                                                    <constraint firstAttribute="width" constant="128" id="jgj-NS-qoB"/>
-                                                    <constraint firstAttribute="height" constant="128" id="u4w-UE-Vo0"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLj-bq-vMh">
-                                                <rect key="frame" x="136" y="53" width="180" height="44"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="180" id="dCw-SP-BLo"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
-                                                <size key="titleShadowOffset" width="2" height="1"/>
-                                                <state key="normal" title="   Grand Piano ">
-                                                    <color key="titleColor" name="mTurqouise"/>
-                                                    <color key="titleShadowColor" name="SeaFoam"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" name="StarBlue"/>
-                                        <constraints>
-                                            <constraint firstItem="Dei-LG-utk" firstAttribute="centerY" secondItem="IW7-Jo-EaJ" secondAttribute="centerY" id="SBc-4C-N1F"/>
-                                            <constraint firstItem="VLj-bq-vMh" firstAttribute="centerY" secondItem="Dei-LG-utk" secondAttribute="centerY" id="W96-LE-UeH"/>
-                                            <constraint firstAttribute="height" constant="150" id="a1m-C3-bR0"/>
-                                            <constraint firstItem="Dei-LG-utk" firstAttribute="leading" secondItem="IW7-Jo-EaJ" secondAttribute="leading" constant="8" id="cMn-Ms-0cJ"/>
-                                            <constraint firstItem="VLj-bq-vMh" firstAttribute="leading" secondItem="Dei-LG-utk" secondAttribute="trailing" id="cSp-tf-i7P"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWB-sG-cvb">
-                                        <rect key="frame" x="0.0" y="175" width="374" height="150"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acoustic_Guitar" translatesAutoresizingMaskIntoConstraints="NO" id="Cc0-dj-ogk">
-                                                <rect key="frame" x="8" y="11" width="128" height="128"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="128" id="Csm-Jk-5yV"/>
-                                                    <constraint firstAttribute="width" constant="128" id="Rj2-Au-w9t"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ha-jV-Hny">
-                                                <rect key="frame" x="136" y="53" width="197" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
-                                                <size key="titleShadowOffset" width="2" height="1"/>
-                                                <state key="normal" title="Acoustic Guitar">
-                                                    <color key="titleColor" name="mTurqouise"/>
-                                                    <color key="titleShadowColor" name="SeaFoam"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="AcousticGuitarButtonTapped:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="pdm-na-WRV"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" name="StarBlue"/>
-                                        <constraints>
-                                            <constraint firstItem="Cc0-dj-ogk" firstAttribute="leading" secondItem="SWB-sG-cvb" secondAttribute="leading" constant="8" id="Abd-Ks-i54"/>
-                                            <constraint firstAttribute="height" constant="150" id="J5l-Zz-kag"/>
-                                            <constraint firstItem="7ha-jV-Hny" firstAttribute="centerY" secondItem="Cc0-dj-ogk" secondAttribute="centerY" id="RNH-MP-43h"/>
-                                            <constraint firstItem="Cc0-dj-ogk" firstAttribute="centerY" secondItem="SWB-sG-cvb" secondAttribute="centerY" id="nUa-j0-piC"/>
-                                            <constraint firstItem="7ha-jV-Hny" firstAttribute="leading" secondItem="Cc0-dj-ogk" secondAttribute="trailing" id="pr5-fS-vaf"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="rPb-Bq-21J">
-                                <rect key="frame" x="20" y="64" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="DAK-QA-dYW"/>
-                                    <constraint firstAttribute="height" constant="44" id="vSU-Ex-ySo"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKA-IU-DZ9">
-                                <rect key="frame" x="72" y="64" width="144" height="41"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                <state key="normal" title="Game Center">
-                                    <color key="titleColor" name="StarBlue"/>
-                                </state>
-                                <connections>
-                                    <action selector="showGameCenterDashboard:" destination="Wfy-ZV-M7y" eventType="touchUpInside" id="CO9-wE-Ooo"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="V4x-Hu-0hh"/>
-                        <color key="backgroundColor" name="middlePurp"/>
-                        <constraints>
-                            <constraint firstItem="OKA-IU-DZ9" firstAttribute="leading" secondItem="rPb-Bq-21J" secondAttribute="trailing" constant="8" id="0fQ-WR-sAU"/>
-                            <constraint firstItem="rPb-Bq-21J" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="20" id="7e7-jG-Sx9"/>
-                            <constraint firstItem="rP6-uf-gSv" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="8jZ-bo-UQi"/>
-                            <constraint firstItem="RVR-Ef-g7t" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="80" id="C1g-QS-pK4"/>
-                            <constraint firstItem="rPb-Bq-21J" firstAttribute="leading" secondItem="V4x-Hu-0hh" secondAttribute="leading" constant="20" id="Er2-vh-Apo"/>
-                            <constraint firstItem="rP6-uf-gSv" firstAttribute="top" secondItem="Fjb-ao-SFp" secondAttribute="bottom" constant="16" id="GLc-b9-gy1"/>
-                            <constraint firstItem="V4x-Hu-0hh" firstAttribute="trailing" secondItem="rP6-uf-gSv" secondAttribute="trailing" constant="20" id="KU3-SN-h45"/>
-                            <constraint firstItem="Fjb-ao-SFp" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="TZg-nJ-8hJ"/>
-                            <constraint firstItem="V4x-Hu-0hh" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OKA-IU-DZ9" secondAttribute="trailing" symbolic="YES" id="Wbg-jc-2fE"/>
-                            <constraint firstItem="OKA-IU-DZ9" firstAttribute="top" secondItem="V4x-Hu-0hh" secondAttribute="top" constant="20" id="bdC-aR-Xz3"/>
-                            <constraint firstItem="RVR-Ef-g7t" firstAttribute="centerX" secondItem="JdK-Od-wjK" secondAttribute="centerX" id="dwa-03-WDx"/>
-                            <constraint firstItem="rP6-uf-gSv" firstAttribute="leading" secondItem="V4x-Hu-0hh" secondAttribute="leading" constant="20" id="hXS-ar-Q54"/>
-                            <constraint firstItem="V4x-Hu-0hh" firstAttribute="bottom" secondItem="rP6-uf-gSv" secondAttribute="bottom" constant="16" id="itH-ju-CgB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="rY4-fb-52O"/>
-                    <connections>
-                        <outlet property="acousticGuitarStatusView" destination="SWB-sG-cvb" id="1Ii-9k-310"/>
-                        <outlet property="buttonAcousticGuitar" destination="7ha-jV-Hny" id="bW0-qM-dvO"/>
-                        <outlet property="grandPianoStatusView" destination="IW7-Jo-EaJ" id="YuB-pg-xfX"/>
-                        <outlet property="localPlayerProfilePhoto" destination="RVR-Ef-g7t" id="tMI-Sl-ytX"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ng6-di-7K9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1203" y="289"/>
         </scene>
         <!--Known Player Instrument Notes Table View Controller-->
         <scene sceneID="Ple-6p-SOO">
@@ -389,7 +248,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-gY-1tV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2890" y="133"/>
+            <point key="canvasLocation" x="2910" y="442"/>
         </scene>
         <!--GamePlay-->
         <scene sceneID="TtS-7Y-bOH">
@@ -1377,106 +1236,102 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Ym-qyB">
-                                <rect key="frame" x="122" y="368" width="170" height="40"/>
-                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="32"/>
-                                <color key="textColor" name="beauBlue"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text=" Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Ym-qyB">
+                                <rect key="frame" x="20" y="128" width="209" height="46"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" name="ImperialRed"/>
+                                <color key="shadowColor" name="polarCapBlue"/>
                                 <size key="shadowOffset" width="2" height="1"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="36T-hl-cA4">
-                                <rect key="frame" x="20" y="60" width="44" height="44"/>
+                                <rect key="frame" x="20" y="64" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="eRf-4B-y1M"/>
                                     <constraint firstAttribute="width" constant="44" id="tLf-Mb-qS5"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2m-aL-b63">
-                                <rect key="frame" x="72" y="64" width="144" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <rect key="frame" x="72" y="64" width="138" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Game Center">
-                                    <color key="titleColor" name="StarBlue"/>
+                                    <color key="titleColor" name="beauBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="showGameCenterDashboard:" destination="mI2-hl-11M" eventType="touchUpInside" id="6Zc-fu-EL6"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrb-ZY-kGK">
-                                <rect key="frame" x="87" y="120" width="240" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vrb-ZY-kGK" secondAttribute="height" multiplier="1:1" id="mq3-eM-adH"/>
-                                </constraints>
-                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zaT-Jn-MZ8">
-                                <rect key="frame" x="20" y="416" width="374" height="446"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="190" width="414" height="672"/>
+                                <color key="backgroundColor" name="niceNight"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="300" id="qZM-Gc-bWc"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="daA-ML-dlD">
-                                    <size key="itemSize" width="250" height="400"/>
+                                    <size key="itemSize" width="300" height="500"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstrumentCCell" id="ZcC-Nm-e4q" customClass="InstrumentCollectionViewCell" customModule="Know_Notes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="23" width="250" height="400"/>
+                                        <rect key="frame" x="0.0" y="86" width="300" height="500"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l2x-Jp-ES9">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcP-as-VaU" userLabel="BackgroundColorView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
                                                     <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Piano" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-yL-egX">
+                                                            <rect key="frame" x="47.5" y="16" width="205" height="50.5"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="36"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <color key="shadowColor" name="roxyClub"/>
+                                                            <size key="shadowOffset" width="1" height="0.0"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-OP-hkw">
+                                                            <rect key="frame" x="8" y="122" width="284" height="256"/>
+                                                        </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJy-9C-y8o">
-                                                            <rect key="frame" x="44" y="342" width="162" height="50"/>
-                                                            <color key="backgroundColor" name="DeepSea"/>
+                                                            <rect key="frame" x="80" y="442" width="140" height="50"/>
+                                                            <color key="backgroundColor" name="discoDayGreen"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="140" id="If9-xQ-muf"/>
                                                                 <constraint firstAttribute="height" constant="50" id="rwc-1j-AEp" userLabel="height = 55"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
-                                                            <size key="titleShadowOffset" width="2" height="1"/>
-                                                            <state key="normal" title="   Grand Piano ">
-                                                                <color key="titleColor" name="mTurqouise"/>
-                                                                <color key="titleShadowColor" name="SeaFoam"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="25"/>
+                                                            <state key="normal" title="Play">
+                                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="titleShadowColor" name="niceNight"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="instrumentButtonTapped:" destination="ZcC-Nm-e4q" eventType="touchUpInside" id="7Ue-hT-FJE"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Piano" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0Y-yL-egX">
-                                                            <rect key="frame" x="57" y="8" width="136.5" height="29"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                                            <color key="textColor" name="mTurqouise"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" name="byzythPurple"/>
+                                                    <color key="backgroundColor" name="sharkBlueGreen"/>
                                                     <constraints>
-                                                        <constraint firstItem="H0Y-yL-egX" firstAttribute="top" secondItem="dcP-as-VaU" secondAttribute="top" constant="8" id="Fsc-sW-ajA"/>
+                                                        <constraint firstItem="H0Y-yL-egX" firstAttribute="top" secondItem="dcP-as-VaU" secondAttribute="top" constant="16" id="Fsc-sW-ajA"/>
+                                                        <constraint firstItem="FA8-OP-hkw" firstAttribute="centerY" secondItem="dcP-as-VaU" secondAttribute="centerY" id="KfD-LP-Ope"/>
                                                         <constraint firstAttribute="bottom" secondItem="NJy-9C-y8o" secondAttribute="bottom" constant="8" id="NeN-Mk-0wD"/>
                                                         <constraint firstItem="H0Y-yL-egX" firstAttribute="centerX" secondItem="dcP-as-VaU" secondAttribute="centerX" id="dLW-oq-Ef6"/>
+                                                        <constraint firstItem="FA8-OP-hkw" firstAttribute="leading" secondItem="dcP-as-VaU" secondAttribute="leading" constant="8" id="jJv-8M-LAK"/>
+                                                        <constraint firstAttribute="trailing" secondItem="FA8-OP-hkw" secondAttribute="trailing" constant="8" id="qct-A1-tl6"/>
                                                         <constraint firstItem="NJy-9C-y8o" firstAttribute="centerX" secondItem="dcP-as-VaU" secondAttribute="centerX" id="ykg-pp-xGR"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-OP-hkw">
-                                                    <rect key="frame" x="0.0" y="72" width="250" height="256"/>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dcP-as-VaU" firstAttribute="leading" secondItem="l2x-Jp-ES9" secondAttribute="leading" id="0f7-yM-lJg"/>
-                                                <constraint firstItem="FA8-OP-hkw" firstAttribute="centerY" secondItem="l2x-Jp-ES9" secondAttribute="centerY" id="6I8-NK-wHU"/>
-                                                <constraint firstAttribute="trailing" secondItem="FA8-OP-hkw" secondAttribute="trailing" id="8vp-sG-wb0"/>
                                                 <constraint firstItem="dcP-as-VaU" firstAttribute="top" secondItem="l2x-Jp-ES9" secondAttribute="top" id="CIS-3d-DF5"/>
                                                 <constraint firstAttribute="trailing" secondItem="dcP-as-VaU" secondAttribute="trailing" id="CYj-qB-A7c"/>
-                                                <constraint firstItem="FA8-OP-hkw" firstAttribute="leading" secondItem="l2x-Jp-ES9" secondAttribute="leading" id="JHk-LS-hgJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="dcP-as-VaU" secondAttribute="bottom" id="gyU-rI-TD8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="250" height="400"/>
+                                        <size key="customSize" width="300" height="500"/>
                                         <connections>
                                             <outlet property="backgroundColorView" destination="dcP-as-VaU" id="peN-3I-beB"/>
                                             <outlet property="instrumentButton" destination="NJy-9C-y8o" id="UoY-dh-frC"/>
@@ -1486,25 +1341,34 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vrb-ZY-kGK">
+                                <rect key="frame" x="284" y="44" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="VTY-jl-UkV"/>
+                                    <constraint firstAttribute="width" secondItem="vrb-ZY-kGK" secondAttribute="height" multiplier="1:1" id="mq3-eM-adH"/>
+                                    <constraint firstAttribute="width" constant="130" id="pAh-4I-sUw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a82-p9-h7G"/>
-                        <color key="backgroundColor" name="Peach"/>
+                        <color key="backgroundColor" name="whaleBlue"/>
                         <constraints>
-                            <constraint firstItem="36T-hl-cA4" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" constant="16" id="3AG-AC-fwE"/>
+                            <constraint firstItem="36T-hl-cA4" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" constant="20" id="3AG-AC-fwE"/>
                             <constraint firstItem="k2m-aL-b63" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" constant="20" id="AV2-Lc-I79"/>
                             <constraint firstItem="36T-hl-cA4" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" constant="20" id="HHA-WN-lAx"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="top" secondItem="a82-p9-h7G" secondAttribute="top" id="KSo-xf-g6S"/>
                             <constraint firstItem="k2m-aL-b63" firstAttribute="centerY" secondItem="36T-hl-cA4" secondAttribute="centerY" id="MSd-M0-COD"/>
                             <constraint firstItem="a82-p9-h7G" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k2m-aL-b63" secondAttribute="trailing" symbolic="YES" id="N1t-8A-PHK"/>
-                            <constraint firstItem="18G-Ym-qyB" firstAttribute="centerY" secondItem="kmW-Kh-CxJ" secondAttribute="centerY" constant="-60" id="QuN-id-izJ"/>
-                            <constraint firstItem="a82-p9-h7G" firstAttribute="trailing" secondItem="zaT-Jn-MZ8" secondAttribute="trailing" constant="20" id="Tka-Pl-r6c"/>
-                            <constraint firstItem="18G-Ym-qyB" firstAttribute="centerX" secondItem="kmW-Kh-CxJ" secondAttribute="centerX" id="dlZ-6U-Go0"/>
+                            <constraint firstItem="a82-p9-h7G" firstAttribute="trailing" secondItem="zaT-Jn-MZ8" secondAttribute="trailing" id="Tka-Pl-r6c"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="trailing" secondItem="zaT-Jn-MZ8" secondAttribute="trailing" id="Tnp-Ck-M3f"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="bottom" secondItem="18G-Ym-qyB" secondAttribute="bottom" id="VPe-JM-tRj"/>
+                            <constraint firstItem="18G-Ym-qyB" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" constant="20" id="dVD-pB-QXh"/>
                             <constraint firstItem="zaT-Jn-MZ8" firstAttribute="bottom" secondItem="a82-p9-h7G" secondAttribute="bottom" id="dwE-7o-s2a"/>
-                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="top" secondItem="18G-Ym-qyB" secondAttribute="bottom" constant="8" symbolic="YES" id="fhK-9Q-I01"/>
-                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" constant="20" id="jtp-KU-41t"/>
-                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="centerX" secondItem="kmW-Kh-CxJ" secondAttribute="centerX" id="ssb-WV-CQ2"/>
-                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="top" secondItem="k2m-aL-b63" secondAttribute="bottom" constant="20" id="vAE-Of-171"/>
-                            <constraint firstItem="18G-Ym-qyB" firstAttribute="top" secondItem="vrb-ZY-kGK" secondAttribute="bottom" constant="8" id="zD2-0I-Ir8"/>
+                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="top" secondItem="18G-Ym-qyB" secondAttribute="bottom" constant="16" id="fi7-wl-b0V"/>
+                            <constraint firstItem="zaT-Jn-MZ8" firstAttribute="leading" secondItem="a82-p9-h7G" secondAttribute="leading" id="jtp-KU-41t"/>
+                            <constraint firstItem="18G-Ym-qyB" firstAttribute="top" secondItem="36T-hl-cA4" secondAttribute="bottom" constant="20" id="slu-Sh-YUy"/>
                             <constraint firstItem="k2m-aL-b63" firstAttribute="leading" secondItem="36T-hl-cA4" secondAttribute="trailing" constant="8" id="zqC-C8-8sW"/>
+                            <constraint firstItem="vrb-ZY-kGK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="18G-Ym-qyB" secondAttribute="trailing" constant="8" symbolic="YES" id="zt0-WY-Gyc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JQS-CR-0Zf"/>
@@ -1513,31 +1377,28 @@
                         <outlet property="localPlayerProfilePhoto" destination="vrb-ZY-kGK" id="y1V-AX-J7d"/>
                         <segue destination="lqg-RY-0Yp" kind="showDetail" identifier="toGrandPianoNotes" id="9Uo-aP-PJH"/>
                         <segue destination="lqg-RY-0Yp" kind="show" identifier="toAcousticNotes" id="qBl-PS-clb"/>
+                        <segue destination="lqg-RY-0Yp" kind="show" identifier="toViolinNotes" id="z9m-6g-bKw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CN3-sY-KzK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1635" y="1045"/>
+            <point key="canvasLocation" x="1548" y="473"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="GOe-8V-P0b"/>
         <segue reference="KZ4-4r-X98"/>
         <segue reference="qIK-oL-1lT"/>
-        <segue reference="9Uo-aP-PJH"/>
+        <segue reference="z9m-6g-bKw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Game Center - Color.png" width="1920" height="1920"/>
-        <image name="acoustic_Guitar" width="256" height="256"/>
         <image name="grand_Piano" width="256" height="256"/>
         <image name="guitars" catalog="system" width="128" height="100"/>
         <image name="pianokeys" catalog="system" width="128" height="93"/>
         <image name="pip.exit" catalog="system" width="128" height="96"/>
         <namedColor name="CeriseRed">
             <color red="0.81999999284744263" green="0.20399999618530273" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="DeepSea">
-            <color red="0.14509803921568629" green="0.36078431372549019" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GoldenSun">
             <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1560,8 +1421,11 @@
         <namedColor name="beauBlue">
             <color red="0.7686274509803922" green="0.8784313725490196" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="byzythPurple">
-            <color red="0.47843137254901963" green="0.18823529411764706" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="discoDayGreen">
+            <color red="0.50196078431372548" green="1" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="foamyGreen">
+            <color red="0.44705882352941179" green="0.93725490196078431" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mTurqouise">
             <color red="0.45882352941176469" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1569,8 +1433,26 @@
         <namedColor name="middlePurp">
             <color red="0.80784313725490198" green="0.51764705882352946" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="niceNight">
+            <color red="0.36862745098039218" green="0.37647058823529411" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="polarCapBlue">
+            <color red="0.32549019607843138" green="0.56470588235294117" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="purpleOrchid">
             <color red="0.68627450980392157" green="0.16862745098039217" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="roxyClub">
+            <color red="0.41176470588235292" green="0.18823529411764706" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sharkBlueGreen">
+            <color red="0.28235294117647058" green="0.74901960784313726" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sharkGReen">
+            <color red="0.33725490196078434" green="0.81176470588235294" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whaleBlue">
+            <color red="0.30588235294117649" green="0.6588235294117647" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

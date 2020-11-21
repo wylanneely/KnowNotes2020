@@ -16,6 +16,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         GameCenterManager.manager.viewController = self
         localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         setupCollectionView()
+        setUpProfilePhotoGestures()
     }
     
     func setupCollectionView(){
@@ -53,10 +54,35 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         return alert
     }
 
+    
+    var finishedGameAlert: UIAlertController {
+        let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Leave Game", style: .destructive) { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        }
+        alert.addAction(action)
+        alert.addAction(action2)
+        return alert
+    }
+    
     //MARK: Outlets & Actions
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var localPlayerProfilePhoto: UIImageView!
+    
+    func setUpProfilePhotoGestures(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
+        localPlayerProfilePhoto.isUserInteractionEnabled = true
+        localPlayerProfilePhoto.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func photoTapped(_ sender:AnyObject){
+        self.present(finishedGameAlert, animated: true, completion: nil)
+    }
     
     
     @IBAction func showGameCenterDashboard(_ sender: Any) {
@@ -120,7 +146,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
             }
         case .violin:
             if isViolinUnlocked {
-                performSegue(withIdentifier: "", sender: self )
+                performSegue(withIdentifier: "toViolinNotes", sender: self )
             } else {
                 self.present(unlockViolinAlertController, animated: true) {
                 }

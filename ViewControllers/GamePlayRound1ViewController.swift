@@ -45,6 +45,7 @@ class GamePlayRound1ViewController: UIViewController {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
+                
             } else if self.instrumentType == .acousticGuitar {
                 GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)

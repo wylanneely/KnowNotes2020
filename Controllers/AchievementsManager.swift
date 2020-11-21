@@ -13,43 +13,76 @@ import GameKit
     
     
     var playerAchievements: [GKAchievement]?
+    
+    private var userDefaultsHelper = LeaderboardsManager()
+    
     //MARK: Achievements
+    
+    
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     
-    var isAcousticGuitarUnlocked: Bool = false
+    let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
     
-    func loadAchievements() {
+    
+    var isAcousticGuitarUnlocked: Bool = false
+    var isViolinUnlocked: Bool = false
+
+    
+    typealias SuccessHandler = (Bool) -> Void
+
+    func loadAchievements(sucess: SuccessHandler) {
+        var didLoad: Bool = false
         GKAchievement.loadAchievements { (achievements, error) in
             if let achievements = achievements {
                 self.playerAchievements = achievements
                 self.sortCompletedAchievements()
+                didLoad = true
+            } else {
+                didLoad = false
             }
         }
+        sucess(didLoad)
     }
     
-   func sortCompletedAchievements(){
+    func sortCompletedAchievements(){
         if let pAchievements = playerAchievements {
             for achievement in pAchievements {
                 switch achievement.identifier {
                 case AchievementsBundleIDs.unlockAcousticGuitar.rawValue :
                     self.isAcousticGuitarUnlocked = achievement.isCompleted
-              default:
-                    return
-                }
-            }
+                case AchievementsBundleIDs.unlockViolin.rawValue :
+                    self.isViolinUnlocked = achievement.isCompleted
+                default:
+                    return } }
         }
-   }
+    }
+    
+    
+    func reportViolinProgress(with score: Int) {
+        if score >= 20 {
+            acousticGuitarAchievement.percentComplete = 100.00
+            reportAchievement(violinAchievement)
+            userDefaultsHelper.unlockViolinLocally()
+        } else {
+           let completePercent =  Double(score) / 20
+            acousticGuitarAchievement.percentComplete = completePercent
+            reportAchievement(violinAchievement)
+        }
+    }
     
     func reportUnlockAcousticGuitarProgress(with score: Int) {
         if score >= 20 {
             acousticGuitarAchievement.percentComplete = 100.00
             reportAchievement(acousticGuitarAchievement)
+            userDefaultsHelper.unlockAcousticGuitarLocally()
         } else {
            let completePercent =  Double(score) / 20
             acousticGuitarAchievement.percentComplete = completePercent
             reportAchievement(acousticGuitarAchievement)
         }   
     }
+    
+    
     
     func reportAchievement(_ achievement: GKAchievement) {
         GKAchievement.report([achievement]) {  error in
@@ -61,4 +94,5 @@ import GameKit
 }
 enum AchievementsBundleIDs: String {
     case unlockAcousticGuitar = "com.wylan.KnowYourNote2020.Achievements.AcousticGuitar"
+    case unlockViolin = "com.wylan.KnowYourNote2020.Achievements.Violin"
 }

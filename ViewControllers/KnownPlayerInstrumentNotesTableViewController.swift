@@ -207,6 +207,11 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         }
                         
                     case InstrumentType.acousticGuitar:
+                            DispatchQueue.main.async {
+                                notesCellExample.firstSelectedNoteLabel.text = "F"
+                                notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
+                            }
+                        
                         if leaderboardsManager.didFinishAcousticGuitarRound2 {
                             return notesCellExample
                         } else {
@@ -215,7 +220,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         }
                     case .violin:
                         return notesCellExample
-
                     }
                 }
                 
@@ -259,7 +263,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? GamePlayRound1ViewController {
-            
             vc.instrumentType = self.instrumentType
         }
         if let vc = segue.destination as? GamePlayRound2ViewController {

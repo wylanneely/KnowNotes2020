@@ -22,6 +22,25 @@ struct LeaderboardsManager {
     
     let defaults = UserDefaults.standard
     
+    //MARK: Instrument helper
+    
+    var isAcousticGuitarUnlocked: Bool {
+        return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+    }
+    
+    
+    var isViolinUnlocked: Bool {
+        return defaults.bool(forKey: kViolinRound1)
+    }
+    
+    func unlockAcousticGuitarLocally(){
+        defaults.setValue(true, forKey: kGrandPianoRound1)
+    }
+    
+    func  unlockViolinLocally(){
+        defaults.setValue(true, forKey: kViolinRound1)
+    }
+    
     //MARK: check if round isFinished
     
     var didFinishGrandPianoRound1: Bool {
@@ -30,12 +49,15 @@ struct LeaderboardsManager {
     var didFinishGrandPianoRound2: Bool {
         return defaults.bool(forKey: kGrandPianoRound2)
     }
+    
+    
     var didFinishAcousticGuitarRound1: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound1)
     }
     var didFinishAcousticGuitarRound2: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
+    
     
     
     var highScoreGrandPiano: Int {
@@ -45,15 +67,20 @@ struct LeaderboardsManager {
         return defaults.integer(forKey: kHighScoreAGuitar)
     }
     
-    
     //MARK: Round Completed Functions
     //call after completing rounds
     
     func setPersonalGranPianoHighScore(score: Int){
         defaults.setValue(score, forKey: kHighScoreGrandPiano)
+        if score >= 20 {
+            unlockAcousticGuitarLocally()
+        }
     }
     func setPersonalAcouGuitarHighScore(score: Int){
         defaults.setValue(score, forKey: kHighScoreAGuitar)
+        if score >= 20 {
+            unlockViolinLocally()
+        }
     }
     
     
@@ -71,10 +98,17 @@ struct LeaderboardsManager {
     }
     
     
+    
+    
     let kGrandPianoRound1 = "GrandPianoRound1"
     let kGrandPianoRound2 = "GrandPianoRound2"
+    
     let kAcousticGuitarRound1 = "AcousticGuitarRound1"
     let kAcousticGuitarRound2 = "AcousticGuitarRound2"
+    
+    
+    let kViolinRound1 = "ViolinRound1"
+    let kViolinRound2 = "ViolinRound2"
    
     let kHighScoreGrandPiano = "GrandPianoHS"
     let kHighScoreAGuitar = "AcousticGuitarHS"

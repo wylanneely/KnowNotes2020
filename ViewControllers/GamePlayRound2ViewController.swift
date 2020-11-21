@@ -349,6 +349,8 @@ class GamePlayRound2ViewController: UIViewController {
                 self.present(finishedGameAlert, animated: true) {
                 }
             }
+            
+            
         } else {
           
             if LessonSession.manager.score >= 25 {

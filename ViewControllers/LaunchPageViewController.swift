@@ -99,8 +99,8 @@ class LaunchPageViewController: UIViewController {
             
             //NOTE: change to test unlocked instruments vs live
             
-            vc.isViolinUnlocked =  GameCenterManager.manager.achievementsManager.isViolinUnlocked
-            vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+//            vc.isViolinUnlocked =  GameCenterManager.manager.achievementsManager.isViolinUnlocked
+                // vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
     }
     

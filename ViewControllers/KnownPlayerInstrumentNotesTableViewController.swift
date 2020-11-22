@@ -11,7 +11,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     
     //MARK: Properties
     
-    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrumentName.type
+    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrument.type
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
@@ -89,7 +89,29 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         let indexp3 = IndexPath(row: 3, section: 0)
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
+    func lockedSecondGroupTapped() {
+        self.present(lockedRound2Alert, animated: true, completion: nil)
+    }
+    func lockedThirdGroupTapped() {
+        self.present(lockedRound3Alert, animated: true, completion: nil)
+    }
     
+    var lockedRound2Alert: UIAlertController {
+        let alert = UIAlertController(title: "Locked", message: "Complete Round 1 to Unlock", preferredStyle: .alert)
+        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            return
+        }
+        alert.addAction(action2)
+        return alert
+    }
+    var lockedRound3Alert: UIAlertController {
+        let alert = UIAlertController(title: "Locked", message: "Complete Round 2 to Unlock", preferredStyle: .alert)
+        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            return
+        }
+        alert.addAction(action2)
+        return alert
+    }
     // MARK: TableView Basi
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -243,6 +265,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
             case 4:
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
+                    notesCellExample.beginButton.pulsate()
                     return notesCellExample
                 }
                 

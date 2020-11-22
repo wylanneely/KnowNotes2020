@@ -76,6 +76,12 @@ class GamePlayRound3ViewController: UIViewController {
         setUpScoresLifes()
         self.isModalInPresentation = true
         setUpGif()
+        playButton.pulse()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        playButton.pulse()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,13 +167,14 @@ class GamePlayRound3ViewController: UIViewController {
     
     func handleCorrectAnswerWithHaptic(){
         self.hapticGenerator.notificationOccurred(.success)
-        
+        stopPulsingNoteButtons()
         UIView.animate(withDuration: 0.33) {
             self.view.backgroundColor = UIColor.systemGreen
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
                 self.view.backgroundColor = UIColor.gameplayBlue
+                self.playButton.pulse()
             }
         }
     }
@@ -206,8 +213,10 @@ class GamePlayRound3ViewController: UIViewController {
             currentNote = newNote
             playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
+            enableNoteButtons()
             DispatchQueue.main.async {
                 self.playButton.setTitle("Repeat", for: .normal)
+                self.pulseAllNoteButtons()
             }
         } else {
             playSoundFromNote(path: currentNote?.soundPath)
@@ -217,6 +226,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note1Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note1 = note1 {
@@ -231,9 +245,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                self.note1Button.layer.removeAllAnimations()
+                self.note1ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
-                
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note1Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -241,6 +259,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note2Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note2 = note2 {
@@ -255,7 +278,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                note2Button.layer.removeAllAnimations()
+                self.note2ButtonView.layer.removeAllAnimations()
+                handleWrongAnswerWithHaptic()
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note2Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -263,6 +292,11 @@ class GamePlayRound3ViewController: UIViewController {
     }
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note3Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note3 = note3 {
@@ -278,14 +312,24 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                note3Button.layer.removeAllAnimations()
+                self.note3ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note3Button.isEnabled = false
             }
         }
         checkRoundEnd()
     }
     @IBAction func note4ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note4Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note4 = note4 {
@@ -300,8 +344,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                note4Button.layer.removeAllAnimations()
+                self.note4ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note4Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -309,6 +358,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func note5ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note5Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note5 = note5 {
@@ -324,8 +378,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                note5Button.layer.removeAllAnimations()
+                self.note5ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note5Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -333,6 +392,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func note6ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note6Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note6 = note6 {
@@ -348,8 +412,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                note6Button.layer.removeAllAnimations()
+                self.note6ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note6Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -357,6 +426,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func note7ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note7Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note7 = note7 {
@@ -372,8 +446,13 @@ class GamePlayRound3ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                note7Button.layer.removeAllAnimations()
+                self.note7ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note7Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -422,6 +501,45 @@ class GamePlayRound3ViewController: UIViewController {
     @IBOutlet weak var note5Button: UIButton!
     @IBOutlet weak var note6Button: UIButton!
     @IBOutlet weak var note7Button: UIButton!
+    @IBOutlet weak var note1ButtonView: UIView!
+    @IBOutlet weak var note2ButtonView: UIView!
+    @IBOutlet weak var note3ButtonView: UIView!
+    @IBOutlet weak var note4ButtonView: UIView!
+    @IBOutlet weak var note5ButtonView: UIView!
+    @IBOutlet weak var note6ButtonView: UIView!
+    @IBOutlet weak var note7ButtonView: UIView!
 
+    lazy var allNoteButtons: [UIButton] = [note1Button,note2Button,note3Button,note4Button,
+                                           note5Button,note6Button,note7Button]
+    lazy var allNoteViews: [UIView] = [note1ButtonView,note2ButtonView,note3ButtonView,
+                                       note4ButtonView,note5ButtonView,note6ButtonView,note7ButtonView]
+    func pulseAllNoteButtons(){
+        for button in allNoteButtons {
+            button.pulsate()
+        }
+        pulseAllNoteViews()
+    }
+    func stopPulsingNoteButtons(){
+        for button in allNoteButtons {
+            button.layer.removeAllAnimations()
+        }
+        stopPulsingNoteViews()
+    }
+    func enableNoteButtons(){
+        for button in allNoteButtons {
+            button.isEnabled = true
+        }
+        pulseAllNoteViews()
+    }
+    func pulseAllNoteViews(){
+            for view in allNoteViews {
+                view.pulsateView()
+            }
+        }
+    func stopPulsingNoteViews(){
+        for view in allNoteViews {
+            view.layer.removeAllAnimations()
+        }
+    }
 
 }

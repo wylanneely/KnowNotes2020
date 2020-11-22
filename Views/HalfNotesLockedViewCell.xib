@@ -28,7 +28,7 @@
                                 <color key="shadowColor" name="polarCapBlue"/>
                                 <size key="shadowOffset" width="2" height="1"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-JM-mcN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-JM-mcN">
                                 <rect key="frame" x="256" y="12.5" width="28" height="26.5"/>
                                 <color key="tintColor" name="discoDayGreen"/>
                                 <constraints>
@@ -58,11 +58,11 @@
             <connections>
                 <outlet property="borderView" destination="ybI-VT-e6b" id="WSH-IB-9U8"/>
             </connections>
-            <point key="canvasLocation" x="128" y="122"/>
+            <point key="canvasLocation" x="127.53623188405798" y="121.875"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="lock.fill" catalog="system" width="128" height="128"/>
+        <image name="lock" catalog="system" width="128" height="128"/>
         <namedColor name="discoDayGreen">
             <color red="0.50196078431372548" green="1" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

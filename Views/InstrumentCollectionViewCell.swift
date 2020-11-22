@@ -69,6 +69,7 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
             backgroundColorView.layer.borderColor = UIColor.discoDayGReen.cgColor
             instrumentButton.setTitleColor(UIColor.black, for: .normal)
             instrumentButton.layer.borderColor = UIColor.midnightPurps.cgColor
+            instrumentButton.pulsate()
         }
         
         

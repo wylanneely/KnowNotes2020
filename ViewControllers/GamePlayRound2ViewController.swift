@@ -73,12 +73,12 @@ class GamePlayRound2ViewController: UIViewController {
         setUpScoresLifes()
         self.isModalInPresentation = true
         setUpGif()
+        playButton.pulse()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
+        super.viewDidAppear(true)
+        playButton.pulse()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -147,13 +147,14 @@ class GamePlayRound2ViewController: UIViewController {
     
     func handleCorrectAnswerWithHaptic(){
         self.hapticGenerator.notificationOccurred(.success)
-        
+        stopPulsingNoteButtons()
         UIView.animate(withDuration: 0.33) {
             self.view.backgroundColor = UIColor.systemGreen
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
                 self.view.backgroundColor = UIColor.gameplayBlue
+                self.playButton.pulse()
             }
         }
     }
@@ -184,8 +185,10 @@ class GamePlayRound2ViewController: UIViewController {
             currentNote = newNote
             playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
+            enableNoteButtons()
             DispatchQueue.main.async {
                 self.playButton.setTitle("Repeat", for: .normal)
+                self.pulseAllNoteButtons()
             }
         } else {
             playSoundFromNote(path: currentNote?.soundPath)
@@ -194,6 +197,10 @@ class GamePlayRound2ViewController: UIViewController {
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        if note1Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note1 = note1 {
@@ -205,13 +212,17 @@ class GamePlayRound2ViewController: UIViewController {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
                     self.updateProgressBar()
-
                 }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                self.note1Button.layer.removeAllAnimations()
+                self.note1ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note1Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -219,6 +230,10 @@ class GamePlayRound2ViewController: UIViewController {
     
     @IBAction func note2ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        if note2Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note2 = note2 {
@@ -230,19 +245,29 @@ class GamePlayRound2ViewController: UIViewController {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
                     self.updateProgressBar()
-                    
                 }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                note2Button.layer.removeAllAnimations()
+                self.note2ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)" }
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note2Button.isEnabled = false
+            }
         }
         checkRoundEnd()
     }
     
     @IBAction func note3ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note3Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note3 = note3 {
@@ -255,13 +280,17 @@ class GamePlayRound2ViewController: UIViewController {
                     self.playButton.setTitle("Play", for: .normal)
                     self.scoreLabel.text = "\(LessonSession.manager.score)"
                     self.updateProgressBar()
-
                 }
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                self.note3Button.layer.removeAllAnimations()
+                self.note3ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note3Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -269,6 +298,11 @@ class GamePlayRound2ViewController: UIViewController {
     
     @IBAction func note4ButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
+            return
+        }
+        
+        if note4Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
             return
         }
         if let note4 = note4 {
@@ -284,8 +318,14 @@ class GamePlayRound2ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
+                self.note4Button.layer.removeAllAnimations()
+                self.note4ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
-                lifesLabel.text = "\(LessonSession.manager.lifes)" }
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note4Button.isEnabled = false
+            }
         }
         checkRoundEnd()
     }
@@ -294,6 +334,12 @@ class GamePlayRound2ViewController: UIViewController {
         if doesGameNeedNewNote {
             return
         }
+        
+        if note5Button.isEnabled == false {
+            handleWrongAnswerWithHaptic()
+            return
+        }
+        
         if let note5 = note5 {
             playSoundFromNote(path: note5.soundPath)
             
@@ -308,8 +354,13 @@ class GamePlayRound2ViewController: UIViewController {
                 doesGameNeedNewNote = true
             } else {
                 //wrong
-                lifesLabel.text = "\(LessonSession.manager.lifes)"
+                self.note5Button.layer.removeAllAnimations()
+                self.note5ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
+                DispatchQueue.main.async {
+                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                }
+                note5Button.isEnabled = false
             }
         }
         checkRoundEnd()
@@ -342,33 +393,21 @@ class GamePlayRound2ViewController: UIViewController {
     }
     
     func checkRoundEnd(){
-        
-        
         if isStartingRound {
             if currentRound >= 15 {
-                self.performSegue(withIdentifier: "toRound3", sender: self)
-            }
+                self.performSegue(withIdentifier: "toRound3", sender: self) }
             if LessonSession.manager.lifes == 0 {
-                self.present(finishedGameAlert, animated: true) {
-                }
+                self.present(finishedGameAlert, animated: true) { }
             }
-            
-            
         } else {
-          
             if LessonSession.manager.score >= 25 {
                 self.performSegue(withIdentifier: "toRound3", sender: self)
             }
             if LessonSession.manager.lifes == 0 {
                 self.present(finishedGameAlert, animated: true) {
                     //Possible unwind segue area
-                }
-            }
-        }
-        
-        
-        
-    }
+                } }
+        } }
     
     
     //MARK: Outlets
@@ -390,6 +429,37 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var note2ButtonView: UIView!
     @IBOutlet weak var note3ButtonView: UIView!
     @IBOutlet weak var note4ButtonView: UIView!
+    
+    lazy var allNoteButtons: [UIButton] = [note1Button,note2Button,note3Button,note4Button,note5Button]
+    lazy var allNoteViews: [UIView] = [note1ButtonView,note2ButtonView,note3ButtonView,note4ButtonView,note5ButtonView]
+    func pulseAllNoteButtons(){
+        for button in allNoteButtons {
+            button.pulsate()
+        }
+        pulseAllNoteViews()
+    }
+    func stopPulsingNoteButtons(){
+        for button in allNoteButtons {
+            button.layer.removeAllAnimations()
+        }
+        stopPulsingNoteViews()
+    }
+    func enableNoteButtons(){
+        for button in allNoteButtons {
+            button.isEnabled = true
+        }
+        pulseAllNoteViews()
+    }
+    func pulseAllNoteViews(){
+            for view in allNoteViews {
+                view.pulsateView()
+            }
+        }
+    func stopPulsingNoteViews(){
+        for view in allNoteViews {
+            view.layer.removeAllAnimations()
+        }
+    }
     
     // MARK: - Navigation
 

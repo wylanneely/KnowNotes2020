@@ -16,6 +16,7 @@ class LaunchPageViewController: UIViewController {
         registerNotification()
         setUPButtons()
         animateimagesWithtwoColors()
+       // animateBackgroundWithtwoColors()
     }
     
     //MARK: Set Up
@@ -26,13 +27,16 @@ class LaunchPageViewController: UIViewController {
     }
     
     func animateBackgroundWithtwoColors(){
-        UIView.animate(withDuration: 1.5) {
-            self.view.backgroundColor = UIColor.gameplayBlue
+        UIView.animate(withDuration: 6.5) {
+            self.view.backgroundColor = UIColor.whaleBlue
         } completion: { (completed: Bool) -> Void in
-            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {
-                self.view.backgroundColor = UIColor.seaFoamBlue
+            UIView.animateKeyframes(withDuration: 5.5, delay: 0, options: .repeat) {
+                self.view.backgroundColor = UIColor.foamGreen
             } completion: { (completed: Bool) -> Void in
-                self.animateBackgroundWithtwoColors() } }
+                self.view.backgroundColor = UIColor.whaleBlue
+            }
+            
+        }
     }
     
     func animateimagesWithtwoColors(){
@@ -84,6 +88,7 @@ class LaunchPageViewController: UIViewController {
     @objc private func authenticationChanged(_ notification: Notification) {        
         signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
+        signInButton.pulsate()
         signInButton.setTitleColor(UIColor.pastelGReen, for: .normal)
         signInButton.layer.borderColor = UIColor.pastelGReen.cgColor
     }

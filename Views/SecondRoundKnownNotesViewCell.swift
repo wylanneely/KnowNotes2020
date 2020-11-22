@@ -39,12 +39,19 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
         if isLocked {
-            return
-        } else if isGroup2 {
-            delegate?.secondGroupTapped()
-        } else {
-            setSelectedView()
-            delegate?.thirdGroupTapped()
+            if isGroup2 {
+                delegate?.lockedSecondGroupTapped()
+            } else  {
+                setSelectedView()
+                delegate?.lockedThirdGroupTapped()
+            }
+        } else if isLocked == false {
+            if isGroup2 {
+                delegate?.secondGroupTapped()
+            } else  {
+                setSelectedView()
+                delegate?.thirdGroupTapped()
+            }
         }
     }
     
@@ -105,5 +112,7 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
 
 protocol secondThirdNoteGroupDelegate {
     func secondGroupTapped()
+    func lockedSecondGroupTapped()
     func thirdGroupTapped()
+    func lockedThirdGroupTapped()
 }

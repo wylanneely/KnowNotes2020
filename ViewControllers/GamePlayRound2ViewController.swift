@@ -43,15 +43,18 @@ class GamePlayRound2ViewController: UIViewController {
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
             if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
                 GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
                 self.performSegue(withIdentifier: "toLocalProfile", sender: self)
             } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
                 GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            }else if self.instrumentType == .violin {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
                 self.performSegue(withIdentifier: "toLocalProfile", sender: self)
             }
         }
@@ -401,11 +404,13 @@ class GamePlayRound2ViewController: UIViewController {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
                 } else if instrumentType == .acousticGuitar {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
+                } else if instrumentType == .violin {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound2ViolinNotes()
                 }
             }
         }
         if segue.identifier == "toLocalProfile" {
-            if let vc = segue.destination as? LocalPlayerMenuViewController {
+            if let vc = segue.destination as? PlayerGameMenuViewController {
                 
             }
         }

@@ -31,10 +31,10 @@ class FirstKnownNotesViewCell: UITableViewCell {
     
     func setSelectedView(){
         DispatchQueue.main.async {
-            self.middleBGView.layer.borderColor = UIColor.pastelGReen.cgColor
-            self.note1Button.layer.borderColor = UIColor.pastelGReen.cgColor
-            self.note2Button.layer.borderColor = UIColor.pastelGReen.cgColor
-            self.note3Button.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.middleBGView.layer.borderColor = UIColor.sharkGreen.cgColor
+            self.note1Button.layer.borderColor = UIColor.sharkGreen.cgColor
+            self.note2Button.layer.borderColor = UIColor.sharkGreen.cgColor
+            self.note3Button.layer.borderColor = UIColor.sharkGreen.cgColor
         }
     }
     
@@ -43,7 +43,7 @@ class FirstKnownNotesViewCell: UITableViewCell {
     
     func setUPViews(){
         middleBGView.layer.borderWidth = 2
-        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        middleBGView.layer.borderColor = UIColor.niceNight.cgColor
         middleBGView.layer.cornerRadius = 10
         note1Button.layer.cornerRadius = 10
         note2Button.layer.cornerRadius = 10
@@ -51,9 +51,9 @@ class FirstKnownNotesViewCell: UITableViewCell {
         note1Button.layer.borderWidth = 2
         note2Button.layer.borderWidth = 2
         note3Button.layer.borderWidth = 2
-        note1Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        note2Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        note3Button.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        note1Button.layer.borderColor = UIColor.niceNight.cgColor
+        note2Button.layer.borderColor = UIColor.niceNight.cgColor
+        note3Button.layer.borderColor = UIColor.niceNight.cgColor
     }
     
     class func createCell() -> FirstKnownNotesViewCell? {

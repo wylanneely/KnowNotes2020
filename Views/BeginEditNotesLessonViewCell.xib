@@ -18,21 +18,21 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kj-fL-LUk">
                         <rect key="frame" x="117" y="8" width="180" height="44"/>
-                        <color key="backgroundColor" name="Banana"/>
+                        <color key="backgroundColor" name="sharkBlueGreen"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="nIe-bs-cii"/>
                             <constraint firstAttribute="width" constant="180" id="pWC-gR-V0i"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <state key="normal" title="Begin Lesson">
-                            <color key="titleColor" name="CeriseRed"/>
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
                             <action selector="beginButtonTapped:" destination="Auo-3N-Ppp" eventType="touchUpInside" id="qDi-nP-8RB"/>
                         </connections>
                     </button>
                 </subviews>
-                <color key="backgroundColor" name="StarBlue"/>
+                <color key="backgroundColor" name="niceNight"/>
                 <constraints>
                     <constraint firstItem="4kj-fL-LUk" firstAttribute="centerY" secondItem="Qf5-W5-YcS" secondAttribute="centerY" id="1sB-GM-PcV"/>
                     <constraint firstItem="4kj-fL-LUk" firstAttribute="centerX" secondItem="Qf5-W5-YcS" secondAttribute="centerX" id="syE-9a-5y3"/>
@@ -46,14 +46,14 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Banana">
-            <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="CeriseRed">
-            <color red="0.81960784313725488" green="0.20392156862745098" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="StarBlue">
             <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="niceNight">
+            <color red="0.36862745098039218" green="0.37647058823529411" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sharkBlueGreen">
+            <color red="0.28235294117647058" green="0.74901960784313726" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -41,15 +41,18 @@ class GamePlayRound1ViewController: UIViewController {
             let score: Int = LessonSession.manager.score
             
             if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
                 
             } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
                 GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                self.dismiss(animated: true, completion: nil)
+            }
+            else if self.instrumentType == .violin {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -323,6 +326,8 @@ class GamePlayRound1ViewController: UIViewController {
                     GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()
                 } else if instrumentType == .acousticGuitar {
                     GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
+                }  else if instrumentType == .violin {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound1ViolinNotes()
                 }
             }
             

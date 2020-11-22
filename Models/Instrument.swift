@@ -15,24 +15,30 @@ struct Instrument {
      var round1Notes: [Note] {
         if type == .grandPiano {
             return [A_note,B_note,C_note]
-        } else {
+        } else if type == .acousticGuitar {
             return [A_Major,B_Major,C_Major]
+        } else {
+           return [A_violin,B_violin,C_violin]
         }
     }
     
      var round2Notes: [Note] {
         if type == .grandPiano {
             return [A_note,B_note,C_note,D_note,E_note]
-        } else {
+        } else if type == .acousticGuitar {
             return [A_Major,B_Major,C_Major,D_Major,E_Major]
+        } else {
+           return [A_violin,B_violin,C_violin,D_violin,E_violin]
         }
     }
     
      var round3Notes: [Note] {
         if type == .grandPiano {
             return [A_note,B_note,C_note,D_note,E_note,F_note,G_note]
-        } else {
+        } else if type == .acousticGuitar {
             return [A_Major,B_Major,C_Major,D_Major,E_Major,F_Major,G_Major]
+        } else {
+            return [A_violin,B_violin,C_violin,D_violin,E_violin,F_violin,G_violin]
         }
     }
     
@@ -81,9 +87,27 @@ struct Instrument {
     fileprivate let G_note = Note(name: "G", id: 10, soundPath: "piano_G.wav")
     fileprivate let Gs_note = Note(name: "Gsharp", id: 11)
     
+    
+    //MARK: Violin
+    
+    var violinNotes: [Note] {
+        return [A_violin,B_violin,C_violin,
+                D_violin,E_violin,F_violin,G_violin]
+    }
+    
+    fileprivate let A_violin = Note(name: "A", id: 0, soundPath: "violin_A.wav")
+    fileprivate let B_violin = Note(name: "B", id: 1, soundPath: "violin_B.wav")
+    fileprivate let C_violin = Note(name: "C", id: 2, soundPath: "violin_C.wav")
+    fileprivate let D_violin = Note(name: "D", id: 3, soundPath: "violin_D.wav")
+    fileprivate let E_violin = Note(name: "E", id: 4, soundPath: "violin_E.wav")
+    fileprivate let F_violin = Note(name: "F", id: 5, soundPath: "violin_F.wav")
+    fileprivate let G_violin = Note(name: "G", id: 6, soundPath: "violin_G.wav")
+    
+    
 }
 
 enum InstrumentType: String {
     case grandPiano = "Grand Piano"
     case acousticGuitar = "Acoustic Guitar"
+    case violin = "Violin"
 }

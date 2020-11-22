@@ -20,7 +20,6 @@ import GameKit
     
     
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
-    
     let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
     
     
@@ -60,12 +59,12 @@ import GameKit
     
     func reportViolinProgress(with score: Int) {
         if score >= 20 {
-            acousticGuitarAchievement.percentComplete = 100.00
+            violinAchievement.percentComplete = 100.00
             reportAchievement(violinAchievement)
             userDefaultsHelper.unlockViolinLocally()
         } else {
            let completePercent =  Double(score) / 20
-            acousticGuitarAchievement.percentComplete = completePercent
+            violinAchievement.percentComplete = completePercent
             reportAchievement(violinAchievement)
         }
     }

@@ -12,7 +12,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     //MARK: Properties
     
     var instrumentType: InstrumentType = LessonSession.manager.lesson.instrumentName.type
-   //v var instrumentNam: String = LessonSession.manager.lesson.instrumentName.type.rawValue
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
@@ -35,19 +34,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-//   @objc func tapEdit(recognizer: UITapGestureRecognizer)  {
-//            if recognizer.state == UIGestureRecognizer.State.ended {
-//                let tapLocation = recognizer.location(in: self.tableView)
-//                if let tapIndexPath = self.tableView.indexPathForRow(at: tapLocation) {
-//
-//                    if let firstNoteRoundCell = self.tableView.cellForRow(at: tapIndexPath) as? FirstKnownNotesViewCell {
-//                    }
-//                    if let secondNoteRoundCell = self.tableView.cellForRow(at: tapIndexPath) as? SecondRoundKnownNotesViewCell {
-//                    }
-//                }
-//            }
-//        }
     
     private func registerCellXibs(){
         let firstNoteCell = UINib(nibName: FirstKnownNotesViewCell.xibRID, bundle: nil)
@@ -131,18 +117,37 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         switch instrumentType {
                         case .grandPiano:
                             if leaderboardsManager.didFinishGrandPianoRound2 {
-                                //NOTE: FIX way to record progress
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
-                                return notesCellExample } else if leaderboardsManager.didFinishGrandPianoRound1 {
-                                    notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
-                                    return notesCellExample }
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
+                                return notesCellExample
+                            } else if leaderboardsManager.didFinishGrandPianoRound1 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
+                                return notesCellExample
+                            }
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Pianist", completedNotes: 3)
+                            return notesCellExample
+                        case .acousticGuitar:
+                            notesCellExample.noteDescription.text = "Regular Major Chords"
+                            if leaderboardsManager.didFinishAcousticGuitarRound2 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Master Guitarist", completedNotes: 7)
+                                return notesCellExample
+                            } else if leaderboardsManager.didFinishAcousticGuitarRound1 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Guitar Player", completedNotes: 5)
+                                return notesCellExample
+                            }
+                            
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Guitarist", completedNotes: 3)
                             return notesCellExample
                             
-                        case .acousticGuitar:
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Rookie", completedNotes: 3)
-                            return notesCellExample
+                            
                         case .violin:
+                            if leaderboardsManager.didFinishViolinRound2 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Concert Master", completedNotes: 7)
+                                return notesCellExample
+                            } else if leaderboardsManager.didFinishViolinRound1 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Violin Player", completedNotes: 5)
+                                return notesCellExample
+                            }
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Violinist", completedNotes: 3)
                                 return notesCellExample
                         }
                     }
@@ -166,14 +171,15 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                     
                     switch instrumentType{
                     
-                    case InstrumentType.grandPiano:
+                    case .grandPiano:
                         if leaderboardsManager.didFinishGrandPianoRound1 {
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
-                            return notesCellExample }
+                            return notesCellExample
+                        }
                         
-                    case InstrumentType.acousticGuitar:
+                    case .acousticGuitar:
                         if leaderboardsManager.didFinishAcousticGuitarRound1 {
                             return notesCellExample
                         } else {
@@ -181,8 +187,12 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             return notesCellExample
                         }
                     case .violin:
-                        return notesCellExample
-
+                        if leaderboardsManager.didFinishViolinRound1 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
                     }
                 }
                 
@@ -205,13 +215,11 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
-                        
                     case InstrumentType.acousticGuitar:
-                            DispatchQueue.main.async {
-                                notesCellExample.firstSelectedNoteLabel.text = "F"
-                                notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
-                            }
-                        
+                        DispatchQueue.main.async {
+                            notesCellExample.firstSelectedNoteLabel.text = "F"
+                            notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
+                        }
                         if leaderboardsManager.didFinishAcousticGuitarRound2 {
                             return notesCellExample
                         } else {
@@ -219,7 +227,16 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             return notesCellExample
                         }
                     case .violin:
-                        return notesCellExample
+                        DispatchQueue.main.async {
+                            notesCellExample.firstSelectedNoteLabel.text = "F"
+                            notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
+                        }
+                        if leaderboardsManager.didFinishViolinRound2 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
                     }
                 }
                 

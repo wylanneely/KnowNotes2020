@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L1K-sB-ieF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PMG-k2-5sB">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -878,8 +879,145 @@
             </objects>
             <point key="canvasLocation" x="6284" y="-569"/>
         </scene>
+        <!--Player Game Menu View Controller-->
+        <scene sceneID="0vJ-2D-FZ7">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="PMG-k2-5sB" customClass="PlayerGameMenuViewController" customModule="Know_Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ds9-nC-Yy3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blV-hM-RKB">
+                                <rect key="frame" x="122" y="368" width="170" height="40"/>
+                                <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="32"/>
+                                <color key="textColor" name="beauBlue"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="ImperialRed"/>
+                                <size key="shadowOffset" width="2" height="1"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Game Center - Color.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qxl-pY-1go">
+                                <rect key="frame" x="20" y="60" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Kjl-dH-2k4"/>
+                                    <constraint firstAttribute="width" constant="44" id="zhg-T9-Ox2"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKh-Zh-lqy">
+                                <rect key="frame" x="72" y="64" width="144" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <state key="normal" title="Game Center">
+                                    <color key="titleColor" name="StarBlue"/>
+                                </state>
+                                <connections>
+                                    <action selector="showGameCenterDashboard:" destination="PMG-k2-5sB" eventType="touchUpInside" id="qYy-Zs-KNr"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rh3-W8-FIP">
+                                <rect key="frame" x="87" y="120" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rh3-W8-FIP" secondAttribute="height" multiplier="1:1" id="sYp-Tc-W5r"/>
+                                </constraints>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XIT-nn-Rla">
+                                <rect key="frame" x="20" y="416" width="374" height="446"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="300" id="6hl-UU-vcZ"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mDW-Pp-4N8">
+                                    <size key="itemSize" width="250" height="400"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InstrumentCCell" id="DI2-5v-Jav" customClass="InstrumentCollectionViewCell" customModule="Know_Notes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="23" width="250" height="400"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="k3e-mE-CZP">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzb-mH-ahm" userLabel="BackgroundColorView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                                                    <color key="backgroundColor" name="byzythPurple"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kR8-HX-6PV">
+                                                    <rect key="frame" x="30.5" y="276" width="189" height="50"/>
+                                                    <color key="backgroundColor" name="DeepSea"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="D4F-FG-etV" userLabel="height = 55"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="28"/>
+                                                    <size key="titleShadowOffset" width="2" height="1"/>
+                                                    <state key="normal" title="   Grand Piano ">
+                                                        <color key="titleColor" name="mTurqouise"/>
+                                                        <color key="titleShadowColor" name="SeaFoam"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="instrumentButtonTapped:" destination="DI2-5v-Jav" eventType="touchUpInside" id="RK1-zf-PYt"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grand_Piano" translatesAutoresizingMaskIntoConstraints="NO" id="Rts-mN-ag6">
+                                                    <rect key="frame" x="0.0" y="20" width="250" height="256"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kR8-HX-6PV" firstAttribute="centerX" secondItem="k3e-mE-CZP" secondAttribute="centerX" id="8WP-OF-1e0"/>
+                                                <constraint firstItem="Rts-mN-ag6" firstAttribute="leading" secondItem="k3e-mE-CZP" secondAttribute="leading" id="KeB-ko-0tf"/>
+                                                <constraint firstItem="gzb-mH-ahm" firstAttribute="leading" secondItem="k3e-mE-CZP" secondAttribute="leading" id="W02-ZL-4bU"/>
+                                                <constraint firstAttribute="bottom" secondItem="gzb-mH-ahm" secondAttribute="bottom" id="gF4-91-bAz"/>
+                                                <constraint firstItem="kR8-HX-6PV" firstAttribute="top" secondItem="Rts-mN-ag6" secondAttribute="bottom" id="h0U-iq-yfW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rts-mN-ag6" secondAttribute="trailing" id="i2V-fS-l5b"/>
+                                                <constraint firstItem="Rts-mN-ag6" firstAttribute="top" secondItem="k3e-mE-CZP" secondAttribute="top" constant="20" id="oeY-fH-4LK"/>
+                                                <constraint firstItem="gzb-mH-ahm" firstAttribute="top" secondItem="k3e-mE-CZP" secondAttribute="top" id="uNN-qG-LET"/>
+                                                <constraint firstAttribute="trailing" secondItem="gzb-mH-ahm" secondAttribute="trailing" id="wsO-Wa-Qty"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="250" height="400"/>
+                                        <connections>
+                                            <outlet property="backgroundColorView" destination="gzb-mH-ahm" id="zOI-DS-wZd"/>
+                                            <outlet property="instrumentButton" destination="kR8-HX-6PV" id="zbU-Cw-dqp"/>
+                                            <outlet property="instrumentImage" destination="Rts-mN-ag6" id="HPE-PS-QFK"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XAB-j4-Y9W"/>
+                        <color key="backgroundColor" name="Peach"/>
+                        <constraints>
+                            <constraint firstItem="blV-hM-RKB" firstAttribute="centerX" secondItem="Ds9-nC-Yy3" secondAttribute="centerX" id="2ld-Xb-3dp"/>
+                            <constraint firstItem="XIT-nn-Rla" firstAttribute="bottom" secondItem="XAB-j4-Y9W" secondAttribute="bottom" id="89I-UC-p2y"/>
+                            <constraint firstItem="Rh3-W8-FIP" firstAttribute="top" secondItem="hKh-Zh-lqy" secondAttribute="bottom" constant="20" id="LwX-KF-Xgo"/>
+                            <constraint firstItem="hKh-Zh-lqy" firstAttribute="top" secondItem="XAB-j4-Y9W" secondAttribute="top" constant="20" id="N10-Pd-ECN"/>
+                            <constraint firstItem="hKh-Zh-lqy" firstAttribute="leading" secondItem="Qxl-pY-1go" secondAttribute="trailing" constant="8" id="Yin-hb-de4"/>
+                            <constraint firstItem="hKh-Zh-lqy" firstAttribute="centerY" secondItem="Qxl-pY-1go" secondAttribute="centerY" id="arW-06-fru"/>
+                            <constraint firstItem="Rh3-W8-FIP" firstAttribute="centerX" secondItem="Ds9-nC-Yy3" secondAttribute="centerX" id="cAy-Um-eY8"/>
+                            <constraint firstItem="Qxl-pY-1go" firstAttribute="top" secondItem="XAB-j4-Y9W" secondAttribute="top" constant="16" id="cEp-mP-4B9"/>
+                            <constraint firstItem="blV-hM-RKB" firstAttribute="top" secondItem="Rh3-W8-FIP" secondAttribute="bottom" constant="8" id="cpq-Ro-hhj"/>
+                            <constraint firstItem="XAB-j4-Y9W" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hKh-Zh-lqy" secondAttribute="trailing" symbolic="YES" id="hdr-qu-MVn"/>
+                            <constraint firstItem="XIT-nn-Rla" firstAttribute="leading" secondItem="XAB-j4-Y9W" secondAttribute="leading" constant="20" id="nVb-qc-6xS"/>
+                            <constraint firstItem="Qxl-pY-1go" firstAttribute="leading" secondItem="XAB-j4-Y9W" secondAttribute="leading" constant="20" id="o2i-ZI-2Mb"/>
+                            <constraint firstItem="blV-hM-RKB" firstAttribute="centerY" secondItem="Ds9-nC-Yy3" secondAttribute="centerY" constant="-60" id="syQ-MS-CeK"/>
+                            <constraint firstItem="XAB-j4-Y9W" firstAttribute="trailing" secondItem="XIT-nn-Rla" secondAttribute="trailing" constant="20" id="wDK-aj-FK6"/>
+                            <constraint firstItem="XIT-nn-Rla" firstAttribute="top" secondItem="blV-hM-RKB" secondAttribute="bottom" constant="8" symbolic="YES" id="x9I-LD-sMn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qiV-Te-HZ2"/>
+                    <connections>
+                        <outlet property="collectionView" destination="XIT-nn-Rla" id="cXJ-5q-jFw"/>
+                        <outlet property="localPlayerProfilePhoto" destination="Rh3-W8-FIP" id="j5l-3A-tkY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aoU-SM-AjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2376.811594202899" y="381.69642857142856"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Game Center - Color.png" width="1920" height="1920"/>
+        <image name="grand_Piano" width="256" height="256"/>
         <namedColor name="Banana">
             <color red="0.92941176470588238" green="0.85098039215686272" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -892,11 +1030,29 @@
         <namedColor name="GoldenSun">
             <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="ImperialRed">
+            <color red="1" green="0.0" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="NavigationBarTextColors">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Peach">
+            <color red="1" green="0.88235294117647056" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SeaFoam">
             <color red="0.031372549019607843" green="0.69803921568627447" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="StarBlue">
+            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="beauBlue">
+            <color red="0.7686274509803922" green="0.8784313725490196" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="byzythPurple">
+            <color red="0.47843137254901963" green="0.18823529411764706" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mTurqouise">
+            <color red="0.45882352941176469" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

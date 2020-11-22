@@ -10,7 +10,7 @@ import UIKit
 import ImageIO
 
 extension UIColor {
-    static var deepSea: UIColor {
+    static var deepSeaBlue: UIColor {
         return UIColor(displayP3Red: 37/255, green: 92/255, blue: 153/255, alpha: 1.0)
     }
     static var seaFoamBlue: UIColor {
@@ -24,6 +24,9 @@ extension UIColor {
     }
     static var coralRed: UIColor {
         return UIColor(displayP3Red: 168/255, green: 32/255, blue: 26/255, alpha: 1.0)
+    }
+    static var gameplayBlue: UIColor {
+        return UIColor(displayP3Red: 64/255, green: 154/255, blue: 212/255, alpha: 1.0)
     }
     static var starCommandBlue: UIColor {
         return UIColor(displayP3Red: 0/255, green: 124/255, blue: 190/255, alpha: 1.0)
@@ -56,6 +59,45 @@ extension UIColor {
         return UIColor(displayP3Red: 255/255, green: 225/255, blue: 168/255, alpha: 1.0)
     }
     
+    //V2theme
+    
+    static var midnightPurps: UIColor {
+        return UIColor(displayP3Red: 116/255, green: 0/255, blue: 184/255, alpha: 1.0)
+    }
+    static var roxyClubPurple: UIColor {
+        return UIColor(displayP3Red: 105/255, green: 48/255, blue: 195/255, alpha: 1.0)
+    }
+    static var niceNight: UIColor {
+        return UIColor(displayP3Red: 94/255, green: 96/255, blue: 1206/255, alpha: 1.0)
+    }
+    static var polarCapBlue: UIColor {
+        return UIColor(displayP3Red: 83/255, green: 144/255, blue: 217/255, alpha: 1.0)
+    }
+    static var whaleBlue: UIColor {
+        return UIColor(displayP3Red: 78/255, green: 168/255, blue: 222/255, alpha: 1.0)
+    }
+    
+    static var sharkBlueGreen: UIColor {
+        return UIColor(displayP3Red: 72/255, green: 191/255, blue: 227/255, alpha: 1.0)
+    }
+    static var sharkGreen: UIColor {
+        return UIColor(displayP3Red: 86/255, green: 207/255, blue: 225/255, alpha: 1.0)
+    }
+    static var greenLandOcean: UIColor {
+        return UIColor(displayP3Red: 100/255, green: 223/255, blue: 223/255, alpha: 1.0)
+    }
+    static var foamGreen: UIColor {
+        return UIColor(displayP3Red: 114/255, green: 239/255, blue: 221/255, alpha: 1.0)
+    }
+    static var discoDayGReen: UIColor {
+        return UIColor(displayP3Red: 128/255, green: 255/255, blue: 219/255, alpha: 1.0)
+    }
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -82,10 +124,69 @@ extension UIImageView {
         }
     }
 
+}//For the circle cropped image
+extension UIImage {
+    var isPortrait:  Bool    { size.height > size.width }
+    var isLandscape: Bool    { size.width > size.height }
+    var breadth:     CGFloat { min(size.width, size.height) }
+    var breadthSize: CGSize  { .init(width: breadth, height: breadth) }
+    var breadthRect: CGRect  { .init(origin: .zero, size: breadthSize) }
+    var circleMasked: UIImage? {
+        guard let cgImage = cgImage?
+                .cropping(to: .init(origin: .init(x: isLandscape ? ((size.width-size.height)/2).rounded(.down) : 0,
+                                                  y: isPortrait  ? ((size.height-size.width)/2).rounded(.down) : 0),
+                                    size: breadthSize)) else { return nil }
+        let format = imageRendererFormat
+        format.opaque = false
+        return UIGraphicsImageRenderer(size: breadthSize, format: format).image { _ in
+            UIBezierPath(ovalIn: breadthRect).addClip()
+            UIImage(cgImage: cgImage, scale: format.scale, orientation: imageOrientation)
+                .draw(in: .init(origin: .zero, size: breadthSize))
+        }
+    }
+    
 }
 
 extension UIImage {
+    
+    public class func gifImageWithName(name: String) -> UIImage? {
+        guard let bundleURL = Bundle.main
+            .url(forResource: name, withExtension: "gif") else {
+                print("SwiftGif: This image named \"\(name)\" does not exist")
+                return nil
+        }
 
+        guard let imageData = NSData(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            return nil
+        }
+
+        return gifImageWithData(data: imageData)
+    }
+    public class func ImageWithName(name: String) -> UIImage? {
+        guard let bundleURL = Bundle.main
+            .url(forResource: name, withExtension: "png") else {
+                print("SwiftGif: This image named \"\(name)\" does not exist")
+                return nil
+        }
+
+        guard let imageData = NSData(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            return nil
+        }
+
+        return gifImageWithData(data: imageData)
+    }
+    
+    public class func gifImageWithData(data: NSData) -> UIImage? {
+        guard let source = CGImageSourceCreateWithData(data, nil) else {
+            print("image doesn't exist")
+            return nil
+        }
+
+        return UIImage.animatedImageWithSource(source)
+    }
+    
     public class func gif(data: Data) -> UIImage? {
         // Create source from data
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {

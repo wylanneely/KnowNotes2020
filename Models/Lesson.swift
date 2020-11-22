@@ -15,8 +15,11 @@ class Lesson {
     var  lessonNotes: [Note] = []
     
     init(instrument: Instrument, noteGroups: NoteGroups) {
+        
         self.instrumentName = instrument
+        
         self.noteGroup = noteGroups
+        
         switch noteGroup {
         case .allNotes:
             lessonNotes = allNotes

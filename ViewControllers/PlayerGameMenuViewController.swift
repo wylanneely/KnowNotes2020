@@ -174,6 +174,10 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                LessonSession.manager.setGrandPianoLesson()
                vc.instrumentImage = UIImage(named: "grand_Piano")
                vc.instrumentType = InstrumentType.grandPiano
+           case "toViolinNotes" :
+            LessonSession.manager.setViolinLesson()
+            vc.instrumentImage = UIImage(named: "violin")
+            vc.instrumentType = InstrumentType.violin
            default:
                return } }
    }

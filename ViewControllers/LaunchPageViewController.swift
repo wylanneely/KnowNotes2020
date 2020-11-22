@@ -8,17 +8,17 @@
 import GameKit
 
 class LaunchPageViewController: UIViewController {
-    
-    
-    
-    
+
+    //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
         registerNotification()
         setUPButtons()
+        animateimagesWithtwoColors()
     }
     
+    //MARK: Set Up
     func setUPButtons(){
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 10
@@ -28,38 +28,35 @@ class LaunchPageViewController: UIViewController {
     func animateBackgroundWithtwoColors(){
         UIView.animate(withDuration: 1.5) {
             self.view.backgroundColor = UIColor.gameplayBlue
-        } completion: {
-            (completed: Bool) -> Void in
+        } completion: { (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {
                 self.view.backgroundColor = UIColor.seaFoamBlue
             } completion: { (completed: Bool) -> Void in
-                self.animateBackgroundWithtwoColors()
-            }
-        }
+                self.animateBackgroundWithtwoColors() } }
     }
     
     func animateimagesWithtwoColors(){
-        UIView.animate(withDuration: 1.5) {
-            self.pianosImage.tintColor = UIColor.goldenSun
-            self.guitarsImage.tintColor = UIColor.urchintPurple
+        UIView.animate(withDuration: 2.5) {
+            self.pianosImage.tintColor = UIColor.discoDayGReen
+            self.guitarsImage.tintColor = UIColor.midnightPurps
         } completion: {
             (completed: Bool) -> Void in
-            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: .calculationModePaced) {
-                
-                
-                self.pianosImage.tintColor = UIColor.urchintPurple
-                self.guitarsImage.tintColor = UIColor.goldenSun
-                
+            UIView.animateKeyframes(withDuration: 2.5, delay: 1, options: .repeat) {
+                self.pianosImage.tintColor = UIColor.midnightPurps
+                self.guitarsImage.tintColor = UIColor.discoDayGReen
             } completion: { (completed: Bool) -> Void in
-                self.animateBackgroundWithtwoColors()
+                    self.pianosImage.tintColor = UIColor.discoDayGReen
+                self.guitarsImage.tintColor = UIColor.midnightPurps
             }
         }
+        
     }
+    
+    
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var signInButton: UIButton!
-    
     @IBOutlet weak var guitarsImage: UIImageView!
     @IBOutlet weak var pianosImage: UIImageView!
     
@@ -73,7 +70,8 @@ class LaunchPageViewController: UIViewController {
         }
     }
     
-    // MARK: - Notifications
+    // MARK: - GameCenter Authentication
+    
     func registerNotification(){
         NotificationCenter.default.addObserver(
             self,
@@ -94,14 +92,9 @@ class LaunchPageViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? PlayerGameMenuViewController {
-            
             GameCenterManager.manager.viewController = vc
-            
-            //NOTE: change to test unlocked instruments vs live
-            
-//            vc.isViolinUnlocked =  GameCenterManager.manager.achievementsManager.isViolinUnlocked
-                // vc.isAcousticGuitarUnlocked = GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
+        
     }
     
 }

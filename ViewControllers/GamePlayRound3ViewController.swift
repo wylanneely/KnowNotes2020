@@ -37,16 +37,20 @@ class GamePlayRound3ViewController: UIViewController {
             
             let score: Int = LessonSession.manager.score
             if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
                 GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
                 self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             }
             else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
                 GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            }
+            else if self.instrumentType == .violin {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
                 self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             }
             

@@ -34,6 +34,7 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
     @IBOutlet weak var completedNotesLabel: UILabel!
     
+    @IBOutlet weak var noteDescription: UILabel!
     static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"
     
 }

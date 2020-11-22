@@ -25,20 +25,26 @@ struct LeaderboardsManager {
     //MARK: Instrument helper
     
     var isAcousticGuitarUnlocked: Bool {
-        return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+        if defaults.bool(forKey: kIsAcousticUnlocked) == true {
+            return true
+        } else {
+            return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+        }
     }
     
-    
-    var isViolinUnlocked: Bool {
-        return defaults.bool(forKey: kViolinRound1)
+    var isViolinUnlocked: Bool  {
+        if defaults.bool(forKey: kIsViolinUnlocked) == true {
+            return true
+        } else {
+            return GameCenterManager.manager.achievementsManager.isViolinUnlocked
+        }
     }
-    
+
     func unlockAcousticGuitarLocally(){
-        defaults.setValue(true, forKey: kGrandPianoRound1)
+        defaults.setValue(true, forKey: kIsAcousticUnlocked)
     }
-    
     func  unlockViolinLocally(){
-        defaults.setValue(true, forKey: kViolinRound1)
+        defaults.setValue(true, forKey: kIsViolinUnlocked)
     }
     
     //MARK: check if round isFinished
@@ -49,17 +55,21 @@ struct LeaderboardsManager {
     var didFinishGrandPianoRound2: Bool {
         return defaults.bool(forKey: kGrandPianoRound2)
     }
-    
-    
+    var didunlockAcousticGuitar: Bool {
+        return defaults.bool(forKey: kAcousticGuitarRound1)
+    }
     var didFinishAcousticGuitarRound1: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound1)
     }
     var didFinishAcousticGuitarRound2: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
-    
-    
-    
+    var didFinishViolinRound1: Bool {
+        return defaults.bool(forKey: kViolinRound1)
+    }
+    var didFinishViolinRound2: Bool {
+        return defaults.bool(forKey: kViolinRound2)
+    }
     var highScoreGrandPiano: Int {
         return defaults.integer(forKey: kHighScoreGrandPiano)
     }
@@ -82,8 +92,9 @@ struct LeaderboardsManager {
             unlockViolinLocally()
         }
     }
-    
-    
+    func setPersonalViolinHighScore(score: Int){
+        defaults.setValue(score, forKey: kHighScoreAGuitar)
+    }
     func finishedRound1GrandPianoNotes(){
         defaults.setValue(true, forKey: kGrandPianoRound1)
     }
@@ -96,16 +107,21 @@ struct LeaderboardsManager {
     func finishedRound2AcousticGuitarNotes(){
         defaults.setValue(true, forKey: kAcousticGuitarRound2)
     }
+    func finishedRound1ViolinNotes(){
+        defaults.setValue(true, forKey: kViolinRound1)
+    }
+    func finishedRound2ViolinNotes(){
+        defaults.setValue(true, forKey: kViolinRound2)
+    }
     
-    
-    
-    
+    let kIsAcousticUnlocked = "isAcousticUnlocked"
+    let kIsViolinUnlocked = "isViolinUnlocked"
+
     let kGrandPianoRound1 = "GrandPianoRound1"
     let kGrandPianoRound2 = "GrandPianoRound2"
     
     let kAcousticGuitarRound1 = "AcousticGuitarRound1"
     let kAcousticGuitarRound2 = "AcousticGuitarRound2"
-    
     
     let kViolinRound1 = "ViolinRound1"
     let kViolinRound2 = "ViolinRound2"
@@ -117,6 +133,8 @@ struct LeaderboardsManager {
 enum LeaderboardBundleIDs: String {
     case regularGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPNHS"
     case regularAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGRHS"
+    case regularViolin = "com.wylan.KnowYourNote2020.leaderboards.VRHS"
     case advancedGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPAHS"
     case advancedAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGAHS"
+    
 }

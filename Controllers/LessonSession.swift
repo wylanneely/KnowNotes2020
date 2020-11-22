@@ -28,6 +28,12 @@ class LessonSession {
         self.lesson = aLesson
     }
     
+    func setViolinLesson() {
+        let instreument = Instrument(type: .violin, notes: [])
+        let aLesson = Lesson(instrument: instreument, noteGroups: .allNotes)
+        self.lesson = aLesson
+    }
+    
     lazy var sessionNotes: [Note] = lesson.round1Notes
     
     func setRound1Notes(){
@@ -53,7 +59,6 @@ class LessonSession {
         currentNote = newNote
         return newNote
     }
-    
     
    private func isNoteSelectionCorrect(note: Note) -> Bool {
         if note.id == currentNote?.id {

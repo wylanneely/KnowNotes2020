@@ -34,12 +34,11 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         case .grandPiano:
             self.instrumentType = type
             setLockedState()
+            
         case .acousticGuitar:
             self.instrumentType = type
             instrumentLabel.text = "Acoustic Guitar"
             instrumentImage.image = UIImage.ImageWithName(name: "acoustic_Guitar")
-            instrumentLabel.textColor = UIColor.middlePurple
-
             setLockedState()
         case .violin:
             self.instrumentType = type
@@ -54,29 +53,35 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         instrumentButton.layer.cornerRadius = 10
         backgroundColorView.layer.cornerRadius = 10
         backgroundColorView.layer.masksToBounds = true
-        
+        backgroundColorView.layer.borderWidth = 2
+        instrumentButton.layer.borderWidth = 2
         if isLocked {
             instrumentLabel.textColor = UIColor.darkGray
-            instrumentButton.setTitle("locked", for: .normal)
-            self.backgroundColorView.layer.backgroundColor = UIColor.lightGray.cgColor
-            instrumentButton.setTitleColor(UIColor.white, for: .normal)
-            instrumentButton.layer.borderColor = UIColor.darkGray.cgColor
+            instrumentButton.setTitle("Locked", for: .normal)
+            instrumentButton.setTitleColor(.white, for: .normal)
+            instrumentButton.layer.backgroundColor = UIColor.darkGray.cgColor
+            instrumentButton.layer.borderColor = UIColor.imperialRed.cgColor
+            backgroundColorView.layer.backgroundColor = UIColor.lightGray.cgColor
+            backgroundColorView.layer.borderColor = UIColor.imperialRed.cgColor
+            
         } else {
-            self.backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
-            instrumentButton.setTitleColor(UIColor.mediumTurqouise, for: .normal)
-            instrumentButton.layer.borderColor = UIColor.mediumTurqouise.cgColor
+            backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
+            backgroundColorView.layer.borderColor = UIColor.discoDayGReen.cgColor
+            instrumentButton.setTitleColor(UIColor.black, for: .normal)
+            instrumentButton.layer.borderColor = UIColor.midnightPurps.cgColor
         }
+        
         
     }
     
     private func returnInstrumentColor()-> UIColor {
         switch self.instrumentType {
         case .acousticGuitar:
-            return UIColor.coralRed
+            return UIColor.polarCapBlue
         case .grandPiano:
-            return UIColor.gameplayBlue
+            return UIColor.greenLandOcean
         case .violin:
-            return UIColor.peach
+            return UIColor.greenLandOcean
         }}
     
 }

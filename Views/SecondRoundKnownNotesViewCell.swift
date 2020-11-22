@@ -56,9 +56,9 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     
     func setSelectedView(){
         DispatchQueue.main.async {
-            self.middleBGView.layer.borderColor = UIColor.pastelGReen.cgColor
-            self.firstNoteView.layer.borderColor = UIColor.pastelGReen.cgColor
-            self.secondSelectedNoteButton.layer.borderColor = UIColor.pastelGReen.cgColor
+            self.middleBGView.layer.borderColor = UIColor.sharkGreen.cgColor
+            self.firstNoteView.layer.borderColor = UIColor.sharkGreen.cgColor
+            self.secondSelectedNoteButton.layer.borderColor = UIColor.sharkGreen.cgColor
         }
     }
     
@@ -69,17 +69,17 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         middleBGView.layer.cornerRadius = 10
         firstNoteView.layer.cornerRadius = 10
         secondSelectedNoteButton.layer.cornerRadius = 10
-        lockImageView.tintColor = UIColor.starCommandBlue
-        middleBGView.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        firstNoteView.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        secondSelectedNoteButton.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        self.firstSelectedNoteLabel.textColor = UIColor.imperialRed
-        self.secondSelectedNoteButton.setTitleColor(UIColor.imperialRed, for: .normal)
+        lockImageView.tintColor = UIColor.clear
+        middleBGView.layer.borderColor = UIColor.niceNight.cgColor
+        firstNoteView.layer.borderColor = UIColor.niceNight.cgColor
+        secondSelectedNoteButton.layer.borderColor = UIColor.niceNight.cgColor
+        self.firstSelectedNoteLabel.textColor = UIColor.white
+        self.secondSelectedNoteButton.setTitleColor(UIColor.white, for: .normal)
     }
     
     func setLockedNotesViews(){
         isLocked = true
-        lockImageView.tintColor = UIColor.beauBlue
+        lockImageView.tintColor = UIColor.roxyClubPurple
         middleBGView.layer.borderWidth = 2
         middleBGView.layer.borderColor = UIColor.lightGray.cgColor
         middleBGView.layer.cornerRadius = 10
@@ -91,8 +91,8 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         secondSelectedNoteButton.layer.backgroundColor = UIColor.lightGray.cgColor
         firstNoteView.layer.borderColor = UIColor.black.cgColor
         secondSelectedNoteButton.layer.borderColor = UIColor.black.cgColor
-        secondSelectedNoteButton.setTitleColor(UIColor.white, for: .normal)
-        firstSelectedNoteLabel.textColor = UIColor.white
+        secondSelectedNoteButton.setTitleColor(UIColor.darkGray, for: .normal)
+        firstSelectedNoteLabel.textColor = UIColor.darkGray
     }
     
     @IBOutlet weak var firstNoteView: UIView!

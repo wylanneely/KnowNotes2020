@@ -33,6 +33,11 @@ class LessonSession {
         let aLesson = Lesson(instrument: instreument, noteGroups: .allNotes)
         self.lesson = aLesson
     }
+    func setSaxophoneLesson() {
+        let instreument = Instrument(type: .saxaphone, notes: [])
+        let aLesson = Lesson(instrument: instreument, noteGroups: .allNotes)
+        self.lesson = aLesson
+    }
     
     lazy var sessionNotes: [Note] = lesson.round1Notes
     

@@ -39,35 +39,35 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
     }
     var isSaxophoneUnlocked: Bool {
-        return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
+        return GameCenterManager.manager.leaderboardsManager.isSaxaphoneUnlocked
     }
     
     
     typealias SuccessHandler = (Bool) -> Void
     
-    let unlockAcousticGuitarAlert: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    let OkAlertAction: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
     
     var unlockAcousticAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 or more notes with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
-        alert.addAction(unlockAcousticGuitarAlert)
+        let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
         return alert
     }
     var unlockViolinAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Violin Locked", message: "Score 20 or more chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
-        alert.addAction(unlockAcousticGuitarAlert)
+        let alert = UIAlertController(title: "Violin Locked", message: "Score 20 chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
         return alert
     }
     var unlockSaxAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 20 or more chords with the Violin to unlock the Saxophone.", preferredStyle: .alert)
-        alert.addAction(unlockAcousticGuitarAlert)
+        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 20 with the Violin to unlock the Saxophone.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
         return alert
     }
 
     
     var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Leave Game", style: .destructive) { (_) in
+        let action = UIAlertAction(title: "Leave", style: .destructive) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
         
@@ -142,6 +142,8 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         }
     }
     
+  
+    
     //MARK: Delegate
     
     func instrumentCellButtonTapped(type: InstrumentType) {
@@ -163,7 +165,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                 }
             }
         case .saxaphone:
-            if isViolinUnlocked {
+            if isSaxophoneUnlocked {
                 performSegue(withIdentifier: "toSaxNotes", sender: self )
             } else {
                 self.present(unlockSaxAlertController, animated: true) {
@@ -200,7 +202,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         case "toSaxNotes" :
          LessonSession.manager.setSaxophoneLesson()
          vc.instrumentImage = UIImage(named: "saxophone")
-         vc.instrumentType = InstrumentType.violin
+            vc.instrumentType = InstrumentType.saxaphone
            default:
                return } }
    }

@@ -21,10 +21,13 @@ import GameKit
     
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
-    
+    let saxaphoneAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockSaxaphone.rawValue)
+
     
     var isAcousticGuitarUnlocked: Bool = false
     var isViolinUnlocked: Bool = false
+    var isSaxUnlocked: Bool = false
+
 
     
     typealias SuccessHandler = (Bool) -> Void
@@ -51,11 +54,24 @@ import GameKit
                     self.isAcousticGuitarUnlocked = achievement.isCompleted
                 case AchievementsBundleIDs.unlockViolin.rawValue :
                     self.isViolinUnlocked = achievement.isCompleted
+                case AchievementsBundleIDs.unlockSaxaphone.rawValue :
+                    self.isSaxUnlocked = achievement.isCompleted
                 default:
                     return } }
         }
     }
     
+    func reportSaxaphoneProgress(with score: Int) {
+        if score >= 20 {
+            saxaphoneAchievement.percentComplete = 100.00
+            reportAchievement(saxaphoneAchievement)
+            userDefaultsHelper.unlockSaxLocally()
+        } else {
+           let completePercent =  Double(score) / 20
+            saxaphoneAchievement.percentComplete = completePercent
+            reportAchievement(saxaphoneAchievement)
+        }
+    }
     
     func reportViolinProgress(with score: Int) {
         if score >= 20 {
@@ -94,4 +110,6 @@ import GameKit
 enum AchievementsBundleIDs: String {
     case unlockAcousticGuitar = "com.wylan.KnowYourNote2020.Achievements.AcousticGuitar"
     case unlockViolin = "com.wylan.KnowYourNote2020.Achievements.Violin"
+    case unlockSaxaphone = "com.wylan.KnowYourNote2020.Achievements.Sax"
+
 }

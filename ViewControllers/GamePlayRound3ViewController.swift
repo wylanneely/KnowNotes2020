@@ -10,7 +10,7 @@ import AVFoundation
 
 class GamePlayRound3ViewController: UIViewController {
 
-    var instrumentType: InstrumentType = .grandPiano
+    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrument.type
     
     var gameRoundNotes: [Note] = LessonSession.manager.lesson.round3Notes
     var isStartingRound: Bool = false
@@ -51,22 +51,26 @@ class GamePlayRound3ViewController: UIViewController {
             else if self.instrumentType == .violin {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
                 GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
+            }
+            else if self.instrumentType == .saxaphone {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
                 self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             }
             
-            
         }
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-            if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
-                self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
-            } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
+
+        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
                 self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             }
-        }
-        alert.addAction(action)
+        
         alert.addAction(action2)
+        alert.addAction(action)
+
+        
         return alert
     }
     

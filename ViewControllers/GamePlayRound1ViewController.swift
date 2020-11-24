@@ -35,9 +35,9 @@ class GamePlayRound1ViewController: UIViewController {
     var doesGameNeedNewNote: Bool = true
     
     var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Submit", style: .default) { (_) in
+        let action = UIAlertAction(title: "Submit Score", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
             
             if self.instrumentType == .grandPiano {
@@ -55,13 +55,43 @@ class GamePlayRound1ViewController: UIViewController {
                 GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
             }
+            else if self.instrumentType == .saxaphone {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
+                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
+                self.dismiss(animated: true, completion: nil)
+            }
         }
         
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let action3 = UIAlertAction(title: "Discard Round", style: .cancel) { [self] (_) in
+            let score: Int = LessonSession.manager.score
+            
+            if self.instrumentType == .grandPiano {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
+                resetGame()
+            } else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                resetGame()
+            }
+            else if self.instrumentType == .violin {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
+                resetGame()
+            }
+            else if self.instrumentType == .saxaphone {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
+                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
+                resetGame()
+            }
+        }
+        
+        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
-        alert.addAction(action)
         alert.addAction(action2)
+
+        alert.addAction(action)
         return alert
     }
 
@@ -109,9 +139,13 @@ class GamePlayRound1ViewController: UIViewController {
     }
     
     func setUpLabelsButtonsViews(){
-        lifesLabel.text = "\(LessonSession.manager.lifes)"
-        scoreLabel.text = "\(LessonSession.manager.score)"
         playButton.layer.cornerRadius = 10
+        DispatchQueue.main.async {
+            self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+            self.scoreLabel.text = "\(LessonSession.manager.score)"
+            self.playButton.setTitle("Play", for: .normal)
+            self.playButton.pulse()
+        }
     }
 
     func checkRoundEnd(){
@@ -275,7 +309,6 @@ class GamePlayRound1ViewController: UIViewController {
             handleWrongAnswerWithHaptic()
             return
         }
-
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
             if LessonSession.manager.checkUpdateSessionWith(note: note3) {
@@ -313,7 +346,6 @@ class GamePlayRound1ViewController: UIViewController {
         circleProgressBar.clipsToBounds = true
           view.sendSubviewToBack(backgroundGif)
           let gifImage = UIImage.gifImageWithName(name: "musicBackground")
-         // self.view.largeContentImage = gifImage
           backgroundGif.image = gifImage?.circleMasked
           view.sendSubviewToBack(circleProgressBar)
       }
@@ -321,11 +353,18 @@ class GamePlayRound1ViewController: UIViewController {
     let totalGroupRounds: Double = 10.00
     var currentRound: Double = 1.00
     
-    
     func updateProgressBar(){
         let progress = currentRound/totalGroupRounds
         circleProgressBar.setProgress(to: progress , withAnimation: false)
         self.currentRound = currentRound + 1.0
+    }
+    
+    func resetGame() {
+        currentRound = 1.0
+        LessonSession.manager.resetScores()
+        setUpLabelsButtonsViews()
+        stopPulsingNoteViews()
+            circleProgressBar.setProgress(to: 0 , withAnimation: true)
     }
     
     //MARK: Outlets
@@ -378,7 +417,6 @@ class GamePlayRound1ViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         if segue.identifier == "toRound2" {
             if let vc = segue.destination as? GamePlayRound2ViewController {
                 LessonSession.manager.setRound2Notes()
@@ -389,9 +427,10 @@ class GamePlayRound1ViewController: UIViewController {
                     GameCenterManager.manager.leaderboardsManager.finishedRound1AcousticGuitarNotes()
                 }  else if instrumentType == .violin {
                     GameCenterManager.manager.leaderboardsManager.finishedRound1ViolinNotes()
+                }   else if instrumentType == .saxaphone {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound1SaxNotes()
                 }
             }
-            
         }
     }
     

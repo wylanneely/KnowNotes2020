@@ -16,6 +16,30 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
     
      var delegate: InstrumentCollectionCellDelegate?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        instrumentLabel.text = instrumentType.rawValue
+        instrumentLabel.text = nil
+        instrumentButton.setTitle("  Play  ", for: .normal)
+        instrumentButton.layer.backgroundColor = UIColor.discoDayGReen.cgColor
+        
+        switch instrumentType {
+        case .grandPiano:
+            let score = leaderboardManager.getHighScoreGrandPiano()
+            highScoreLabel.text = "High Score: \(score)"
+        case .acousticGuitar:
+            let score = leaderboardManager.highScoreAcousticGuitar()
+            highScoreLabel.text = "High Score: \(score)"
+        case .violin:
+            let score = leaderboardManager.highScoreViolin()
+            highScoreLabel.text = "High Score: \(score)"
+        case .saxaphone:
+            let score = leaderboardManager.highScoreSax()
+            highScoreLabel.text = "High Score: \(score)"
+
+        }
+    }
+    
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var instrumentImage: UIImageView!
     @IBOutlet weak var instrumentButton: UIButton!
@@ -31,18 +55,21 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
     func setUp(type: InstrumentType, isUnlocked: Bool){
         
         self.isLocked = !isUnlocked
-        instrumentButton.setTitle("  Play  ", for: .normal)
 
+        instrumentButton.setTitle("  Play  ", for: .normal)
         switch type {
         case .grandPiano:
             self.instrumentType = type
+            instrumentLabel.text = instrumentType.rawValue
+            instrumentImage.image = UIImage.ImageWithName(name: "grand_Piano")
             setLockedState()
             let score = leaderboardManager.getHighScoreGrandPiano()
             highScoreLabel.text = "High Score: \(score)"
             if leaderboardManager.didFinishGrandPianoRound1 == true {
                 notesUnlockedLabel.text = "5 Notes Unlocked"
+            }else {
+                notesUnlockedLabel.text = "3 Chords Unlocked"
             }
-            
             if leaderboardManager.didFinishGrandPianoRound2 == true {
                 notesUnlockedLabel.text = "7 Notes Unlocked"
             }
@@ -73,6 +100,22 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
             }
             if leaderboardManager.didFinishViolinRound2 == true {
                 notesUnlockedLabel.text = "7 Notes Unlocked" }
+        
+        case .saxaphone:
+            self.instrumentType = type
+            setLockedState()
+            instrumentLabel.text = "Saxophone"
+            instrumentImage.image = UIImage.ImageWithName(name: "saxophone")
+            let score = leaderboardManager.highScoreSax()
+            highScoreLabel.text = "High Score: \(score)"
+            
+            
+            if leaderboardManager.didFinishSaxRound1 == true {
+                notesUnlockedLabel.text = "5 Notes Unlocked"
+            }
+            if leaderboardManager.didFinishSaxRound2 == true {
+                notesUnlockedLabel.text = "7 Notes Unlocked" }
+        
         }
     }
     
@@ -107,7 +150,11 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
             return UIColor.greenLandOcean
         case .violin:
             return UIColor.greenLandOcean
-        }}
+        case .saxaphone:
+            return UIColor.greenLandOcean
+        }
+    }
+    
     
 }
 

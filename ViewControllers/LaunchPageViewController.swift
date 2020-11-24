@@ -16,8 +16,7 @@ class LaunchPageViewController: UIViewController {
         registerNotification()
         setUPButtons()
         animateimagesWithtwoColors()
-       // animateBackgroundWithtwoColors()
-        checkDevice()
+       // animateBackgroundWithtwoColors()        checkDevice()
     }
     
     //MARK: Set Up

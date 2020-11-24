@@ -22,6 +22,21 @@ struct LeaderboardsManager {
     
     let defaults = UserDefaults.standard
     
+    func getHighScoreGrandPiano() -> Int {
+        return defaults.integer(forKey: kHighScoreGrandPiano)
+    }
+    
+    func highScoreAcousticGuitar() -> Int {
+        return defaults.integer(forKey: kHighScoreAGuitar)
+    }
+    
+    func highScoreViolin() -> Int {
+        return defaults.integer(forKey: kHighScoreViolin)
+    }
+    
+    func highScoreSax() -> Int {
+        return defaults.integer(forKey: kHighScoreSaxaphone)
+    }
     //MARK: Instrument helper
     
     var isAcousticGuitarUnlocked: Bool {
@@ -39,12 +54,22 @@ struct LeaderboardsManager {
             return GameCenterManager.manager.achievementsManager.isViolinUnlocked
         }
     }
-
+    var isSaxaphoneUnlocked: Bool  {
+        if defaults.bool(forKey: kIsSaxaphoneUnlocked) == true {
+            return true
+        } else {
+            return GameCenterManager.manager.achievementsManager.isSaxUnlocked
+        }
+    }
+    
     func unlockAcousticGuitarLocally(){
         defaults.setValue(true, forKey: kIsAcousticUnlocked)
     }
     func  unlockViolinLocally(){
         defaults.setValue(true, forKey: kIsViolinUnlocked)
+    }
+    func  unlockSaxLocally(){
+        defaults.setValue(true, forKey: kIsSaxaphoneUnlocked)
     }
     
     //MARK: check if round isFinished
@@ -70,14 +95,14 @@ struct LeaderboardsManager {
     var didFinishViolinRound2: Bool {
         return defaults.bool(forKey: kViolinRound2)
     }
-    var highScoreGrandPiano: Int {
-        return defaults.integer(forKey: kHighScoreGrandPiano)
+    var didFinishSaxRound1: Bool {
+        return defaults.bool(forKey: kSaxRound1)
     }
-    var highScoreAcousticGuitar: Int {
-        return defaults.integer(forKey: kHighScoreAGuitar)
+    var didFinishSaxRound2: Bool {
+        return defaults.bool(forKey: kSaxRound2)
     }
     
-    //MARK: Round Completed Functions
+    //MARK: Local HighScores
     //call after completing rounds
     
     func setPersonalGranPianoHighScore(score: Int){
@@ -93,8 +118,17 @@ struct LeaderboardsManager {
         }
     }
     func setPersonalViolinHighScore(score: Int){
-        defaults.setValue(score, forKey: kHighScoreAGuitar)
+        defaults.setValue(score, forKey: kHighScoreViolin)
+        if score >= 20 {
+            unlockSaxLocally()
+        }
     }
+    func setPersonalSaxaphoneHighScore(score: Int){
+        defaults.setValue(score, forKey: kHighScoreSaxaphone)
+    }
+    
+    //MARK: Local Rounds
+
     func finishedRound1GrandPianoNotes(){
         defaults.setValue(true, forKey: kGrandPianoRound1)
     }
@@ -113,28 +147,43 @@ struct LeaderboardsManager {
     func finishedRound2ViolinNotes(){
         defaults.setValue(true, forKey: kViolinRound2)
     }
+    func finishedRound1SaxNotes(){
+        defaults.setValue(true, forKey: kSaxRound1)
+    }
+    func finishedRound2SaxNotes(){
+        defaults.setValue(true, forKey: kSaxRound2)
+    }
     
-    let kIsAcousticUnlocked = "isAcousticUnlocked"
-    let kIsViolinUnlocked = "isViolinUnlocked"
+    fileprivate let kIsAcousticUnlocked = "isAcousticUnlocked"
+    fileprivate let kIsViolinUnlocked = "isViolinUnlocked"
+    fileprivate let kIsSaxaphoneUnlocked = "isSaxaphoneUnlocked"
 
-    let kGrandPianoRound1 = "GrandPianoRound1"
-    let kGrandPianoRound2 = "GrandPianoRound2"
+
+    fileprivate let kGrandPianoRound1 = "GrandPianoRound1"
+    fileprivate let kGrandPianoRound2 = "GrandPianoRound2"
     
-    let kAcousticGuitarRound1 = "AcousticGuitarRound1"
-    let kAcousticGuitarRound2 = "AcousticGuitarRound2"
+    fileprivate let kAcousticGuitarRound1 = "AcousticGuitarRound1"
+    fileprivate let kAcousticGuitarRound2 = "AcousticGuitarRound2"
     
-    let kViolinRound1 = "ViolinRound1"
-    let kViolinRound2 = "ViolinRound2"
+    fileprivate let kViolinRound1 = "ViolinRound1"
+    fileprivate let kViolinRound2 = "ViolinRound2"
+    
+    fileprivate let kSaxRound1 = "SaxRound1"
+    fileprivate let kSaxRound2 = "SaxRound2"
    
-    let kHighScoreGrandPiano = "GrandPianoHS"
-    let kHighScoreAGuitar = "AcousticGuitarHS"
+    fileprivate let kHighScoreGrandPiano = "GrandPianoHS"
+    fileprivate let kHighScoreAGuitar = "AcousticGuitarHS"
+    fileprivate let kHighScoreViolin = "ViolinHS"
+    fileprivate let kHighScoreSaxaphone = "SaxaphoneHS"
+
+
 }
 
 enum LeaderboardBundleIDs: String {
     case regularGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPNHS"
     case regularAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGRHS"
     case regularViolin = "com.wylan.KnowYourNote2020.leaderboards.VRHS"
+    case regularSaxaphone = "com.wylan.KnowYourNote2020.leaderboards.SHS"
     case advancedGrandPiano = "com.wylan.KnowYourNote2020.leaderboards.GPAHS"
     case advancedAcousticGuitar = "com.wylan.KnowYourNote2020.leaderboards.AGAHS"
-    
 }

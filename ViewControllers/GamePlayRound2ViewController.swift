@@ -38,9 +38,9 @@ class GamePlayRound2ViewController: UIViewController {
     var doesGameNeedNewNote: Bool = true
     
     var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Game Finished", message: "Would you like to submit score to Lederboard?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Submit", style: .default) { (_) in
+        let action = UIAlertAction(title: "Submit Score", style: .default) { (_) in
             let score: Int = LessonSession.manager.score
             if self.instrumentType == .grandPiano {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
@@ -52,18 +52,23 @@ class GamePlayRound2ViewController: UIViewController {
                 GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
                 GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
                 self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            }else if self.instrumentType == .violin {
+            } else if self.instrumentType == .violin {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
                 GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            } else if self.instrumentType == .saxaphone {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
+                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
                 self.performSegue(withIdentifier: "toLocalProfile", sender: self)
             }
         }
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
         }
         
-        alert.addAction(action)
         alert.addAction(action2)
+        alert.addAction(action)
         return alert
     }
     
@@ -83,7 +88,6 @@ class GamePlayRound2ViewController: UIViewController {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -465,9 +469,8 @@ class GamePlayRound2ViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         if segue.identifier == "toRound3" {
-            if let vc = segue.destination as? GamePlayRound2ViewController {
+            if let vc = segue.destination as? GamePlayRound3ViewController {
                 vc.instrumentType = self.instrumentType
                 LessonSession.manager.setRound3Notes()
                 if instrumentType == .grandPiano {
@@ -476,12 +479,9 @@ class GamePlayRound2ViewController: UIViewController {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2AcousticGuitarNotes()
                 } else if instrumentType == .violin {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2ViolinNotes()
+                } else if instrumentType == .saxaphone {
+                    GameCenterManager.manager.leaderboardsManager.finishedRound2SaxNotes()
                 }
-            }
-        }
-        if segue.identifier == "toLocalProfile" {
-            if let vc = segue.destination as? PlayerGameMenuViewController {
-                
             }
         }
     }

@@ -17,13 +17,25 @@ class LaunchPageViewController: UIViewController {
         setUPButtons()
         animateimagesWithtwoColors()
        // animateBackgroundWithtwoColors()
+        checkDevice()
     }
     
     //MARK: Set Up
     func setUPButtons(){
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 10
-        signInButton.layer.borderColor = UIColor.imperialRed.cgColor
+        signInButton.layer.borderColor = UIColor.coralRed.cgColor
+    }
+    
+    func checkDevice(){
+        
+        if UIDevice.current.modelName == "x86_64" {
+            print("iPhone8")
+        } else {
+            print("iPhoneLarger")
+        }
+        
+        
     }
     
     func animateBackgroundWithtwoColors(){
@@ -89,8 +101,8 @@ class LaunchPageViewController: UIViewController {
         signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
         signInButton.pulsate()
-        signInButton.setTitleColor(UIColor.pastelGReen, for: .normal)
-        signInButton.layer.borderColor = UIColor.pastelGReen.cgColor
+        signInButton.setTitleColor(UIColor.discoDayGReen, for: .normal)
+        signInButton.layer.borderColor = UIColor.discoDayGReen.cgColor
     }
     
     //MARK: Navigation

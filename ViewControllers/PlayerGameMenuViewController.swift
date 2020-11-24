@@ -38,6 +38,10 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     var isViolinUnlocked: Bool {
         return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
     }
+    var isSaxophoneUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
+    }
+    
     
     typealias SuccessHandler = (Bool) -> Void
     
@@ -50,6 +54,11 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     }
     var unlockViolinAlertController: UIAlertController {
         let alert = UIAlertController(title: "Violin Locked", message: "Score 20 or more chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
+        alert.addAction(unlockAcousticGuitarAlert)
+        return alert
+    }
+    var unlockSaxAlertController: UIAlertController {
+        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 20 or more chords with the Violin to unlock the Saxophone.", preferredStyle: .alert)
         alert.addAction(unlockAcousticGuitarAlert)
         return alert
     }
@@ -104,7 +113,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,7 +134,9 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         case 2:
             cell.setUp(type: .violin, isUnlocked: isViolinUnlocked)
             return cell
-
+        case 3:
+            cell.setUp(type: .saxaphone, isUnlocked: isSaxophoneUnlocked )
+            return cell
         default:
            return cell
         }
@@ -149,6 +160,13 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                 performSegue(withIdentifier: "toViolinNotes", sender: self )
             } else {
                 self.present(unlockViolinAlertController, animated: true) {
+                }
+            }
+        case .saxaphone:
+            if isViolinUnlocked {
+                performSegue(withIdentifier: "toSaxNotes", sender: self )
+            } else {
+                self.present(unlockSaxAlertController, animated: true) {
                 }
             }
         }
@@ -178,6 +196,11 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
             LessonSession.manager.setViolinLesson()
             vc.instrumentImage = UIImage(named: "violin")
             vc.instrumentType = InstrumentType.violin
+            
+        case "toSaxNotes" :
+         LessonSession.manager.setSaxophoneLesson()
+         vc.instrumentImage = UIImage(named: "saxophone")
+         vc.instrumentType = InstrumentType.violin
            default:
                return } }
    }

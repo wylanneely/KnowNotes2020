@@ -171,9 +171,18 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             }
                             notesCellExample.commonInit(image: instrumentImage, rank: "Noob Violinist", completedNotes: 3)
                                 return notesCellExample
-                        }
-                    }
-                }
+                        
+                        case .saxaphone:
+                            if leaderboardsManager.didFinishSaxRound2 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Sax Master", completedNotes: 7)
+                                return notesCellExample
+                            } else if leaderboardsManager.didFinishSaxRound1 {
+                                notesCellExample.commonInit(image: instrumentImage, rank: "Sax Player", completedNotes: 5)
+                                return notesCellExample
+                            }
+                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Sax Player", completedNotes: 3)
+                                return notesCellExample
+                        }}}
                 
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
@@ -210,6 +219,13 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         }
                     case .violin:
                         if leaderboardsManager.didFinishViolinRound1 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
+                    case .saxaphone:
+                        if leaderboardsManager.didFinishSaxRound1 {
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
@@ -254,6 +270,17 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
                         }
                         if leaderboardsManager.didFinishViolinRound2 {
+                            return notesCellExample
+                        } else {
+                            notesCellExample.setLockedNotesViews()
+                            return notesCellExample
+                        }
+                    case .saxaphone:
+                        DispatchQueue.main.async {
+                            notesCellExample.firstSelectedNoteLabel.text = "F"
+                            notesCellExample.secondSelectedNoteButton.setTitle("G", for: .normal)
+                        }
+                        if leaderboardsManager.didFinishSaxRound2{
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()

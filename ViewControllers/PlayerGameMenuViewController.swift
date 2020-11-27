@@ -142,8 +142,6 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         }
     }
     
-  
-    
     //MARK: Delegate
     
     func instrumentCellButtonTapped(type: InstrumentType) {

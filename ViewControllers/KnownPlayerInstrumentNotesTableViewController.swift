@@ -66,27 +66,26 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         }
     }
     
+    
+    
+    let indexp1 = IndexPath(row: 1, section: 0)
+    let indexp2 = IndexPath(row: 2, section: 0)
+    let indexp3 = IndexPath(row: 3, section: 0)
+    
+    
     func firstGroupTapped() {
         groupStartNumber = 1
-        let indexp1 = IndexPath(row: 1, section: 0)
-        let indexp2 = IndexPath(row: 2, section: 0)
-        let indexp3 = IndexPath(row: 3, section: 0)
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
     
+    
     func secondGroupTapped() {
         groupStartNumber = 2
-        let indexp1 = IndexPath(row: 1, section: 0)
-        let indexp2 = IndexPath(row: 2, section: 0)
-        let indexp3 = IndexPath(row: 3, section: 0)
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
    }
     
     func thirdGroupTapped() {
         groupStartNumber = 3
-        let indexp1 = IndexPath(row: 1, section: 0)
-        let indexp2 = IndexPath(row: 2, section: 0)
-        let indexp3 = IndexPath(row: 3, section: 0)
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
     func lockedSecondGroupTapped() {
@@ -186,9 +185,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                 
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
-                    if groupStartNumber == 1 {
                         notesCellExample.setSelectedView()
-                    }
+                    
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
@@ -198,6 +196,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                     if groupStartNumber == 2 {
                         notesCellExample.setSelectedView()
                     }
+                    if groupStartNumber == 3 {
+                        notesCellExample.setSelectedView()
+                    }
+                    
                     notesCellExample.delegate = self
                     
                     switch instrumentType{

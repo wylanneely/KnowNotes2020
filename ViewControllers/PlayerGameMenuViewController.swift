@@ -23,9 +23,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 300, height: 500)
-        
         collectionView?.setCollectionViewLayout(layout, animated: false)
-        
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -62,7 +60,6 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         alert.addAction(OkAlertAction)
         return alert
     }
-
     
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
@@ -93,17 +90,9 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         self.present(finishedGameAlert, animated: true, completion: nil)
     }
     
-    
     @IBAction func showGameCenterDashboard(_ sender: Any) {
         GameCenterManager.manager.presentGameCenterDashboard()
     }
-    //MARK: Delegate
-    
-    
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     
     
 //MARK: Collection View
@@ -143,6 +132,11 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     }
     
     //MARK: Delegate
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     func instrumentCellButtonTapped(type: InstrumentType) {
         switch type {

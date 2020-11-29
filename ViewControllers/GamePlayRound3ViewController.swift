@@ -465,35 +465,20 @@ class GamePlayRound3ViewController: UIViewController {
     //MARK: Helper Functions
 
     func setUpGif(){
-          circleProgressBar.labelSize = 60
-          circleProgressBar.lineWidth = 12
-          circleProgressBar.safePercent = 5
-          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
-        circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
-        circleProgressBar.clipsToBounds = true
         view.sendSubviewToBack(backgroundGif)
-          let gifImage = UIImage.gifImageWithName(name: "musicBackground")
+          let gifImage = UIImage.gifImageWithName(name: "smallLogoGif")
          // self.view.largeContentImage = gifImage
-          backgroundGif.image = gifImage?.circleMasked
+          backgroundGif.image = gifImage
         
-          view.sendSubviewToBack(circleProgressBar)
       }
-
-    var totalGroupRounds: Double = 25.00
-    var currentRound: Double = 1.00
-    
-    func updateProgressBar(){
-        let progress = currentRound/totalGroupRounds
-        circleProgressBar.setProgress(to: progress , withAnimation: false)
-        self.currentRound = currentRound + 1.0
-    }
+ 
     
     
     
     //MARK: Outlets
     
     @IBOutlet weak var backgroundGif: UIImageView!
-    @IBOutlet weak var circleProgressBar: CircularProgressBar!
+
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!

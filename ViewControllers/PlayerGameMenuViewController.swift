@@ -13,8 +13,15 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isOnline == true {
         GameCenterManager.manager.viewController = self
         localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
+        } else {
+            gameCenterButton.setTitle("Offline Notes", for: .normal)
+            gameCenterButton.isEnabled = false
+            gameCenterImage.isHidden = true
+        }
+        
         setupCollectionView()
         setUpProfilePhotoGestures()
     }
@@ -39,7 +46,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     var isSaxophoneUnlocked: Bool {
         return GameCenterManager.manager.leaderboardsManager.isSaxaphoneUnlocked
     }
-    
+    var isOnline: Bool = false
     
     typealias SuccessHandler = (Bool) -> Void
     
@@ -65,7 +72,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Leave", style: .destructive) { (_) in
-            self.dismiss(animated: true, completion: nil)
+            self.performSegue(withIdentifier: "toLaunch", sender: self)
         }
         
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
@@ -79,20 +86,28 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var localPlayerProfilePhoto: UIImageView!
+    @IBOutlet weak var gameCenterImage: UIImageView!
     
+    @IBOutlet weak var gameCenterButton: UIButton!
+    
+    
+    @IBAction func showGameCenterDashboard(_ sender: Any) {
+            GameCenterManager.manager.presentGameCenterDashboard()
+        }
+    
+    @objc func photoTapped(_ sender:AnyObject){
+            self.present(finishedGameAlert, animated: true, completion: nil)
+        }
+
     func setUpProfilePhotoGestures(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
         localPlayerProfilePhoto.isUserInteractionEnabled = true
         localPlayerProfilePhoto.addGestureRecognizer(tapGesture)
     }
     
-    @objc func photoTapped(_ sender:AnyObject){
-        self.present(finishedGameAlert, animated: true, completion: nil)
-    }
     
-    @IBAction func showGameCenterDashboard(_ sender: Any) {
-        GameCenterManager.manager.presentGameCenterDashboard()
-    }
+    
+    
     
     
 //MARK: Collection View
@@ -177,7 +192,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
-           switch segue.identifier {
+           switch segue.identifier {            
            case "toAcousticNotes" :
                LessonSession.manager.setAcousticLesson()
                vc.instrumentImage = UIImage(named: "acoustic_Guitar")

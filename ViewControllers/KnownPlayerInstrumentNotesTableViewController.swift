@@ -49,10 +49,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         self.tableView.register(beginNoteCell, forCellReuseIdentifier: "beginCell")
     }
     
-    //MARK: Delegate
+    //MARK: Begin Delegate
+    
     func beginLesssonButtonTapped() {
         LessonSession.manager.resetScores()
-        
         switch groupStartNumber {
         case 2:
             LessonSession.manager.setRound2Notes()
@@ -66,24 +66,20 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         }
     }
     
-    
+    //MARK: Note Groups Delegate
     
     let indexp1 = IndexPath(row: 1, section: 0)
     let indexp2 = IndexPath(row: 2, section: 0)
     let indexp3 = IndexPath(row: 3, section: 0)
     
-    
     func firstGroupTapped() {
         groupStartNumber = 1
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
     }
-    
-    
     func secondGroupTapped() {
         groupStartNumber = 2
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
    }
-    
     func thirdGroupTapped() {
         groupStartNumber = 3
         tableView.reloadRows(at: [indexp1,indexp3,indexp2], with: .automatic)
@@ -312,11 +308,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if indexPath.section == 1 {
             return 80
         }
-    
         switch indexPath.row {
         case 0: return 200
         case 1: return 120

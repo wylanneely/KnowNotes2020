@@ -21,9 +21,16 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
             gameCenterButton.isEnabled = false
             gameCenterImage.isHidden = true
         }
-        
         setupCollectionView()
         setUpProfilePhotoGestures()
+    }
+    
+    //MARK: Set Up
+
+    func setUpProfilePhotoGestures(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
+        localPlayerProfilePhoto.isUserInteractionEnabled = true
+        localPlayerProfilePhoto.addGestureRecognizer(tapGesture)
     }
     
     func setupCollectionView(){
@@ -34,8 +41,8 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-        
-    //MARK: Unlock Instruments
+    
+    //MARK: Unlocked Instruments
     
     var isAcousticGuitarUnlocked: Bool {
         return GameCenterManager.manager.leaderboardsManager.isAcousticGuitarUnlocked
@@ -46,12 +53,14 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     var isSaxophoneUnlocked: Bool {
         return GameCenterManager.manager.leaderboardsManager.isSaxaphoneUnlocked
     }
+    
+    //MARK: Properties
+    
     var isOnline: Bool = false
     
     typealias SuccessHandler = (Bool) -> Void
     
     let OkAlertAction: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-    
     var unlockAcousticAlertController: UIAlertController {
         let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
         alert.addAction(OkAlertAction)
@@ -67,14 +76,11 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         alert.addAction(OkAlertAction)
         return alert
     }
-    
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
-        
         let action = UIAlertAction(title: "Leave", style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLaunch", sender: self)
         }
-        
         let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
         }
         alert.addAction(action)
@@ -87,10 +93,8 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var localPlayerProfilePhoto: UIImageView!
     @IBOutlet weak var gameCenterImage: UIImageView!
-    
     @IBOutlet weak var gameCenterButton: UIButton!
-    
-    
+
     @IBAction func showGameCenterDashboard(_ sender: Any) {
             GameCenterManager.manager.presentGameCenterDashboard()
         }
@@ -98,17 +102,6 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     @objc func photoTapped(_ sender:AnyObject){
             self.present(finishedGameAlert, animated: true, completion: nil)
         }
-
-    func setUpProfilePhotoGestures(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
-        localPlayerProfilePhoto.isUserInteractionEnabled = true
-        localPlayerProfilePhoto.addGestureRecognizer(tapGesture)
-    }
-    
-    
-    
-    
-    
     
 //MARK: Collection View
     

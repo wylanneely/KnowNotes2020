@@ -58,7 +58,6 @@ class LaunchPageViewController: UIViewController {
     //MARK: Outlets & Actions
     
     @IBOutlet weak var signInButton: UIButton!
-    
     @IBOutlet weak var gif: UIImageView!
     
    // @IBOutlet weak var guitarsImage: UIImageView!
@@ -73,9 +72,9 @@ class LaunchPageViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func playOfflineTapped(_ sender: Any) {
         self.performSegue(withIdentifier: "toOfflineMode", sender: self)
-
     }
     
     // MARK: - GameCenter Authentication
@@ -110,7 +109,6 @@ class LaunchPageViewController: UIViewController {
             }
             GameCenterManager.manager.viewController = vc
         }
-        
     }
     
 }

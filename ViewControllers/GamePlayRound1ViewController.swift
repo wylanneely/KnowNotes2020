@@ -12,6 +12,10 @@ import AVFoundation
 class GamePlayRound1ViewController: UIViewController {
     
     var instrumentType: InstrumentType = .grandPiano
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    var musicSound: AVAudioPlayer?
+    
+    var doesGameNeedNewNote: Bool = true
     
     var gameRoundNotes: [Note] = LessonSession.manager.lesson.round1Notes
     
@@ -20,20 +24,7 @@ class GamePlayRound1ViewController: UIViewController {
     var note3: Note?
     
     var currentNote: Note?
-    
-    let hapticGenerator = UINotificationFeedbackGenerator()
-    var musicSound: AVAudioPlayer?
-    
-    func byPassSilentMode(){
-        do {
-              try AVAudioSession.sharedInstance().setCategory(.playback)
-           } catch(let error) {
-               print(error.localizedDescription)
-           }
-    }
-    
-    var doesGameNeedNewNote: Bool = true
-    
+
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
         
@@ -59,30 +50,6 @@ class GamePlayRound1ViewController: UIViewController {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
                 GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
                 self.dismiss(animated: true, completion: nil)
-            }
-        }
-        
-        let action3 = UIAlertAction(title: "Discard Round", style: .cancel) { [self] (_) in
-            let score: Int = LessonSession.manager.score
-            
-            if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
-                resetGame()
-            } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
-                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
-                resetGame()
-            }
-            else if self.instrumentType == .violin {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
-                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
-                resetGame()
-            }
-            else if self.instrumentType == .saxaphone {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
-                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
-                resetGame()
             }
         }
         
@@ -147,7 +114,9 @@ class GamePlayRound1ViewController: UIViewController {
             self.playButton.pulse()
         }
     }
-
+    
+    //MARK: Functions
+    
     func checkRoundEnd(){
         if LessonSession.manager.score >= 10 {
             self.performSegue(withIdentifier: "toRound2", sender: self)
@@ -157,6 +126,14 @@ class GamePlayRound1ViewController: UIViewController {
                 //Possible unwind segue area
             }
         }
+    }
+
+    func byPassSilentMode(){
+        do {
+              try AVAudioSession.sharedInstance().setCategory(.playback)
+           } catch(let error) {
+               print(error.localizedDescription)
+           }
     }
     
     func playSoundFromNote(path: String? ) {
@@ -212,7 +189,7 @@ class GamePlayRound1ViewController: UIViewController {
         return quitGameActionSheet
     }
 
-    //MARK: Actions
+    //MARK: IBActions
     
     @IBAction func leaveButtonTapped(_ sender: Any) {
         self.present(quitGameActionSheet, animated: true, completion: nil)

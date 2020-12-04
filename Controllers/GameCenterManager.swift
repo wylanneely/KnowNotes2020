@@ -16,7 +16,6 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
         authenticateGKLocalPlayer { (success) in
             if success {
                 achievementsManager.loadAchievements { (_) in
-                    
                 }
             } }
     }

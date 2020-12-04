@@ -80,6 +80,16 @@ struct LeaderboardsManager {
     var didFinishGrandPianoRound2: Bool {
         return defaults.bool(forKey: kGrandPianoRound2)
     }
+    func pianoLevel() -> Int {
+        if didFinishGrandPianoRound2 == true {
+            return 2
+        } else if didFinishGrandPianoRound1 == true {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
     var didunlockAcousticGuitar: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound1)
     }
@@ -89,17 +99,46 @@ struct LeaderboardsManager {
     var didFinishAcousticGuitarRound2: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
+    func acousticGuitarLevel() -> Int {
+        if didFinishAcousticGuitarRound2 == true {
+            return 2
+        } else if didFinishAcousticGuitarRound1 == true {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
     var didFinishViolinRound1: Bool {
         return defaults.bool(forKey: kViolinRound1)
     }
     var didFinishViolinRound2: Bool {
         return defaults.bool(forKey: kViolinRound2)
     }
+    func violinLevel() -> Int {
+        if didFinishViolinRound2 == true {
+            return 2
+        } else if didFinishViolinRound1 == true {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
     var didFinishSaxRound1: Bool {
         return defaults.bool(forKey: kSaxRound1)
     }
     var didFinishSaxRound2: Bool {
         return defaults.bool(forKey: kSaxRound2)
+    }
+    func saxaphoneLevel() -> Int {
+        if didFinishSaxRound2 == true {
+            return 2
+        } else if didFinishSaxRound1 == true {
+            return 1
+        } else {
+            return 0
+        }
     }
     
     //MARK: Local HighScores

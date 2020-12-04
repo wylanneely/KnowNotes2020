@@ -9,19 +9,39 @@ import GameKit
 
 
 struct LeaderboardsManager {
-       
-    func submit(score: Int, to leaderboard: LeaderboardBundleIDs){
-        GKLeaderboard.submitScore(score, context: 0,
-                                  player: GKLocalPlayer.local,
-                                  leaderboardIDs: [leaderboard.rawValue]) { (error) in
-            if let error = error {
-                print(error.localizedDescription) } }
+       // Loaded achievements
+    var achievements = GameCenterManager.manager.achievementsManager
+    
+    //MARK: Instrument helper
+    
+    var isAcousticGuitarUnlocked: Bool {
+        //First check if stored in user defaults,
+        if defaults.bool(forKey: kIsAcousticUnlocked) == true {
+            return true
+        } else {
+            // Then check the achievements manager to see if saved on GameCenter
+            return achievements.isAcousticGuitarUnlocked
+        }
     }
     
+    var isViolinUnlocked: Bool  {
+        if defaults.bool(forKey: kIsViolinUnlocked) == true {
+            return true
+        } else {
+            return achievements.isViolinUnlocked
+        }
+    }
+    var isSaxaphoneUnlocked: Bool  {
+        if defaults.bool(forKey: kIsSaxaphoneUnlocked) == true {
+            return true
+        } else {
+            return achievements.isSaxUnlocked
+        }
+    }
     //MARK: UserDefaults for unlocking visuals and notes
-    
     let defaults = UserDefaults.standard
-    
+
+
     func getHighScoreGrandPiano() -> Int {
         return defaults.integer(forKey: kHighScoreGrandPiano)
     }
@@ -37,30 +57,8 @@ struct LeaderboardsManager {
     func highScoreSax() -> Int {
         return defaults.integer(forKey: kHighScoreSaxaphone)
     }
-    //MARK: Instrument helper
     
-    var isAcousticGuitarUnlocked: Bool {
-        if defaults.bool(forKey: kIsAcousticUnlocked) == true {
-            return true
-        } else {
-            return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
-        }
-    }
     
-    var isViolinUnlocked: Bool  {
-        if defaults.bool(forKey: kIsViolinUnlocked) == true {
-            return true
-        } else {
-            return GameCenterManager.manager.achievementsManager.isViolinUnlocked
-        }
-    }
-    var isSaxaphoneUnlocked: Bool  {
-        if defaults.bool(forKey: kIsSaxaphoneUnlocked) == true {
-            return true
-        } else {
-            return GameCenterManager.manager.achievementsManager.isSaxUnlocked
-        }
-    }
     
     func unlockAcousticGuitarLocally(){
         defaults.setValue(true, forKey: kIsAcousticUnlocked)
@@ -99,6 +97,7 @@ struct LeaderboardsManager {
     var didFinishAcousticGuitarRound2: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound2)
     }
+    
     func acousticGuitarLevel() -> Int {
         if didFinishAcousticGuitarRound2 == true {
             return 2
@@ -115,6 +114,7 @@ struct LeaderboardsManager {
     var didFinishViolinRound2: Bool {
         return defaults.bool(forKey: kViolinRound2)
     }
+    
     func violinLevel() -> Int {
         if didFinishViolinRound2 == true {
             return 2
@@ -131,6 +131,7 @@ struct LeaderboardsManager {
     var didFinishSaxRound2: Bool {
         return defaults.bool(forKey: kSaxRound2)
     }
+    
     func saxaphoneLevel() -> Int {
         if didFinishSaxRound2 == true {
             return 2
@@ -193,6 +194,8 @@ struct LeaderboardsManager {
         defaults.setValue(true, forKey: kSaxRound2)
     }
     
+    //MARK: Local Keys
+    
     fileprivate let kIsAcousticUnlocked = "isAcousticUnlocked"
     fileprivate let kIsViolinUnlocked = "isViolinUnlocked"
     fileprivate let kIsSaxaphoneUnlocked = "isSaxaphoneUnlocked"
@@ -215,7 +218,15 @@ struct LeaderboardsManager {
     fileprivate let kHighScoreViolin = "ViolinHS"
     fileprivate let kHighScoreSaxaphone = "SaxaphoneHS"
 
-
+    //MARK: Public & Global Leaderboards
+        
+     func submit(score: Int, to leaderboard: LeaderboardBundleIDs){
+         GKLeaderboard.submitScore(score, context: 0,
+                                   player: GKLocalPlayer.local,
+                                   leaderboardIDs: [leaderboard.rawValue]) { (error) in
+             if let error = error {
+                 print(error.localizedDescription) } }
+     }
 }
 
 enum LeaderboardBundleIDs: String {

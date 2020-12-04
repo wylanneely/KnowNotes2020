@@ -10,20 +10,46 @@ import GameKit
 
 final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocalPlayerListener {
     
+    static let manager = GameCenterManager()
+    
+    var leaderboardsManager = LeaderboardsManager()
+    var achievementsManager = AchievementsManager()
+    
+    var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
+    var currentMatch: GKTurnBasedMatch?
+    
+    var viewController: UIViewController?
+    var localPlayerPhoto: UIImage?
+
+    //MARK:  Set UP
     override init() {
         super.init()
-        
         authenticateGKLocalPlayer { (success) in
             if success {
                 achievementsManager.loadAchievements { (_) in
                 }
             } }
     }
+
+    func getSetLocalPlayerPhoto(){
+        GKLocalPlayer.local.loadPhoto(for: .normal) { (image, error) in
+            if let image = image {
+                self.localPlayerPhoto = image }
+        } }
     
-    static let manager = GameCenterManager()
     typealias CompletionBlock = (Error?) -> Void
     typealias SuccessHandler = (Bool) -> Void
 
+    
+    //MARK: Authentication
+    
+    static var isAuthenticated: Bool {
+            return GKLocalPlayer.local.isAuthenticated
+        }
+    enum GameCenterHelperError: Error {
+           case matchNotFound
+       }
+    
     func authenticateGKLocalPlayer(completion: SuccessHandler) {
         GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
             if GKLocalPlayer.local.isAuthenticated {
@@ -39,43 +65,12 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
         completion(true)
     }
     
-    //MARK: Authentication
-
-    static var isAuthenticated: Bool {
-            return GKLocalPlayer.local.isAuthenticated
-        }
-    enum GameCenterHelperError: Error {
-           case matchNotFound
-       }
-
-    var localPlayerPhoto: UIImage?
-    func getSetLocalPlayerPhoto(){
-        GKLocalPlayer.local.loadPhoto(for: .normal) { (image, error) in
-            if let image = image {
-                self.localPlayerPhoto = image }
-        } }
-
-    var viewController: UIViewController?
-    var currentMatchmakerVC: GKTurnBasedMatchmakerViewController?
-    var currentMatch: GKTurnBasedMatch?
-    var leaderboardsManager = LeaderboardsManager()
-    var achievementsManager = AchievementsManager()
-    
     //MARK: View GameCenter dashboards
     var gameCenterDashboardVC = GKGameCenterViewController(state: .default)
     
     func presentGameCenterDashboard(){
         let vc = gameCenterDashboardVC
         gameCenterDashboardVC.gameCenterDelegate = self
-        viewController?.present(vc, animated: true, completion: nil)
-    }
-    
-    var gameCenterPlayerProfileVC = GKGameCenterViewController(
-        state: .localPlayerProfile)
-    
-    func presentGameCenterProfile(){
-        let vc = gameCenterPlayerProfileVC
-        gameCenterPlayerProfileVC.gameCenterDelegate = self
         viewController?.present(vc, animated: true, completion: nil)
     }
     

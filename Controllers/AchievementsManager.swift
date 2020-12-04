@@ -11,27 +11,22 @@ import GameKit
 
  class AchievementsManager {
     
-    
-    var playerAchievements: [GKAchievement]?
-    
     private var userDefaultsHelper = LeaderboardsManager()
-    
+
     //MARK: Achievements
     
-    
+    var playerAchievements: [GKAchievement]?
+
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
     let saxaphoneAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockSaxaphone.rawValue)
-
     
     var isAcousticGuitarUnlocked: Bool = false
     var isViolinUnlocked: Bool = false
     var isSaxUnlocked: Bool = false
 
-
+    //MARK; Load & Sort Achievements
     
-    typealias SuccessHandler = (Bool) -> Void
-
     func loadAchievements(sucess: SuccessHandler) {
         var didLoad: Bool = false
         GKAchievement.loadAchievements { (achievements, error) in
@@ -61,6 +56,8 @@ import GameKit
         }
     }
     
+    typealias SuccessHandler = (Bool) -> Void
+
     func reportSaxaphoneProgress(with score: Int) {
         if score >= 20 {
             saxaphoneAchievement.percentComplete = 100.00

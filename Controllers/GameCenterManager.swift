@@ -73,7 +73,14 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
         gameCenterDashboardVC.gameCenterDelegate = self
         viewController?.present(vc, animated: true, completion: nil)
     }
-    
+    var gameCenterPlayerProfileVC = GKGameCenterViewController(
+        state: .localPlayerProfile)
+
+    func presentGameCenterProfile(){
+        let vc = gameCenterPlayerProfileVC
+        gameCenterPlayerProfileVC.gameCenterDelegate = self
+        viewController?.present(vc, animated: true, completion: nil)
+    }
     //MARK: Delegate
     
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {

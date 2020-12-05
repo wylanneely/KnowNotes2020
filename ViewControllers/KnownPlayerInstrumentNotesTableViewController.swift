@@ -7,15 +7,17 @@
 
 import UIKit
 
-class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate {
+class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate, sharpsFlatsDelegate {
     
     //MARK: Properties
     
-    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrument.type
+    var instrumentType: InstrumentType = .grandPiano
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
     var groupStartNumber: Int = 1
+    var isHalfNotesUsed: Bool = false
+    
     
     //MARK: LifeCycle
     
@@ -64,6 +66,11 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
             LessonSession.manager.setRound1Notes()
             self.performSegue(withIdentifier: "toGamePlay", sender: self)
         }
+    }
+    //MARK: Delegates
+    
+    func sharpsFlatsSelected() {
+        self.isHalfNotesUsed = !isHalfNotesUsed
     }
     
     //MARK: Note Groups Delegate
@@ -126,6 +133,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //MARK: Layout Order
         if indexPath.section == 0 {
+            
             switch indexPath.row {
             case 0:
                 if let instrumentImage = instrumentImage {
@@ -300,9 +308,24 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                 }
             }
         }
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "lockedHalfNotes", for: indexPath)
+    
         if let lockedHalfNotesCell = HalfNotesLockedViewCell.createCell() {
-            return lockedHalfNotesCell
+            lockedHalfNotesCell.delegate = self
+            if instrumentType == .grandPiano {
+                if leaderboardsManager.didFinishGrandPianoRound2 {
+                    lockedHalfNotesCell.isLocked = false
+                    lockedHalfNotesCell.setImage()
+                    lockedHalfNotesCell.delegate = self
+                    return lockedHalfNotesCell
+                }
+            } else {
+                lockedHalfNotesCell.delegate = self
+                
+                return lockedHalfNotesCell
+            }
         }
         return cell
     }
@@ -327,6 +350,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? GamePlayRound1ViewController {
             vc.instrumentType = self.instrumentType
+            
+                vc.hasHalfNotes = true
+            
+            
         }
         if let vc = segue.destination as? GamePlayRound2ViewController {
             vc.isStartingRound = true

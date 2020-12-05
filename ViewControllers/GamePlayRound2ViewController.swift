@@ -12,7 +12,7 @@ class GamePlayRound2ViewController: UIViewController {
     
     var instrumentType: InstrumentType = .grandPiano
     
-    var gameRoundNotes: [Note] = LessonSession.manager.lesson.round2Notes
+    var gameRoundNotes: [Note] = LessonSession.manager.sessionNotes
     
     var isStartingRound: Bool = false
     
@@ -473,6 +473,7 @@ class GamePlayRound2ViewController: UIViewController {
             if let vc = segue.destination as? GamePlayRound3ViewController {
                 vc.instrumentType = self.instrumentType
                 LessonSession.manager.setRound3Notes()
+                
                 if instrumentType == .grandPiano {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()
                 } else if instrumentType == .acousticGuitar {

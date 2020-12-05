@@ -10,9 +10,9 @@ import AVFoundation
 
 class GamePlayRound3ViewController: UIViewController {
 
-    var instrumentType: InstrumentType = LessonSession.manager.lesson.instrument.type
+    var instrumentType: InstrumentType = .acousticGuitar
     
-    var gameRoundNotes: [Note] = LessonSession.manager.lesson.round3Notes
+    var gameRoundNotes: [Note] = LessonSession.manager.sessionNotes
     var isStartingRound: Bool = false
     
     var note1: Note?

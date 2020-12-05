@@ -10,7 +10,7 @@ import GameKit
 
 struct LeaderboardsManager {
        // Loaded achievements
-    var achievements = GameCenterManager.manager.achievementsManager
+    //var achievements = GameCenterManager.manager.achievementsManager
     
     //MARK: Instrument helper
     
@@ -20,7 +20,7 @@ struct LeaderboardsManager {
             return true
         } else {
             // Then check the achievements manager to see if saved on GameCenter
-            return achievements.isAcousticGuitarUnlocked
+            return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
         }
     }
     
@@ -28,14 +28,14 @@ struct LeaderboardsManager {
         if defaults.bool(forKey: kIsViolinUnlocked) == true {
             return true
         } else {
-            return achievements.isViolinUnlocked
+            return GameCenterManager.manager.achievementsManager.isViolinUnlocked
         }
     }
     var isSaxaphoneUnlocked: Bool  {
         if defaults.bool(forKey: kIsSaxaphoneUnlocked) == true {
             return true
         } else {
-            return achievements.isSaxUnlocked
+            return GameCenterManager.manager.achievementsManager.isSaxUnlocked
         }
     }
     //MARK: UserDefaults for unlocking visuals and notes

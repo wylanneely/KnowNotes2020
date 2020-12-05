@@ -15,8 +15,6 @@ class LaunchPageViewController: UIViewController {
         GameCenterManager.manager.viewController = self
         registerNotification()
         setUPButtons()
-       // animateimagesWithtwoColors()
-        //checkDevice()
     }
     
     //MARK: Set Up
@@ -37,23 +35,6 @@ class LaunchPageViewController: UIViewController {
             print("iPhoneLarger")
         }
     }
-   
-    //NOTE: this is for the menu image animation
-//    func animateimagesWithtwoColors(){
-//        UIView.animate(withDuration: 2.5) {
-//            self.pianosImage.tintColor = UIColor.discoDayGReen
-//            self.guitarsImage.tintColor = UIColor.midnightPurps
-//        } completion: {
-//            (completed: Bool) -> Void in
-//            UIView.animateKeyframes(withDuration: 2.5, delay: 1, options: .repeat) {
-//                self.pianosImage.tintColor = UIColor.midnightPurps
-//                self.guitarsImage.tintColor = UIColor.discoDayGReen
-//            } completion: { (completed: Bool) -> Void in
-//                    self.pianosImage.tintColor = UIColor.discoDayGReen
-//                self.guitarsImage.tintColor = UIColor.midnightPurps
-//            }
-//        }
-//    }
     
     //MARK: Outlets & Actions
     

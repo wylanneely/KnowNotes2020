@@ -37,4 +37,6 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     @IBOutlet weak var noteDescription: UILabel!
     static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"
     
+    
+    
 }

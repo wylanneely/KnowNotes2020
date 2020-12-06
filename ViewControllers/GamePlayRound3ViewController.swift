@@ -12,7 +12,7 @@ class GamePlayRound3ViewController: UIViewController {
 
     var instrumentType: InstrumentType = .acousticGuitar
     
-    var gameRoundNotes: [Note] = LessonSession.manager.sessionNotes
+    var gameRoundNotes: [Note] = Session.manager.sessionNotes
     var isStartingRound: Bool = false
     
     var note1: Note?
@@ -35,7 +35,7 @@ class GamePlayRound3ViewController: UIViewController {
         let action = UIAlertAction(title: "Submit", style: .default) { (_) in
             
             
-            let score: Int = LessonSession.manager.score
+            let score: Int = Session.manager.score
             if self.instrumentType == .grandPiano {
                 GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
                 GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
@@ -131,13 +131,13 @@ class GamePlayRound3ViewController: UIViewController {
     }
     
     func setUpScoresLifes(){
-        lifesLabel.text = "\(LessonSession.manager.lifes)"
-        scoreLabel.text = "\(LessonSession.manager.score)"
+        lifesLabel.text = "\(Session.manager.lifes)"
+        scoreLabel.text = "\(Session.manager.score)"
         playButton.layer.cornerRadius = 10
     }
     
     func checkRoundEnd(){
-        if LessonSession.manager.lifes == 0 {
+        if Session.manager.lifes == 0 {
             self.present(finishedGameAlert, animated: true) {
                 //Possible unwind segue area
             }
@@ -145,7 +145,7 @@ class GamePlayRound3ViewController: UIViewController {
     }
     
     func playSoundFromNote(path: String? ) {
-        if let url = LessonSession.manager.getSoundPathURLFromNote(path: path) {
+        if let url = Session.manager.getSoundPathURLFromNote(path: path) {
             do {
                 byPassSilentMode()
                 musicSound = try AVAudioPlayer(contentsOf: url)
@@ -213,7 +213,7 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func playButtonTapped(_ sender: Any) {
         if doesGameNeedNewNote {
-            let newNote = LessonSession.manager.getNextNote()
+            let newNote = Session.manager.getNextNote()
             currentNote = newNote
             playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
@@ -239,12 +239,12 @@ class GamePlayRound3ViewController: UIViewController {
         }
         if let note1 = note1 {
             playSoundFromNote(path: note1.soundPath)
-            if LessonSession.manager.checkUpdateSessionWith(note: note1) {
+            if Session.manager.checkUpdateSessionWith(note: note1) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -253,7 +253,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note1ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note1Button.isEnabled = false
             }
@@ -272,12 +272,12 @@ class GamePlayRound3ViewController: UIViewController {
         }
         if let note2 = note2 {
             playSoundFromNote(path: note2.soundPath)
-            if LessonSession.manager.checkUpdateSessionWith(note: note2) {
+            if Session.manager.checkUpdateSessionWith(note: note2) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -286,7 +286,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note2ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note2Button.isEnabled = false
             }
@@ -306,12 +306,12 @@ class GamePlayRound3ViewController: UIViewController {
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
 
-            if LessonSession.manager.checkUpdateSessionWith(note: note3) {
+            if Session.manager.checkUpdateSessionWith(note: note3) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -320,7 +320,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note3ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note3Button.isEnabled = false
             }
@@ -338,12 +338,12 @@ class GamePlayRound3ViewController: UIViewController {
         }
         if let note4 = note4 {
             playSoundFromNote(path: note4.soundPath)
-            if LessonSession.manager.checkUpdateSessionWith(note: note4) {
+            if Session.manager.checkUpdateSessionWith(note: note4) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -352,7 +352,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note4ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note4Button.isEnabled = false
             }
@@ -372,12 +372,12 @@ class GamePlayRound3ViewController: UIViewController {
         if let note5 = note5 {
             playSoundFromNote(path: note5.soundPath)
 
-            if LessonSession.manager.checkUpdateSessionWith(note: note5) {
+            if Session.manager.checkUpdateSessionWith(note: note5) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -386,7 +386,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note5ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note5Button.isEnabled = false
             }
@@ -406,12 +406,12 @@ class GamePlayRound3ViewController: UIViewController {
         if let note6 = note6 {
             playSoundFromNote(path: note6.soundPath)
 
-            if LessonSession.manager.checkUpdateSessionWith(note: note6) {
+            if Session.manager.checkUpdateSessionWith(note: note6) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -420,7 +420,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note6ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note6Button.isEnabled = false
             }
@@ -440,12 +440,12 @@ class GamePlayRound3ViewController: UIViewController {
         if let note7 = note7 {
             playSoundFromNote(path: note7.soundPath)
 
-            if LessonSession.manager.checkUpdateSessionWith(note: note7) {
+            if Session.manager.checkUpdateSessionWith(note: note7) {
                 //correct
                 handleCorrectAnswerWithHaptic()
                 DispatchQueue.main.async {
                     self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(LessonSession.manager.score)"
+                    self.scoreLabel.text = "\(Session.manager.score)"
                 }
                 doesGameNeedNewNote = true
             } else {
@@ -454,7 +454,7 @@ class GamePlayRound3ViewController: UIViewController {
                 self.note7ButtonView.layer.removeAllAnimations()
                 handleWrongAnswerWithHaptic()
                 DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(LessonSession.manager.lifes)"
+                    self.lifesLabel.text = "\(Session.manager.lifes)"
                 }
                 note7Button.isEnabled = false
             }

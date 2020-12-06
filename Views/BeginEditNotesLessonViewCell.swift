@@ -14,10 +14,6 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
         setUpViews()
         beginButton.pulsate()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     func setUpViews(){
         beginButton.layer.cornerRadius = 10
@@ -28,6 +24,11 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
         let cell = nib.instantiate(withOwner: self, options: nil).first as? BeginEditNotesLessonViewCell
         return cell
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
     //MARK: Properties
     
     var delegate: BeginLessonDelegate?
@@ -39,7 +40,8 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
     @IBAction func beginButtonTapped(_ sender: Any) {
         DispatchQueue.main.async {
             self.delegate?.beginLesssonButtonTapped()
-        } }
+        }
+    }
     
 }
 

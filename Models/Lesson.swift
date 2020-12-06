@@ -5,33 +5,28 @@
 //  Created by Wylan L Neely on 10/23/20.
 //
 
-import Foundation
+//import Foundation
+//
+//class Lesson {
+//
+//    let instrument: SoundHolder
+//    var grandPiano = GrandPiano()
+//
+//    var noteGroup: NoteType
+//    var lessonNotes: [Note] = []
+//
+//    init(instrument: SoundHolder, noteGroups: NoteType) {
+//        self.instrument = instrument
+//        self.noteGroup = noteGroups
+//    }
+//
+//    lazy var round1Notes: [Note] = instrument.round1Notes
+//    lazy var round1HalfNotes: [Note] = grandPiano.sharpsFlatsRound1
+//    lazy var round2Notes: [Note] = instrument.round2Notes
+//    lazy var round3Notes: [Note] = instrument.round3Notes
+//}
+//
 
 
-class Lesson {
-    
-    let instrument: Instrument
-    var noteGroup: NoteGroups
-    var  lessonNotes: [Note] = []
-    
-    init(instrument: Instrument, noteGroups: NoteGroups) {
-        self.instrument = instrument
-        self.noteGroup = noteGroups
-    }
-    
-    lazy var round1Notes: [Note] = instrument.round1Notes
-    lazy var round2Notes: [Note] = instrument.round2Notes
-    lazy var round3Notes: [Note] = instrument.round3Notes
-}
 
-enum NoteGroups: String {
-    case wholeNotes = "Whole"
-    case halfNotes = "Halfs"
-    case allNotes = "All"
-}
 
-struct Note {
-    let name: String
-    let id: Int
-    var soundPath: String?
-}

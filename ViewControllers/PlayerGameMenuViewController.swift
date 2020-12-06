@@ -187,20 +187,20 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
            switch segue.identifier {            
            case "toAcousticNotes" :
-               LessonSession.manager.setAcousticLesson()
+               Session.manager.setAcousticSession()
                vc.instrumentImage = UIImage(named: "acoustic_Guitar")
                vc.instrumentType = InstrumentType.acousticGuitar
            case "toGrandPianoNotes" :
-               LessonSession.manager.setGrandPianoLesson()
+               Session.manager.setGrandPianoSession()
                vc.instrumentImage = UIImage(named: "grand_Piano")
                vc.instrumentType = InstrumentType.grandPiano
            case "toViolinNotes" :
-            LessonSession.manager.setViolinLesson()
+            Session.manager.setViolinSession()
             vc.instrumentImage = UIImage(named: "violin")
             vc.instrumentType = InstrumentType.violin
             
         case "toSaxNotes" :
-         LessonSession.manager.setSaxophoneLesson()
+         Session.manager.setSaxophoneSession()
          vc.instrumentImage = UIImage(named: "saxophone")
             vc.instrumentType = InstrumentType.saxaphone
            default:

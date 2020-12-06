@@ -9,6 +9,7 @@ import UIKit
 
 class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondThirdNoteGroupDelegate, sharpsFlatsDelegate {
     
+    
     //MARK: Properties
     
     var instrumentType: InstrumentType = .grandPiano
@@ -16,8 +17,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
     var groupStartNumber: Int = 1
-    var isHalfNotesUsed: Bool = false
-    
+    var hasHalfNotes: Bool = false
     
     //MARK: LifeCycle
     
@@ -43,34 +43,39 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         let secondRoundNoteCell = UINib(nibName:SecondRoundKnownNotesViewCell.xibRID,bundle: nil)
         let beginNoteCell = UINib(nibName: BeginEditNotesLessonViewCell.xibRID, bundle: nil)
         let lockedHalfNotesCell = UINib(nibName: HalfNotesLockedViewCell.xibRID, bundle: nil)
+        
         //TODO: finish organizing this file                  Lock These in code
         self.tableView.register(firstNoteCell, forCellReuseIdentifier: "FirstNoteCell")
         self.tableView.register(lockedHalfNotesCell, forCellReuseIdentifier: "lockedHalfNotes")
         self.tableView.register(headerNoteCell, forCellReuseIdentifier: "headerCell")
         self.tableView.register(secondRoundNoteCell, forCellReuseIdentifier: "secondRoundCell")
         self.tableView.register(beginNoteCell, forCellReuseIdentifier: "beginCell")
+        
+        
     }
     
-    //MARK: Begin Delegate
+
+    //MARK: Delegates
     
+    //MARK: Begin Delegate
+
     func beginLesssonButtonTapped() {
-        LessonSession.manager.resetScores()
+        Session.manager.resetScores()
         switch groupStartNumber {
         case 2:
-            LessonSession.manager.setRound2Notes()
+            Session.manager.setRound2Notes()
             self.performSegue(withIdentifier: "skipToRound2", sender: self)
         case 3:
-            LessonSession.manager.setRound3Notes()
+            Session.manager.setRound3Notes()
             self.performSegue(withIdentifier: "skipToRound3", sender: self)
         default:
-            LessonSession.manager.setRound1Notes()
+            Session.manager.setRound1Notes()
             self.performSegue(withIdentifier: "toGamePlay", sender: self)
         }
     }
-    //MARK: Delegates
-    
-    func sharpsFlatsSelected() {
-        self.isHalfNotesUsed = !isHalfNotesUsed
+
+    func sharpsFlatsSelected(hasHalfs: Bool) {
+        hasHalfNotes = hasHalfs
     }
     
     //MARK: Note Groups Delegate
@@ -98,6 +103,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         self.present(lockedRound3Alert, animated: true, completion: nil)
     }
     
+    //MARK: Alerts
+    
     var lockedRound2Alert: UIAlertController {
         let alert = UIAlertController(title: "Locked", message: "Complete Round 1 to Unlock", preferredStyle: .alert)
         let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
@@ -106,6 +113,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         alert.addAction(action2)
         return alert
     }
+    
     var lockedRound3Alert: UIAlertController {
         let alert = UIAlertController(title: "Locked", message: "Complete Round 2 to Unlock", preferredStyle: .alert)
         let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
@@ -114,7 +122,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         alert.addAction(action2)
         return alert
     }
-    // MARK: TableView Basi
+    
+    // MARK: TableView
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         //NOTE: to display what sounds you have unlocked
@@ -133,7 +142,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //MARK: Layout Order
         if indexPath.section == 0 {
-            
             switch indexPath.row {
             case 0:
                 if let instrumentImage = instrumentImage {
@@ -190,7 +198,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
                         notesCellExample.setSelectedView()
-                    
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
@@ -203,11 +210,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                     if groupStartNumber == 3 {
                         notesCellExample.setSelectedView()
                     }
-                    
                     notesCellExample.delegate = self
                     
                     switch instrumentType{
-                    
                     case .grandPiano:
                         if leaderboardsManager.didFinishGrandPianoRound1 {
                             return notesCellExample
@@ -215,7 +220,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.setLockedNotesViews()
                             return notesCellExample
                         }
-                        
                     case .acousticGuitar:
                         if leaderboardsManager.didFinishAcousticGuitarRound1 {
                             return notesCellExample
@@ -309,24 +313,26 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
             }
         }
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "lockedHalfNotes", for: indexPath)
-    
+        if indexPath.section == 0 {
+        }
         if let lockedHalfNotesCell = HalfNotesLockedViewCell.createCell() {
             lockedHalfNotesCell.delegate = self
+            
             if instrumentType == .grandPiano {
                 if leaderboardsManager.didFinishGrandPianoRound2 {
                     lockedHalfNotesCell.isLocked = false
                     lockedHalfNotesCell.setImage()
-                    lockedHalfNotesCell.delegate = self
                     return lockedHalfNotesCell
                 }
+                
             } else {
                 lockedHalfNotesCell.delegate = self
                 
                 return lockedHalfNotesCell
             }
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lockedHalfNotes", for: indexPath)
         return cell
     }
     
@@ -350,8 +356,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? GamePlayRound1ViewController {
             vc.instrumentType = self.instrumentType
-            
-                vc.hasHalfNotes = true
+            vc.hasHalfNotes = self.hasHalfNotes
             
             
         }

@@ -24,7 +24,9 @@ class GamePlayRound1ViewController: UIViewController {
     var note2: Note?
     var note3: Note?
     
+    //AdvancedOptions
     var hasHalfNotes: Bool = false
+    var shuffleMode: ShuffleMode = .off
     
     var currentNote: Note?
     
@@ -34,14 +36,10 @@ class GamePlayRound1ViewController: UIViewController {
         } else {
             Session.manager.setRound1Notes()
         }
-        
-        
-        
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGameNotes()
         setUpLabelsButtonsViews()
         assignNotesToButtons()
         self.isModalInPresentation = true
@@ -104,11 +102,6 @@ class GamePlayRound1ViewController: UIViewController {
     //MARK: Functions
     
     func checkRoundEnd(){
-        if Session.manager.isRound1fullyRandomized() {
-            
-            
-        }
-        
         if Session.manager.score >= 10 {
             self.performSegue(withIdentifier: "toRound2", sender: self)
         }
@@ -151,15 +144,27 @@ class GamePlayRound1ViewController: UIViewController {
             }
         }
     
-    func handleCorrectAnswerWithHaptic(){
-       if  Session.manager.isRound1fullyRandomized() {
-            DispatchQueue.main.async {
-                self.showShuffleButtonModes()
-                self.assignNotesToButtons()
+    func checkIfSetAllRandomSelected(){
+        if  Session.manager.isRound1fullyRandomized() {
+            switch shuffleMode {
+            case .auto:
+                self.shuffleNotes(self)
+            case .manual:
+                DispatchQueue.main.async {
+                    self.showShuffleButtonModes()
+                }
+            case .off:
+                return
+            default:
+                return
             }
         }
+    }
+    
+    func handleCorrectAnswerWithHaptic(){
+        checkIfSetAllRandomSelected()
+        
         self.hapticGenerator.notificationOccurred(.success)
-        // assignNotesToButtons() //get rid
         stopPulsingNoteButtons()
         UIView.animate(withDuration: 0.33) {
             self.view.backgroundColor = UIColor.pastelGReen
@@ -203,6 +208,7 @@ class GamePlayRound1ViewController: UIViewController {
             return
         }
         
+        
         if doesGameNeedNewNote {
             let newNote = Session.manager.getNextNote()
             currentNote = newNote
@@ -219,12 +225,12 @@ class GamePlayRound1ViewController: UIViewController {
     }
     
     @IBAction func shuffleNotes(_ sender: Any) {
-        shuffleNotes()
-        assignNotesToButtons()
         hideShuffleButton()
         DispatchQueue.main.async {
+                self.shuffleNotes()
                 self.playButton.setTitle("Play", for: .normal)
                 self.pulseAllNoteButtons()
+                self.assignNotesToButtons()
         }
         enableNoteButtons()
     }
@@ -356,6 +362,7 @@ class GamePlayRound1ViewController: UIViewController {
     func resetGame() {
         currentRound = 1.0
         Session.manager.resetScores()
+        Session.manager.reuseRound1NoteSet()
         setUpLabelsButtonsViews()
         stopPulsingNoteViews()
             circleProgressBar.setProgress(to: 0 , withAnimation: true)
@@ -391,8 +398,13 @@ class GamePlayRound1ViewController: UIViewController {
         let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
+        let action3 = UIAlertAction(title: "Replay Round", style: .default) { (_) in
+            self.resetGame()
+        }
+        
         alert.addAction(action2)
         alert.addAction(action)
+        alert.addAction(action3)
         return alert
     }
     
@@ -465,7 +477,15 @@ class GamePlayRound1ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRound2" {
             if let vc = segue.destination as? GamePlayRound2ViewController {
-                Session.manager.setRound2Notes()
+                vc.hasHalfNotes = self.hasHalfNotes
+                
+                if hasHalfNotes {
+                    Session.manager.setRound2HalfNotes()
+                } else {
+                    Session.manager.setRound2Notes()
+                }
+                
+
                 vc.instrumentType = self.instrumentType
                 if instrumentType == .grandPiano {
                     GameCenterManager.manager.leaderboardsManager.finishedRound1GrandPianoNotes()

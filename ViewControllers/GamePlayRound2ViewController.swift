@@ -28,10 +28,13 @@ class GamePlayRound2ViewController: UIViewController {
     var note4: Note?
     var note5: Note?
     
+    //AdvancedOptions 
     var hasHalfNotes: Bool = false
+    var shuffleMode: ShuffleMode = .off
 
     //for progressView
     var isStartingRound: Bool = false
+    
     let totalGroupRounds: Double = 15.00
     var currentRound: Double = 1.00
     
@@ -59,6 +62,14 @@ class GamePlayRound2ViewController: UIViewController {
     }
    
     //MARK: SetUp
+    
+    func getGameNotes(){
+        if hasHalfNotes {
+            Session.manager.setRound2HalfNotes()
+        } else {
+            Session.manager.setRound2Notes()
+        }
+    }
     
     func assignNotesToButtons(){
         let note_1 = gameRoundNotes[0]
@@ -135,7 +146,6 @@ class GamePlayRound2ViewController: UIViewController {
         if  Session.manager.isRound2fullyRandomized() {
              DispatchQueue.main.async {
                  self.showShuffleButtonModes()
-                 self.assignNotesToButtons()
              }
          }
         self.hapticGenerator.notificationOccurred(.success)
@@ -208,12 +218,11 @@ class GamePlayRound2ViewController: UIViewController {
     }
     
     @IBAction func shuffleNotes(_ sender: Any) {
-        shuffleNotes()
-        hideShuffleButton()
-        assignNotesToButtons()
         DispatchQueue.main.async {
-            self.playButton.setTitle("Play", for: .normal)
-            self.pulseAllNoteButtons()
+                self.shuffleNotes()
+                self.playButton.setTitle("Play", for: .normal)
+                self.pulseAllNoteButtons()
+                self.assignNotesToButtons()
         }
         enableNoteButtons()
     }
@@ -412,7 +421,7 @@ class GamePlayRound2ViewController: UIViewController {
     
     func checkRoundEnd(){
         if isStartingRound {
-            if currentRound >= 15 {
+            if Session.manager.score >= 15 {
                 self.performSegue(withIdentifier: "toRound3", sender: self) }
             if Session.manager.lifes == 0 {
                 self.present(finishedGameAlert, animated: true) { }
@@ -426,6 +435,15 @@ class GamePlayRound2ViewController: UIViewController {
                     //Possible unwind segue area
                 } }
         } }
+    
+    func resetGame() {
+        currentRound = 2.0
+        Session.manager.resetScores()
+        Session.manager.reuseRound2NoteSet()
+        setUpLabelsButtonsViews()
+        stopPulsingNoteViews()
+            circleProgressBar.setProgress(to: 0 , withAnimation: true)
+    }
     //MARK: Alerts
     var finishedGameAlert: UIAlertController {
         let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
@@ -456,8 +474,13 @@ class GamePlayRound2ViewController: UIViewController {
         let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
         }
+        let action3 = UIAlertAction(title: "Replay Round", style: .destructive) { (_) in
+            self.resetGame()
+       }
         alert.addAction(action2)
         alert.addAction(action)
+        alert.addAction(action3)
+
         return alert
     }
     

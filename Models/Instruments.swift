@@ -36,7 +36,7 @@ class GrandPiano: Instrument, NoteRounds {
         return [A_note,B_note,C_note,D_note,E_note,F_note,G_note]
     }
     var sharpsFlatsRound1: [Note] {
-        var gameRoundNotes: [Note] = [A_note,Bb_note,B_note,C_note,Cs_note,D_note]
+        var gameRoundNotes: [Note] = [A_note,Bb_note,B_note,C_note,Cs_note]
         let note_1 = gameRoundNotes.randomElement()
         gameRoundNotes.remove(object: note_1!)
         let note_2 = gameRoundNotes.randomElement()
@@ -45,7 +45,7 @@ class GrandPiano: Instrument, NoteRounds {
         return [note_1!,note_2!,note_3!]
     }
     var sharpsFlatsRound2: [Note] {
-        var gameRoundNotes: [Note] = [A_note,Bb_note,B_note,C_note,Cs_note,D_note,Eb_note,E_note,F_note]
+        var gameRoundNotes: [Note] = [A_note,Bb_note,B_note,C_note,Cs_note,D_note,Eb_note,E_note]
         let note_1 = gameRoundNotes.randomElement()
         gameRoundNotes.remove(object: note_1!)
         let note_2 = gameRoundNotes.randomElement()

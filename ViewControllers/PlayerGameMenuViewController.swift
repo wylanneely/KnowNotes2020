@@ -26,7 +26,6 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     }
     
     //MARK: Set Up
-
     func setUpProfilePhotoGestures(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
         localPlayerProfilePhoto.isUserInteractionEnabled = true
@@ -123,11 +122,9 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         case 0:
             cell.setUp(type: .grandPiano, isUnlocked: true)
             return cell
-
         case 1:
             cell.setUp(type: .acousticGuitar, isUnlocked: isAcousticGuitarUnlocked)
             return cell
-
         case 2:
             cell.setUp(type: .violin, isUnlocked: isViolinUnlocked)
             return cell
@@ -185,7 +182,9 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
-           switch segue.identifier {            
+        vc.hasHalfNotes = false
+        Session.manager.hasHalfNotes = false
+           switch segue.identifier {
            case "toAcousticNotes" :
                Session.manager.setAcousticSession()
                vc.instrumentImage = UIImage(named: "acoustic_Guitar")

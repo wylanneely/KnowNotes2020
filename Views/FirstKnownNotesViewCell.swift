@@ -13,6 +13,23 @@ class FirstKnownNotesViewCell: UITableViewCell {
         super.awakeFromNib()
         setUPViews()
         setGestureRecognizer()
+        setSharpsFlats()
+    }
+    
+    override func reloadInputViews() {
+         setSharpsFlats()
+    }
+    
+    func setSharpsFlats(){
+        if Session.manager.hasHalfNotes {
+            self.flatLabel.isHidden = false
+            self.flatLabel.startShimmeringAnimation()
+            self.sharpLabel.isHidden = false
+            self.sharpLabel.startShimmeringAnimation()
+        } else {
+                self.flatLabel.isHidden = true
+                self.sharpLabel.isHidden = true
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,6 +43,8 @@ class FirstKnownNotesViewCell: UITableViewCell {
     }
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
+        //animateSharps()
+        //flashSharps()
         delegate?.firstGroupTapped()
     }
     
@@ -65,9 +84,34 @@ class FirstKnownNotesViewCell: UITableViewCell {
     static let xibRID: String = "FirstKnownNotesViewCell"
     
     var delegate: FirstRoundNotesDelegate?
+    
+    func flashSharps(){
+        self.flatLabel.blink2()
+        self.sharpLabel.blink2()
+    }
+    
+//    func animateSharps(){
+//        DispatchQueue.main.async {
+//            UIView.animate(withDuration: 2.5) {
+//                self.flatLabel.textColor = UIColor.red
+//                self.sharpLabel.textColor = UIColor.red
+//            } completion: {
+//                (completed: Bool) -> Void in
+//                UIView.animateKeyframes(withDuration: 2.5, delay: 1, options: .repeat) {
+//                    self.flatLabel.textColor = UIColor.white
+//                        self.sharpLabel.textColor = UIColor.white
+//                } completion: { (completed: Bool) -> Void in
+//                    self.flatLabel.textColor = UIColor.red
+//                    self.sharpLabel.textColor = UIColor.red
+//                }
+//            }
+//        }
+//        }
 
     //MARK: Outlets
     
+    @IBOutlet weak var flatLabel: UILabel!
+    @IBOutlet weak var sharpLabel: UILabel!
     @IBOutlet weak var middleBGView: UIView!
     @IBOutlet weak var note2Button: UIButton!
     @IBOutlet weak var note1Button: UIButton!

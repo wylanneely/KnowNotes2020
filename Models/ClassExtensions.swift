@@ -396,3 +396,25 @@ extension Array where Element: Equatable {
     }
 
 }
+
+extension UILabel {
+    func blink() {
+        self.alpha = 0.0;
+        UIView.animate(withDuration: 0.8, //Time duration you want,
+            delay: 0.0,
+            options: .repeat,
+            animations: { [weak self] in self?.alpha = 1.0 },
+            completion: { [weak self] _ in self?.alpha = 0.0 })
+    }
+    func blink2() {
+      let animation = CABasicAnimation(keyPath: "opacity")
+      animation.isRemovedOnCompletion = false
+      animation.fromValue           = 1
+      animation.toValue             = 0
+      animation.duration            = 0.8
+      animation.autoreverses        = true
+      animation.repeatCount         = 3
+      animation.beginTime           = CACurrentMediaTime() + 0.5
+      self.layer.add(animation, forKey: nil)
+      }
+}

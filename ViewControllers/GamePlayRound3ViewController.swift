@@ -17,10 +17,15 @@ class GamePlayRound3ViewController: UIViewController {
     var gameRoundNotes: [Note] {
         return Session.manager.sessionNotes
     }
-    
-    var hasHalfNotes: Bool = false
-    var doesGameNeedNewNote: Bool = true
     var isStartingRound: Bool = false
+
+    
+    //AdvancedOptions
+    var hasHalfNotes: Bool = false
+    var shuffleMode: ShuffleMode = .off
+    
+    //Notes helpers
+    var doesGameNeedNewNote: Bool = true
     var currentNote: Note?
 
     var note1: Note?
@@ -56,6 +61,14 @@ class GamePlayRound3ViewController: UIViewController {
     }
     
     //MARK: SetUp
+    
+    func getGameNotes(){
+        if hasHalfNotes {
+            Session.manager.setRound3HalfNotes()
+        } else {
+            Session.manager.setRound3Notes()
+        }
+    }
     
     func assignNotesToButtons(){
         let note_1 = gameRoundNotes[0]
@@ -139,7 +152,6 @@ class GamePlayRound3ViewController: UIViewController {
         if  Session.manager.isRound3fullyRandomized() {
              DispatchQueue.main.async {
                  self.showShuffleButtonModes()
-                 self.assignNotesToButtons()
              }
          }
         self.hapticGenerator.notificationOccurred(.success)
@@ -219,11 +231,11 @@ class GamePlayRound3ViewController: UIViewController {
     
     @IBAction func shuffleNotes(_ sender: Any) {
         shuffleNotes()
-        hideShuffleButton()
-        assignNotesToButtons()
         DispatchQueue.main.async {
-            self.playButton.setTitle("Play", for: .normal)
-            self.pulseAllNoteButtons()
+                self.shuffleNotes()
+                self.playButton.setTitle("Play", for: .normal)
+                self.pulseAllNoteButtons()
+                self.assignNotesToButtons()
         }
         enableNoteButtons()
     }
@@ -521,11 +533,22 @@ class GamePlayRound3ViewController: UIViewController {
                 self.performSegue(withIdentifier: "toLocalProfile2", sender: self)
             }
         
+        let action3 = UIAlertAction(title: "Replay Round", style: .default) { (_) in
+            self.resetGame()
+        }
+        
         alert.addAction(action2)
         alert.addAction(action)
+        alert.addAction(action3)
         return alert
     }
-    
+    func resetGame() {
+        Session.manager.resetScores()
+        Session.manager.reuseRound3NoteSet()
+        setUpScoresLifes()
+        assignNotesToButtons()
+        stopPulsingNoteViews()
+    }
     //MARK: Outlets
     
     @IBOutlet weak var backgroundGif: UIImageView!

@@ -9,7 +9,10 @@ import UIKit
 
 class HalfNotesLockedViewCell: UITableViewCell {
     
-    var isLocked: Bool = true
+    var isLocked: Bool {
+      return  !Session.manager.isHalfNotesUnLocked
+    }
+    
     var delegate: sharpsFlatsDelegate?
     var isHalfs: Bool = false
 
@@ -19,10 +22,13 @@ class HalfNotesLockedViewCell: UITableViewCell {
         setGestureRecognizer()
         setImage()
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+
+    func setUpViews(){
+        borderView.layer.borderWidth = 2
+        borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        borderView.layer.cornerRadius = 10
     }
+    
     func setGestureRecognizer(){
         self.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(HalfNotesLockedViewCell.tapEdit(sender:)))
@@ -30,12 +36,16 @@ class HalfNotesLockedViewCell: UITableViewCell {
     }
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
+        if isLocked {
+            self.delegate?.sharpsFlatsSelected(hasHalfs: nil)
+            return
+        }
+        
         if isHalfs == false {
             isHalfs = true
             DispatchQueue.main.async {
                 self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
                 self.delegate?.sharpsFlatsSelected(hasHalfs: false)
-
             }
         } else {
             isHalfs = false
@@ -54,26 +64,32 @@ class HalfNotesLockedViewCell: UITableViewCell {
         return cell
     }
     
-    func setUpViews(){
-        borderView.layer.borderWidth = 2
-        borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
-        borderView.layer.cornerRadius = 10
-    }
+ 
     
     func setImage(){
+        
         if isLocked == false {
             self.isUserInteractionEnabled = true
-                lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+            DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+            }
         }
-        
+    }
+    
+    func setGUitarChords(){
+        DispatchQueue.main.async {
+            self.notesLabel.text = "Minor Chords"
+        }
     }
     
     @IBOutlet weak var lockedOrChecked: UIImageView!
     @IBOutlet weak var borderView: UIView!
+    @IBOutlet weak var notesLabel: UILabel!
+    
     static let xibRID:String = "HalfNotesLockedViewCell"
 }
 
 protocol sharpsFlatsDelegate {
-    func sharpsFlatsSelected(hasHalfs: Bool)
+    func sharpsFlatsSelected(hasHalfs: Bool?)
 }
 

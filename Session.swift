@@ -54,129 +54,6 @@ class Session {
     
     //MARK: Set UP
     
-    func setRound1Notes(){
-        roundNumber = 1
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.round1Notes
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.round1Notes
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round1Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round1Notes
-        }
-        round1Notes = sessionNotes
-        hasHalfNotes = false
-    }
-    func setRound2Notes(){
-        roundNumber = 2
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round2Notes
-        }
-        round2Notes = sessionNotes
-        hasHalfNotes = false
-    }
-    func setRound3Notes(){
-        roundNumber = 3
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.round3Notes
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.round3Notes
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round3Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round3Notes
-        }
-        round3Notes = sessionNotes
-        hasHalfNotes = false
-    }
-    
-    
-    func setRound1HalfNotes(){
-        roundNumber = 1
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.sharpsFlatsRound1
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.minorMajorChordsRound1
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round2Notes
-        }
-        round1Notes = sessionNotes
-        hasHalfNotes = true
-    }
-    
-    func setRound2HalfNotes(){
-        roundNumber = 2
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.sharpsFlatsRound2
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.minorMajorChordsRound2
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round2Notes
-        }
-        round1Notes = sessionNotes
-        hasHalfNotes = true
-    }
-    func setRound3HalfNotes(){
-        roundNumber = 3
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.sharpsFlatsRound3
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.minorChordsRound3
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round3Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round3Notes
-        }
-        round1Notes = sessionNotes
-        hasHalfNotes = true
-    }
-    func setRound4HalfNotes(){
-        roundNumber = 4
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Violin {
-            sessionNotes = instrum.round2Notes
-        }
-        if let instrum = self.instrument as? Saxaphone {
-            sessionNotes = instrum.round2Notes
-        }
-        round1Notes = sessionNotes
-        hasHalfNotes = true
-    }
-    
     func setGrandPianoSession() {
         currentInstrumentType = .grandPiano
     }
@@ -190,7 +67,7 @@ class Session {
         currentInstrumentType = .saxaphone
     }
     
-    //MARK: Note Handlers
+    //MARK: Round 1
     
     func reuseRound1NoteSet(){
        var unRandomizedSet: [Note] = []
@@ -215,6 +92,46 @@ class Session {
         }
         return fullRando
     }
+    
+    func setRound1Notes(){
+        roundNumber = 1
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.round1Notes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.round1Notes
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round1Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round1Notes
+        }
+        round1Notes = sessionNotes
+        hasHalfNotes = false
+    }
+    
+    func setRound1HalfNotes(){
+        roundNumber = 1
+        
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.sharpsFlatsRound1
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.minorMajorChordsRound1
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round2Notes
+        }
+        round1Notes = sessionNotes
+        hasHalfNotes = true
+    }
+    
+    //MARK: Round 2
+
     func reuseRound2NoteSet(){
        var unRandomizedSet: [Note] = []
         for notte in sessionNotes {
@@ -223,11 +140,11 @@ class Session {
             unRandomizedSet.append(unRando)
         }
         sessionNotes = unRandomizedSet
-        round1Notes = unRandomizedSet
+        round2Notes = unRandomizedSet
     }
     func isRound2fullyRandomized() -> Bool {
         var fullRando = false
-        for notee in round1Notes {
+        for notee in round2Notes {
             if notee.isRandomlySelected == false  {
                 fullRando = false
                 return fullRando
@@ -237,7 +154,122 @@ class Session {
         }
         return fullRando
     }
+    func setRound2Notes(){
+        roundNumber = 2
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round2Notes
+        }
+        round2Notes = sessionNotes
+        hasHalfNotes = false
+    }
     
+    func setRound2HalfNotes(){
+        roundNumber = 2
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.sharpsFlatsRound2
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.minorMajorChordsRound2
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round2Notes
+        }
+        round1Notes = sessionNotes
+        hasHalfNotes = true
+    }
+    
+    //MARK: Round 3
+    
+    func reuseRound3NoteSet(){
+       var unRandomizedSet: [Note] = []
+        for notte in sessionNotes {
+            let unRando = notte
+            unRando.isRandomlySelected = false
+            unRandomizedSet.append(unRando)
+        }
+        sessionNotes = unRandomizedSet
+        round3Notes = unRandomizedSet
+    }
+    func isRound3fullyRandomized() -> Bool {
+        var fullRando = false
+        for notee in round3Notes {
+            if notee.isRandomlySelected == false  {
+                fullRando = false
+                return fullRando
+            } else {
+                fullRando = true
+            }
+        }
+        return fullRando
+    }
+    func setRound3Notes(){
+        roundNumber = 3
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.round3Notes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.round3Notes
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round3Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round3Notes
+        }
+        round3Notes = sessionNotes
+        hasHalfNotes = false
+    }
+    
+    func setRound3HalfNotes(){
+        roundNumber = 3
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.sharpsFlatsRound3
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.minorChordsRound3
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round3Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round3Notes
+        }
+        round1Notes = sessionNotes
+        hasHalfNotes = true
+    }
+    
+    
+    //MARK: Future Rounds
+    
+    func setRound4HalfNotes(){
+        roundNumber = 4
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Violin {
+            sessionNotes = instrum.round2Notes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            sessionNotes = instrum.round2Notes
+        }
+        round1Notes = sessionNotes
+        hasHalfNotes = true
+    }
     
     //MARK: Note Session Functions
     

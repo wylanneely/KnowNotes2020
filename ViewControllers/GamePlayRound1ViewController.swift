@@ -16,7 +16,9 @@ class GamePlayRound1ViewController: UIViewController {
     var musicSound: AVAudioPlayer?
     //Setting up new instruments
     var doesGameNeedNewNote: Bool = true
-    var gameRoundNotes: [Note] = []
+    var gameRoundNotes: [Note] {
+        return Session.manager.sessionNotes
+    }
     
     var note1: Note?
     var note2: Note?
@@ -29,12 +31,12 @@ class GamePlayRound1ViewController: UIViewController {
     func shuffleNotes(){
         if hasHalfNotes{
             Session.manager.setRound1HalfNotes()
-            gameRoundNotes = Session.manager.sessionNotes
-            Session.manager.reuseRound1NoteSet()
         } else {
             Session.manager.setRound1Notes()
-            gameRoundNotes = Session.manager.sessionNotes
         }
+        
+        
+        
     }
    
     override func viewDidLoad() {
@@ -64,10 +66,8 @@ class GamePlayRound1ViewController: UIViewController {
     func getGameNotes(){
         if hasHalfNotes {
             Session.manager.setRound1HalfNotes()
-            gameRoundNotes = Session.manager.sessionNotes
         } else {
             Session.manager.setRound1Notes()
-            gameRoundNotes = Session.manager.sessionNotes
         }
     }
     
@@ -195,11 +195,11 @@ class GamePlayRound1ViewController: UIViewController {
     @IBAction func playButtonTapped(_ sender: Any) {
         if playButton.title(for: .normal) == "Keep" {
             Session.manager.reuseRound1NoteSet()
-            doesGameNeedNewNote = true
             DispatchQueue.main.async {
                 self.playButton.setTitle("Play", for: .normal)
                 self.hideShuffleButton()
             }
+            doesGameNeedNewNote = true
             return
         }
         
@@ -220,6 +220,7 @@ class GamePlayRound1ViewController: UIViewController {
     
     @IBAction func shuffleNotes(_ sender: Any) {
         shuffleNotes()
+        assignNotesToButtons()
         hideShuffleButton()
         DispatchQueue.main.async {
                 self.playButton.setTitle("Play", for: .normal)

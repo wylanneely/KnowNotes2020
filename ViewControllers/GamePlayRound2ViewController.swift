@@ -11,72 +11,36 @@ import AVFoundation
 class GamePlayRound2ViewController: UIViewController {
     
     var instrumentType: InstrumentType = .grandPiano
+    let hapticGenerator = UINotificationFeedbackGenerator()
+    var musicSound: AVAudioPlayer?
+    
+    var doesGameNeedNewNote: Bool = true
     
     var gameRoundNotes: [Note] {
-        return Session.manager.sessionNotes
-    }
-    var isStartingRound: Bool = false
+            return Session.manager.sessionNotes
+        }
     
+    var currentNote: Note?
+
     var note1: Note?
     var note2: Note?
     var note3: Note?
     var note4: Note?
     var note5: Note?
     
-    var currentNote: Note?
+    var hasHalfNotes: Bool = false
 
-    let hapticGenerator = UINotificationFeedbackGenerator()
-    var musicSound: AVAudioPlayer?
+    //for progressView
+    var isStartingRound: Bool = false
+    let totalGroupRounds: Double = 15.00
+    var currentRound: Double = 1.00
     
-    func byPassSilentMode(){
-        do {
-              try AVAudioSession.sharedInstance().setCategory(.playback)
-           } catch(let error) {
-               print(error.localizedDescription)
-           }
-    }
-    
-    var doesGameNeedNewNote: Bool = true
-    
-    var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Submit Score", style: .default) { (_) in
-            let score: Int = Session.manager.score
-            if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-                GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
-                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
-                GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .violin {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
-                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
-                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .saxaphone {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
-                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            }
-        }
-        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
-            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-        }
-        
-        alert.addAction(action2)
-        alert.addAction(action)
-        return alert
-    }
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
-        setUpScoresLifes()
+        setUpLabelsButtonsViews()
         self.isModalInPresentation = true
         setUpGif()
         playButton.pulse()
@@ -119,11 +83,29 @@ class GamePlayRound2ViewController: UIViewController {
         note5Button.setTitle("\(note_5.name)", for: .normal)
     }
     
-    func setUpScoresLifes(){
-        lifesLabel.text = "\(Session.manager.lifes)"
-        scoreLabel.text = "\(Session.manager.score)"
+    func setUpLabelsButtonsViews(){
         playButton.layer.cornerRadius = 10
+        shuffleSetButton.layer.cornerRadius = 10
+        shuffleSetButton.layer.borderWidth = 2
+        shuffleSetButton.layer.borderColor = UIColor.discoDayGReen.cgColor
+        DispatchQueue.main.async {
+            self.lifesLabel.text = "\(Session.manager.lifes)"
+            self.scoreLabel.text = "\(Session.manager.score)"
+            self.playButton.setTitle("Play", for: .normal)
+            self.playButton.pulse()
+        }
     }
+    
+    func byPassSilentMode(){
+        do {
+              try AVAudioSession.sharedInstance().setCategory(.playback)
+           } catch(let error) {
+               print(error.localizedDescription)
+           }
+    }
+    
+    
+    //MARK: Update Functions
     
     func playSoundFromNote(path: String? ) {
         if let url = Session.manager.getSoundPathURLFromNote(path: path) {
@@ -139,9 +121,8 @@ class GamePlayRound2ViewController: UIViewController {
     
     func handleWrongAnswerWithHaptic(){
         self.hapticGenerator.notificationOccurred(.error)
-        
         UIView.animate(withDuration: 0.33) {
-            self.view.backgroundColor = UIColor.systemRed
+            self.view.backgroundColor = UIColor.imperialRed
         } completion: {
             (completed: Bool) -> Void in
             UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
@@ -151,6 +132,12 @@ class GamePlayRound2ViewController: UIViewController {
     }
     
     func handleCorrectAnswerWithHaptic(){
+        if  Session.manager.isRound2fullyRandomized() {
+             DispatchQueue.main.async {
+                 self.showShuffleButtonModes()
+                 self.assignNotesToButtons()
+             }
+         }
         self.hapticGenerator.notificationOccurred(.success)
         stopPulsingNoteButtons()
         UIView.animate(withDuration: 0.33) {
@@ -164,19 +151,29 @@ class GamePlayRound2ViewController: UIViewController {
         }
     }
     
-    var quitGameActionSheet: UIAlertController {
-        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to go back? Any progress made will not be saved.", preferredStyle: .actionSheet)
-        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
-            self.isModalInPresentation = false
-            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+    func shuffleNotes(){
+        if hasHalfNotes{
+            Session.manager.setRound2HalfNotes()
+        } else {
+            Session.manager.setRound2Notes()
         }
-        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
-            return
-        }
-        quitGameActionSheet.addAction(noAction)
-        quitGameActionSheet.addAction(yesAction)
-        return quitGameActionSheet
     }
+   
+    
+    func showShuffleButtonModes(){
+        DispatchQueue.main.async {
+            self.shuffleSetButton.isHidden = false
+            self.shuffleSetButton.isUserInteractionEnabled = true
+            self.shuffleSetButton.pulse()
+            self.playButton.setTitle("Keep", for: .normal)
+        }
+    }
+    
+    func hideShuffleButton(){
+        shuffleSetButton.isHidden = true
+        shuffleSetButton.isUserInteractionEnabled = false
+    }
+
     
     //MARK: Actions
     @IBAction func leaveButtonTapped(_ sender: Any) {
@@ -185,6 +182,16 @@ class GamePlayRound2ViewController: UIViewController {
     
     
     @IBAction func playButtonTapped(_ sender: Any) {
+        if playButton.title(for: .normal) == "Keep" {
+            Session.manager.reuseRound2NoteSet()
+            DispatchQueue.main.async {
+                self.playButton.setTitle("Play", for: .normal)
+                self.hideShuffleButton()
+            }
+            doesGameNeedNewNote = true
+            return
+        }
+        
         if doesGameNeedNewNote {
             let newNote = Session.manager.getNextNote()
             currentNote = newNote
@@ -198,6 +205,17 @@ class GamePlayRound2ViewController: UIViewController {
         } else {
             playSoundFromNote(path: currentNote?.soundPath)
         }
+    }
+    
+    @IBAction func shuffleNotes(_ sender: Any) {
+        shuffleNotes()
+        hideShuffleButton()
+        assignNotesToButtons()
+        DispatchQueue.main.async {
+            self.playButton.setTitle("Play", for: .normal)
+            self.pulseAllNoteButtons()
+        }
+        enableNoteButtons()
     }
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
@@ -339,12 +357,10 @@ class GamePlayRound2ViewController: UIViewController {
         if doesGameNeedNewNote {
             return
         }
-        
         if note5Button.isEnabled == false {
             handleWrongAnswerWithHaptic()
             return
         }
-        
         if let note5 = note5 {
             playSoundFromNote(path: note5.soundPath)
             
@@ -388,9 +404,6 @@ class GamePlayRound2ViewController: UIViewController {
           view.sendSubviewToBack(circleProgressBar)
       }
     
-    let totalGroupRounds: Double = 15.00
-    var currentRound: Double = 1.00
-    
     func updateProgressBar(){
         let progress = currentRound/totalGroupRounds
         circleProgressBar.setProgress(to: progress , withAnimation: false)
@@ -413,6 +426,55 @@ class GamePlayRound2ViewController: UIViewController {
                     //Possible unwind segue area
                 } }
         } }
+    //MARK: Alerts
+    var finishedGameAlert: UIAlertController {
+        let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Submit Score", style: .default) { (_) in
+            let score: Int = Session.manager.score
+            if self.instrumentType == .grandPiano {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
+                GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
+                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            } else if self.instrumentType == .acousticGuitar {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
+                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            } else if self.instrumentType == .violin {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
+                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
+                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            } else if self.instrumentType == .saxaphone {
+                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
+                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
+                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+            }
+        }
+        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+        }
+        alert.addAction(action2)
+        alert.addAction(action)
+        return alert
+    }
+    
+    var quitGameActionSheet: UIAlertController {
+        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to go back? Any progress made will not be saved.", preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+            self.isModalInPresentation = false
+            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            return
+        }
+        quitGameActionSheet.addAction(noAction)
+        quitGameActionSheet.addAction(yesAction)
+        return quitGameActionSheet
+    }
+    
     
     
     //MARK: Outlets
@@ -421,6 +483,7 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var circleProgressBar: CircularProgressBar!
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var shuffleSetButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var lifesLabel: UILabel!
     @IBOutlet weak var note1Button: UIButton!
@@ -436,7 +499,9 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var note4ButtonView: UIView!
     
     lazy var allNoteButtons: [UIButton] = [note1Button,note2Button,note3Button,note4Button,note5Button]
+    
     lazy var allNoteViews: [UIView] = [note1ButtonView,note2ButtonView,note3ButtonView,note4ButtonView,note5ButtonView]
+    
     func pulseAllNoteButtons(){
         for button in allNoteButtons {
             button.pulsate()
@@ -449,17 +514,20 @@ class GamePlayRound2ViewController: UIViewController {
         }
         stopPulsingNoteViews()
     }
+    
     func enableNoteButtons(){
         for button in allNoteButtons {
             button.isEnabled = true
         }
         pulseAllNoteViews()
     }
+    
     func pulseAllNoteViews(){
             for view in allNoteViews {
                 view.pulsateView()
             }
         }
+    
     func stopPulsingNoteViews(){
         for view in allNoteViews {
             view.layer.removeAllAnimations()
@@ -471,9 +539,14 @@ class GamePlayRound2ViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRound3" {
-            if let vc = segue.destination as? GamePlayRound3ViewController {
+            if let vc = segue.destination as?
+                GamePlayRound3ViewController {
+                
+                
                 vc.instrumentType = self.instrumentType
                 Session.manager.setRound3Notes()
+                vc.hasHalfNotes = self.hasHalfNotes
+                
                 
                 if instrumentType == .grandPiano {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()

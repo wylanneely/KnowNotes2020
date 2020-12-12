@@ -21,28 +21,19 @@ class LaunchPageViewController: UIViewController {
     func setUPButtons(){
         let gifImage = UIImage.gifImageWithName(name: "KnowNotesLogoAnimation")
         gif.image = gifImage
-        
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 10
         signInButton.layer.borderColor = UIColor.coralRed.cgColor
-    }
-    
-    func checkDevice(){
-        
-        if UIDevice.current.modelName == "x86_64" {
-            print("iPhone8")
-        } else {
-            print("iPhoneLarger")
-        }
+        offlineButton.layer.borderWidth = 2
+        offlineButton.layer.cornerRadius = 10
+        offlineButton.layer.borderColor = UIColor.discoDayGReen.cgColor
     }
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var gif: UIImageView!
-    
-   // @IBOutlet weak var guitarsImage: UIImageView!
-   // @IBOutlet weak var pianosImage: UIImageView!
+    @IBOutlet weak var offlineButton: UIButton!
     
     @IBAction func signInButtonTapped(_ sender: Any) {
         if GKLocalPlayer.local.isAuthenticated {
@@ -70,10 +61,8 @@ class LaunchPageViewController: UIViewController {
     }
     
     @objc private func authenticationChanged(_ notification: Notification) {
-        
         let gifImage = UIImage.gifImageWithName(name: "KnowNotesLaunchScreen")
         gif.image = gifImage
-        
         signInButton.isEnabled = notification.object as? Bool ?? false
         signInButton.setTitle("Start", for: .normal)
         signInButton.pulsate()
@@ -86,11 +75,22 @@ class LaunchPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? PlayerGameMenuViewController {
             if segue.identifier == "toLocalPlayerMenu" {
-                vc.isOnline = true
+                GameCenterManager.manager.isOnline = true
+            }
+            if segue.identifier == "toOfflineMode" {
+                GameCenterManager.manager.isOnline = true
             }
             GameCenterManager.manager.viewController = vc
         }
     }
+    
+    //    func checkDevice(){
+    //        if UIDevice.current.modelName == "x86_64" {
+    //            print("iPhone8")
+    //        } else {
+    //            print("iPhoneLarger")
+    //        }
+    //    }
     
 }
 

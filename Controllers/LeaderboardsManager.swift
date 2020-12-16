@@ -8,9 +8,20 @@
 import GameKit
 
 
+
 struct LeaderboardsManager {
        // Loaded achievements
     //var achievements = GameCenterManager.manager.achievementsManager
+    
+    var inAppPurchases = InAppPurchases()
+    
+    var isGrandPianoHalfsNotesUnlocked: Bool  {
+        if defaults.bool(forKey: kGrandHalfNotes) == true {
+            return true
+        } else {
+          return  inAppPurchases.gameData.didUnlockGrandPianoHalfs
+        } 
+    }
     
     //MARK: Instrument helper
     
@@ -24,7 +35,7 @@ struct LeaderboardsManager {
         }
     }
     
-    var isViolinUnlocked: Bool  {
+     var isViolinUnlocked: Bool  {
         if defaults.bool(forKey: kIsViolinUnlocked) == true {
             return true
         } else {
@@ -59,7 +70,9 @@ struct LeaderboardsManager {
     }
     
     
-    
+    func unlockGrandPiranoHalfsLocally(){
+        defaults.setValue(true, forKey: kGrandHalfNotes)
+    }
     func unlockAcousticGuitarLocally(){
         defaults.setValue(true, forKey: kIsAcousticUnlocked)
     }
@@ -146,25 +159,37 @@ struct LeaderboardsManager {
     //call after completing rounds
     
     func setPersonalGranPianoHighScore(score: Int){
-        defaults.setValue(score, forKey: kHighScoreGrandPiano)
+        let oldScore = getHighScoreGrandPiano()
+        if score > oldScore {
+            defaults.setValue(score, forKey: kHighScoreGrandPiano)
+        }
         if score >= 20 {
             unlockAcousticGuitarLocally()
         }
     }
     func setPersonalAcouGuitarHighScore(score: Int){
-        defaults.setValue(score, forKey: kHighScoreAGuitar)
+        let oldScore = highScoreAcousticGuitar()
+        if oldScore < score {
+            defaults.setValue(score, forKey: kHighScoreAGuitar)
+        }
         if score >= 20 {
             unlockViolinLocally()
         }
     }
     func setPersonalViolinHighScore(score: Int){
-        defaults.setValue(score, forKey: kHighScoreViolin)
+        let oldScore = highScoreViolin()
+        if oldScore < score {
+            defaults.setValue(score, forKey: kHighScoreViolin)
+        }
         if score >= 20 {
             unlockSaxLocally()
         }
     }
     func setPersonalSaxaphoneHighScore(score: Int){
-        defaults.setValue(score, forKey: kHighScoreSaxaphone)
+        let oldScore = highScoreSax()
+        if oldScore < score {
+            defaults.setValue(score, forKey: kHighScoreSaxaphone)
+        }
     }
     
     //MARK: Local Rounds
@@ -201,6 +226,8 @@ struct LeaderboardsManager {
     fileprivate let kIsSaxaphoneUnlocked = "isSaxaphoneUnlocked"
 
 
+    fileprivate let kGrandHalfNotes = "GrandPianoHalfNotes"
+
     fileprivate let kGrandPianoRound1 = "GrandPianoRound1"
     fileprivate let kGrandPianoRound2 = "GrandPianoRound2"
     
@@ -219,14 +246,48 @@ struct LeaderboardsManager {
     fileprivate let kHighScoreSaxaphone = "SaxaphoneHS"
 
     //MARK: Public & Global Leaderboards
-        
+    private var leaderboard: GKLeaderboard?
+    private var localPlayer = GKLocalPlayer.local
+
      func submit(score: Int, to leaderboard: LeaderboardBundleIDs){
+        
          GKLeaderboard.submitScore(score, context: 0,
                                    player: GKLocalPlayer.local,
                                    leaderboardIDs: [leaderboard.rawValue]) { (error) in
              if let error = error {
                  print(error.localizedDescription) } }
      }
+    
+    
+//    func loadPlayerScores(instrument type: InstrumentType, finished: @escaping() -> ()){
+//        guard let playerHSLeaderboard = leaderboard else { return  }
+//        
+//        
+//        
+//        
+//    }
+    
+  
+//    func retrieveBestScoreForLeaderboard(_ leaderboardID: String) -> Int {
+//
+//        if GKLocalPlayer.local.isAuthenticated {
+//
+//            // Initialize the leaderboard for the current local player
+//            var gkLeaderboard = GKLeaderboard(players: [GKLocalPlayer.local])
+//            gkLeaderboard.identifier = leaderboardID
+//            gkLeaderboard.timeScope = GKLeaderboard.TimeScope.allTime
+//
+//            // Load the scores
+//            gkLeaderboard.loadScores(completionHandler: { (scores, error) -> Void in
+//                var currentScore: Int64 = 0
+//                if error == nil, let scores = scores {
+//                    if scores.count > 0 {
+//                        currentScore = scores[0].value
+//                    }
+//                }
+//            })
+//        }
+//    }
 }
 
 enum LeaderboardBundleIDs: String {

@@ -12,6 +12,8 @@ final class GameCenterManager: NSObject, GKGameCenterControllerDelegate, GKLocal
     
     static let manager = GameCenterManager()
     
+    var isOnline: Bool = false
+
     var leaderboardsManager = LeaderboardsManager()
     var achievementsManager = AchievementsManager()
     

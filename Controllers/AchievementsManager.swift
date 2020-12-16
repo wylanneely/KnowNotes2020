@@ -8,7 +8,6 @@
 
 import GameKit
 
-
  class AchievementsManager {
     
     private var userDefaultsHelper = LeaderboardsManager()

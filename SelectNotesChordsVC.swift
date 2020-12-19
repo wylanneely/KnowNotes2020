@@ -14,18 +14,17 @@ class SelectNotesChordsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUP()
+        assignsGestureRecognizersToLabels()
     }
-    
-    @IBOutlet weak var roundLabel: UILabel!
-    @IBOutlet weak var round2Label: UILabel!
-    @IBOutlet weak var round3Label: UILabel!
-
+   
     
     //MARK: Properties
     
     var roundNumber: Int = 1
     let instrument = Session.manager.customInstrument
-    var notes: [Note] = []
+    let piano = GrandPiano()
+    var roundNotes: [Note] = []
+
     var IsSelectingStart: Bool = true
     var selectedStartNoteTags: [Int] = []
     var selectedShuffledNoteTags: [Int] = []
@@ -38,32 +37,42 @@ class SelectNotesChordsVC: UIViewController {
     var maxNumberOfRegularNotes: Int = 3
     var maxNumberOfShuffledNotes: Int = 3
     
+    
     func createNotes(){
         if let piano = instrument as? GrandPiano {
             for noteTag in selectedStartNoteTags {
                 if let note = piano.noteDictionary[noteTag] {
-                    self.notes.append(note)
+                    self.roundNotes.append(note)
                 }
             }
             for noteTag in selectedShuffledNoteTags {
                 if let note = piano.noteDictionary[noteTag] {
                     note.isShuffledExtraNote = true
-                    self.notes.append(note)
+                    self.roundNotes.append(note)
                 }
             }
         }
     }
 
     //MARK: Setup
-    
+    @IBOutlet weak var roundStack: UIStackView!
     func setUP(){
+        
+        
+        startNotesButton.setTitleColor(.white, for: .selected)
+        shuffledNotesButton.setTitleColor(.white, for: .selected)
+        roundStack.layer.cornerRadius = 12
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 40
+                                                      , weight: .bold, scale: .large)
+         let largeBoldDoc = UIImage(systemName: "xmark.circle.fill", withConfiguration: largeConfig)
+        exitButton.setImage(largeBoldDoc, for: .normal)
         selectView.layer.cornerRadius = 10
-        startNotes.isSelected = true
+        startNotesButton.isSelected = true
         IsSelectingStart = true
-        startNotes.layer.borderColor = UIColor.black.cgColor
-        startNotes.layer.borderWidth = 2
-        shuffledNotes.layer.borderColor = UIColor.white.cgColor
-        shuffledNotes.layer.borderWidth = 2
+        startNotesButton.layer.borderColor = UIColor.black.cgColor
+        startNotesButton.layer.borderWidth = 2
+        shuffledNotesButton.layer.borderColor = UIColor.white.cgColor
+        shuffledNotesButton.layer.borderWidth = 2
         note_A.layer.cornerRadius = 10
         note_A.layer.borderColor = UIColor.white.cgColor
         note_A.layer.borderWidth = 2
@@ -107,7 +116,7 @@ class SelectNotesChordsVC: UIViewController {
     }
     
     func setUpSelectedShuffleStartNotes(){
-        for button in noteButtons {
+        for button in computedNoteButtons {
             if selectedStartNoteTags.contains(button.tag){
                 button.isSelected = true
                 button.layer.borderColor = UIColor.discoDayGReen.cgColor
@@ -128,10 +137,11 @@ class SelectNotesChordsVC: UIViewController {
             roundNumber = 2
             maxNumberOfRegularNotes = 5
             maxNumberOfShuffledNotes = 4
-            roundLabel.textColor = UIColor.lightGray
-            round2Label.textColor = UIColor.white
             selectedStartNoteTags = []
             selectedShuffledNoteTags = []
+            
+            roundLabel.textColor = UIColor.lightGray
+            round2Label.textColor = UIColor.white
             sNotesTapped(self)
         }
         
@@ -142,23 +152,28 @@ class SelectNotesChordsVC: UIViewController {
             roundLabel.textColor = UIColor.lightGray
             round2Label.textColor = UIColor.lightGray
             round3Label.textColor = UIColor.white
-            selectedStartNoteTags = []
-            selectedShuffledNoteTags = []
             sNotesTapped(self)
         }
     }
     
     fileprivate func setNextRound() {
+        
         if startNumber == maxNumberOfRegularNotes {
             switch roundNumber {
             case 1:
-                saveNotes(notes: self.notes, round: 1)
+                saveNotes(notes: self.roundNotes, round: 1)
                 self.setMaxNumbersAndTags(round: 2)
+                sNotesTapped(self)
+                roundNotes = []
+                updateButtons()
             case 2:
-                saveNotes(notes: self.notes, round: 2)
+                saveNotes(notes: self.roundNotes, round: 2)
                 self.setMaxNumbersAndTags(round: 3)
+                sNotesTapped(self)
+                roundNotes = []
+                updateButtons()
             default:
-                saveNotes(notes: self.notes, round: 3)
+                saveNotes(notes: self.roundNotes, round: 3)
                 self.performSegue(withIdentifier: "cRound1", sender: self)
             }
         }
@@ -168,8 +183,8 @@ class SelectNotesChordsVC: UIViewController {
     
     private func updateCounts(){
         DispatchQueue.main.async {
-        self.startnumberLabel.text = "Start Notes: \(self.startNumber)/\(self.maxNumberOfRegularNotes)"
-        self.shufflenumberLabel.text = "Shuffle Notes: \(self.shuffleNumber)/\(self.maxNumberOfShuffledNotes)"
+        self.startnumberLabel.text = "\(self.startNumber)/\(self.maxNumberOfRegularNotes)"
+        self.shufflenumberLabel.text = "\(self.shuffleNumber)/\(self.maxNumberOfShuffledNotes)"
         }
             if  (startNumber == maxNumberOfRegularNotes) {
                 self.shuffledNotesTapped(self)
@@ -178,19 +193,41 @@ class SelectNotesChordsVC: UIViewController {
             }
         }
     }
-
+    
+    func updateSelectedSharpsFlats(_ tag: Int){
+        for label in sharpFlatLabels {
+            if label.tag == tag {
+                label.textColor = UIColor.white
+            }
+        }
+    }
+    func updateShuffledSharpsFlats(_ tag: Int){
+        for label in sharpFlatLabels {
+            if label.tag == tag {
+                label.textColor = UIColor.black
+            }
+        }
+    }
+    
     func updateButtons(){
         for button in computedNoteButtons {
             if selectedStartNoteTags.contains(button.tag){
+                updateSelectedSharpsFlats(button.tag)
                 DispatchQueue.main.async {
                     button.isSelected = true
                     button.layer.borderColor = UIColor.discoDayGReen.cgColor
                     button.setTitleShadowColor(.discoDayGReen, for: .selected)
-                }
+                    button.backgroundColor = UIColor.discoDayGReen
+                    button.setTitleColor(.white, for: .normal)
+           }
             } else if selectedShuffledNoteTags.contains(button.tag){
+                updateShuffledSharpsFlats(button.tag)
+                DispatchQueue.main.async {
                 button.isSelected = true
                 button.layer.borderColor = UIColor.midnightPurps.cgColor
                 button.setTitleShadowColor(.midnightPurps, for: .selected)
+                button.backgroundColor = UIColor.midnightPurps
+                }
             } else  {
                 DispatchQueue.main.async {
                     button.isSelected = false
@@ -237,30 +274,84 @@ class SelectNotesChordsVC: UIViewController {
     
     // MARK: - Outlets
     
+    
+    @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var roundLabel: UILabel!
+    @IBOutlet weak var round2Label: UILabel!
+    @IBOutlet weak var round3Label: UILabel!
     @IBOutlet weak var startnumberLabel: UILabel!
     @IBOutlet weak var shufflenumberLabel: UILabel!
     @IBOutlet weak var selectView: UIView!
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var startNotes: UIButton!
+    @IBOutlet weak var startNotesButton: UIButton!
+    @IBOutlet weak var shuffledNotesButton: UIButton!
     @IBOutlet weak var note_A: UIButton!
-    @IBOutlet weak var shuffledNotes: UIButton!
     @IBOutlet weak var note_Bb: UIButton!
+    @IBOutlet weak var flatBbLabel: UILabel!
     @IBOutlet weak var note_B: UIButton!
     @IBOutlet weak var note_C: UIButton!
     @IBOutlet weak var note_Cs: UIButton!
+    @IBOutlet weak var sharpCsLabel: UILabel!
     @IBOutlet weak var note_D: UIButton!
     @IBOutlet weak var note_E: UIButton!
     @IBOutlet weak var note_Eb: UIButton!
+    @IBOutlet weak var flatEbLabel: UILabel!
     @IBOutlet weak var note_F: UIButton!
     @IBOutlet weak var note_Fs: UIButton!
+    @IBOutlet weak var sarpFsLabel: UILabel!
     @IBOutlet weak var note_G: UIButton!
     @IBOutlet weak var note_Gs: UIButton!
+    @IBOutlet weak var sharpGsLabel: UILabel!
     
-    lazy var noteButtons: [UIButton] =
-        [note_A,note_Bb,note_B,note_C,note_Cs,note_D,note_E,note_Eb,note_F,note_Fs,note_G,note_Gs]
+    
+
+
+    lazy var sharpFlatLabels: [UILabel] = [sharpGsLabel,sarpFsLabel,flatEbLabel,sharpCsLabel,flatBbLabel]
+
     
     var computedNoteButtons: [UIButton] {
       return [note_A,note_Bb,note_B,note_C,note_Cs,note_D,note_E,note_Eb,note_F,note_Fs,note_G,note_Gs] }
+    
+    func assignsGestureRecognizersToLabels(){
+        roundLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.label1Tapped(sender:)))
+        roundLabel.addGestureRecognizer(tapGesture)
+        
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(self.label2Tapped(sender:)))
+        roundLabel.addGestureRecognizer(tapGesture2)
+        
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(self.label3Tapped(sender:)))
+        roundLabel.addGestureRecognizer(tapGesture3)
+    }
+    
+    
+    
+    @objc func label1Tapped(sender: UITapGestureRecognizer) {
+        let notes = piano.allCustomRound1Notes
+        self.roundNotes = notes
+        updateButtons()
+        roundLabel.textColor = UIColor.white
+        round2Label.textColor = UIColor.lightGray
+        round3Label.textColor = UIColor.lightGray
+    }
+    @objc func label2Tapped(sender: UITapGestureRecognizer) {
+        let notes = piano.allCustomRound2Notes
+        self.roundNotes = notes
+        updateButtons()
+        roundLabel.textColor = UIColor.lightGray
+        round2Label.textColor = UIColor.white
+        round3Label.textColor = UIColor.lightGray
+    }
+    @objc func label3Tapped(sender: UITapGestureRecognizer) {
+        let notes = piano.allCustomRound3Notes
+        self.roundNotes = notes
+        updateButtons()
+        roundLabel.textColor = UIColor.lightGray
+        round2Label.textColor = UIColor.lightGray
+        round3Label.textColor = UIColor.white
+        
+    }
+    
     // MARK: - Actions
     
     @IBAction func note_ASelected(_ sender: Any) {
@@ -530,7 +621,6 @@ class SelectNotesChordsVC: UIViewController {
         }
     }
     
-
     
     @IBAction func startTapped(_ sender: Any) {
         self.createNotes()
@@ -538,34 +628,39 @@ class SelectNotesChordsVC: UIViewController {
     }
     
     
-    
     func saveNotes(notes: [Note], round: Int){
         if let type = Session.manager.customInstrument as? GrandPiano {
+            piano.setCustoms(notes: notes, round: round)
             type.setCustoms(notes: notes, round: round)
         }
         if let type = Session.manager.customInstrument as? AcousticGuitar {
             
         }
-       
+        
     }
     
     @IBAction func sNotesTapped(_ sender: Any) {
-        shuffledNotes.isSelected = false
-            startNotes.isSelected = true
-            IsSelectingStart = true
-            startNotes.layer.borderColor = UIColor.black.cgColor
-            startNotes.layer.borderWidth = 2
-            shuffledNotes.layer.borderColor = UIColor.white.cgColor
-            shuffledNotes.layer.borderWidth = 2
+        startnumberLabel.textColor = UIColor.discoDayGReen
+        shufflenumberLabel.textColor = UIColor.white
+        shuffledNotesButton.isSelected = false
+        startNotesButton.isSelected = true
+        IsSelectingStart = true
+        startNotesButton.layer.borderColor = UIColor.black.cgColor
+        startNotesButton.layer.borderWidth = 2
+        shuffledNotesButton.layer.borderColor = UIColor.white.cgColor
+        shuffledNotesButton.layer.borderWidth = 2
     }
+    
     @IBAction func shuffledNotesTapped(_ sender: Any) {
-    shuffledNotes.isSelected = true
-        startNotes.isSelected = false
+            startnumberLabel.textColor = UIColor.white
+            shufflenumberLabel.textColor = UIColor.midnightPurps
+        shuffledNotesButton.isSelected = true
+        startNotesButton.isSelected = false
         IsSelectingStart = false
-        startNotes.layer.borderColor = UIColor.white.cgColor
-        startNotes.layer.borderWidth = 2
-        shuffledNotes.layer.borderColor = UIColor.black.cgColor
-        shuffledNotes.layer.borderWidth = 2
+        startNotesButton.layer.borderColor = UIColor.white.cgColor
+        startNotesButton.layer.borderWidth = 2
+        shuffledNotesButton.layer.borderColor = UIColor.black.cgColor
+        shuffledNotesButton.layer.borderWidth = 2
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -573,7 +668,7 @@ class SelectNotesChordsVC: UIViewController {
         if let VC = presentingViewController as? KnownPlayerInstrumentNotesTableViewController {
             
         }
-       
+        
     }
 }
 

@@ -7,91 +7,125 @@
 
 import GameKit
 
-class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
+
+
+protocol ViewModelIAPDelegate {
+    func toggleOverlay(shouldShow: Bool)
+    func willStartLongProcess()
+    func didFinishLongProcess()
+    func showIAPRelatedError(_ error: Error)
+    func shouldUpdateUI()
+    func didFinishRestoringPurchasesWithZeroProducts()
+    func didFinishRestoringPurchasedProducts()
+}
+
+class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, InstrumentCollectionCellDelegate{
+    
+    
+    //MARK:IAP
+
     
     //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GameCenterManager.manager.viewController = self
-        localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
+        
+        if isOnline == true {
+            //MARK:In APP PUrchase
+          
+            
+            
+            
+            GameCenterManager.manager.viewController = self
+            localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
+        } else {
+            gameCenterButton.setTitle("Offline Notes", for: .normal)
+            gameCenterButton.isEnabled = false
+            gameCenterImage.isHidden = true
+        }
         setupCollectionView()
+        setUpProfilePhotoGestures()
     }
     
-    let cellScale: CGFloat = 0.06
+    //MARK: Set Up
+    func setUpProfilePhotoGestures(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.photoTapped(_:)))
+        localPlayerProfilePhoto.isUserInteractionEnabled = true
+        localPlayerProfilePhoto.addGestureRecognizer(tapGesture)
+    }
     
     func setupCollectionView(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: 250, height: 400)
-
-            collectionView?.setCollectionViewLayout(layout, animated: false)
-        
+        layout.itemSize = CGSize(width: 300, height: 500)
+        collectionView?.setCollectionViewLayout(layout, animated: false)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
     }
     
-    @IBAction func gameCenterTapped(_ sender: Any) {
-        collectionView.reloadData()
+    //MARK: Unlocked Instruments
+    
+    var isAcousticGuitarUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isAcousticGuitarUnlocked
+    }
+    var isViolinUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
+    }
+    var isSaxophoneUnlocked: Bool {
+        return GameCenterManager.manager.leaderboardsManager.isSaxaphoneUnlocked
     }
     
+    //MARK: Properties
     
-    //MARK: Unlock Instruments
-    
-    var isAcousticGuitarUnlocked: Bool = false
-    var isViolinUnlocked: Bool = false
+    var isOnline: Bool {
+        return GameCenterManager.manager.isOnline
+    }
     
     typealias SuccessHandler = (Bool) -> Void
     
-    var unlockAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Instrument Locked", message: "Unlock the Acoustic Guitar by scoring 20 or more points with the Grand Piano.", preferredStyle: .alert)
-        alert.addAction(unlockAcousticGuitarAlert)
+    let OkAlertAction: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    var unlockAcousticAlertController: UIAlertController {
+        let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
         return alert
     }
-    
-    let unlockAcousticGuitarAlert: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    var unlockViolinAlertController: UIAlertController {
+        let alert = UIAlertController(title: "Violin Locked", message: "Score 20 chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
+        return alert
+    }
+    var unlockSaxAlertController: UIAlertController {
+        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 20 with the Violin to unlock the Saxophone.", preferredStyle: .alert)
+        alert.addAction(OkAlertAction)
+        return alert
+    }
+    var finishedGameAlert: UIAlertController {
+        let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Leave", style: .destructive) { (_) in
+            self.performSegue(withIdentifier: "toLaunch", sender: self)
+        }
+        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        }
+        alert.addAction(action)
+        alert.addAction(action2)
+        return alert
+    }
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var localPlayerProfilePhoto: UIImageView!
-    
+    @IBOutlet weak var gameCenterImage: UIImageView!
+    @IBOutlet weak var gameCenterButton: UIButton!
+
     @IBAction func showGameCenterDashboard(_ sender: Any) {
-        GameCenterManager.manager.presentGameCenterDashboard()
-    }
+            GameCenterManager.manager.presentGameCenterDashboard()
+        }
     
-  
-    //MARK: Delegate
+    @objc func photoTapped(_ sender:AnyObject){
+            self.present(finishedGameAlert, animated: true, completion: nil)
+        }
     
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK: Navigation
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "toAcousticNotes" {
-            if isAcousticGuitarUnlocked { return true }
-            else { return false } }
-        return true
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
-            switch segue.identifier {
-            case "toAcousticNotes" :
-                LessonSession.manager.setAcousticLesson()
-                vc.instrumentImage = UIImage(named: "acoustic_Guitar")
-                vc.instrumentType = InstrumentType.acousticGuitar
-            case "toGrandPianoNotes" :
-                LessonSession.manager.setGrandPianoLesson()
-                vc.instrumentImage = UIImage(named: "grand_Piano")
-                vc.instrumentType = InstrumentType.grandPiano
-            default:
-                return } }
-    }
 //MARK: Collection View
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -99,7 +133,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,24 +141,91 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InstrumentCCell", for: indexPath) as? InstrumentCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+        cell.delegate = self
         switch indexPath.item {
         case 0:
             cell.setUp(type: .grandPiano, isUnlocked: true)
             return cell
-
         case 1:
             cell.setUp(type: .acousticGuitar, isUnlocked: isAcousticGuitarUnlocked)
             return cell
-
         case 2:
             cell.setUp(type: .violin, isUnlocked: isViolinUnlocked)
             return cell
-
+        case 3:
+            cell.setUp(type: .saxaphone, isUnlocked: isSaxophoneUnlocked )
+            return cell
         default:
            return cell
         }
     }
     
+    //MARK: Delegate
     
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func instrumentCellButtonTapped(type: InstrumentType) {
+        switch type {
+        case .grandPiano:
+            performSegue(withIdentifier: "toGrandPianoNotes", sender: self)
+        case .acousticGuitar:
+            if isAcousticGuitarUnlocked {
+                performSegue(withIdentifier: "toAcousticNotes", sender: self)
+            } else {
+                self.present(unlockAcousticAlertController, animated: true) {
+                }
+            }
+        case .violin:
+            if isViolinUnlocked {
+                performSegue(withIdentifier: "toViolinNotes", sender: self )
+            } else {
+                self.present(unlockViolinAlertController, animated: true) {
+                }
+            }
+        case .saxaphone:
+            if isSaxophoneUnlocked {
+                performSegue(withIdentifier: "toSaxNotes", sender: self )
+            } else {
+                self.present(unlockSaxAlertController, animated: true) {
+                }
+            }
+        }
+    }
+    
+    //MARK: Navigation
+   
+   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+       if identifier == "toAcousticNotes" {
+           if isAcousticGuitarUnlocked { return true }
+           else { return false } }
+       return true
+   }
+   
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
+        Session.manager.hasHalfNotes = false
+           switch segue.identifier {
+           case "toAcousticNotes" :
+               Session.manager.setAcousticSession()
+               vc.instrumentImage = UIImage(named: "acoustic_Guitar")
+               vc.instrumentType = InstrumentType.acousticGuitar
+           case "toGrandPianoNotes" :
+               Session.manager.setGrandPianoSession()
+               vc.instrumentImage = UIImage(named: "grand_Piano")
+               vc.instrumentType = InstrumentType.grandPiano
+           case "toViolinNotes" :
+            Session.manager.setViolinSession()
+            vc.instrumentImage = UIImage(named: "violin")
+            vc.instrumentType = InstrumentType.violin
+            
+        case "toSaxNotes" :
+         Session.manager.setSaxophoneSession()
+         vc.instrumentImage = UIImage(named: "saxophone")
+            vc.instrumentType = InstrumentType.saxaphone
+           default:
+               return } }
+   }
 }

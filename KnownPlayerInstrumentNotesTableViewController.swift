@@ -6,16 +6,29 @@
 //
 
 import UIKit
+import StoreKit
 
-class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondNoteGroupDelegate,ThirdNoteGroupDelegate, sharpsFlatsDelegate,ShuffleModeDelegate {
+class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAdaptivePresentationControllerDelegate, BeginLessonDelegate, FirstRoundNotesDelegate, secondNoteGroupDelegate,ThirdNoteGroupDelegate, sharpsFlatsDelegate,ShuffleModeDelegate,CustomRoundsDelegate {
+    
     //MARK: Properties
     
     var instrumentType: InstrumentType = .grandPiano
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
     
+    var IAP = Session.manager.iAPurchases
+    var gPianoProduct: SKProduct {
+        return IAP.products.first!
+    }
+    
     var groupStartNumber: Int = 1
-    var hasHalfNotes: Bool = false
+    
+    var hasHalfNotes: Bool {
+        return  Session.manager.hasHalfNotes
+    }
+    var willCustomizeRounds: Bool {
+        return Session.manager.isCustomSession
+    }
     
     //MARK: LifeCycle
     
@@ -32,7 +45,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        tableView.reloadData()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,8 +60,10 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         let lockedHalfNotesCell = UINib(nibName: HalfNotesLockedViewCell.xibRID, bundle: nil)
         let shuffleCell = UINib(nibName: ShuffleNotesViewCell.xibRID, bundle: nil)
         let thirdCell = UINib(nibName: ThirdRoundKnownNotesViewCell.xibRID, bundle: nil)
+        let CustomCell = UINib(nibName: CustomRoundsViewCell.xibRID, bundle: nil)
         
         self.tableView.register(thirdCell, forCellReuseIdentifier: "ThirdCell")
+        self.tableView.register(CustomCell, forCellReuseIdentifier: "CustomRounds")
         self.tableView.register(firstNoteCell, forCellReuseIdentifier: "FirstNoteCell")
         self.tableView.register(lockedHalfNotesCell, forCellReuseIdentifier: "lockedHalfNotes")
         self.tableView.register(headerNoteCell, forCellReuseIdentifier: "headerCell")
@@ -64,31 +78,61 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
 
     func beginLesssonButtonTapped() {
         Session.manager.resetScores()
+        if willCustomizeRounds {
+            self.performSegue(withIdentifier: "toCustom", sender: self)
+        }
+        
         switch groupStartNumber {
         case 2:
-            Session.manager.setRound2Notes()
-            self.performSegue(withIdentifier: "skipToRound2", sender: self)
+            //TEst
+            if hasHalfNotes {
+                Session.manager.setRound2HalfNotes { (_) in
+                    self.performSegue(withIdentifier: "skipToRound2", sender: self)
+                }
+            }
+            else {  Session.manager.setRound2Notes { (_) in
+                self.performSegue(withIdentifier: "skipToRound2", sender: self)
+                }
+            }
         case 3:
-            Session.manager.setRound3Notes()
+            if hasHalfNotes {
+                Session.manager.setRound3HalfNotes { (_) in
+                    self.performSegue(withIdentifier: "skipToRound3", sender: self)
+
+                }
+            } else {
+                Session.manager.setRound3Notes { (_) in
+                    self.performSegue(withIdentifier: "skipToRound3", sender: self)
+
+                }
+            }
             self.performSegue(withIdentifier: "skipToRound3", sender: self)
+        case 1:
+            if hasHalfNotes {
+                Session.manager.setRound1HalfNotes { (complete) in
+                self.performSegue(withIdentifier: "toGamePlay", sender: self)
+                }
+            } else {
+                Session.manager.setRound1Notes { (complete) in
+                self.performSegue(withIdentifier: "toGamePlay", sender: self)
+                }
+           }
         default:
-            Session.manager.setRound1Notes()
-            self.performSegue(withIdentifier: "toGamePlay", sender: self)
+            self.performSegue(withIdentifier: "toCustom", sender: self)
         }
+        
     }
 
     //MARK: Advanced Gameplay Delegates
     
     func sharpsFlatsSelected(hasHalfs: Bool?) {
-        if let hasHalfs = hasHalfs {
-            hasHalfNotes = hasHalfs
-            Session.manager.hasHalfNotes = hasHalfs
+        if hasHalfs != nil {
             DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [self.indexp1,self.indexp1,self.indexp1], with: .automatic)
+                self.tableView.reloadRows(at: [self.indexp1,self.indexp2,self.indexp3], with: .automatic)
                     }
         } else {
-            self.present(lockedHalfsAlert, animated: true, completion: nil)
-        } 
+            self.present(lockedGPianoHalfsAlert, animated: true, completion: nil)
+        }
     }
     
     func shuffleModeSelected(mode: ShuffleMode) {
@@ -100,9 +144,21 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         }
     }
     
+    func customRoundsSelected(isCustom: Bool?) {
+        guard let isCustom = isCustom else { self.present(lockedCustomAlert, animated: true, completion: nil) ; return }
+        if isCustom {
+            thirdGroupTapped()
+            
+        } else {
+            self.present(lockedCustomAlert, animated: true, completion: nil)
+        }
+    }
+    
+    
     //MARK: Note Groups Delegate
     
     let indexp1 = IndexPath(row: 1, section: 0)
+    let indexp11 = IndexPath(row: 0, section: 1)
     let indexp2 = IndexPath(row: 2, section: 0)
     let indexp3 = IndexPath(row: 3, section: 0)
     
@@ -144,12 +200,59 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         alert.addAction(action2)
         return alert
     }
+    var lockedCustomAlert: UIAlertController {
+        let alert = UIAlertController(title: "Locked", message: "Score 40 to Custom Rounds", preferredStyle: .alert)
+        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            return
+        }
+        alert.addAction(action2)
+        return alert
+    }
     
     var lockedHalfsAlert: UIAlertController {
         let alert = UIAlertController(title: "Locked", message: "Complete all rounds to unlock", preferredStyle: .alert)
         let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
             return
         }
+        alert.addAction(action2)
+        return alert
+    }
+    
+    func showSingleAlert(withMessage message: String) {
+           let alertController = UIAlertController(title: "FakeGame", message: message, preferredStyle: .alert)
+           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           self.present(alertController, animated: true, completion: nil)
+       }
+    
+    var lockedGPianoHalfsAlert: UIAlertController {
+        let price = IAPManager.shared.getPriceFormatted(for: gPianoProduct) ?? "0.99"
+        let alert = UIAlertController(title: "Locked", message: "Achieve 30 or more correct notes on Grand Piano to unlock half notes", preferredStyle: .alert)
+        let action2 = UIAlertAction(title: "Ok!", style: .cancel) { (_) in
+            return
+        }
+        func showSingleAlert(withMessage message: String) {
+               let alertController = UIAlertController(title: "Error Purchasing", message: message, preferredStyle: .alert)
+               alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+               self.present(alertController, animated: true, completion: nil)
+           }
+        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+            if !IAPManager.shared.canMakePayments() {
+                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                return
+               } else {
+                IAPManager.shared.buy(product: self.gPianoProduct) { (result) in
+                       DispatchQueue.main.async {
+                           switch result {
+                           case .success(_):
+                            self.tableView.reloadRows(at: [self.indexp11], with: .fade)
+                           case .failure(let error): print(error)
+                           }
+                       }
+                   }
+                   return
+               }
+        }))
+        alert.addAction(action)
         alert.addAction(action2)
         return alert
     }
@@ -169,23 +272,40 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         //NOTE: to display what sounds you have unlocked
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-        return 5
-        }
-        if section == 1 {
-            if  instrumentType == .grandPiano, leaderboardsManager.didFinishGrandPianoRound2 {
+        
+        switch instrumentType {
+        case .grandPiano:
+            if section == 0 {
+                return 5
+            }
+            if section == 1 {
+                return 3
+            }
+        case .acousticGuitar:
+            if section == 0 {
+                return 5
+            }
+            if section == 1 {
                 return 2
             }
-            if instrumentType == .acousticGuitar, leaderboardsManager.didFinishAcousticGuitarRound1 {
-                    return 2
-                }
-            } else {
+        case .violin:
+            if section == 0 {
+                return 5
+            }
+            if section == 1 {
                 return 1
             }
-        return 0
+        case .saxaphone:
+            if section == 0 {
+                return 5
+            }
+            if section == 1 {
+                return 1
+            }
+        }
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -208,7 +328,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.commonInit(image: instrumentImage, rank: "Noob Pianist", completedNotes: 3)
                             return notesCellExample
                         case .acousticGuitar:
-                            notesCellExample.noteDescription.text = "Regular Major Chords"
+                            
                             if leaderboardsManager.didFinishAcousticGuitarRound2 {
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Master Guitarist", completedNotes: 7)
                                 return notesCellExample
@@ -216,11 +336,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Guitar Player", completedNotes: 5)
                                 return notesCellExample
                             }
-                            
                             notesCellExample.commonInit(image: instrumentImage, rank: "Noob Guitarist", completedNotes: 3)
+                            notesCellExample.notesChordsLabel.text = "Regular Chords"
                             return notesCellExample
-                            
-                            
                         case .violin:
                             if leaderboardsManager.didFinishViolinRound2 {
                                 notesCellExample.commonInit(image: instrumentImage, rank: "Concert Master", completedNotes: 7)
@@ -243,18 +361,15 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             notesCellExample.commonInit(image: instrumentImage, rank: "Noob Sax Player", completedNotes: 3)
                                 return notesCellExample
                         }}}
-                
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
                         notesCellExample.setSelectedView()
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
-                
             case 2:
                 if let notesCellExample = SecondRoundKnownNotesViewCell.createCell()
                 {
-
                     if groupStartNumber == 2 {
                         notesCellExample.setSelectedView()
                     }
@@ -262,7 +377,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         notesCellExample.setSelectedView()
                     }
                     notesCellExample.delegate = self
-
                     switch instrumentType{
                     case .grandPiano:
                         if leaderboardsManager.didFinishGrandPianoRound1 {
@@ -290,11 +404,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
-                            return notesCellExample
-                        }
-                    }
+                            return notesCellExample   } }
                 }
-                
             case 3:
                 if let notesCellExample = ThirdRoundKnownNotesViewCell.createCell() {
                     if groupStartNumber == 3 {
@@ -328,62 +439,101 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
-                            return notesCellExample
-                        }
-                    }
+                            return notesCellExample  }  }
                 }
-                
             case 4:
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
                     notesCellExample.delegate = self
                     notesCellExample.beginButton.pulsate()
                     return notesCellExample
                 }
-                
             default:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
-                    return notesCellExample
-                }
+                    return notesCellExample }
             }
         }
-        
         if indexPath.section == 1 {
+            
             switch indexPath.row {
             case 0:
-                if let shuffleViewCell = ShuffleNotesViewCell.createCell() {
-                    shuffleViewCell.delegate = self
-                    if Session.manager.isShuffleModeUnlocked == true {
-                        return shuffleViewCell
-                    } else {
-                        shuffleViewCell.setLockedState()
-                        return shuffleViewCell
+                switch self.instrumentType {
+                case .grandPiano:
+                    if let shuffleViewCell = ShuffleNotesViewCell.createCell() {
+                        shuffleViewCell.delegate = self
+                        if Session.manager.isShuffleModeUnlocked == true {
+                            return shuffleViewCell
+                        } else {
+                            shuffleViewCell.setLockedState()
+                            return shuffleViewCell  }
                     }
-                }
+                case .acousticGuitar:
+                    if let shuffleViewCell = ShuffleNotesViewCell.createCell() {
+                        shuffleViewCell.delegate = self
+                        if Session.manager.isShuffleModeUnlocked == true {
+                            return shuffleViewCell
+                        } else {
+                            shuffleViewCell.setLockedState()
+                            return shuffleViewCell }  }
+                default:
+                    if let shuffleViewCell = ShuffleNotesViewCell.createCell() {
+                        shuffleViewCell.delegate = self
+                        if Session.manager.isShuffleModeUnlocked == true {
+                            return shuffleViewCell
+                        } else {
+                            shuffleViewCell.setLockedState()
+                            return shuffleViewCell  }  } }
+                
             case 1:
                 if let lockedHalfNotesCell = HalfNotesLockedViewCell.createCell() {
-                    if instrumentType == .grandPiano {
+                    switch self.instrumentType {
+                    case .grandPiano:
                         lockedHalfNotesCell.delegate = self
+                        lockedHalfNotesCell.includesHalfNotes = Session.manager.hasHalfNotes
                         return lockedHalfNotesCell
-                    }
-                    if instrumentType == .acousticGuitar {
+                    case .acousticGuitar:
+                        lockedHalfNotesCell.includesHalfNotes = hasHalfNotes
                         lockedHalfNotesCell.delegate = self
                         lockedHalfNotesCell.setGUitarChords()
+                        
                         return lockedHalfNotesCell
-                    } else {
-                        return lockedHalfNotesCell
-                    }
+                        
+                    case .violin:
+                        let cell = UITableViewCell()
+                        cell.backgroundColor = UIColor.clear
+                        return cell
+                    case .saxaphone:
+                        let cell = UITableViewCell()
+                        cell.backgroundColor = UIColor.clear
+                        return cell  }  }
+            case 2:
+                if let lockedCustomRoundsCell = CustomRoundsViewCell.createCell() {
                     
+                    switch self.instrumentType {
+                    case .grandPiano:
+                        lockedCustomRoundsCell.delegate = self
+                        return lockedCustomRoundsCell
+                    case .acousticGuitar:
+                        lockedCustomRoundsCell.delegate = self
+                        return lockedCustomRoundsCell
+                    case .violin:
+                        let cell = UITableViewCell()
+                        cell.backgroundColor = UIColor.clear
+                        return cell
+                    case .saxaphone:
+                        let cell = UITableViewCell()
+                        cell.backgroundColor = UIColor.clear
+                        return cell  }  }
+            case 3:
+                if let lockedCustomRoundsCell = CustomRoundsViewCell.createCell() {
+                        lockedCustomRoundsCell.delegate = self
+                        return lockedCustomRoundsCell
                 }
-                
-                
             default:
                 let cell = UITableViewCell()
                 cell.backgroundColor = UIColor.clear
                 return cell
             }
-            
         }
-        
         let cell = UITableViewCell()
         cell.backgroundColor = UIColor.clear
         return cell
@@ -400,7 +550,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         case 2: return 120
         case 3: return 120
         case 4: return 70
-        default: return 900
+        default: return 90
         }
     }
     
@@ -411,25 +561,24 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let vc = segue.destination as? SelectNotesChordsVC {
+            Session.manager.tCustomOn()
+        }
         if let vc = segue.destination as? GamePlayRound1ViewController {
-            vc.instrumentType = self.instrumentType
-            vc.hasHalfNotes = self.hasHalfNotes
-            vc.getGameNotes()
             vc.shuffleMode = Session.manager.shuffleMode
         }
         if let vc = segue.destination as? GamePlayRound2ViewController {
             vc.isStartingRound = true
             vc.instrumentType = self.instrumentType
-            vc.hasHalfNotes = self.hasHalfNotes
             vc.getGameNotes()
             vc.shuffleMode = Session.manager.shuffleMode
         }
         if let vc = segue.destination as? GamePlayRound3ViewController {
+            vc.getGameNotes()
             vc.isStartingRound = true
             vc.instrumentType = self.instrumentType
-            vc.hasHalfNotes = self.hasHalfNotes
             vc.shuffleMode = Session.manager.shuffleMode
-            vc.getGameNotes()
         }
     }
     

@@ -144,8 +144,10 @@ class GamePlayRound1ViewController: UIViewController {
             return
         }
         let gifname = "knowNotes\(lifesLeft)Lifes"
-        let gifImage = UIImage.gifImageWithName(name: gifname)
-        backgroundGif.image = gifImage
+        DispatchQueue.main.async {
+            let gifImage = UIImage.gifImageWithName(name: gifname)
+            self.backgroundGif.image = gifImage
+        }
     }
     
     
@@ -327,10 +329,18 @@ class GamePlayRound1ViewController: UIViewController {
         doesGameNeedNewNote = true
     }
     
-    fileprivate func updateViewsWithIncorrectAnswer() {
+    fileprivate func updateButtonAndViewWithIncorrectAnswer(noteButton: UIButton) {
         //wrong
-        self.note1Button.layer.removeAllAnimations()
-        self.note1ButtonView.layer.removeAllAnimations()
+        if noteButton == note1Button{
+            self.note1Button.layer.removeAllAnimations()
+            self.note1ButtonView.layer.removeAllAnimations()
+        } else if noteButton == note2Button {
+            self.note2Button.layer.removeAllAnimations()
+            self.note2ButtonView.layer.removeAllAnimations()
+        } else if noteButton == note3Button {
+            self.note3Button.layer.removeAllAnimations()
+            self.note3ButtonView.layer.removeAllAnimations()
+        }
         handleWrongAnswerWithHaptic()
         DispatchQueue.main.async {
             self.updateLifesGif(Session.manager.lifes)
@@ -351,7 +361,7 @@ class GamePlayRound1ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note1) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateButtonAndViewWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -371,7 +381,7 @@ class GamePlayRound1ViewController: UIViewController {
                 //correct
                updateViewsWithCorrectAnswer()
             } else {
-               updateViewsWithIncorrectAnswer()
+               updateButtonAndViewWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -390,7 +400,7 @@ class GamePlayRound1ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note3) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateButtonAndViewWithIncorrectAnswer()
             }
         }
         checkRoundEnd()

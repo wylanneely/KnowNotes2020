@@ -19,14 +19,37 @@ class ThirdRoundKnownNotesViewCell: UITableViewCell {
         super.awakeFromNib()
         setUnlockedViews()
         setGestureRecognizer()
+        setInitlAccesoriesViews()
         setSharpsFlats()
+    }
+    
+    func setInitlAccesoriesViews(){
+        if Session.manager.currentInstrumentType == .grandPiano {
+        setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }
+        else {
+                self.firstNoteSharpFlat.isHidden = true
+                self.secondNoteSharpFlat.isHidden = true
+                self.fMinorLabel.isHidden = true
+                self.gMinorLabel.isHidden = true
+        }
     }
     
     override func reloadInputViews() {
+        if Session.manager.currentInstrumentType == .grandPiano {
         setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }
     }
     
     func setSharpsFlats(){
+        if Session.manager.currentInstrumentType == .grandPiano {
+
         if Session.manager.hasHalfNotes {
             self.firstNoteSharpFlat.isHidden = false
             self.secondNoteSharpFlat.isHidden = false
@@ -35,8 +58,24 @@ class ThirdRoundKnownNotesViewCell: UITableViewCell {
         } else {
             self.firstNoteSharpFlat.isHidden = true
             self.secondNoteSharpFlat.isHidden = true
+        }} else {
+             return 
         }
     }
+    
+    func setMinors(){
+        if Session.manager.hasHalfNotes {
+            self.fMinorLabel.isHidden = false
+            self.gMinorLabel.isHidden = false
+            self.fMinorLabel.startShimmeringAnimation()
+            self.gMinorLabel.startShimmeringAnimation()
+        } else {
+            self.fMinorLabel.isHidden = true
+            self.gMinorLabel.isHidden = true
+        }
+    }
+    
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -52,12 +91,13 @@ class ThirdRoundKnownNotesViewCell: UITableViewCell {
     func setGestureRecognizer(){
         self.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ThirdRoundKnownNotesViewCell.tapEdit(sender:)))
+        
+        
         addGestureRecognizer(tapGesture)
     }
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
         if isLocked {
-                setSelectedView()
                 delegate?.lockedThirdGroupTapped()
             } else {
                 setSelectedView()
@@ -112,9 +152,22 @@ class ThirdRoundKnownNotesViewCell: UITableViewCell {
         firstSelectedNoteLabel.textColor = UIColor.darkGray
     }
     
+    @IBAction func secondNoteButtonTapped(_ sender: Any) {
+        if isLocked {
+                setSelectedView()
+                delegate?.lockedThirdGroupTapped()
+            } else {
+                setSelectedView()
+                delegate?.thirdGroupTapped()
+            }
+    }
     
     @IBOutlet weak var firstNoteSharpFlat: UILabel!
     @IBOutlet weak var secondNoteSharpFlat: UILabel!
+    
+    @IBOutlet weak var gMinorLabel: UILabel!
+    @IBOutlet weak var fMinorLabel: UILabel!
+    
     
     @IBOutlet weak var firstNoteView: UIView!
     @IBOutlet weak var middleBGView: UIView!

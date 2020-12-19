@@ -17,6 +17,7 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+
     func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
            instrumentImage.image = image
            instrumentProficiencyRankingLabel.text = rank
@@ -30,11 +31,14 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
        }
 
     //MARK: Properties
+    
+    
+    @IBOutlet weak var progressBarr: UIProgressView!
     @IBOutlet weak var instrumentImage: UIImageView!
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
     @IBOutlet weak var completedNotesLabel: UILabel!
+    @IBOutlet weak var notesChordsLabel: UILabel!
     
-    @IBOutlet weak var noteDescription: UILabel!
     static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"
     
     

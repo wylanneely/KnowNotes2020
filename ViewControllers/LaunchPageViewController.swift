@@ -7,8 +7,8 @@
 
 import GameKit
 
-class LaunchPageViewController: UIViewController {
 
+class LaunchPageViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +17,7 @@ class LaunchPageViewController: UIViewController {
         setUPButtons()
     }
     
+    
     //MARK: Set Up
     func setUPButtons(){
         let gifImage = UIImage.gifImageWithName(name: "KnowNotesLogoAnimation")
@@ -24,14 +25,21 @@ class LaunchPageViewController: UIViewController {
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 10
         signInButton.layer.borderColor = UIColor.coralRed.cgColor
+        offlineButton.layer.borderWidth = 1
+    
+        offlineButton.layer.cornerRadius = 10
+        offlineButton.layer.borderColor = UIColor.discoDayGReen.cgColor
     }
     
     //MARK: Outlets & Actions
     
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var gif: UIImageView!
+    @IBOutlet weak var offlineButton: UIButton!
+    
     @IBAction func signInButtonTapped(_ sender: Any) {
         if GKLocalPlayer.local.isAuthenticated {
+            
             self.performSegue(withIdentifier: "toLocalPlayerMenu", sender: self)
         } else {
             GameCenterManager.manager.viewController = self
@@ -56,6 +64,9 @@ class LaunchPageViewController: UIViewController {
     }
     
     @objc private func authenticationChanged(_ notification: Notification) {
+        //MARK: In App Payments Begin
+        Session.manager.getIAPProducts()
+        Session.manager.restorePurchases()
         let gifImage = UIImage.gifImageWithName(name: "KnowNotesLaunchScreen")
         gif.image = gifImage
         signInButton.isEnabled = notification.object as? Bool ?? false
@@ -70,7 +81,10 @@ class LaunchPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? PlayerGameMenuViewController {
             if segue.identifier == "toLocalPlayerMenu" {
-                vc.isOnline = true
+                GameCenterManager.manager.isOnline = true
+            }
+            if segue.identifier == "toOfflineMode" {
+                GameCenterManager.manager.isOnline = false
             }
             GameCenterManager.manager.viewController = vc
         }

@@ -31,8 +31,13 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gse-Wh-9OM">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gse-Wh-9OM">
                                                 <rect key="frame" x="45" y="4" width="39" height="28"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  m  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaA-nm-mRx">
+                                                <rect key="frame" x="39.5" y="56" width="44.5" height="28"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -40,10 +45,12 @@
                                         <color key="backgroundColor" name="sharkBlueGreen"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="88" id="58m-3z-39R"/>
+                                            <constraint firstAttribute="trailing" secondItem="GaA-nm-mRx" secondAttribute="trailing" constant="4" id="BMm-MS-Bgz"/>
                                             <constraint firstItem="IpB-tm-kat" firstAttribute="centerX" secondItem="F8r-ab-FKE" secondAttribute="centerX" id="BZx-co-kKK"/>
                                             <constraint firstItem="gse-Wh-9OM" firstAttribute="top" secondItem="F8r-ab-FKE" secondAttribute="top" constant="4" id="YuB-3u-UQs"/>
                                             <constraint firstItem="IpB-tm-kat" firstAttribute="centerY" secondItem="F8r-ab-FKE" secondAttribute="centerY" id="h1s-tW-qVI"/>
                                             <constraint firstAttribute="height" constant="88" id="jDO-Gv-ae2"/>
+                                            <constraint firstAttribute="bottom" secondItem="GaA-nm-mRx" secondAttribute="bottom" constant="4" id="rQh-T7-YP8"/>
                                             <constraint firstAttribute="trailing" secondItem="gse-Wh-9OM" secondAttribute="trailing" constant="4" id="slH-Ek-qNZ"/>
                                         </constraints>
                                     </view>
@@ -58,6 +65,9 @@
                                         <state key="normal" title="G">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="secondNoteButtonTapped:" destination="CdO-Dd-xJd" eventType="touchUpInside" id="r0D-6y-Jgl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -69,8 +79,13 @@
                                     <constraint firstAttribute="height" constant="28" id="iVA-mG-PXV"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL1-n7-etL">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL1-n7-etL">
                                 <rect key="frame" x="252" y="16" width="37" height="27"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="19"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  m  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-tf-dXS">
+                                <rect key="frame" x="246.5" y="69" width="42.5" height="27"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="19"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -81,7 +96,9 @@
                             <constraint firstItem="Z8K-Dc-2fC" firstAttribute="centerY" secondItem="KQv-ZT-J2j" secondAttribute="centerY" id="8ka-bo-CUX"/>
                             <constraint firstItem="qL1-n7-etL" firstAttribute="trailing" secondItem="0Ds-yt-PPY" secondAttribute="trailing" constant="-4" id="IkK-fK-rfy"/>
                             <constraint firstItem="Z8K-Dc-2fC" firstAttribute="leading" secondItem="KQv-ZT-J2j" secondAttribute="leading" constant="20" id="S94-Lt-bG9"/>
+                            <constraint firstItem="KaZ-tf-dXS" firstAttribute="bottom" secondItem="0Ds-yt-PPY" secondAttribute="bottom" constant="-4" id="aKW-2f-cEw"/>
                             <constraint firstItem="0kg-x3-qiD" firstAttribute="centerY" secondItem="KQv-ZT-J2j" secondAttribute="centerY" id="ebX-VU-Z9f"/>
+                            <constraint firstItem="KaZ-tf-dXS" firstAttribute="trailing" secondItem="0Ds-yt-PPY" secondAttribute="trailing" constant="-4" id="kpP-qm-UK1"/>
                             <constraint firstItem="0kg-x3-qiD" firstAttribute="centerX" secondItem="KQv-ZT-J2j" secondAttribute="centerX" id="q9a-GP-5TJ"/>
                         </constraints>
                     </view>
@@ -96,15 +113,17 @@
             </tableViewCellContentView>
             <color key="backgroundColor" name="StarBlue"/>
             <connections>
+                <outlet property="fMinorLabel" destination="GaA-nm-mRx" id="vxc-eA-4bw"/>
                 <outlet property="firstNoteSharpFlat" destination="gse-Wh-9OM" id="l6j-zK-kYd"/>
                 <outlet property="firstNoteView" destination="F8r-ab-FKE" id="oov-if-3zv"/>
                 <outlet property="firstSelectedNoteLabel" destination="IpB-tm-kat" id="pgO-BD-g0b"/>
+                <outlet property="gMinorLabel" destination="KaZ-tf-dXS" id="Aht-hr-lnc"/>
                 <outlet property="lockImageView" destination="Z8K-Dc-2fC" id="GW3-Xn-4g2"/>
                 <outlet property="middleBGView" destination="KQv-ZT-J2j" id="dup-gI-hgh"/>
                 <outlet property="secondNoteSharpFlat" destination="qL1-n7-etL" id="bxw-He-zeE"/>
                 <outlet property="secondSelectedNoteButton" destination="0Ds-yt-PPY" id="kYZ-Ly-yGO"/>
             </connections>
-            <point key="canvasLocation" x="-291.304347826087" y="-596.65178571428567"/>
+            <point key="canvasLocation" x="-462" y="-605"/>
         </tableViewCell>
     </objects>
     <resources>

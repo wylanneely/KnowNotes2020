@@ -7,15 +7,31 @@
 
 import GameKit
 
-class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, InstrumentCollectionCellDelegate{
 
+
+
+class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, InstrumentCollectionCellDelegate {
+    
+    
+    
+    //MARK:IAP
+    var IAP = Session.manager.iAPurchases
+
+    
     //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if isOnline == true {
-        GameCenterManager.manager.viewController = self
-        localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
+            //MARK:In APP PUrchase
+            
+            IAP.iAPDelegate = self
+            
+            
+            
+            GameCenterManager.manager.viewController = self
+            localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         } else {
             gameCenterButton.setTitle("Offline Notes", for: .normal)
             gameCenterButton.isEnabled = false
@@ -44,34 +60,122 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     //MARK: Unlocked Instruments
     
     var isAcousticGuitarUnlocked: Bool {
-        return GameCenterManager.manager.leaderboardsManager.isAcousticGuitarUnlocked
+        return Session.manager.isAcousticGuitarAvailable
     }
     var isViolinUnlocked: Bool {
-        return GameCenterManager.manager.leaderboardsManager.isViolinUnlocked
+        return Session.manager.isViolinAvailable
     }
     var isSaxophoneUnlocked: Bool {
-        return GameCenterManager.manager.leaderboardsManager.isSaxaphoneUnlocked
+        return Session.manager.isSaxophoneAvailable
     }
     
     //MARK: Properties
     
-    var isOnline: Bool = false
+    var isOnline: Bool {
+        return GameCenterManager.manager.isOnline
+    }
     
     typealias SuccessHandler = (Bool) -> Void
     
     let OkAlertAction: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    
+    func showSingleAlert(withMessage message: String) {
+           let alertController = UIAlertController(title: "Error Purchasing", message: message, preferredStyle: .alert)
+           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           self.present(alertController, animated: true, completion: nil)
+       }
+    
     var unlockAcousticAlertController: UIAlertController {
+        
+         let product = IAP.getProduct(containing: "IAPAcoustic") ?? nil
+        let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
+        
         let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
+        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+            if !IAPManager.shared.canMakePayments() {
+                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                return
+               } else {
+                if let product = product{
+                IAPManager.shared.buy(product: product) { (result) in
+                       DispatchQueue.main.async {
+                           switch result {
+                           case .success(_):
+                            self.IAP.updateGameDataWithPurchasedProduct(product)
+                            self.collectionView.reloadData()
+                           case .failure(let error): print(error)
+                           }
+                       }
+                }} else {
+                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    return
+                }
+                   return
+               }
+        }))
+        alert.addAction(action)
         alert.addAction(OkAlertAction)
         return alert
     }
+    
+    
     var unlockViolinAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Violin Locked", message: "Score 20 chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
+             let product = IAP.getProduct(containing: "IAPViolin") ?? nil
+            let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
+        let alert = UIAlertController(title: "Violin Locked", message: "Score 25 chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
+        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+            if !IAPManager.shared.canMakePayments() {
+                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                return
+               } else {
+                if let product = product{
+                IAPManager.shared.buy(product: product) { (result) in
+                       DispatchQueue.main.async {
+                           switch result {
+                           case .success(_):
+                            self.IAP.updateGameDataWithPurchasedProduct(product)
+                            self.collectionView.reloadData()
+                           case .failure(let error): print(error)
+                           }
+                       }
+                }} else {
+                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    return
+                }
+                   return
+               }
+        }))
+        alert.addAction(action)
         alert.addAction(OkAlertAction)
         return alert
     }
     var unlockSaxAlertController: UIAlertController {
-        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 20 with the Violin to unlock the Saxophone.", preferredStyle: .alert)
+        let product = IAP.getProduct(containing: "IAPSax") ?? nil
+       let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
+        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 25 with the Violin to unlock the Saxophone.", preferredStyle: .alert)
+        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+            if !IAPManager.shared.canMakePayments() {
+                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                return
+               } else {
+                if let product = product{
+                IAPManager.shared.buy(product: product) { (result) in
+                       DispatchQueue.main.async {
+                           switch result {
+                           case .success(_):
+                            self.IAP.updateGameDataWithPurchasedProduct(product)
+                            self.collectionView.reloadData()
+                           case .failure(let error): print(error)
+                           }
+                       }
+                }} else {
+                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    return
+                }
+                   return
+               }
+        }))
+        alert.addAction(action)
         alert.addAction(OkAlertAction)
         return alert
     }
@@ -182,9 +286,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
    
    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if let vc = segue.destination as? KnownPlayerInstrumentNotesTableViewController {
-        vc.hasHalfNotes = false
-        Session.manager.hasHalfNotes = false
-           switch segue.identifier {
+        switch segue.identifier {
            case "toAcousticNotes" :
                Session.manager.setAcousticSession()
                vc.instrumentImage = UIImage(named: "acoustic_Guitar")
@@ -205,4 +307,27 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
            default:
                return } }
    }
+}
+
+extension PlayerGameMenuViewController: IAPDelegate{
+    func willStartLongProcess() {
+    }
+    
+    func didFinishLongProcess() {
+    }
+    
+    func showIAPRelatedError(_ error: Error) {
+    }
+    
+    func shouldUpdateUI() {
+        collectionView.reloadData()
+    }
+    
+    func didFinishRestoringPurchasesWithZeroProducts() {
+        
+    }
+    
+    func didFinishRestoringPurchasedProducts() {
+        collectionView.reloadData()
+    }
 }

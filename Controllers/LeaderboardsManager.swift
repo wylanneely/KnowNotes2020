@@ -19,8 +19,8 @@ struct LeaderboardsManager {
         if defaults.bool(forKey: kGrandHalfNotes) == true {
             return true
         } else {
-          return  inAppPurchases.gameData.didUnlockGrandPianoHalfs
-        } 
+            return false
+        }
     }
     
     //MARK: Instrument helper
@@ -31,7 +31,16 @@ struct LeaderboardsManager {
             return true
         } else {
             // Then check the achievements manager to see if saved on GameCenter
-            return GameCenterManager.manager.achievementsManager.isAcousticGuitarUnlocked
+            return false
+        }
+    }
+    var isAcousticGUitarMinorChordsUnlocked: Bool {
+        //First check if stored in user defaults,
+        if defaults.bool(forKey: kAcousticMinorChords) == true {
+            return true
+        } else {
+            // Then check the achievements manager to see if saved on GameCenter
+            return false
         }
     }
     
@@ -39,19 +48,22 @@ struct LeaderboardsManager {
         if defaults.bool(forKey: kIsViolinUnlocked) == true {
             return true
         } else {
-            return GameCenterManager.manager.achievementsManager.isViolinUnlocked
+            return false
         }
     }
     var isSaxaphoneUnlocked: Bool  {
         if defaults.bool(forKey: kIsSaxaphoneUnlocked) == true {
             return true
         } else {
-            return GameCenterManager.manager.achievementsManager.isSaxUnlocked
+            return false
         }
     }
     //MARK: UserDefaults for unlocking visuals and notes
     let defaults = UserDefaults.standard
 
+    
+    
+    
 
     func getHighScoreGrandPiano() -> Int {
         return defaults.integer(forKey: kHighScoreGrandPiano)
@@ -72,6 +84,9 @@ struct LeaderboardsManager {
     
     func unlockGrandPiranoHalfsLocally(){
         defaults.setValue(true, forKey: kGrandHalfNotes)
+    }
+    func unlockAcousticGuitarMinorChordsLocally(){
+        defaults.setValue(true, forKey: kAcousticMinorChords)
     }
     func unlockAcousticGuitarLocally(){
         defaults.setValue(true, forKey: kIsAcousticUnlocked)
@@ -101,9 +116,7 @@ struct LeaderboardsManager {
         }
     }
     
-    var didunlockAcousticGuitar: Bool {
-        return defaults.bool(forKey: kAcousticGuitarRound1)
-    }
+   
     var didFinishAcousticGuitarRound1: Bool {
         return defaults.bool(forKey: kAcousticGuitarRound1)
     }
@@ -227,6 +240,8 @@ struct LeaderboardsManager {
 
 
     fileprivate let kGrandHalfNotes = "GrandPianoHalfNotes"
+    fileprivate let kAcousticMinorChords = "AcousticMinorChords"
+
 
     fileprivate let kGrandPianoRound1 = "GrandPianoRound1"
     fileprivate let kGrandPianoRound2 = "GrandPianoRound2"

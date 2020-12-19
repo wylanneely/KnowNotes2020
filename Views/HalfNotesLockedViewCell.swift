@@ -14,7 +14,7 @@ class HalfNotesLockedViewCell: UITableViewCell {
     }
     
     var delegate: sharpsFlatsDelegate?
-    var isHalfs: Bool = false
+    var includesHalfNotes: Bool = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,45 +40,65 @@ class HalfNotesLockedViewCell: UITableViewCell {
             self.delegate?.sharpsFlatsSelected(hasHalfs: nil)
             return
         }
-        
-        if isHalfs == false {
-            isHalfs = true
+        if includesHalfNotes == false {
+            DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
+                self.delegate?.sharpsFlatsSelected(hasHalfs: true)
+                 Session.manager.hasHalfNotes = true
+            }
+            includesHalfNotes = true
+        } else {
             DispatchQueue.main.async {
                 self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
                 self.delegate?.sharpsFlatsSelected(hasHalfs: false)
+                 Session.manager.hasHalfNotes = false
             }
-        } else {
-            isHalfs = false
-            DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
-            }
-            self.delegate?.sharpsFlatsSelected(hasHalfs: true)
+            includesHalfNotes = false
         }
     }
     
     class func createCell() -> HalfNotesLockedViewCell? {
-    
         let nib = UINib(nibName: xibRID, bundle: nil)
         let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
-        
         return cell
     }
     
- 
+    func setLockedState(){
+        borderView.layer.backgroundColor = UIColor.beauBlue.cgColor
+        borderView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    func setUnlockedState(){
+        borderView.layer.backgroundColor = UIColor.niceNight.cgColor
+        borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+    }
     
     func setImage(){
-        
-        if isLocked == false {
+        if isLocked == true {
+            setLockedState()
             self.isUserInteractionEnabled = true
             DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"lock.fill")
+            }
+            return
+        } else {
+        setUnlockedState()
+        }
+        if includesHalfNotes == true {
+            DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
+            }
+        }else {
+            DispatchQueue.main.async {
                 self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+                self.delegate?.sharpsFlatsSelected(hasHalfs: false)
+                Session.manager.hasHalfNotes = false
             }
         }
     }
     
     func setGUitarChords(){
         DispatchQueue.main.async {
-            self.notesLabel.text = "Minor Chords"
+            self.notesLabel.text = "Add Minor Chords"
         }
     }
     

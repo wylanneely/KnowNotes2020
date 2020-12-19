@@ -26,6 +26,7 @@ class GrandPiano: Instrument, NoteRounds {
     init() {
         super.init(type: .grandPiano)
     }
+    
     var round1Notes: [Note] {
         return [A_note,B_note,C_note]
     }
@@ -35,6 +36,95 @@ class GrandPiano: Instrument, NoteRounds {
     var round3Notes: [Note] {
         return [A_note,B_note,C_note,D_note,E_note,F_note,G_note]
     }
+    
+    
+    func setCustoms(notes:[Note], round:Int) {
+        switch round {
+        case 1:
+            allCustomRound1Notes = notes
+            for note in notes {
+                if note.isShuffledExtraNote == false {
+                    cRound1Notes.append(note)
+                }
+            }
+            
+            //TODO:
+          //  Session.manager.customInstrument
+        case 2:
+            allCustomRound2Notes = notes
+            for note in notes {
+                if note.isShuffledExtraNote == false {
+                    cRound2Notes.append(note)
+                }
+            }
+        default:
+            allCustomRound3Notes = notes
+            for note in notes {
+                if note.isShuffledExtraNote == false {
+                    cRound3Notes.append(note)
+                }
+            }
+        }
+       
+    }
+    
+    var cRound1Notes: [Note] = []
+    
+    var allCustomRound1Notes: [Note] = []
+    
+    func refreshCustomRound1Notes() {
+        var gameRoundNotes = allCustomRound1Notes
+        let note_1 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_1!)
+        let note_2 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_2!)
+        let note_3 = gameRoundNotes.randomElement()
+        cRound1Notes = [note_1!,note_2!,note_3!]
+    }
+    
+    var cRound2Notes: [Note] = []
+     var allCustomRound2Notes: [Note] = []
+    
+    func refreshCustomRound2Notes() {
+        var gameRoundNotes = allCustomRound2Notes
+        let note_1 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_1!)
+        let note_2 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_2!)
+        let note_3 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_3!)
+        let note_4 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_4!)
+        let note_5 = gameRoundNotes.randomElement()
+        cRound2Notes = [note_1!,note_2!,note_3!,note_4!,note_5!]
+    }
+    var cRound3Notes: [Note] = []
+     var allCustomRound3Notes: [Note] = []
+    func refreshCustomRound3Notes() {
+        var gameRoundNotes = allCustomRound1Notes
+        let note_1 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_1!)
+        let note_2 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_2!)
+        let note_3 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_3!)
+        let note_4 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_4!)
+        let note_5 = gameRoundNotes.randomElement()
+        
+        gameRoundNotes.remove(object: note_5!)
+        let note_6 = gameRoundNotes.randomElement()
+        gameRoundNotes.remove(object: note_6!)
+        let note_7 = gameRoundNotes.randomElement()
+        cRound3Notes = [note_1!,note_2!,note_3!,note_4!,note_5!,note_6!,note_7!]
+    }
+    
+   lazy var noteDictionary: [Int:Note] =
+    [0:A_note,1:Bb_note,2:B_note,
+    3:C_note,4:Cs_note,5:D_note,
+    6:Eb_note,7:E_note,8:F_note,
+    9:Fs_note,10:G_note,11:Gs_note]
+    
     var sharpsFlatsRound1: [Note] {
         var gameRoundNotes: [Note] = [A_note,Bb_note,B_note,C_note,Cs_note]
         let note_1 = gameRoundNotes.randomElement()
@@ -100,14 +190,31 @@ class AcousticGuitar: Instrument, NoteRounds {
     init() {
         super.init(type: .acousticGuitar)
     }
+    var includesMinors: Bool = false
+    
     var round1Notes: [Note] {
+        if includesMinors {
+          return  [A_Major,B_Major,C_Major,A_Minor,B_Minor,C_Minor]
+        } else {
         return [A_Major,B_Major,C_Major]
+        }
     }
     var round2Notes: [Note] {
+        if includesMinors {
+            return [A_Major,B_Major,C_Major,D_Major,E_Major,A_Minor,B_Minor,C_Minor,D_Minor,E_Minor]
+        } else {
         return [A_Major,B_Major,C_Major,D_Major,E_Major]
+        }
     }
     var round3Notes: [Note] {
+        if includesMinors {
+          return  [A_Major,B_Major,C_Major,D_Major,
+                 E_Major,F_Major,G_Major,A_Minor,
+                 B_Minor,C_Minor,D_Minor,E_Minor,
+                 F_Minor,G_Minor]
+        } else {
         return [A_Major,B_Major,C_Major,D_Major,E_Major,F_Major,G_Major]
+        }
     }
     
     var minorMajorChordsRound1: [Note] {
@@ -121,8 +228,7 @@ class AcousticGuitar: Instrument, NoteRounds {
     }
     
     var minorMajorChordsRound2: [Note] {
-        var gameRoundNotes: [Note] = [A_Major,B_Major,C_Major,D_Major,E_Major,
-                                      A_Minor,B_Minor,C_Minor,D_Minor,E_Minor]
+        var gameRoundNotes: [Note] = [A_Major,B_Major,C_Major,D_Major,E_Major,A_Minor,B_Minor,C_Minor,D_Minor,E_Minor]
         let note_1 = gameRoundNotes.randomElement()
         gameRoundNotes.remove(object: note_1!)
         let note_2 = gameRoundNotes.randomElement()
@@ -159,21 +265,21 @@ class AcousticGuitar: Instrument, NoteRounds {
     
     //MARK: Chords
     
-    fileprivate let A_Major = Note(name: "A", id: 0, soundPath: "AcouGuitar_A_Major.wav")
-    fileprivate let B_Major = Note(name: "B", id: 1, soundPath: "AcouGuitar_B_Major.wav")
-    fileprivate let C_Major = Note(name: "C", id: 2, soundPath: "AcouGuitar_C_Major.wav")
-    fileprivate let D_Major = Note(name: "D", id: 3, soundPath: "AcouGuitar_D_Major.wav")
-    fileprivate let E_Major = Note(name: "E", id: 4, soundPath: "AcouGuitar_E_Major.wav")
-    fileprivate let F_Major = Note(name: "F", id: 5, soundPath: "AcouGuitar_F_Major.wav")
-    fileprivate let G_Major = Note(name: "G", id: 6, soundPath: "AcouGuitar_G_Major.wav")
+    fileprivate let A_Minor = Note(name: "Am", id: 0, soundPath: "AcouGuitar_A_Minor.wav")
+    fileprivate let B_Minor = Note(name: "Bm", id: 1, soundPath: "AcouGuitar_B_Minor.wav")
+    fileprivate let C_Minor = Note(name: "Cm", id: 2, soundPath: "AcouGuitar_C_Minor.wav")
+    fileprivate let D_Minor = Note(name: "Dm", id: 3, soundPath: "AcouGuitar_D_Minor.wav")
+    fileprivate let E_Minor = Note(name: "Em", id: 4, soundPath: "AcouGuitar_E_Minor.wav")
+    fileprivate let F_Minor = Note(name: "Fm", id: 5, soundPath: "AcouGuitar_F_Minor.wav")
+    fileprivate let G_Minor = Note(name: "Gm", id: 6, soundPath: "AcouGuitar_G_Minor.wav")
     
-    fileprivate let A_Minor = Chord(name: "Am", id: 7, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let B_Minor = Chord(name: "Bm", id: 8, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let C_Minor = Chord(name: "Cm", id: 9, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let D_Minor = Chord(name: "Dm", id: 10, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let E_Minor = Chord(name: "Em", id: 11, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let F_Minor = Chord(name: "Fm", id: 12, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
-    fileprivate let G_Minor = Chord(name: "Gm", id: 13, soundPath: "AcouGuitar_A_Major.wav", type: .minor)
+    fileprivate let A_Major = Note(name: "A", id: 7, soundPath: "AcouGuitar_A_Major.wav")
+    fileprivate let B_Major = Note(name: "B", id: 8, soundPath: "AcouGuitar_B_Major.wav")
+    fileprivate let C_Major = Note(name: "C", id: 9, soundPath: "AcouGuitar_C_Major.wav")
+    fileprivate let D_Major = Note(name: "D", id: 10, soundPath: "AcouGuitar_D_Major.wav")
+    fileprivate let E_Major = Note(name: "E", id: 11, soundPath: "AcouGuitar_E_Major.wav")
+    fileprivate let F_Major = Note(name: "F", id: 12, soundPath: "AcouGuitar_F_Major.wav")
+    fileprivate let G_Major = Note(name: "G", id: 13, soundPath: "AcouGuitar_G_Major.wav")
 }
 
 class Violin: Instrument, NoteRounds {

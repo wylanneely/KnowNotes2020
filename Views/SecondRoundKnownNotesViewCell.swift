@@ -19,19 +19,55 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         super.awakeFromNib()
         setUnlockedViews()
         setGestureRecognizer()
+        setInitlAccesoriesViews()
         setSharpsFlats()
+    }
+    
+    func setInitlAccesoriesViews(){
+        if Session.manager.currentInstrumentType == .grandPiano {
+            setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }
+        else {
+                self.secondNoteSharpFlat.isHidden = true
+                self.eMinorLabel.isHidden = true
+                self.dMinorLabel.isHidden = true
+        }
     }
     
     override func reloadInputViews() {
-        setSharpsFlats()
+        if Session.manager.currentInstrumentType == .grandPiano {
+            setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }
     }
     
     func setSharpsFlats(){
+        if Session.manager.currentInstrumentType == .grandPiano {
         if Session.manager.hasHalfNotes {
             self.secondNoteSharpFlat.isHidden = false
             self.secondNoteSharpFlat.startShimmeringAnimation()
         } else {
             self.secondNoteSharpFlat.isHidden = true
+        }} else {
+            return
+        }
+    }
+
+    
+    func setMinors(){
+        if Session.manager.hasHalfNotes {
+            self.dMinorLabel.isHidden = false
+            self.eMinorLabel.isHidden = false
+            self.dMinorLabel.startShimmeringAnimation()
+            self.eMinorLabel.startShimmeringAnimation()
+        } else {
+            self.dMinorLabel.isHidden = true
+            self.eMinorLabel.isHidden = true
         }
     }
 
@@ -54,13 +90,11 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     @objc func tapEdit(sender: UITapGestureRecognizer) {
         if isLocked {
                 delegate?.lockedSecondGroupTapped()
-                setSelectedView()
         } else if isLocked == false {
                 delegate?.secondGroupTapped()
                 setSelectedView()
             }
         }
-    
     
     func setSecondNoteTo(note: String){
         DispatchQueue.main.async {
@@ -109,10 +143,13 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         firstSelectedNoteLabel.textColor = UIColor.darkGray
     }
     
-    
     @IBOutlet weak var secondNoteSharpFlat: UILabel!
-    
     @IBOutlet weak var firstNoteView: UIView!
+    
+    
+    @IBOutlet weak var eMinorLabel: UILabel!
+    @IBOutlet weak var dMinorLabel: UILabel!
+    
     @IBOutlet weak var middleBGView: UIView!
     @IBOutlet weak var firstSelectedNoteLabel: UILabel!
     @IBOutlet weak var secondSelectedNoteButton: UIButton!

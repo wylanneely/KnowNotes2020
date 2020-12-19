@@ -20,6 +20,8 @@ import GameKit
     let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
     let saxaphoneAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockSaxaphone.rawValue)
     
+    var isGrandPianoHAlfNotesUnlocked: Bool = false
+    var isAcousticGuitarMinorChordsUnlocked: Bool = false
     var isAcousticGuitarUnlocked: Bool = false
     var isViolinUnlocked: Bool = false
     var isSaxUnlocked: Bool = false

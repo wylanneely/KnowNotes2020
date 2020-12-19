@@ -19,6 +19,8 @@ class GamePlayRound2ViewController: UIViewController {
     var gameRoundNotes: [Note] {
             return Session.manager.sessionNotes
         }
+    var score: Int { Session.manager.score }
+
     
     var currentNote: Note?
 
@@ -28,8 +30,13 @@ class GamePlayRound2ViewController: UIViewController {
     var note4: Note?
     var note5: Note?
     
+    lazy var noteSet: [Note?] = [note1,note2,note3,note4,note5]
+
+    
     //AdvancedOptions 
-    var hasHalfNotes: Bool = false
+    var hasHalfNotes: Bool {
+        return Session.manager.hasHalfNotes
+    }
     var shuffleMode: ShuffleMode = .off
 
     //for progressView
@@ -42,6 +49,7 @@ class GamePlayRound2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        resetGame()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
         self.isModalInPresentation = true
@@ -50,6 +58,7 @@ class GamePlayRound2ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        resetGame()
         playButton.pulse()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -63,35 +72,57 @@ class GamePlayRound2ViewController: UIViewController {
    
     //MARK: SetUp
     
+    
+    func setUpGif(){
+          circleProgressBar.labelSize = 60
+          circleProgressBar.safePercent = 100
+          circleProgressBar.lineWidth = 12
+          circleProgressBar.safePercent = 100
+          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
+        circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
+        circleProgressBar.clipsToBounds = true
+          view.sendSubviewToBack(backgroundGif)
+          view.sendSubviewToBack(circleProgressBar)
+        updateLifesGif(Session.manager.lifes)
+      }
+    
     func getGameNotes(){
-        if hasHalfNotes {
-            Session.manager.setRound2HalfNotes()
+        doesGameNeedNewNote = true
+        if hasHalfNotes{
+            Session.manager.setRound2HalfNotes { (_) in
+                self.assignNotesToButtons()
+            }
         } else {
-            Session.manager.setRound2Notes()
+            Session.manager.setRound2Notes { (_) in
+                self.assignNotesToButtons()
+            }
         }
     }
     
     func assignNotesToButtons(){
-        let note_1 = gameRoundNotes[0]
-        let note_2 = gameRoundNotes[1]
-        let note_3 = gameRoundNotes[2]
-        let note_4 = gameRoundNotes[3]
-        let note_5 = gameRoundNotes[4]
-        note1 = note_1
-        note2 = note_2
-        note3 = note_3
-        note4 = note_4
-        note5 = note_5
-        note1Button.tag = note_1.id
-        note2Button.tag = note_2.id
-        note3Button.tag = note_3.id
-        note4Button.tag = note_4.id
-        note5Button.tag = note_5.id
-        note1Button.setTitle("\(note_1.name)", for: .normal)
-        note2Button.setTitle("\(note_2.name)", for: .normal)
-        note3Button.setTitle("\(note_3.name)", for: .normal)
-        note4Button.setTitle("\(note_4.name)", for: .normal)
-        note5Button.setTitle("\(note_5.name)", for: .normal)
+        DispatchQueue.main.async {
+            let note_1 = self.gameRoundNotes[0]
+            let note_2 = self.gameRoundNotes[1]
+            let note_3 = self.gameRoundNotes[2]
+            let note_4 = self.gameRoundNotes[3]
+            let note_5 = self.gameRoundNotes[4]
+            self.note1 = note_1
+            self.note2 = note_2
+            self.note3 = note_3
+            self.note4 = note_4
+            self.note5 = note_5
+            self.note1Button.tag = note_1.id
+            self.note2Button.tag = note_2.id
+            self.note3Button.tag = note_3.id
+            self.note4Button.tag = note_4.id
+            self.note5Button.tag = note_5.id
+            self.note1Button.setTitle("\(note_1.name)", for: .normal)
+            self.note2Button.setTitle("\(note_2.name)", for: .normal)
+            self.note3Button.setTitle("\(note_3.name)", for: .normal)
+            self.note4Button.setTitle("\(note_4.name)", for: .normal)
+            self.note5Button.setTitle("\(note_5.name)", for: .normal)
+          self.noteSet = [self.note1,self.note2,self.note3,self.note4,self.note5]
+        }
     }
     
     func setUpLabelsButtonsViews(){
@@ -100,7 +131,6 @@ class GamePlayRound2ViewController: UIViewController {
         shuffleSetButton.layer.borderWidth = 2
         shuffleSetButton.layer.borderColor = UIColor.discoDayGReen.cgColor
         DispatchQueue.main.async {
-            self.lifesLabel.text = "\(Session.manager.lifes)"
             self.scoreLabel.text = "\(Session.manager.score)"
             self.playButton.setTitle("Play", for: .normal)
             self.playButton.pulse()
@@ -134,41 +164,90 @@ class GamePlayRound2ViewController: UIViewController {
         self.hapticGenerator.notificationOccurred(.error)
         UIView.animate(withDuration: 0.33) {
             self.view.backgroundColor = UIColor.imperialRed
-        } completion: {
-            (completed: Bool) -> Void in
-            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                self.view.backgroundColor = UIColor.gameplayBlue
-            }
-        }
-    }
+            } completion: {
+                (completed: Bool) -> Void in
+                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    self.view.backgroundColor = UIColor.gameplayBlue
+                }    }  }
     
     func handleCorrectAnswerWithHaptic(){
-        if  Session.manager.isRound2fullyRandomized() {
-             DispatchQueue.main.async {
-                 self.showShuffleButtonModes()
-             }
-         }
+        checkSetShouldShuffle()
         self.hapticGenerator.notificationOccurred(.success)
         stopPulsingNoteButtons()
         UIView.animate(withDuration: 0.33) {
-            self.view.backgroundColor = UIColor.systemGreen
-        } completion: {
-            (completed: Bool) -> Void in
-            UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
-                self.view.backgroundColor = UIColor.gameplayBlue
-                self.playButton.pulse()
+            self.view.backgroundColor = UIColor.pastelGReen
+            } completion: {
+                (completed: Bool) -> Void in
+                UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    self.view.backgroundColor = UIColor.gameplayBlue
+                    self.playButton.pulse()
+                }  }
+    }
+    
+    fileprivate func updateViewsWithCorrectAnswer(){
+        
+        DispatchQueue.main.async {
+            self.playButton.setTitle("Play", for: .normal)
+            self.scoreLabel.text = "\(Session.manager.score)"
+            self.updateProgressBar()
+            self.handleCorrectAnswerWithHaptic()
+        }
+        doesGameNeedNewNote = true
+    }
+    
+    fileprivate func updateViewsWithIncorrectAnswer() {
+        //wrong
+        self.note1Button.layer.removeAllAnimations()
+        self.note1ButtonView.layer.removeAllAnimations()
+        handleWrongAnswerWithHaptic()
+        DispatchQueue.main.async {
+            self.updateLifesGif(Session.manager.lifes)
+        }
+        note1Button.isEnabled = false
+    }
+    
+    func updateLifesGif(_ lifesLeft: Int){
+        if lifesLeft == 0 {
+            return
+        }
+        let gifname = "knowNotes\(lifesLeft)Lifes"
+        let gifImage = UIImage.gifImageWithName(name: gifname)
+        backgroundGif.image = gifImage
+    }
+    
+    func hasNotesBeenSelectedOnce()-> Bool {
+        if score % 5 == 0 {
+            return true
+        } else { return false  }
+    }
+    
+    func checkSetShouldShuffle(){
+        if  hasNotesBeenSelectedOnce() {
+            switch shuffleMode {
+            case .auto:
+                self.shuffleNotes(self)
+            case .manual:
+                self.showShuffleButtonModes()
+            case .off:
+                Session.manager.reuseRound1NoteSet()
+            default:
+                Session.manager.reuseRound1NoteSet()
             }
         }
     }
     
     func shuffleNotes(){
+        doesGameNeedNewNote = true
         if hasHalfNotes{
-            Session.manager.setRound2HalfNotes()
+            Session.manager.setRound2HalfNotes { (_) in
+                self.assignNotesToButtons()
+            }
         } else {
-            Session.manager.setRound2Notes()
+            Session.manager.setRound2Notes { (_) in
+                self.assignNotesToButtons()
+            }
         }
     }
-   
     
     func showShuffleButtonModes(){
         DispatchQueue.main.async {
@@ -201,9 +280,11 @@ class GamePlayRound2ViewController: UIViewController {
             doesGameNeedNewNote = true
             return
         }
-        
         if doesGameNeedNewNote {
-            let newNote = Session.manager.getNextNote()
+            let newNotes = Session.manager.getNewNote(notes: noteSet)
+            let newNote = newNotes.nextNote
+            let updatedSet = newNotes.noteSet
+            noteSet = updatedSet
             currentNote = newNote
             playSoundFromNote(path: newNote?.soundPath )
             doesGameNeedNewNote = false
@@ -220,6 +301,7 @@ class GamePlayRound2ViewController: UIViewController {
     @IBAction func shuffleNotes(_ sender: Any) {
         DispatchQueue.main.async {
                 self.shuffleNotes()
+            self.hideShuffleButton()
                 self.playButton.setTitle("Play", for: .normal)
                 self.pulseAllNoteButtons()
                 self.assignNotesToButtons()
@@ -238,23 +320,10 @@ class GamePlayRound2ViewController: UIViewController {
         if let note1 = note1 {
             playSoundFromNote(path: note1.soundPath)
             if Session.manager.checkUpdateSessionWith(note: note1) {
-                //correct
-                handleCorrectAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(Session.manager.score)"
-                    self.updateProgressBar()
-                }
-                doesGameNeedNewNote = true
+                updateViewsWithCorrectAnswer()
             } else {
-                //wrong
-                self.note1Button.layer.removeAllAnimations()
-                self.note1ButtonView.layer.removeAllAnimations()
-                handleWrongAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(Session.manager.lifes)"
-                }
-                note1Button.isEnabled = false
+                updateViewsWithIncorrectAnswer()
+
             }
         }
         checkRoundEnd()
@@ -271,23 +340,9 @@ class GamePlayRound2ViewController: UIViewController {
         if let note2 = note2 {
             playSoundFromNote(path: note2.soundPath)
             if Session.manager.checkUpdateSessionWith(note: note2) {
-                //correct
-                handleCorrectAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(Session.manager.score)"
-                    self.updateProgressBar()
-                }
-                doesGameNeedNewNote = true
+                updateViewsWithCorrectAnswer()
             } else {
-                //wrong
-                note2Button.layer.removeAllAnimations()
-                self.note2ButtonView.layer.removeAllAnimations()
-                handleWrongAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(Session.manager.lifes)"
-                }
-                note2Button.isEnabled = false
+                updateViewsWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -297,32 +352,16 @@ class GamePlayRound2ViewController: UIViewController {
         if doesGameNeedNewNote {
             return
         }
-        
         if note3Button.isEnabled == false {
             handleWrongAnswerWithHaptic()
             return
         }
         if let note3 = note3 {
             playSoundFromNote(path: note3.soundPath)
-            
             if Session.manager.checkUpdateSessionWith(note: note3) {
-                //correct
-                handleCorrectAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(Session.manager.score)"
-                    self.updateProgressBar()
-                }
-                doesGameNeedNewNote = true
+                updateViewsWithCorrectAnswer()
             } else {
-                //wrong
-                self.note3Button.layer.removeAllAnimations()
-                self.note3ButtonView.layer.removeAllAnimations()
-                handleWrongAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(Session.manager.lifes)"
-                }
-                note3Button.isEnabled = false
+                updateViewsWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -340,23 +379,9 @@ class GamePlayRound2ViewController: UIViewController {
         if let note4 = note4 {
             playSoundFromNote(path: note4.soundPath)
             if Session.manager.checkUpdateSessionWith(note: note4) {
-                //correct
-                handleCorrectAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(Session.manager.score)"
-                    self.updateProgressBar()
-                }
-                doesGameNeedNewNote = true
+                updateViewsWithCorrectAnswer()
             } else {
-                //wrong
-                self.note4Button.layer.removeAllAnimations()
-                self.note4ButtonView.layer.removeAllAnimations()
-                handleWrongAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(Session.manager.lifes)"
-                }
-                note4Button.isEnabled = false
+                updateViewsWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -374,44 +399,15 @@ class GamePlayRound2ViewController: UIViewController {
             playSoundFromNote(path: note5.soundPath)
             
             if Session.manager.checkUpdateSessionWith(note: note5) {
-                //correct
-                handleCorrectAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.playButton.setTitle("Play", for: .normal)
-                    self.scoreLabel.text = "\(Session.manager.score)"
-                    self.updateProgressBar()
-                }
-                doesGameNeedNewNote = true
+                updateViewsWithCorrectAnswer()
             } else {
-                //wrong
-                self.note5Button.layer.removeAllAnimations()
-                self.note5ButtonView.layer.removeAllAnimations()
-                handleWrongAnswerWithHaptic()
-                DispatchQueue.main.async {
-                    self.lifesLabel.text = "\(Session.manager.lifes)"
-                }
-                note5Button.isEnabled = false
+                updateViewsWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
     }
     
     //MARK: Helper Functions
-
-    func setUpGif(){
-          circleProgressBar.labelSize = 60
-          circleProgressBar.safePercent = 100
-          circleProgressBar.lineWidth = 12
-          circleProgressBar.safePercent = 100
-          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
-        circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
-        circleProgressBar.clipsToBounds = true
-          view.sendSubviewToBack(backgroundGif)
-          let gifImage = UIImage.gifImageWithName(name: "musicBackground")
-         // self.view.largeContentImage = gifImage
-          backgroundGif.image = gifImage?.circleMasked
-          view.sendSubviewToBack(circleProgressBar)
-      }
     
     func updateProgressBar(){
         let progress = currentRound/totalGroupRounds
@@ -424,16 +420,16 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.score >= 15 {
                 self.performSegue(withIdentifier: "toRound3", sender: self) }
             if Session.manager.lifes == 0 {
-                self.present(finishedGameAlert, animated: true) { }
+                self.performSegue(withIdentifier: "round2Finish", sender: self)
             }
         } else {
             if Session.manager.score >= 25 {
                 self.performSegue(withIdentifier: "toRound3", sender: self)
             }
             if Session.manager.lifes == 0 {
-                self.present(finishedGameAlert, animated: true) {
+                self.performSegue(withIdentifier: "round2Finish", sender: self)
                     //Possible unwind segue area
-                } }
+                 }
         } }
     
     func resetGame() {
@@ -474,12 +470,12 @@ class GamePlayRound2ViewController: UIViewController {
         let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
         }
-        let action3 = UIAlertAction(title: "Replay Round", style: .destructive) { (_) in
+        let action3 = UIAlertAction(title: "Replay Round", style: .default) { (_) in
             self.resetGame()
        }
         alert.addAction(action2)
-        alert.addAction(action)
         alert.addAction(action3)
+        alert.addAction(action)
 
         return alert
     }
@@ -508,7 +504,6 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var shuffleSetButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var lifesLabel: UILabel!
     @IBOutlet weak var note1Button: UIButton!
     @IBOutlet weak var note2Button: UIButton!
     @IBOutlet weak var note3Button: UIButton!
@@ -565,11 +560,14 @@ class GamePlayRound2ViewController: UIViewController {
             if let vc = segue.destination as?
                 GamePlayRound3ViewController {
                 
-                
                 vc.instrumentType = self.instrumentType
-                Session.manager.setRound3Notes()
-                vc.hasHalfNotes = self.hasHalfNotes
-                
+                if Session.manager.hasHalfNotes{
+                    Session.manager.setRound3HalfNotes { (_) in
+                    }
+                } else {
+                    Session.manager.setRound3Notes { (_) in
+                    }
+                }
                 
                 if instrumentType == .grandPiano {
                     GameCenterManager.manager.leaderboardsManager.finishedRound2GrandPianoNotes()

@@ -17,6 +17,8 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
     
     func setUpViews(){
         beginButton.layer.cornerRadius = 10
+        beginButton.layer.borderWidth = 2
+        beginButton.layer.borderColor = UIColor.beauBlue.cgColor
     }
     
     class func createCell() -> BeginEditNotesLessonViewCell? {

@@ -11,32 +11,25 @@ import StoreKit
 class Session {
 
     static let manager = Session()
+    let sessionInstruments = Instruments()
+
     static var leaderboard = LeaderboardsManager()
     
-    
     var currentInstrumentType: InstrumentType = .grandPiano
-    let sessionInstruments = Instruments()
-    typealias CompletionHandler = (Bool) -> Void
 
+    typealias CompletionHandler = (Bool) -> Void
     
-    var isCustomModeLocked: Bool {
-        switch currentInstrumentType {
-        case .acousticGuitar:
-            return true
-            //TODO
-        case .grandPiano:
-            return false
-        case .violin:
-            return true
-        case .saxaphone:
-            return true
-        }
+    var lifes: Int = 5
+    var score: Int = 0
+    var roundNumber: Int = 1
+
+    var sessionNotes: [Note] = []
+
+    func resetScores(){
+        lifes = 5
+        score = 0
     }
-    
-    
-    var isCustomSession: Bool = false
-    var customInstrument: Instrument?
-    
+
     var instrument: Instrument {
         switch currentInstrumentType {
         case .acousticGuitar:
@@ -50,107 +43,7 @@ class Session {
         }
     }
     
-    var lifes: Int = 5
-    var score: Int = 0
-    
-    func resetScores(){
-        lifes = 5
-        score = 0
-    }
-    
-    var sessionNotes: [Note] = []
-    var roundNumber: Int = 1
-
-    //advancedOptions
-    
-    
-    var hasHalfNotes: Bool = false
-    var shuffleMode: ShuffleMode = .off
-    
-    
-    var isShuffleModeUnlocked: Bool {
-        switch currentInstrumentType {
-        case .grandPiano:
-           return LeaderboardsManager().didFinishGrandPianoRound1
-        case .acousticGuitar:
-            return LeaderboardsManager().didFinishAcousticGuitarRound1
-        case .violin:
-            return LeaderboardsManager().didFinishViolinRound1
-        case .saxaphone:
-            return LeaderboardsManager().didFinishSaxRound1
-        }
-    }
-    
-    var isHalfNotesUnLocked: Bool {
-        switch currentInstrumentType {
-        case .grandPiano:
-            return LeaderboardsManager().isGrandPianoHalfsNotesUnlocked
-        case .acousticGuitar:
-            return LeaderboardsManager().didFinishAcousticGuitarRound1
-        case .violin:
-            return LeaderboardsManager().didFinishViolinRound2
-        case .saxaphone:
-            return LeaderboardsManager().didFinishSaxRound2
-        }
-    }
-    
-    var iAPurchases = InAppPurchases()
-    
-    func getIAPProducts(){
-        IAPManager.shared.getProducts { (result) in
-            switch result {
-            case .success(let products): self.iAPurchases.products = products
-                self.updateGameDataWithPurchasedProduct(self.iAPurchases.products)
-            case .failure(let error): print(error)
-            }
-        }
-    }
-    
-    fileprivate func updateGameDataWithPurchasedProduct(_ products: [SKProduct]) {
-            // Update the proper game data depending on the keyword the
-            // product identifier of the give product contains.
-        for p in products {
-            if p.productIdentifier.contains("gphn") {
-                
-            }
-            
-        }
-    }
-    
-    
-    //MARK: Note Helpers 
-
-    var currentNote: Note?
-    var note1: Note?
-    var note2: Note?
-    var note3: Note?
-    lazy var round1Notes: [Note]  = [note1!, note2!, note3!]
-    var note4: Note?
-    var note5: Note?
-    lazy var round2Notes: [Note] = [note1!, note2!, note3!, note4!, note5!]
-    var note6: Note?
-    var note7: Note?
-    lazy var round3Notes: [Note] = [note1!, note2!, note3!, note4!, note5!, note6!, note7!]
-    
     //MARK: Set UP
-    
-    func tCustomOn(){
-        isCustomSession = true
-        switch currentInstrumentType {
-        case .acousticGuitar:
-            customInstrument = AcousticGuitar()
-        case .grandPiano:
-            customInstrument = GrandPiano()
-        case .violin:
-            customInstrument = Violin()
-        case .saxaphone:
-            customInstrument = Saxaphone()
-        }
-    }
-    func tCustomOff(){
-        isCustomSession = false
-        customInstrument = nil
-    }
     
     func setGrandPianoSession() {
         currentInstrumentType = .grandPiano
@@ -164,6 +57,172 @@ class Session {
     func setSaxophoneSession() {
         currentInstrumentType = .saxaphone
     }
+    
+    
+    //MARK: Note Helpers
+
+    var currentNote: Note?
+    
+    var note1: Note?
+    var note2: Note?
+    var note3: Note?
+    lazy var round1Notes: [Note]  = [note1!, note2!, note3!]
+    var note4: Note?
+    var note5: Note?
+    lazy var round2Notes: [Note] = [note1!, note2!, note3!, note4!, note5!]
+    var note6: Note?
+    var note7: Note?
+    lazy var round3Notes: [Note] = [note1!, note2!, note3!, note4!, note5!, note6!, note7!]
+    
+    //MARK: Extra Notes and Chords
+    
+    
+    var hasHalfNotes: Bool  = false
+    
+        var isHalfNotesUnLocked: Bool {
+            switch currentInstrumentType {
+            case .grandPiano:
+                return isGrandPianoHalfNotesAvailable
+            case .acousticGuitar:
+                return isAcousticGuitarMinorChordsAvailable
+            default:
+                return false
+            }
+        }
+
+    //advancedOptions
+    var shuffleMode: ShuffleMode = .off
+    var isShuffleModeUnlocked: Bool {
+            switch currentInstrumentType {
+            case .grandPiano:
+               return LeaderboardsManager().didFinishGrandPianoRound1
+            case .acousticGuitar:
+                return LeaderboardsManager().didFinishAcousticGuitarRound1
+            case .violin:
+                return LeaderboardsManager().didFinishViolinRound1
+            case .saxaphone:
+                return LeaderboardsManager().didFinishSaxRound1
+            }
+    }
+   
+    
+    //MARK: In App Purchases
+    
+    
+    
+    var iAPurchases = InAppPurchases()
+    
+    var isGrandPianoHalfNotesAvailable: Bool {
+        if Session.leaderboard.isGrandPianoHalfsNotesUnlocked == true {
+            return true
+        } else if iAPurchases.gameData.didUnlockGrandPianoHalfNotes == true {
+            return true
+        } else {
+            return false
+        }
+       
+       }
+    var isAcousticGuitarAvailable: Bool {
+        if Session.leaderboard.isAcousticGuitarUnlocked == true {
+            return true
+        } else if iAPurchases.gameData.didUnlockTheAcousticGuitar == true {
+            return true
+        } else {
+            return false
+        }
+       }
+    
+    var isAcousticGuitarMinorChordsAvailable: Bool {
+        if Session.leaderboard.isAcousticGUitarMinorChordsUnlocked == true {
+            return true
+        } else if iAPurchases.gameData.didUnlockAcouGuitarMinorChords == true {
+            return true
+        } else {
+            return false
+        }
+       }
+    
+    var isViolinAvailable: Bool {
+        if Session.leaderboard.isViolinUnlocked == true {
+            return true
+        } else if iAPurchases.gameData.didUnlockViolin == true {
+            return true
+        } else {
+            return false
+        }
+       }
+    var isSaxophoneAvailable: Bool {
+        if Session.leaderboard.isSaxaphoneUnlocked == true {
+            return true
+        } else if iAPurchases.gameData.didUnlockSaxophone == true {
+            return true
+        } else {
+            return false
+        }
+       }
+    
+    
+    
+    
+    
+    func getIAPProducts(){
+        IAPManager.shared.getProducts { (result) in
+            switch result {
+            case .success(let products): self.iAPurchases.products = products
+            case .failure(let error): print(error)
+            }
+        }
+    }
+    
+    func purchase(product: SKProduct) -> Bool {
+        if !IAPManager.shared.canMakePayments() {
+            return false
+        } else {
+            iAPurchases.iAPDelegate?.willStartLongProcess()
+            
+            IAPManager.shared.buy(product: product) { (result) in
+                DispatchQueue.main.async {
+                    self.iAPurchases.iAPDelegate?.didFinishLongProcess()
+
+                    switch result {
+                    case .success(_):
+                        self.iAPurchases.updateGameDataWithPurchasedProduct(product)
+                    case .failure(let error):
+                        self.iAPurchases.iAPDelegate?.showIAPRelatedError(error)
+                    }
+                }
+            }
+        }
+
+        return true
+    }
+    
+    
+    func restorePurchases() {
+        iAPurchases.iAPDelegate?.willStartLongProcess()
+        IAPManager.shared.restorePurchases { (result) in
+            DispatchQueue.main.async {
+                self.iAPurchases.iAPDelegate?.didFinishLongProcess()
+
+                switch result {
+                case .success(let success):
+                    if success {
+                        self.iAPurchases.iAPDelegate?.didFinishRestoringPurchasedProducts()
+                    } else {
+                        self.iAPurchases.iAPDelegate?.didFinishRestoringPurchasesWithZeroProducts()
+                    }
+
+                case .failure(let error): self.iAPurchases.iAPDelegate?.showIAPRelatedError(error)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+
+    
     
     //MARK: Round 1
     
@@ -225,24 +284,6 @@ class Session {
             note3 = instrum.cRound1Notes[2]
             round1Notes = [note1!,note2!,note3!]
         }
-        if let instrum = self.instrument as? AcousticGuitar {
-      //todo
-        }
-    }
-    
-    func setCustomRound1Notes(completion: CompletionHandler){
-        roundNumber = 1
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.allCustomRound1Notes
-            note1 = instrum.cRound1Notes[0]
-            note2 = instrum.cRound1Notes[1]
-            note3 = instrum.cRound1Notes[2]
-            round1Notes = [note1!,note2!,note3!]
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-      //todo
-        }
-        completion(true)
     }
     
     func setRound1HalfNotes(completion: CompletionHandler){
@@ -253,18 +294,16 @@ class Session {
         }
         if let instrum = self.instrument as? AcousticGuitar {
             sessionNotes = instrum.minorMajorChordsRound1
+            
             reuseRound1NoteSet()
-
         }
         if let instrum = self.instrument as? Violin {
             sessionNotes = instrum.round2Notes
             reuseRound1NoteSet()
-
         }
         if let instrum = self.instrument as? Saxaphone {
             sessionNotes = instrum.round2Notes
             reuseRound1NoteSet()
-
         }
         round1Notes = sessionNotes
         completion(true)
@@ -318,24 +357,6 @@ class Session {
         round2Notes = sessionNotes
     }
     
-    func setCustomRound2Notes(completion: CompletionHandler){
-        roundNumber = 2
-        if let instrum = self.instrument as? GrandPiano {
-            sessionNotes = instrum.allCustomRound2Notes
-            note1 = instrum.cRound2Notes[0]
-            note2 = instrum.cRound2Notes[1]
-            note3 = instrum.cRound2Notes[2]
-            note4 = instrum.cRound2Notes[3]
-            note5 = instrum.cRound2Notes[4]
-            round2Notes = [note1!,note2!,note3!,note4!,note5!]
-        }
-        
-        if let instrum = self.instrument as? AcousticGuitar {
-        //todo
-        }
-        completion(true)
-    }
-    
     func setRound2HalfNotes(completion: CompletionHandler){
         roundNumber = 2
         if let instrum = self.instrument as? GrandPiano {
@@ -383,25 +404,6 @@ class Session {
         return fullRando
     }
     
-    func setCustomRound3Notes(completion: CompletionHandler){
-        roundNumber = 3
-        if let instrum = self.instrument as? GrandPiano {
-          sessionNotes = instrum.allCustomRound3Notes
-            note1 = instrum.cRound2Notes[0]
-            note2 = instrum.cRound2Notes[1]
-            note3 = instrum.cRound2Notes[2]
-            note4 = instrum.cRound2Notes[3]
-            note5 = instrum.cRound2Notes[4]
-            note6 = instrum.cRound2Notes[3]
-            note7 = instrum.cRound2Notes[4]
-            round2Notes = [note1!,note2!,note3!,note4!,note5!,note6!,note7!]
-        }
-        if let instrum = self.instrument as? AcousticGuitar {
-        //todo
-        }
-        completion(true)
-    }
-    
     func setRound3Notes(completion: CompletionHandler){
         roundNumber = 3
         if let instrum = self.instrument as? GrandPiano {
@@ -411,17 +413,14 @@ class Session {
         if let instrum = self.instrument as? AcousticGuitar {
             sessionNotes = instrum.round3Notes
             reuseRound3NoteSet()
-
         }
         if let instrum = self.instrument as? Violin {
             sessionNotes = instrum.round3Notes
             reuseRound3NoteSet()
-
         }
         if let instrum = self.instrument as? Saxaphone {
             sessionNotes = instrum.round3Notes
             reuseRound3NoteSet()
-
         }
         round3Notes = sessionNotes
         completion(true)
@@ -432,22 +431,18 @@ class Session {
         if let instrum = self.instrument as? GrandPiano {
             sessionNotes = instrum.sharpsFlatsRound3
             reuseRound3NoteSet()
-
         }
         if let instrum = self.instrument as? AcousticGuitar {
             sessionNotes = instrum.minorChordsRound3
             reuseRound3NoteSet()
-
         }
         if let instrum = self.instrument as? Violin {
             sessionNotes = instrum.round3Notes
             reuseRound3NoteSet()
-
         }
         if let instrum = self.instrument as? Saxaphone {
             sessionNotes = instrum.round3Notes
             reuseRound3NoteSet()
-
         }
         round3Notes = sessionNotes
         completion(true)
@@ -472,7 +467,34 @@ class Session {
         round1Notes = sessionNotes
     }
     
-    //MARK: Note Session Functions
+    //MARK: GamePlay Note Functions
+    
+    
+    func checkUpdateSessionWith(note: Note) -> Bool {
+        if isNoteSelectionCorrect(note: note) {
+            score += 1
+            return true
+        } else {
+            lifes -= 1
+            return false
+        }
+    }
+    
+    private func isNoteSelectionCorrect(note: Note) -> Bool {
+         if note.id == currentNote?.id {
+             return true
+         } else {
+             return false
+         }
+     }
+    func getSoundPathURLFromNote(path: String?) -> URL? {
+        if let path = path {
+            let soundPath = Bundle.main.path(forResource: path, ofType: nil)!
+            let url = URL(fileURLWithPath: soundPath)
+            return url
+        }
+        return nil
+    }
     
     func getNewNote(notes: [Note?])-> (nextNote:Note?, noteSet:[Note?] ) {
         var noteCopy = notes
@@ -554,31 +576,81 @@ class Session {
         }  while randomSelected == false
         
     }
-
     
-    func checkUpdateSessionWith(note: Note) -> Bool {
-        if isNoteSelectionCorrect(note: note) {
-            score += 1
+    //MARK: Custom Notes Mode
+
+    var isCustomSession: Bool = false
+    var customInstrument: Instrument?
+    var isCustomModeLocked: Bool {
+        switch currentInstrumentType {
+        case .acousticGuitar:
             return true
-        } else {
-            lifes -= 1
+            //TODO
+        case .grandPiano:
             return false
+        case .violin:
+            return true
+        case .saxaphone:
+            return true
         }
     }
-    private func isNoteSelectionCorrect(note: Note) -> Bool {
-         if note.id == currentNote?.id {
-             return true
-         } else {
-             return false
-         }
-     }
-    func getSoundPathURLFromNote(path: String?) -> URL? {
-        if let path = path {
-            let soundPath = Bundle.main.path(forResource: path, ofType: nil)!
-            let url = URL(fileURLWithPath: soundPath)
-            return url
+    func tCustomOn(){
+        isCustomSession = true
+        switch currentInstrumentType {
+        case .acousticGuitar:
+            customInstrument = AcousticGuitar()
+        case .grandPiano:
+            customInstrument = GrandPiano()
+        case .violin:
+            customInstrument = Violin()
+        case .saxaphone:
+            customInstrument = Saxaphone()
         }
-        return nil
     }
+    func tCustomOff(){
+        isCustomSession = false
+        customInstrument = nil
+    }
+    func setCustomRound3Notes(completion: CompletionHandler){
+        roundNumber = 3
+        if let instrum = self.instrument as? GrandPiano {
+          sessionNotes = instrum.allCustomRound3Notes
+            note1 = instrum.cRound2Notes[0]
+            note2 = instrum.cRound2Notes[1]
+            note3 = instrum.cRound2Notes[2]
+            note4 = instrum.cRound2Notes[3]
+            note5 = instrum.cRound2Notes[4]
+            note6 = instrum.cRound2Notes[3]
+            note7 = instrum.cRound2Notes[4]
+            round2Notes = [note1!,note2!,note3!,note4!,note5!,note6!,note7!]
+        }
+        completion(true)
+    }
+    func setCustomRound2Notes(completion: CompletionHandler){
+        roundNumber = 2
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.allCustomRound2Notes
+            note1 = instrum.cRound2Notes[0]
+            note2 = instrum.cRound2Notes[1]
+            note3 = instrum.cRound2Notes[2]
+            note4 = instrum.cRound2Notes[3]
+            note5 = instrum.cRound2Notes[4]
+            round2Notes = [note1!,note2!,note3!,note4!,note5!]
+        }
+        completion(true)
+    }
+    
+    func setCustomRound1Notes(completion: CompletionHandler){
+        roundNumber = 1
+        if let instrum = self.instrument as? GrandPiano {
+            sessionNotes = instrum.allCustomRound1Notes
+            note1 = instrum.cRound1Notes[0]
+            note2 = instrum.cRound1Notes[1]
+            note3 = instrum.cRound1Notes[2]
+            round1Notes = [note1!,note2!,note3!]
+        }
+        completion(true)
+    }
+
     
 }

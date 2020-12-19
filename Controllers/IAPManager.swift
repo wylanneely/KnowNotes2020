@@ -9,47 +9,104 @@ import StoreKit
 
 class IAPManager: NSObject, SKPaymentTransactionObserver{
     
-    func canMakePayments() -> Bool {
-        return SKPaymentQueue.canMakePayments()
-    }
-  
-    
-    func buy(product: SKProduct, withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.default().add(payment)
-     
-        // Keep the completion handler.
-        onBuyProductHandler = handler
-    }
-    func startObserving() {
-        SKPaymentQueue.default().add(self)
-    }
-     
-     
-    func stopObserving() {
-        SKPaymentQueue.default().remove(self)
-    }
-    
     //MARK: Properties
     static let shared = IAPManager()
+    
     var onReceiveProductsHandler: ((Result<[SKProduct], IAPManagerError>) -> Void)?
     var onBuyProductHandler: ((Result<Bool, Error>) -> Void)?
     
+    var totalRestoredPurchases = 0
+
+    
+    func canMakePayments() -> Bool {
+          return SKPaymentQueue.canMakePayments()
+      }
+      
+
+    
+
     private override init() {
         super.init()
     }
     
     
+    // MARK: - Purchase Products
+
+    func buy(product: SKProduct, withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.default().add(payment)
+         
+            // Keep the completion handler.
+            onBuyProductHandler = handler
+        }
     
+    func restorePurchases(withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
+            onBuyProductHandler = handler
+            totalRestoredPurchases = 0
+            SKPaymentQueue.default().restoreCompletedTransactions()
+        }
+    
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        if totalRestoredPurchases != 0 {
+            onBuyProductHandler?(.success(true))
+        } else {
+            print("IAP: No purchases to restore!")
+            onBuyProductHandler?(.success(false))
+        }
+    }
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        if let error = error as? SKError {
+            if error.code != .paymentCancelled {
+                print("IAP Restore Error:", error.localizedDescription)
+                onBuyProductHandler?(.failure(error))
+            } else {
+                onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
+            }
+        }
+    }
+    
+    // MARK: - General Methods
+    
+    fileprivate func getProductIDs() -> [String]? {
+        guard let url = Bundle.main.url(forResource: "IAP_ProductIDs", withExtension: "plist") else { return nil }
+        do {
+            let data = try Data(contentsOf: url)
+            let productIDs = try PropertyListSerialization.propertyList(from: data, options: .mutableContainersAndLeaves, format: nil) as? [String] ?? []
+            return productIDs
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func startObserving() {
+        SKPaymentQueue.default().add(self)
+    }
+    
+    func stopObserving() {
+        SKPaymentQueue.default().remove(self)
+    }
+    
+    func getPriceFormatted(for product: SKProduct?) -> String? {
+        guard let p = product else {return "error"}
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = p.priceLocale
+        return formatter.string(from: p.price)
+    }
+    
+        
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
         transactions.forEach { (transaction) in
             switch transaction.transactionState {
             case .purchased:
-                
                 onBuyProductHandler?(.success(true))
                 SKPaymentQueue.default().finishTransaction(transaction)
-            case .restored: break
+            case .restored:
+                totalRestoredPurchases += 1
+                SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:
                 if let error = transaction.error as? SKError {
                     if error.code != .paymentCancelled {
@@ -65,7 +122,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
             }
         }
     }
-    
+
     func getProducts(withHandler productsReceiveHandler: @escaping (_ result: Result<[SKProduct], IAPManagerError>) -> Void) {
         // Keep the handler (closure) that will be called when requesting for
            // products on the App Store is finished.
@@ -87,30 +144,9 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
            request.start()
     }
     
-    fileprivate func getProductIDs() -> [String]? {
-        guard let url = Bundle.main.url(forResource: "IAP_ProductIDs", withExtension: "plist") else { return nil }
-        do {
-            let data = try Data(contentsOf: url)
-            let productIDs = try PropertyListSerialization.propertyList(from: data, options: .mutableContainersAndLeaves, format: nil) as? [String] ?? []
-            return productIDs
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
+   
     
-    }
-    
-    //MARK: Helpers
-    
-    func getPriceFormatted(for product: SKProduct?) -> String? {
-        guard let p = product else {return "error"}
-        
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = p.priceLocale
-        return formatter.string(from: p.price)
-    }
-    
+
     enum IAPManagerError: Error {
         case noProductIDsFound
         case noProductsFound
@@ -130,6 +166,7 @@ extension IAPManager: SKProductsRequestDelegate {
             onReceiveProductsHandler?(.failure(.noProductsFound))
         }
     }
+    
     func request(_ request: SKRequest, didFailWithError error: Error) {
         onReceiveProductsHandler?(.failure(.productRequestFailed))
     }

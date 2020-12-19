@@ -13,14 +13,36 @@ class FirstKnownNotesViewCell: UITableViewCell {
         super.awakeFromNib()
         setUPViews()
         setGestureRecognizer()
+        setInitlAccesoriesViews()
         setSharpsFlats()
     }
     
-    override func reloadInputViews() {
-         setSharpsFlats()
+    func setInitlAccesoriesViews(){
+        if Session.manager.currentInstrumentType == .grandPiano {
+        setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }
+        else {
+            self.flatLabel.isHidden = true
+            self.sharpLabel.isHidden = true
+            self.aMinorLabel.isHidden = true
+            self.bMinorLabel.isHidden = true
+            self.cMinorLabel.isHidden = true
+        }
     }
     
+    override func reloadInputViews() {
+        if Session.manager.currentInstrumentType == .grandPiano {
+        setSharpsFlats()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setMinors()
+        }    }
+    
     func setSharpsFlats(){
+        if Session.manager.currentInstrumentType == .grandPiano {
         if Session.manager.hasHalfNotes {
             self.flatLabel.isHidden = false
             self.flatLabel.startShimmeringAnimation()
@@ -29,6 +51,23 @@ class FirstKnownNotesViewCell: UITableViewCell {
         } else {
                 self.flatLabel.isHidden = true
                 self.sharpLabel.isHidden = true
+        }} else {
+            return
+        }
+    }
+    
+    func setMinors(){
+        if Session.manager.hasHalfNotes {
+            self.aMinorLabel.isHidden = false
+            self.bMinorLabel.isHidden = false
+            self.cMinorLabel.isHidden = false
+            self.aMinorLabel.startShimmeringAnimation()
+            self.bMinorLabel.startShimmeringAnimation()
+            self.cMinorLabel.startShimmeringAnimation()
+        } else {
+            self.aMinorLabel.isHidden = true
+            self.bMinorLabel.isHidden = true
+            self.cMinorLabel.isHidden = true
         }
     }
 
@@ -43,8 +82,6 @@ class FirstKnownNotesViewCell: UITableViewCell {
     }
     
     @objc func tapEdit(sender: UITapGestureRecognizer) {
-        //animateSharps()
-        //flashSharps()
         delegate?.firstGroupTapped()
     }
     
@@ -85,11 +122,6 @@ class FirstKnownNotesViewCell: UITableViewCell {
     
     var delegate: FirstRoundNotesDelegate?
     
-    func flashSharps(){
-        self.flatLabel.blink2()
-        self.sharpLabel.blink2()
-    }
-    
 //    func animateSharps(){
 //        DispatchQueue.main.async {
 //            UIView.animate(withDuration: 2.5) {
@@ -109,6 +141,12 @@ class FirstKnownNotesViewCell: UITableViewCell {
 //        }
 
     //MARK: Outlets
+    
+    
+    @IBOutlet weak var aMinorLabel: UILabel!
+    @IBOutlet weak var bMinorLabel: UILabel!
+    @IBOutlet weak var cMinorLabel: UILabel!
+    
     
     @IBOutlet weak var flatLabel: UILabel!
     @IBOutlet weak var sharpLabel: UILabel!

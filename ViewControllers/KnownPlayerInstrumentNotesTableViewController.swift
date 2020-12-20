@@ -30,7 +30,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     
     
     var willCustomizeRounds: Bool {
-        return Session.manager.isCustomSession
+        return false
     }
     
     //MARK: LifeCycle
@@ -38,6 +38,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellXibs()
+        Session.manager.shuffleMode = .off
         IAP.iAPDelegate = self
     }
     
@@ -107,9 +108,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
 
     func beginLesssonButtonTapped() {
         Session.manager.resetScores()
-        if willCustomizeRounds {
-            self.performSegue(withIdentifier: "toCustom", sender: self)
-        }
+        
         
         switch groupStartNumber {
         
@@ -234,7 +233,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         return alert
     }
     var lockedCustomAlert: UIAlertController {
-        let alert = UIAlertController(title: "Locked", message: "Score 40 to Custom Rounds", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Soon", message: "Next Version Will Have Custom Rounds!", preferredStyle: .alert)
         let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
             return
         }
@@ -252,7 +251,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     func showSingleAlert(withMessage message: String) {
-           let alertController = UIAlertController(title: "FakeGame", message: message, preferredStyle: .alert)
+           let alertController = UIAlertController(title: "Uh, Oh!", message: message, preferredStyle: .alert)
            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
            self.present(alertController, animated: true, completion: nil)
        }

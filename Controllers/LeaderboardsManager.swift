@@ -179,6 +179,10 @@ struct LeaderboardsManager {
         if score >= 20 {
             unlockAcousticGuitarLocally()
         }
+        if score >= 30 {
+            GameCenterManager.manager.achievementsManager.reportGrandPianoHalfs(with: score)
+        }
+        
     }
     func setPersonalAcouGuitarHighScore(score: Int){
         let oldScore = highScoreAcousticGuitar()
@@ -188,6 +192,9 @@ struct LeaderboardsManager {
         if score >= 20 {
             unlockViolinLocally()
         }
+        if score >= 30 {
+            GameCenterManager.manager.achievementsManager.reportAcousticMinors(with: score)
+    }
     }
     func setPersonalViolinHighScore(score: Int){
         let oldScore = highScoreViolin()

@@ -47,7 +47,6 @@ class GamePlayRound3ViewController: UIViewController {
         //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetGame()
         assignNotesToButtons()
         setUpScoresLifes()
         self.isModalInPresentation = true
@@ -58,8 +57,15 @@ class GamePlayRound3ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        resetGame()
-        playButton.pulse()
+        
+        DispatchQueue.main.async {
+            self.updateLifesGif(Session.manager.lifes)
+            self.scoreLabel.text = "\(Session.manager.score)"
+            self.playButton.setTitle("Play", for: .normal)
+            self.playButton.pulse()
+            
+        }
+        playButtonTapped(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,7 +218,7 @@ class GamePlayRound3ViewController: UIViewController {
                 assignNotesToButtons()
             }
         } else {
-            Session.manager.setRound3Notes { (_) in
+            Session.manager.shuffleRound3Notes { (_) in
                 Session.manager.reuseRound3NoteSet()
                 assignNotesToButtons()
             }
@@ -238,9 +244,12 @@ class GamePlayRound3ViewController: UIViewController {
         if lifesLeft == 0 {
             return
         }
+        
         let gifname = "knowNotes\(lifesLeft)Lifes"
-        let gifImage = UIImage.gifImageWithName(name: gifname)
-        backgroundGif.image = gifImage
+        DispatchQueue.main.async {
+            let gifImage = UIImage.gifImageWithName(name: gifname)
+            self.backgroundGif.image = gifImage
+        }
     }
     
     fileprivate func updateViewsWithCorrectAnswer(){
@@ -299,7 +308,6 @@ class GamePlayRound3ViewController: UIViewController {
     }
     
     @IBAction func shuffleNotes(_ sender: Any) {
-        shuffleNotes()
         DispatchQueue.main.async {
                 self.shuffleNotes()
                 self.playButton.setTitle("Play", for: .normal)
@@ -323,6 +331,7 @@ class GamePlayRound3ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note1) {
                 updateViewsWithCorrectAnswer()
             } else {
+                updateViewsWithIncorrectAnswer()
             }
         }
         checkRoundEnd()
@@ -574,6 +583,11 @@ class GamePlayRound3ViewController: UIViewController {
     func stopPulsingNoteViews(){
         for view in allNoteViews {
             view.layer.removeAllAnimations()
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CustomAlertViewController {
+            vc.isUsingHalfs = self.hasHalfNotes
         }
     }
 

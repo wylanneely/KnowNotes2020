@@ -19,11 +19,7 @@ class GamePlayRound1ViewController: UIViewController {
     var customMode: Bool = false
     
     var gameRoundNotes: [Note] {
-        if customMode == true {
-            return Session.manager.round1Notes
-        } else {
             return Session.manager.sessionNotes
-        }
     }
     var score: Int { Session.manager.score }
 
@@ -59,8 +55,8 @@ class GamePlayRound1ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        resetGame()
-        playButton.pulse()
+        updateLifesGif()
+        setUpLabelsButtonsViews()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -90,20 +86,32 @@ class GamePlayRound1ViewController: UIViewController {
     
     func getNewSessionNotes(){
         doesGameNeedNewNote = true
-        if customMode {
-            Session.manager.randomizeCustomRound1()
-            self.assignNotesToButtons()
-        }
+//        if customMode {
+//            Session.manager.randomizeCustomRound1()
+//            self.assignNotesToButtons()
+//        }
            if hasHalfNotes{
             Session.manager.setRound1HalfNotes { (complete) in
                 self.assignNotesToButtons()
             }
+           } else if shuffleMode != .off {
+            
+            Session.manager.shuffleRound1Notes { (complete) in
+                Session.manager.reuseRound1NoteSet()
+                self.assignNotesToButtons()
+
+            }
+            
            } else {
             Session.manager.setRound1Notes { (complete) in
                 self.assignNotesToButtons()
             }
            }
        }
+    
+    
+    
+    
     
     func assignNotesToButtons(){
         DispatchQueue.main.async {
@@ -139,13 +147,16 @@ class GamePlayRound1ViewController: UIViewController {
     
     
 
-    func updateLifesGif(_ lifesLeft: Int){
+    func updateLifesGif(){
+        let lifesLeft = Session.manager.lifes
         if lifesLeft == 0 {
             return
         }
         let gifname = "knowNotes\(lifesLeft)Lifes"
-        let gifImage = UIImage.gifImageWithName(name: gifname)
-        backgroundGif.image = gifImage
+        DispatchQueue.main.async {
+            let gifImage = UIImage.gifImageWithName(name: gifname)
+            self.backgroundGif.image = gifImage
+        }
     }
     
     
@@ -161,7 +172,7 @@ class GamePlayRound1ViewController: UIViewController {
         Session.manager.reuseRound1NoteSet()
         setUpLabelsButtonsViews()
         stopPulsingNoteViews()
-            circleProgressBar.setProgress(to: 0 , withAnimation: true)
+        circleProgressBar.setProgress(to: 0 , withAnimation: true)
     }
     
     func getNextNote(notes: [Note?])-> (nextNote:Note?, noteSet:[Note?] ) {
@@ -327,15 +338,25 @@ class GamePlayRound1ViewController: UIViewController {
         doesGameNeedNewNote = true
     }
     
-    fileprivate func updateViewsWithIncorrectAnswer() {
+    fileprivate func updateButtonAndViewWithIncorrectAnswer(noteButton: UIButton) {
         //wrong
-        self.note1Button.layer.removeAllAnimations()
-        self.note1ButtonView.layer.removeAllAnimations()
+        if noteButton == note1Button{
+            self.note1Button.layer.removeAllAnimations()
+            self.note1ButtonView.layer.removeAllAnimations()
+            self.note1Button.isEnabled = false
+        } else if noteButton == note2Button {
+            self.note2Button.layer.removeAllAnimations()
+            self.note2ButtonView.layer.removeAllAnimations()
+            self.note2Button.isEnabled = false
+        } else if noteButton == note3Button {
+            self.note3Button.layer.removeAllAnimations()
+            self.note3ButtonView.layer.removeAllAnimations()
+            self.note3Button.isEnabled = false
+        }
         handleWrongAnswerWithHaptic()
         DispatchQueue.main.async {
-            self.updateLifesGif(Session.manager.lifes)
+            self.updateLifesGif()
         }
-        note1Button.isEnabled = false
     }
     
     @IBAction func note1ButtonTapped(_ sender: Any) {
@@ -351,7 +372,7 @@ class GamePlayRound1ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note1) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateButtonAndViewWithIncorrectAnswer(noteButton: note1Button)
             }
         }
         checkRoundEnd()
@@ -371,7 +392,7 @@ class GamePlayRound1ViewController: UIViewController {
                 //correct
                updateViewsWithCorrectAnswer()
             } else {
-               updateViewsWithIncorrectAnswer()
+                updateButtonAndViewWithIncorrectAnswer(noteButton: note2Button)
             }
         }
         checkRoundEnd()
@@ -390,7 +411,7 @@ class GamePlayRound1ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note3) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateButtonAndViewWithIncorrectAnswer(noteButton: note3Button)
             }
         }
         checkRoundEnd()
@@ -503,6 +524,12 @@ class GamePlayRound1ViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CustomAlertViewController {
+            vc.isUsingHalfs = self.hasHalfNotes
+
+            
+        }
+        
         if segue.identifier == "toRound2" {
             if let vc = segue.destination as? GamePlayRound2ViewController {
                 vc.getGameNotes()

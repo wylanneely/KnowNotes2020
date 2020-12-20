@@ -9,11 +9,16 @@ import UIKit
 
 class CustomAlertViewController: UIViewController {
     
-    var instrumentType: InstrumentType = .grandPiano
+    var instrumentType: InstrumentType {
+        return Session.manager.currentInstrumentType
+    }
+    
+    var isUsingHalfs: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewsButtons()
+        setLabels()
         // Do any additional setup after loading the view.
     }
     func setUpViewsButtons(){
@@ -28,12 +33,32 @@ class CustomAlertViewController: UIViewController {
         submitScoreButton.layer.borderWidth = 2
         submitScoreButton.layer.borderColor = UIColor.black.cgColor
     }
-    func setLabels(instrument: String,score: Int, noteTypes: String){
+    func setLabels(){
+        let instrument = Session.manager.currentInstrumentType.rawValue
+        let score = "Score: \(Session.manager.score)"
+        var noteTypes = "Regular Notes"
+        if instrumentType == .grandPiano {
+            if isUsingHalfs {
+                noteTypes = "Regular + Sharp & Flats"
+            } else {
+                noteTypes = "Regular Whole Notes"
+            }
+
+        } else if instrumentType == .acousticGuitar {
+            if isUsingHalfs {
+            noteTypes = "Major & Minor Chords"
+            } else {
+                noteTypes = "Major Chords"
+            }
+        }
         
+        intrumentTypeLabel.text = instrument
+        scoreLabel.text = score
+        noteChordTypeLabel.text = noteTypes
     }
     
 
-    @IBOutlet weak var intrumentTyoeLabel: UIView!
+    @IBOutlet weak var intrumentTypeLabel: UILabel!
     
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -47,10 +72,13 @@ class CustomAlertViewController: UIViewController {
     @IBOutlet weak var submitScoreButton: UIButton!
     
     @IBAction func retryTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        
+        self.viewWillDisappear(true)
+        self.dismiss(animated: true) {
+        }
     }
     @IBAction func sendChallengeTapped(_ sender: Any) {
-        
+        self.performSegue(withIdentifier: "backMainSegue", sender: self)
     }
     @IBAction func submitScoreTapped(_ sender: Any) {
         
@@ -73,22 +101,20 @@ class CustomAlertViewController: UIViewController {
      }
     
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
+    
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
+        super.viewWillDisappear(true)
         if let firstVC = presentingViewController as? GamePlayRound1ViewController {
+            firstVC.resetGame()
             firstVC.viewDidAppear(true)
         }
-        if let firstVC = presentingViewController as? GamePlayRound2ViewController {
-            firstVC.viewDidAppear(true)
+        if let secondVC = presentingViewController as? GamePlayRound2ViewController {
+            secondVC.resetGame()
+            secondVC.viewDidAppear(true)
         }
-        if let firstVC = presentingViewController as? GamePlayRound3ViewController {
-            firstVC.viewDidAppear(true)
+        if let thirdVC = presentingViewController as? GamePlayRound3ViewController {
+            thirdVC.resetGame()
+            thirdVC.viewDidAppear(true)
         }
     }
     

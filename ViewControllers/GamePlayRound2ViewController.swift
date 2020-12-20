@@ -49,7 +49,6 @@ class GamePlayRound2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetGame()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
         self.isModalInPresentation = true
@@ -58,8 +57,11 @@ class GamePlayRound2ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        resetGame()
-        playButton.pulse()
+        DispatchQueue.main.async {
+            self.updateLifesGif()
+            self.setUpLabelsButtonsViews()
+        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -83,7 +85,7 @@ class GamePlayRound2ViewController: UIViewController {
         circleProgressBar.clipsToBounds = true
           view.sendSubviewToBack(backgroundGif)
           view.sendSubviewToBack(circleProgressBar)
-        updateLifesGif(Session.manager.lifes)
+        updateLifesGif()
       }
     
     func getGameNotes(){
@@ -195,24 +197,46 @@ class GamePlayRound2ViewController: UIViewController {
         doesGameNeedNewNote = true
     }
     
-    fileprivate func updateViewsWithIncorrectAnswer() {
+    fileprivate func updateViewsWithIncorrectAnswer(noteButton: UIButton) {
         //wrong
-        self.note1Button.layer.removeAllAnimations()
-        self.note1ButtonView.layer.removeAllAnimations()
+        if noteButton == note1Button{
+            self.note1Button.layer.removeAllAnimations()
+            self.note1ButtonView.layer.removeAllAnimations()
+            self.note1Button.isEnabled = false
+        } else if noteButton == note2Button {
+            self.note2Button.layer.removeAllAnimations()
+            self.note2ButtonView.layer.removeAllAnimations()
+            self.note2Button.isEnabled = false
+        } else if noteButton == note3Button {
+            self.note3Button.layer.removeAllAnimations()
+            self.note3ButtonView.layer.removeAllAnimations()
+            self.note3Button.isEnabled = false
+        }
+        else if noteButton == note4Button {
+            self.note4Button.layer.removeAllAnimations()
+            self.note4ButtonView.layer.removeAllAnimations()
+            self.note4Button.isEnabled = false
+        } else if noteButton == note5Button {
+            self.note5Button.layer.removeAllAnimations()
+            self.note5ButtonView.layer.removeAllAnimations()
+            self.note5Button.isEnabled = false
+        }
         handleWrongAnswerWithHaptic()
         DispatchQueue.main.async {
-            self.updateLifesGif(Session.manager.lifes)
+            self.updateLifesGif()
         }
-        note1Button.isEnabled = false
     }
     
-    func updateLifesGif(_ lifesLeft: Int){
+    func updateLifesGif(){
+        let lifesLeft = Session.manager.lifes
         if lifesLeft == 0 {
             return
         }
         let gifname = "knowNotes\(lifesLeft)Lifes"
-        let gifImage = UIImage.gifImageWithName(name: gifname)
-        backgroundGif.image = gifImage
+        DispatchQueue.main.async {
+            let gifImage = UIImage.gifImageWithName(name: gifname)
+            self.backgroundGif.image = gifImage
+        }
     }
     
     func hasNotesBeenSelectedOnce()-> Bool {
@@ -229,9 +253,9 @@ class GamePlayRound2ViewController: UIViewController {
             case .manual:
                 self.showShuffleButtonModes()
             case .off:
-                Session.manager.reuseRound1NoteSet()
+                Session.manager.reuseRound2NoteSet()
             default:
-                Session.manager.reuseRound1NoteSet()
+                Session.manager.reuseRound2NoteSet()
             }
         }
     }
@@ -243,7 +267,8 @@ class GamePlayRound2ViewController: UIViewController {
                 self.assignNotesToButtons()
             }
         } else {
-            Session.manager.setRound2Notes { (_) in
+            Session.manager.shuffleRound2Notes { (_) in
+                Session.manager.reuseRound2NoteSet()
                 self.assignNotesToButtons()
             }
         }
@@ -322,7 +347,7 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note1) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateViewsWithIncorrectAnswer(noteButton: note1Button)
 
             }
         }
@@ -342,7 +367,7 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note2) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateViewsWithIncorrectAnswer(noteButton: note2Button)
             }
         }
         checkRoundEnd()
@@ -361,7 +386,7 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note3) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateViewsWithIncorrectAnswer(noteButton: note3Button)
             }
         }
         checkRoundEnd()
@@ -381,7 +406,7 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note4) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateViewsWithIncorrectAnswer(noteButton: note4Button)
             }
         }
         checkRoundEnd()
@@ -401,7 +426,7 @@ class GamePlayRound2ViewController: UIViewController {
             if Session.manager.checkUpdateSessionWith(note: note5) {
                 updateViewsWithCorrectAnswer()
             } else {
-                updateViewsWithIncorrectAnswer()
+                updateViewsWithIncorrectAnswer(noteButton: note5Button)
             }
         }
         checkRoundEnd()
@@ -556,6 +581,11 @@ class GamePlayRound2ViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let vc = segue.destination as? CustomAlertViewController {
+            vc.isUsingHalfs = self.hasHalfNotes
+
+        }
         if segue.identifier == "toRound3" {
             if let vc = segue.destination as?
                 GamePlayRound3ViewController {

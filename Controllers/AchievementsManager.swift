@@ -19,6 +19,10 @@ import GameKit
     let acousticGuitarAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitar.rawValue)
     let violinAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockViolin.rawValue)
     let saxaphoneAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockSaxaphone.rawValue)
+    let grandPianoHalfsAchievement = GKAchievement(identifier: AchievementsBundleIDs.unlockGrandPianoHalfNotes.rawValue)
+    let acousticGuitarMinors = GKAchievement(identifier: AchievementsBundleIDs.unlockAcousticGuitarMinorChords.rawValue)
+
+    
     
     var isGrandPianoHAlfNotesUnlocked: Bool = false
     var isAcousticGuitarMinorChordsUnlocked: Bool = false
@@ -58,7 +62,29 @@ import GameKit
     }
     
     typealias SuccessHandler = (Bool) -> Void
-
+    
+    func reportGrandPianoHalfs(with score: Int) {
+        if score >= 30 {
+            grandPianoHalfsAchievement.percentComplete = 100.00
+            reportAchievement(grandPianoHalfsAchievement)
+            userDefaultsHelper.unlockGrandPiranoHalfsLocally()
+        } else {
+           let completePercent =  Double(score) / 30
+            grandPianoHalfsAchievement.percentComplete = completePercent
+            reportAchievement(grandPianoHalfsAchievement)
+        }
+    }
+    func reportAcousticMinors(with score: Int) {
+        if score >= 30 {
+            acousticGuitarAchievement.percentComplete = 100.00
+            reportAchievement(acousticGuitarAchievement)
+            userDefaultsHelper.unlockAcousticGuitarMinorChordsLocally()
+        } else {
+           let completePercent =  Double(score) / 30
+            acousticGuitarAchievement.percentComplete = completePercent
+            reportAchievement(acousticGuitarAchievement)
+        }
+    }
     func reportSaxaphoneProgress(with score: Int) {
         if score >= 20 {
             saxaphoneAchievement.percentComplete = 100.00
@@ -109,5 +135,7 @@ enum AchievementsBundleIDs: String {
     case unlockAcousticGuitar = "com.wylan.KnowYourNote2020.Achievements.AcousticGuitar"
     case unlockViolin = "com.wylan.KnowYourNote2020.Achievements.Violin"
     case unlockSaxaphone = "com.wylan.KnowYourNote2020.Achievements.Sax"
+    case unlockGrandPianoHalfNotes = "com.wylan.KnowYourNote2020.Achievements.GPHN"
+    case unlockAcousticGuitarMinorChords = "com.wylan.KnowYourNote2020.Achievements.AGMC"
 
 }

@@ -248,7 +248,68 @@ class Session {
             }
         }
         return fullRando
+    
     }
+    
+    func shuffleRound1Notes(completion: CompletionHandler){
+        roundNumber = 1
+        if let instrum = self.instrument as? GrandPiano {
+            var copyNotes = instrum.round1Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 3
+            sessionNotes = shuffledNotes
+            reuseRound1NoteSet()
+            completion(true)
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            var copyNotes = instrum.round1Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 3
+            sessionNotes = shuffledNotes
+            reuseRound1NoteSet()
+            completion(true)
+        }
+        if let instrum = self.instrument as? Violin {
+            var copyNotes = instrum.round1Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 3
+            sessionNotes = shuffledNotes
+            reuseRound1NoteSet()
+            completion(true)
+
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            var copyNotes = instrum.round1Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 3
+            sessionNotes = shuffledNotes
+            reuseRound1NoteSet()
+            completion(true)
+
+        }
+        completion(false)
+    }
+    
     
     func setRound1Notes(completion: CompletionHandler){
         roundNumber = 1
@@ -335,6 +396,8 @@ class Session {
         return fullRando
     }
     
+    
+    
     func setRound2Notes(completion: CompletionHandler){
         roundNumber = 2
         if let instrum = self.instrument as? GrandPiano {
@@ -355,6 +418,55 @@ class Session {
         }
         completion(true)
         round2Notes = sessionNotes
+    }
+    
+    func shuffleRound2Notes(completion: CompletionHandler){
+        roundNumber = 2
+        if let instrum = self.instrument as? GrandPiano {
+            var copyNotes = instrum.round2Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 5
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            var copyNotes = instrum.round2Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 5
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? Violin {
+            var copyNotes = instrum.round2Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 5
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            var copyNotes = instrum.round2Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 5
+            sessionNotes = shuffledNotes
+        }
+        completion(true)
     }
     
     func setRound2HalfNotes(completion: CompletionHandler){
@@ -425,24 +537,68 @@ class Session {
         round3Notes = sessionNotes
         completion(true)
     }
+    func shuffleRound3Notes(completion: CompletionHandler){
+        roundNumber = 3
+        if let instrum = self.instrument as? GrandPiano {
+            var copyNotes = instrum.round3Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 7
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? AcousticGuitar {
+            var copyNotes = instrum.round3Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 7
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? Violin {
+            var copyNotes = instrum.round3Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 7
+            sessionNotes = shuffledNotes
+        }
+        if let instrum = self.instrument as? Saxaphone {
+            var copyNotes = instrum.round3Notes
+            var shuffledNotes:[Note] = []
+            repeat {
+                if let note = copyNotes.randomElement() {
+                shuffledNotes.append(note)
+                copyNotes.remove(object: note)
+                }
+            } while shuffledNotes.count < 7
+            sessionNotes = shuffledNotes
+        }
+        completion(true)
+    }
     
     func setRound3HalfNotes(completion: CompletionHandler){
         roundNumber = 3
         if let instrum = self.instrument as? GrandPiano {
             sessionNotes = instrum.sharpsFlatsRound3
-            reuseRound3NoteSet()
         }
         if let instrum = self.instrument as? AcousticGuitar {
             sessionNotes = instrum.minorChordsRound3
-            reuseRound3NoteSet()
         }
         if let instrum = self.instrument as? Violin {
             sessionNotes = instrum.round3Notes
-            reuseRound3NoteSet()
         }
         if let instrum = self.instrument as? Saxaphone {
             sessionNotes = instrum.round3Notes
-            reuseRound3NoteSet()
         }
         round3Notes = sessionNotes
         completion(true)
@@ -587,7 +743,7 @@ class Session {
             return true
             //TODO
         case .grandPiano:
-            return false
+            return true
         case .violin:
             return true
         case .saxaphone:

@@ -9,6 +9,13 @@ import UIKit
 
 class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     
+    
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+    
+    let nUnlockedTitle = NSLocalizedString("Notes Unlocked", comment: "no comment")
+    let headerTitle = NSLocalizedString("Regular Gameplay", comment: "no comment")
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -17,12 +24,13 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-
+    
     func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
-           instrumentImage.image = image
-           instrumentProficiencyRankingLabel.text = rank
-           completedNotesLabel.text = "\(completedNotes) Notes Unlocked"
-       }
+        instrumentImage.image = image
+        instrumentProficiencyRankingLabel.text = rank
+        completedNotesLabel.text = "\(completedNotes)" + nUnlockedTitle
+        notesChordsLabel.text = headerTitle
+    }
     
     class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
            let nib = UINib(nibName: xibRID, bundle: nil)
@@ -31,6 +39,11 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
        }
 
     //MARK: Properties
+    
+    func setProgressBar(score: Int){
+        let progress = Float(score/30)
+        progressBarr.setProgress(progress, animated: true)
+    }
     
     
     @IBOutlet weak var progressBarr: UIProgressView!

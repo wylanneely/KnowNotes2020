@@ -1,0 +1,77 @@
+
+//LaunchVC
+"AppLanguage" = "Chinese";
+"OfflineButtonTitle" = "离线模式";
+"LaunchScreenGif" = "KnowNotesChinaLogoAnimation";
+"StartButtonTitle" = " 开始 ";
+//PlayVC
+"OfflineGameCenterButton" = "离线笔记";
+"OK" = "好";
+"Error Purchasing" = "购买错误";
+"Acoustic Locked" = "民谣吉他锁定";
+"LockedAcouMessage" = "用大钢琴得分20，即可解锁原声吉他";
+"Buy for" = "购买 ";
+"In-App Purchases No" = "此设备上不允许进行应用内购买。";
+"Violin Locked" = "小提琴锁定";
+"Violin Message" = "用原声吉他演奏25和弦以解锁小提琴。";
+"Saxophone Locked" = "萨克斯管锁定";
+"Saxophone Message" = "用小提琴得分25，即可解锁萨克斯管。";
+"Exit" = "出口";
+"Leave" = "离开";
+"Cancel" = "取消";
+"Return to main menu" = "返回主菜单";
+//CollectionViewCell
+"Chords Unlocked" = "和弦解锁";
+"Notes Unlocked" = "音乐音调可用";
+"Acoustic Guitar" = " 原声吉他 ";
+"Grand Piano" = " 三角钢琴 ";
+"Violin" = " 小提琴 ";
+"Saxophone" = " 萨克斯风 ";
+"Play" = " 听 ";
+"Locked" = "已锁定";
+//KnownNotesVC
+"cR1Message" = "完成第一轮解锁";
+"cR2Message" = "完成第二轮解锁";
+"cR3Message" = "完成第3轮解锁";
+"ComingSoonMessage" = "即将推出...下次更新将允许自定义回合！";
+"lockedHalfsMessage" = "一旦所有回合都解锁后可用";
+"Attention" = "注意";
+"half notes" = "半色调";
+"minor chords" = "小和弦";
+"unlockHalfs" = "取得30分以上的高分才能解锁";
+"New Pianist" = "新钢琴家";
+"Piano Player" = "钢琴家";
+"Grand Pianist" = "大钢琴家";
+"Master Guitarist" = "吉他大师";
+"Guitar Player" = "吉他手";
+"New Guitarist" = "新吉他手";
+"Regular Chords" = "普通和弦";
+"Concert Master" = "音乐会大师";
+"Violin Player" = "音乐会大师";
+"New Violinist" = "新小提琴家";
+"Sax Master" = "萨克斯大师";
+"Sax Player" = "萨克斯手";
+"New Sax Player" = "新萨克斯手";
+//ViewCells
+"Regular Gameplay" = "常规课程";
+"Add Sharps/Flats" = "添加锐器/平底锅";
+"Add Minor Chords" = "添加小和弦";
+"Customize Rounds" = "自定义回合";
+"Shuffle Sets" = "随机组合";
+"Off" = "关";
+"Manual" = "手册";
+"Auto" = "汽车";
+"Begin Lesson" = "开始上课";
+//RoundVCs
+"Keep" = "保持";
+"Repeat" = "重复";
+"Quit Game?" = "退出课程";
+//CustomAlertVC
+"Score" = "得分";
+"Submit Score" = "提交成绩";
+"QuitMessage" = "您确定要离开吗？取得的任何进展将不会保存。";
+"Major Chords" = "大和弦";
+"Regular Notes" = "常规音";
+"Major & Minor Chords" = "大和弦和小和弦";
+"Regular Whole Notes" = "常规全音";
+"Regular + Sharp & Flats" = "常规+尖锐的平坦色调";

@@ -1,0 +1,348 @@
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "0Fk-yS-Weg"; */
+"0Fk-yS-Weg.normalTitle" = "E";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "0HT-sk-1S7"; */
+"0HT-sk-1S7.normalTitle" = "C";
+
+/* Class = "UILabel"; text = " Instruments"; ObjectID = "18G-Ym-qyB"; */
+"18G-Ym-qyB.text" = " Instrumentos";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "1Tx-Tk-tnu"; */
+"1Tx-Tk-tnu.normalTitle" = "G";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "1Xe-VP-wPa"; */
+"1Xe-VP-wPa.text" = "  #  ";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "2WS-AI-pBW"; */
+"2WS-AI-pBW.text" = "♭  ";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "2w0-bF-atN"; */
+"2w0-bF-atN.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "37s-Bc-y5d"; */
+"37s-Bc-y5d.normalTitle" = "  Notas Iniciales  ";
+
+/* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "4zN-jJ-Af4"; */
+"4zN-jJ-Af4.normalTitle" = " Notas Barajadas ";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "5Dc-9b-QBS"; */
+"5Dc-9b-QBS.normalTitle" = "A";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "5hr-n5-srK"; */
+"5hr-n5-srK.text" = "♭  ";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "6WK-W1-uuB"; */
+"6WK-W1-uuB.normalTitle" = "E";
+
+/* Class = "UILabel"; text = "3 Notes Unlocked"; ObjectID = "7PV-Fz-Ryj"; */
+"7PV-Fz-Ryj.text" = "
+3 Notas Disponibles";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "7gn-Rm-8xH"; */
+"7gn-Rm-8xH.normalTitle" = "B";
+
+/* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "8CA-Tn-F3L"; */
+"8CA-Tn-F3L.normalTitle" = "Salir";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "8JK-27-Ogq"; */
+"8JK-27-Ogq.normalTitle" = "Próximo";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "8UL-eq-ITU"; */
+"8UL-eq-ITU.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "  Shuffle  "; ObjectID = "8hA-wJ-13R"; */
+"8hA-wJ-13R.normalTitle" = "  Shuffle  ";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "8iI-IX-fv2"; */
+"8iI-IX-fv2.normalTitle" = "G";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "8oM-HE-5zk"; */
+"8oM-HE-5zk.normalTitle" = "A";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "A6f-67-nRE"; */
+"A6f-67-nRE.normalTitle" = "F";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "AUl-wQ-j5l"; */
+"AUl-wQ-j5l.normalTitle" = "F";
+
+/* Class = "UIButton"; normalTitle = "  Play Offline  "; ObjectID = "Arj-ek-fQg"; */
+"Arj-ek-fQg.normalTitle" = "Jugar Sin Conexión";
+
+/* Class = "UIButton"; normalTitle = "D"; ObjectID = "CBR-W9-0vX"; */
+"CBR-W9-0vX.normalTitle" = "D";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "CIe-5s-r7g"; */
+"CIe-5s-r7g.normalTitle" = "B";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "Cjd-3S-Nmz"; */
+"Cjd-3S-Nmz.text" = "♭  ";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "DAs-dl-V2Y"; */
+"DAs-dl-V2Y.normalTitle" = "A";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "EVj-0D-pzz"; */
+"EVj-0D-pzz.normalTitle" = "B";
+
+/* Class = "UILabel"; text = "  Round 1"; ObjectID = "EjZ-A4-1rm"; */
+"EjZ-A4-1rm.text" = "  Ronda 1";
+
+/* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "Elf-jw-tIg"; */
+"Elf-jw-tIg.normalTitle" = "Salir";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "FQM-Hf-IE3"; */
+"FQM-Hf-IE3.normalTitle" = "Registrarse";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "FTc-YV-dHt"; */
+"FTc-YV-dHt.normalTitle" = "B";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "FqL-Cd-8Un"; */
+"FqL-Cd-8Un.text" = "♭  ";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "Fub-77-SYb"; */
+"Fub-77-SYb.normalTitle" = "Próximo";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "GGa-Vh-z9c"; */
+"GGa-Vh-z9c.normalTitle" = "G";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "GPU-6a-ekr"; */
+"GPU-6a-ekr.normalTitle" = "B";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "GeG-e6-Zgt"; */
+"GeG-e6-Zgt.text" = "3/3";
+
+/* Class = "UILabel"; text = "Grand Piano"; ObjectID = "H0Y-yL-egX"; */
+"H0Y-yL-egX.text" = "Grand Piano";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "HmW-ih-oII"; */
+"HmW-ih-oII.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "Hx1-1a-Hna"; */
+"Hx1-1a-Hna.normalTitle" = "E";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "IIl-u3-Qv7"; */
+"IIl-u3-Qv7.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "Iaq-rd-Ath"; */
+"Iaq-rd-Ath.normalTitle" = " Notas Iniciales ";
+
+/* Class = "UILabel"; text = "Score"; ObjectID = "Ix8-UU-qWk"; */
+"Ix8-UU-qWk.text" = "Puntos";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "JRE-AM-FRb"; */
+"JRE-AM-FRb.text" = "3/3";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "JSY-iX-g9d"; */
+"JSY-iX-g9d.normalTitle" = "Próximo";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "NJy-9C-y8o"; */
+"NJy-9C-y8o.normalTitle" = "Empieza";
+
+/* Class = "UIButton"; normalTitle = " Retry Round "; ObjectID = "NUD-P4-yyq"; */
+"NUD-P4-yyq.normalTitle" = " Reintentar Ronda ";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "Qle-gK-pjc"; */
+"Qle-gK-pjc.normalTitle" = "F";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "Qy8-6e-o5I"; */
+"Qy8-6e-o5I.text" = "3/3";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "R59-On-VRl"; */
+"R59-On-VRl.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "RxS-Fx-hwg"; */
+"RxS-Fx-hwg.normalTitle" = " Notas Barajadas ";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "SrD-Ok-eO9"; */
+"SrD-Ok-eO9.normalTitle" = "B";
+
+/* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "TGW-4N-cWu"; */
+"TGW-4N-cWu.normalTitle" = " Notas Barajadas ";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "TVW-BG-ZUU"; */
+"TVW-BG-ZUU.normalTitle" = "G";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "UJm-dI-5LU"; */
+"UJm-dI-5LU.text" = "3/3";
+
+/* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "VZd-km-Hec"; */
+"VZd-km-Hec.normalTitle" = "  Notas Iniciales  ";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "ViV-Sc-5hZ"; */
+"ViV-Sc-5hZ.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "W50-SL-48K"; */
+"W50-SL-48K.normalTitle" = "G";
+
+/* Class = "UIButton"; normalTitle = " Submit Score "; ObjectID = "WV6-Dz-TW8"; */
+"WV6-Dz-TW8.normalTitle" = "
+Enviar Puntuación ";
+
+/* Class = "UIButton"; normalTitle = "D"; ObjectID = "Wq1-Vu-KEt"; */
+"Wq1-Vu-KEt.normalTitle" = "D";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "Wvr-Vq-3LO"; */
+"Wvr-Vq-3LO.normalTitle" = "A";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "Xfe-UU-sCN"; */
+"Xfe-UU-sCN.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "XjS-Xe-Nnd"; */
+"XjS-Xe-Nnd.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "ZEJ-p0-Kxp"; */
+"ZEJ-p0-Kxp.normalTitle" = "F";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "Zyg-bu-60M"; */
+"Zyg-bu-60M.normalTitle" = "E";
+
+/* Class = "UITableViewSection"; footerTitle = " "; ObjectID = "aOw-SO-o2E"; */
+"aOw-SO-o2E.footerTitle" = " ";
+
+/* Class = "UITableViewSection"; headerTitle = "Advanced Options"; ObjectID = "aOw-SO-o2E"; */
+"aOw-SO-o2E.headerTitle" = "
+Opciones Avanzadas";
+
+/* Class = "UIButton"; normalTitle = "  Shuffle  "; ObjectID = "adz-gs-SWd"; */
+"adz-gs-SWd.normalTitle" = "  Barajar  ";
+
+/* Class = "UILabel"; text = "Score"; ObjectID = "ahI-ly-srg"; */
+"ahI-ly-srg.text" = "Puntos";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "bVf-9T-Y0X"; */
+"bVf-9T-Y0X.text" = "0";
+
+/* Class = "UILabel"; text = "Whole + Half Notes"; ObjectID = "cy6-xy-doq"; */
+"cy6-xy-doq.text" = "Notas Redondas y Blancas";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "dNW-YC-LmT"; */
+"dNW-YC-LmT.text" = "  #  ";
+
+/* Class = "UILabel"; text = "Score: 20"; ObjectID = "dxR-VD-3m4"; */
+"dxR-VD-3m4.text" = "Puntos: 20";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "dyd-RO-QgG"; */
+"dyd-RO-QgG.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "D"; ObjectID = "e0R-z9-uoo"; */
+"e0R-z9-uoo.normalTitle" = "D";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "eN4-fl-zry"; */
+"eN4-fl-zry.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "eNp-tw-I4X"; */
+"eNp-tw-I4X.normalTitle" = "F";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "fgi-uN-lmA"; */
+"fgi-uN-lmA.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "g4b-qc-Q04"; */
+"g4b-qc-Q04.normalTitle" = "G";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "g6o-gU-GM7"; */
+"g6o-gU-GM7.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "gKr-63-wkj"; */
+"gKr-63-wkj.normalTitle" = "Empieza";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "grj-H7-f8Y"; */
+"grj-H7-f8Y.text" = "3/3";
+
+/* Class = "UILabel"; text = "3/3"; ObjectID = "hYV-Hg-2eX"; */
+"hYV-Hg-2eX.text" = "3/3";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "jFu-qk-dwF"; */
+"jFu-qk-dwF.normalTitle" = "F";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "jYm-33-X72"; */
+"jYm-33-X72.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "Game Center"; ObjectID = "k2m-aL-b63"; */
+"k2m-aL-b63.normalTitle" = "Game Center";
+
+/* Class = "UILabel"; text = "Round 2"; ObjectID = "kdV-NX-WKP"; */
+"kdV-NX-WKP.text" = "Ronda 2";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "leJ-Is-NbI"; */
+"leJ-Is-NbI.normalTitle" = "E";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "ll6-Vs-amG"; */
+"ll6-Vs-amG.text" = "  #  ";
+
+/* Class = "UILabel"; text = "Round 3 "; ObjectID = "mZF-mf-dmK"; */
+"mZF-mf-dmK.text" = "Ronda 3";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "mbq-R9-ieU"; */
+"mbq-R9-ieU.normalTitle" = "B";
+
+/* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "n6P-pt-SFe"; */
+"n6P-pt-SFe.normalTitle" = "Salir";
+
+/* Class = "UIButton"; normalTitle = "F"; ObjectID = "nX7-ee-IGp"; */
+"nX7-ee-IGp.normalTitle" = "F";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "nuH-Qd-0Pu"; */
+"nuH-Qd-0Pu.normalTitle" = "A";
+
+/* Class = "UIButton"; normalTitle = "A"; ObjectID = "oEX-QK-n0S"; */
+"oEX-QK-n0S.normalTitle" = "A";
+
+/* Class = "UIButton"; normalTitle = "D"; ObjectID = "ohh-Q2-EtR"; */
+"ohh-Q2-EtR.normalTitle" = "D";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "pVT-mB-axO"; */
+"pVT-mB-axO.normalTitle" = "E";
+
+/* Class = "UIButton"; normalTitle = "  Shuffle  "; ObjectID = "pqq-jD-Gmt"; */
+"pqq-jD-Gmt.normalTitle" = "  Barajar  ";
+
+/* Class = "UIButton"; normalTitle = "D"; ObjectID = "r1F-7x-dh6"; */
+"r1F-7x-dh6.normalTitle" = "D";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "sT7-DH-ydt"; */
+"sT7-DH-ydt.normalTitle" = "B";
+
+/* Class = "UILabel"; text = "Finished Rounds"; ObjectID = "scg-5H-2NV"; */
+"scg-5H-2NV.text" = "Terminó las Rondas";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "sdz-bJ-uEc"; */
+"sdz-bJ-uEc.text" = "♭  ";
+
+/* Class = "UILabel"; text = "Score:"; ObjectID = "tX9-2h-BSH"; */
+"tX9-2h-BSH.text" = "Puntos:";
+
+/* Class = "UIButton"; normalTitle = "B"; ObjectID = "uPI-Di-77l"; */
+"uPI-Di-77l.normalTitle" = "B";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "ukh-yr-8nN"; */
+"ukh-yr-8nN.normalTitle" = "Empieza";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "uyF-DW-fBb"; */
+"uyF-DW-fBb.normalTitle" = "E";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "v9W-s5-quM"; */
+"v9W-s5-quM.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "E"; ObjectID = "w99-il-o5r"; */
+"w99-il-o5r.normalTitle" = "E";
+
+/* Class = "UIButton"; normalTitle = "  Discard  "; ObjectID = "wG3-Vg-o07"; */
+"wG3-Vg-o07.normalTitle" = " Descarte ";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "wJb-0X-0x6"; */
+"wJb-0X-0x6.normalTitle" = "Empieza";
+
+/* Class = "UILabel"; text = "Instrument"; ObjectID = "wRH-5C-awc"; */
+"wRH-5C-awc.text" = "Instrumentos";
+
+/* Class = "UILabel"; text = "♭  "; ObjectID = "wu6-bH-MfY"; */
+"wu6-bH-MfY.text" = "♭  ";
+
+/* Class = "UILabel"; text = "  #  "; ObjectID = "x96-MF-rzp"; */
+"x96-MF-rzp.text" = "  #  ";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "xka-1m-ktS"; */
+"xka-1m-ktS.normalTitle" = "C";
+
+/* Class = "UIButton"; normalTitle = "G"; ObjectID = "xol-8Q-wE7"; */
+"xol-8Q-wE7.normalTitle" = "G";

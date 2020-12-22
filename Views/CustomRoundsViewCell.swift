@@ -21,11 +21,12 @@ class CustomRoundsViewCell: UITableViewCell {
         setUpViews()
         setGestureRecognizer()
         setImage()
+        setNotesLabelLanguage()
     }
-
+    
     func setUpViews(){
         borderView.layer.borderWidth = 2
-        borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
+        borderView.layer.borderColor = UIColor.middlePurple.cgColor
         borderView.layer.cornerRadius = 10
     }
     
@@ -40,21 +41,21 @@ class CustomRoundsViewCell: UITableViewCell {
             self.delegate?.customRoundsSelected(isCustom: nil)
             return
         }
-        if isCustom == false {
-            DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
-                self.delegate?.customRoundsSelected(isCustom: true)
-                Session.manager.isCustomSession = true
-            }
-            isCustom = true
-        } else {
-            DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
-                self.delegate?.customRoundsSelected(isCustom: false)
-                Session.manager.isCustomSession = false
-            }
-            isCustom = false
-        }
+//        if isCustom == false {
+//            DispatchQueue.main.async {
+//                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
+//                self.delegate?.customRoundsSelected(isCustom: true)
+//                Session.manager.isCustomSession = true
+//            }
+//            isCustom = true
+//        } else {
+//            DispatchQueue.main.async {
+//                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+//                self.delegate?.customRoundsSelected(isCustom: false)
+//                Session.manager.isCustomSession = false
+//            }
+//            isCustom = false
+//        }
     }
     
     class func createCell() -> CustomRoundsViewCell? {
@@ -63,28 +64,29 @@ class CustomRoundsViewCell: UITableViewCell {
         return cell
     }
     
- 
+    func setNotesLabelLanguage(){
+        let labelTitle = NSLocalizedString("Customize Rounds", comment: "nope")
+        notesLabel.text = labelTitle
+    }
     
     func setImage(){
         if isLocked == false {
             self.isUserInteractionEnabled = true
             DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+                self.lockedOrChecked.image = UIImage.init(systemName:"lock.fill")
             }
         }
-        if isCustom == true {
-            DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
-            }
-        }else {
-            DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
-                Session.manager.isCustomSession = false
-            }
-        }
+//        if isCustom == true {
+//            DispatchQueue.main.async {
+//                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
+//            }
+//        }else {
+//            DispatchQueue.main.async {
+//                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+//                Session.manager.isCustomSession = false
+//            }
+//        }
     }
-    
-   
     
     @IBOutlet weak var lockedOrChecked: UIImageView!
     @IBOutlet weak var borderView: UIView!

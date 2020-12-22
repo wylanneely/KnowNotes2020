@@ -125,20 +125,152 @@
             </connections>
             <point key="canvasLocation" x="-462" y="-605"/>
         </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThirdCell" rowHeight="120" id="97s-g1-hMs" userLabel="thirdCell" customClass="ThirdRoundKnownNotesViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="97s-g1-hMs" id="kbH-uV-Z9v">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLW-l3-39F">
+                        <rect key="frame" x="20" y="4" width="374" height="112"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="U5y-1u-kzG">
+                                <rect key="frame" x="81" y="12" width="212" height="88"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHi-T0-f7I">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="F" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pff-fi-NzX">
+                                                <rect key="frame" x="30.5" y="12" width="27.5" height="64"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="45"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="shadowOffset" width="1" height="1"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkq-fn-xML">
+                                                <rect key="frame" x="44" y="4" width="40" height="29"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="shadowOffset" width="1" height="1"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  m  " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eM-qr-rs3">
+                                                <rect key="frame" x="38.5" y="55" width="45.5" height="29"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="20"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="shadowOffset" width="1" height="1"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" name="ChinaYellow"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="kkq-fn-xML" secondAttribute="trailing" constant="4" id="5cp-UM-GUP"/>
+                                            <constraint firstAttribute="height" constant="88" id="5eG-1j-Rfg"/>
+                                            <constraint firstItem="kkq-fn-xML" firstAttribute="top" secondItem="mHi-T0-f7I" secondAttribute="top" constant="4" id="BvL-3o-Oce"/>
+                                            <constraint firstItem="Pff-fi-NzX" firstAttribute="centerY" secondItem="mHi-T0-f7I" secondAttribute="centerY" id="Cmk-8r-SFh"/>
+                                            <constraint firstAttribute="trailing" secondItem="9eM-qr-rs3" secondAttribute="trailing" constant="4" id="kFT-Sq-8DW"/>
+                                            <constraint firstItem="Pff-fi-NzX" firstAttribute="centerX" secondItem="mHi-T0-f7I" secondAttribute="centerX" id="lhr-Hz-LFQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="9eM-qr-rs3" secondAttribute="bottom" constant="4" id="ptY-mc-i5y"/>
+                                            <constraint firstAttribute="width" constant="88" id="yig-yf-lcJ"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUQ-0g-gnc">
+                                        <rect key="frame" x="124" y="0.0" width="88" height="88"/>
+                                        <color key="backgroundColor" name="ChinaYellow"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="88" id="UHo-8E-7as"/>
+                                            <constraint firstAttribute="width" constant="88" id="n4E-Zb-ZEB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="44"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="G">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" name="China Red"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="secondNoteButtonTapped:" destination="97s-g1-hMs" eventType="touchUpInside" id="MGM-is-wj0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="g4L-fg-62w">
+                                <rect key="frame" x="20" y="42.5" width="28" height="26.5"/>
+                                <color key="tintColor" name="beauBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="u0x-AZ-5Hp"/>
+                                    <constraint firstAttribute="height" constant="28" id="yd1-iF-FsN"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  #  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pY1-7a-mIJ">
+                                <rect key="frame" x="252" y="16" width="37" height="27"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="19"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  m  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GU-9E-SMt">
+                                <rect key="frame" x="246.5" y="69" width="42.5" height="27"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="19"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="China Red"/>
+                        <constraints>
+                            <constraint firstItem="pY1-7a-mIJ" firstAttribute="trailing" secondItem="wUQ-0g-gnc" secondAttribute="trailing" constant="-4" id="ARM-Nk-G4m"/>
+                            <constraint firstItem="9GU-9E-SMt" firstAttribute="bottom" secondItem="wUQ-0g-gnc" secondAttribute="bottom" constant="-4" id="GYe-cs-WcU"/>
+                            <constraint firstItem="g4L-fg-62w" firstAttribute="leading" secondItem="WLW-l3-39F" secondAttribute="leading" constant="20" id="RWs-nN-N0y"/>
+                            <constraint firstItem="pY1-7a-mIJ" firstAttribute="top" secondItem="wUQ-0g-gnc" secondAttribute="top" constant="4" id="Vcy-rv-ypY"/>
+                            <constraint firstItem="g4L-fg-62w" firstAttribute="centerY" secondItem="WLW-l3-39F" secondAttribute="centerY" id="giF-tc-wly"/>
+                            <constraint firstItem="U5y-1u-kzG" firstAttribute="centerY" secondItem="WLW-l3-39F" secondAttribute="centerY" id="lxG-K6-s74"/>
+                            <constraint firstItem="U5y-1u-kzG" firstAttribute="centerX" secondItem="WLW-l3-39F" secondAttribute="centerX" id="n8t-1y-wyE"/>
+                            <constraint firstItem="9GU-9E-SMt" firstAttribute="trailing" secondItem="wUQ-0g-gnc" secondAttribute="trailing" constant="-4" id="wz8-rJ-8z1"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="China Red"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="WLW-l3-39F" secondAttribute="trailing" constant="20" symbolic="YES" id="RSA-8S-16O"/>
+                    <constraint firstItem="WLW-l3-39F" firstAttribute="leading" secondItem="kbH-uV-Z9v" secondAttribute="leading" constant="20" symbolic="YES" id="X2P-T4-Uuu"/>
+                    <constraint firstAttribute="bottom" secondItem="WLW-l3-39F" secondAttribute="bottom" constant="4" id="hPg-kY-ccY"/>
+                    <constraint firstItem="WLW-l3-39F" firstAttribute="top" secondItem="kbH-uV-Z9v" secondAttribute="top" constant="4" id="qTR-48-hIZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="StarBlue"/>
+            <connections>
+                <outlet property="fMinorLabel" destination="9eM-qr-rs3" id="0nv-m7-Wqh"/>
+                <outlet property="firstNoteSharpFlat" destination="kkq-fn-xML" id="xBY-Xq-diR"/>
+                <outlet property="firstNoteView" destination="mHi-T0-f7I" id="xTn-s8-eg5"/>
+                <outlet property="firstSelectedNoteLabel" destination="Pff-fi-NzX" id="kmt-on-IHx"/>
+                <outlet property="gMinorLabel" destination="9GU-9E-SMt" id="9PD-Ym-ZIX"/>
+                <outlet property="lockImageView" destination="g4L-fg-62w" id="1cE-DZ-lQq"/>
+                <outlet property="middleBGView" destination="WLW-l3-39F" id="an6-7N-kIz"/>
+                <outlet property="secondNoteSharpFlat" destination="pY1-7a-mIJ" id="5fg-Ht-Z1P"/>
+                <outlet property="secondSelectedNoteButton" destination="wUQ-0g-gnc" id="ySe-ei-WWA"/>
+            </connections>
+            <point key="canvasLocation" x="-462" y="-414"/>
+        </tableViewCell>
     </objects>
     <resources>
         <image name="lock" catalog="system" width="128" height="128"/>
+        <namedColor name="China Red">
+            <color red="0.86845642329999995" green="0.16273203489999999" blue="0.06268117577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChinaYellow">
+            <color red="1" green="0.86897069220000001" blue="0.0063200490549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="StarBlue">
-            <color red="0.0" green="0.48627450980392156" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.48600000143051147" blue="0.74500000476837158" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="beauBlue">
-            <color red="0.7686274509803922" green="0.8784313725490196" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.76899999380111694" green="0.87800002098083496" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="niceNight">
-            <color red="0.36862745098039218" green="0.37647058823529411" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.36899998784065247" green="0.37599998712539673" blue="0.80800002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="sharkBlueGreen">
-            <color red="0.28235294117647058" green="0.74901960784313726" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.28200000524520874" green="0.74900001287460327" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

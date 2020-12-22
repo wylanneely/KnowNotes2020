@@ -70,25 +70,26 @@
             <connections>
                 <outlet property="borderView" destination="P29-pS-5Oj" id="Wt7-HB-E9L"/>
                 <outlet property="optionControl" destination="mNt-Ao-VEa" id="hPZ-qS-ASh"/>
+                <outlet property="shuffleSetsLabel" destination="9mM-7i-SGP" id="8Om-Tx-YWZ"/>
             </connections>
             <point key="canvasLocation" x="71.014492753623188" y="138.61607142857142"/>
         </tableViewCell>
     </objects>
     <resources>
         <namedColor name="SeaFoam">
-            <color red="0.031372549019607843" green="0.69803921568627447" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.030999999493360519" green="0.69800001382827759" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UrchintPurple">
-            <color red="0.52549019607843139" green="0.086274509803921567" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.52499997615814209" green="0.086000002920627594" blue="0.34099999070167542" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="foamyGreen">
-            <color red="0.44705882352941179" green="0.93725490196078431" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.44699999690055847" green="0.93699997663497925" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="niceNight">
-            <color red="0.36862745098039218" green="0.37647058823529411" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.36899998784065247" green="0.37599998712539673" blue="0.80800002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="polarCapBlue">
-            <color red="0.32549019607843138" green="0.56470588235294117" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.32499998807907104" green="0.56499999761581421" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

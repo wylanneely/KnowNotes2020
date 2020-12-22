@@ -1,0 +1,78 @@
+
+//LaunchVC
+"AppLanguage" = "English";
+"OfflineButtonTitle" = "Play Offline" ;
+"LaunchScreenGif" = "KnowNotesLogoAnimation";
+"StartButtonTitle" = " Start ";
+//PlayVC
+"OfflineGameCenterButton" = "Offline Notes";
+"OK" = "Ok";
+"Error Purchasing" = "Error Purchasing";
+"Acoustic Locked" = "Acoustic Locked";
+"LockedAcouMessage" = "Score 20 with the Grand Piano to unlock the Acoustic Guitar.";
+"Buy for" = "Buy for";
+"In-App Purchases No" = "In-App Purchases are not allowed on this device.";
+"Violin Locked" = "Violin Locked";
+"Violin Message" = "Score 25 chords with the Acoustic Guitar to unlock the Violin.";
+"Saxophone Locked" = "Saxophone Locked";
+"Saxophone Message" = "Score 25 with the Violin to unlock the Saxophone.";
+"Exit" = "Exit";
+"Leave" = "Leave";
+"Cancel" = "Cancel";
+"Return to main menu" = "Return to main menu";
+//CollectionViewCell
+"Chords Unlocked" = "Chords Unlocked";
+"Notes Unlocked" = "Notes Unlocked";
+"Acoustic Guitar" = " Acoustic Guitar ";
+"Grand Piano" = " Grand Piano ";
+"Violin" = " Violin ";
+"Saxophone" = " Saxophone ";
+"Play" = " Play ";
+"Locked" = "Locked";
+//KnownNotesVC
+"cR1Message" = "Complete Round 1 to Unlock";
+"cR2Message" = "Complete Round 2 to Unlock";
+"cR3Message" = "Complete Round 3 to Unlock";
+"ComingSoonMessage" = "Coming Soon... Next Update Will Allow Custom Rounds!";
+"lockedHalfsMessage" = "Avialable once all of the rounds have been unlocked";
+"Attention" = "Attention";
+"half notes" = "half notes";
+"minor chords" = "minor chords";
+"unlockHalfs" = "Achieve a high score of 30 or more to unlock";
+"New Pianist" = "New Pianist";
+"Piano Player" = "Piano Player";
+"Grand Pianist" = "Grand Pianist";
+"Master Guitarist" = "Master Guitarist";
+"Guitar Player" = "Guitar Player";
+"New Guitarist" = "New Guitarist";
+"Regular Chords" = "Regular Chords";
+"Concert Master" = "Concert Master";
+"Violin Player" = "Violin Player";
+"New Violinist" = "New Violinist";
+"Sax Master" = "Sax Master";
+"Sax Player" = "Sax Player";
+"New Sax Player" = "New Sax Player";
+//ViewCells
+"Regular Gameplay" = "Regular Gameplay";
+"Add Sharps/Flats" = "Add Sharps/Flats";
+"Add Minor Chords" = "Add Minor Chords";
+"Customize Rounds" = "Customize Rounds";
+"Shuffle Sets" = "Shuffle Sets";
+"Off" = "Off";
+"Manual" = "Manual";
+"Auto" = "Auto";
+"Begin Lesson" = "Begin Lesson";
+//RoundVCs
+"Keep" = "Keep";
+"Repeat" = "Repeat";
+"Quit Game?" = "Quit Game?";
+//CustomAlertVC
+"Score" = "Score";
+"Submit Score" = "Submit Score";
+"QuitMessage" = "Are you sure you would like to leave? Any progress made will not be saved.";
+"Major Chords" = "Major Chords";
+"Regular Notes" = "Regular Notes";
+"Major & Minor Chords" = "Major & Minor Chords";
+"Regular Whole Notes" = "Regular Whole Notes";
+"Regular + Sharp & Flats" = "Regular + Sharp & Flats";
+

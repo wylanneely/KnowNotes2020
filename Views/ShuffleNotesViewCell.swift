@@ -16,12 +16,26 @@ class ShuffleNotesViewCell: UITableViewCell{
         setUpViews()
         setOptionControlUp()
         setGestureRecognizer()
+        setLanguageLocalization()
         }
     
     class func createCell() -> ShuffleNotesViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
         let cell = nib.instantiate(withOwner: self, options: nil).first as? ShuffleNotesViewCell
         return cell
+    }
+    
+    let shuffleSetsTitle = NSLocalizedString("Shuffle Sets", comment: "nope")
+    let offO = NSLocalizedString("Off", comment: "nope")
+    let manualO = NSLocalizedString("Manual", comment: "nope")
+    let autoO = NSLocalizedString("Auto", comment: "nope")
+
+    
+    func setLanguageLocalization() {
+        optionControl.setTitle(offO, forSegmentAt: 0)
+        optionControl.setTitle(manualO, forSegmentAt: 1)
+        optionControl.setTitle(autoO, forSegmentAt: 2)
+        shuffleSetsLabel.text = shuffleSetsTitle
     }
     
     func setUpViews(){
@@ -67,7 +81,7 @@ class ShuffleNotesViewCell: UITableViewCell{
     
    
     @IBOutlet weak var optionControl: UISegmentedControl!
-  
+    @IBOutlet weak var shuffleSetsLabel: UILabel!
     @IBOutlet weak var borderView: UIView!
 
     

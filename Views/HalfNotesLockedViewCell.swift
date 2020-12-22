@@ -21,6 +21,12 @@ class HalfNotesLockedViewCell: UITableViewCell {
         setUpViews()
         setGestureRecognizer()
         setImage()
+        if Session.manager.currentInstrumentType == .grandPiano {
+            setPianoNotes()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setGUitarChords()
+        }
     }
 
     func setUpViews(){
@@ -68,7 +74,7 @@ class HalfNotesLockedViewCell: UITableViewCell {
         borderView.layer.borderColor = UIColor.lightGray.cgColor
     }
     func setUnlockedState(){
-        borderView.layer.backgroundColor = UIColor.niceNight.cgColor
+        borderView.layer.backgroundColor = UIColor.clear.cgColor
         borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
     }
     
@@ -95,10 +101,19 @@ class HalfNotesLockedViewCell: UITableViewCell {
             }
         }
     }
+    let addSF = NSLocalizedString("Add Sharps/Flats", comment: "none")
+    let addMinorC = NSLocalizedString("Add Minor Chords", comment: "none")
+
+    
+    func setPianoNotes() {
+        DispatchQueue.main.async {
+            self.notesLabel.text = self.addSF
+        }
+    }
     
     func setGUitarChords(){
         DispatchQueue.main.async {
-            self.notesLabel.text = "Add Minor Chords"
+            self.notesLabel.text = self.addMinorC
         }
     }
     

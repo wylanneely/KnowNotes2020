@@ -8,6 +8,8 @@
 import UIKit
 
 class FirstKnownNotesViewCell: UITableViewCell {
+    
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -114,6 +116,7 @@ class FirstKnownNotesViewCell: UITableViewCell {
     
     class func createCell() -> FirstKnownNotesViewCell? {
         let nib = UINib(nibName: self.xibRID, bundle: nil)
+        
         let cell = nib.instantiate(withOwner: self, options: nil).first as? FirstKnownNotesViewCell
         return cell
     }

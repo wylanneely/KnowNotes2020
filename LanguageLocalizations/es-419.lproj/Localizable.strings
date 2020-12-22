@@ -1,0 +1,31 @@
+//LaunchVC
+"AppLanguage" = "Spanish";
+"OfflineButtonTitle" = "Modo Offline" ;
+"LaunchScreenGif" = "KnowNotesLogoAnimation";
+"StartButtonTitle" = " Start ";
+//PlayVC
+"OfflineGameCenterButton" = "Notas Sin Conexión";
+"OK" = "Ok";
+"Error Purchasing" = "Error de Compra";
+"Acoustic Locked" = "Guitarra Acústica Bloqueada";
+"LockedAcouMessage" = "Consigue 20 puntos con El Piano para desbloquear La Guitarra Acústica.";
+"Buy for" = "Comprar para ";
+"In-App Purchases No" = "No se permiten compras dentro de la aplicación en este dispositivo.";
+"Violin Locked" = "Violina Bloqueada";
+"Violin Message" = "Marca 25 acordes con la guitarra acústica para desbloquear el violín.";
+"Saxophone Locked" = "Saxophone Bloqueada";
+"Saxophone Message" = "Marca 25 con el violín para desbloquear el saxofón.";
+"Exit" = "Salida";
+"Leave" = "Salir";
+"Cancel" = "Cancelar";
+"Return to main menu" = "Volver al menú principal";
+//CollectionViewCell
+"Chords Unlocked" = "Acordes Disponibles";
+"Notes Unlocked" = "Notas Disponibles";
+"Acoustic Guitar" = " Guitarra Acustica ";
+"Grand Piano" = "Piano de Cola ";
+"Violin" = " Violina ";
+"Saxophone" = " Saxofón ";
+"Play" = " Desempeñar ";
+"Locked" = "Bloqueado";
+//KnownNotesVC

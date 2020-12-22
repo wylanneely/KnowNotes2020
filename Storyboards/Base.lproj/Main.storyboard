@@ -27,14 +27,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQM-Hf-IE3">
-                                <rect key="frame" x="147" y="797" width="120" height="49"/>
+                                <rect key="frame" x="153" y="797" width="108" height="49"/>
                                 <color key="backgroundColor" name="roxyClub"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="nwc-Vz-UgI"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="31"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
-                                <state key="normal" title="Sign In">
+                                <state key="normal" title=" Sign In ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -48,10 +45,9 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Arj-ek-fQg">
-                                <rect key="frame" x="157" y="732" width="100" height="33"/>
+                                <rect key="frame" x="157.5" y="732" width="99" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="GFC-42-IKF"/>
-                                    <constraint firstAttribute="width" constant="100" id="dG7-fm-Dgv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="15"/>
                                 <state key="normal" title="  Play Offline  ">
@@ -2681,7 +2677,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aPx-6R-flK"/>
+        <segue reference="GOe-8V-P0b"/>
         <segue reference="KZ4-4r-X98"/>
         <segue reference="jfw-HG-feo"/>
         <segue reference="ncy-fg-zh2"/>
@@ -2697,10 +2693,10 @@
             <color red="0.81999999284744263" green="0.20399999618530273" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GoldenSun">
-            <color red="0.97647058823529409" green="0.86274509803921573" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.97600001096725464" green="0.86299997568130493" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ImperialRed">
-            <color red="1" green="0.0" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.0" blue="0.20800000429153442" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="NavigationBarTextColors">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2709,28 +2705,28 @@
             <color red="0.087999999523162842" green="0.028000000864267349" blue="0.21199999749660492" alpha="0.5899999737739563" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="beauBlue">
-            <color red="0.7686274509803922" green="0.8784313725490196" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.76899999380111694" green="0.87800002098083496" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="discoDayGreen">
-            <color red="0.50196078431372548" green="1" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.50199997425079346" green="1" blue="0.85900002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="midnight">
-            <color red="0.45490196078431372" green="0.0" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.45500001311302185" green="0.0" blue="0.72200000286102295" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="niceNight">
-            <color red="0.36862745098039218" green="0.37647058823529411" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.36899998784065247" green="0.37599998712539673" blue="0.80800002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="polarCapBlue">
-            <color red="0.32549019607843138" green="0.56470588235294117" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.32499998807907104" green="0.56499999761581421" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="roxyClub">
-            <color red="0.41176470588235292" green="0.18823529411764706" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.41200000047683716" green="0.18799999356269836" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="sharkBlueGreen">
-            <color red="0.28235294117647058" green="0.74901960784313726" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.28200000524520874" green="0.74900001287460327" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="sharkGReen">
-            <color red="0.33725490196078434" green="0.81176470588235294" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33700001239776611" green="0.81199997663497925" blue="0.88200002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

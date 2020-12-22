@@ -13,6 +13,12 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
         super.awakeFromNib()
         setUpViews()
         beginButton.pulsate()
+        setLanguageOfbutton()
+    }
+    
+    func setLanguageOfbutton() {
+     let beginTitle = NSLocalizedString("Begin Lesson", comment: "None")
+        beginButton.setTitle(beginTitle, for: .normal)
     }
     
     func setUpViews(){

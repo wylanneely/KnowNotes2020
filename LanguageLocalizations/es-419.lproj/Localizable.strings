@@ -1,10 +1,10 @@
 //LaunchVC
 "AppLanguage" = "Spanish";
-"OfflineButtonTitle" = "Modo Offline" ;
+"OfflineButtonTitle" = " Modo Offline " ;
 "LaunchScreenGif" = "KnowNotesLogoAnimation";
-"StartButtonTitle" = " Start ";
+"StartButtonTitle" = " Comienzo ";
 //PlayVC
-"OfflineGameCenterButton" = "Notas Sin Conexión";
+"OfflineGameCenterButton" = "Modo Sin Conexión";
 "OK" = "Ok";
 "Error Purchasing" = "Error de Compra";
 "Acoustic Locked" = "Guitarra Acústica Bloqueada";
@@ -26,6 +26,54 @@
 "Grand Piano" = "Piano de Cola ";
 "Violin" = " Violina ";
 "Saxophone" = " Saxofón ";
-"Play" = " Desempeñar ";
+"Play" = " Elegir ";
 "Locked" = "Bloqueado";
 //KnownNotesVC
+"cR1Message" = "Completa la ronda 1 para desbloquear";
+"cR2Message" = "Completa la ronda 2 para desbloquear";
+"cR3Message" = "Completa la ronda 3 para desbloquear";
+"ComingSoonMessage" = "Próximamente ... ¡La próxima actualización permitirá rondas personalizadas!";
+"lockedHalfsMessage" = "Disponible una vez que se hayan desbloqueado todas las rondas";
+"Attention" = "Atención";
+"half notes" = "la blanca";
+"minor chords" = "acordes menores";
+"unlockHalfs" = "Consigue una puntuación alta de 30 o más para desbloquear.";
+"New Pianist" = "Nuevo Pianista";
+"Piano Player" = "Pianista";
+"Grand Pianist" = "Gran Pianista";
+"Master Guitarist" = "Maestro Guitarrista";
+"Guitar Player" = "Guitarrista";
+"New Guitarist" = "Nuevo Guitarist";
+"Regular Chords" = "Acordes regulares";
+"Concert Master" = "Maestro de conciertos";
+"Violin Player" = "Violinista";
+"New Violinist" = "Nuevo Violinista";
+"Sax Master" = "Maestro de Saxofón";
+"Sax Player" = "Saxofonista";
+"New Sax Player" = "Nuevo Saxofonista";
+//ViewCells
+"Regular Gameplay" = "Jugabilidad Regular";
+"Add Sharps/Flats" = "Sostenidos/Bemoles";
+"Add Minor Chords" = "Agregar Acordes Menores";
+"Customize Rounds" = "Personalizar Rondas";
+"Shuffle Sets" = "Barajar Notas";
+"Off" = "Apagar";
+"Manual" = "Manual";
+"Auto" = "Auto";
+"Begin Lesson" = "Comenzar Lección";
+//RoundVCs
+"Finished" = "Terminado";
+"Keep" = "Mantener";
+"Repeat" = "Repetir";
+"Quit Game?" = "¿Salir del Juego?";
+"Yes" = "Sí";
+"No" = "No";
+//CustomAlertVC
+"Score" = "Puntuación";
+"Submit Score" = "Enviar Puntuación";
+"QuitMessage" = "¿Está usted seguro de que quiere irse? Cualquier progreso realizado no se guardará.";
+"Major Chords" = "Acordes Mayores";
+"Regular Notes" = "Notas Regulares";
+"Major & Minor Chords" = "Acordes Mayores y Menores";
+"Regular Whole Notes" = "Notas Enteras regulares";
+"Regular + Sharp & Flats" = "Agudos y Planos Regulares";

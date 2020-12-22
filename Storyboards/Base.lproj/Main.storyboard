@@ -133,6 +133,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zlj-ED-0ew" id="z4g-2q-feZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -395,6 +396,7 @@
                     <connections>
                         <outlet property="backgroundGif" destination="Qc2-dB-ZiV" id="7VU-na-nsg"/>
                         <outlet property="circleProgressBar" destination="8G3-SH-456" id="fEU-MF-IVd"/>
+                        <outlet property="leaveButton" destination="8CA-Tn-F3L" id="YJL-YU-mRK"/>
                         <outlet property="note1Button" destination="Wvr-Vq-3LO" id="UWK-Fz-39Q"/>
                         <outlet property="note1ButtonView" destination="1MD-JO-52d" id="X5Q-iP-D2i"/>
                         <outlet property="note2Button" destination="IIl-u3-Qv7" id="P73-qP-NzX"/>
@@ -403,6 +405,7 @@
                         <outlet property="note3ButtonView" destination="uCT-is-xkk" id="Dpl-1x-0MC"/>
                         <outlet property="playButton" destination="ukh-yr-8nN" id="UZp-Gj-CdC"/>
                         <outlet property="scoreLabel" destination="eN4-fl-zry" id="2ge-j8-YW6"/>
+                        <outlet property="scoreTitleLabel" destination="Ix8-UU-qWk" id="XkP-8v-FMX"/>
                         <outlet property="shuffleSetButton" destination="adz-gs-SWd" id="saf-QP-B8F"/>
                         <segue destination="n16-rO-qvI" kind="presentation" identifier="round1Finish" modalPresentationStyle="overFullScreen" id="Rtg-K7-3Gq"/>
                     </connections>
@@ -1203,11 +1206,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8C-i6-dA4">
+                                <rect key="frame" x="185.5" y="52" width="43" height="98"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="70"/>
+                                <color key="textColor" name="China Red"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kr0-iD-Ebu"/>
                         <color key="backgroundColor" red="0.16101491449999999" green="0.56606894730000001" blue="0.79055315260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GMx-Gc-s1U" firstAttribute="centerY" secondItem="esf-WR-ZxM" secondAttribute="centerY" id="0bQ-A1-nYh"/>
+                            <constraint firstItem="v8C-i6-dA4" firstAttribute="top" secondItem="rt9-4T-Enw" secondAttribute="top" id="5NS-x3-KCc"/>
                             <constraint firstItem="gN5-mI-HHB" firstAttribute="leading" secondItem="Kr0-iD-Ebu" secondAttribute="leading" constant="20" id="8KJ-DG-N0S"/>
                             <constraint firstItem="gN5-mI-HHB" firstAttribute="centerY" secondItem="Wq1-Vu-KEt" secondAttribute="centerY" id="CJt-SX-gBy"/>
                             <constraint firstItem="Kr0-iD-Ebu" firstAttribute="bottom" secondItem="esf-WR-ZxM" secondAttribute="bottom" constant="80" id="Chn-cB-03C"/>
@@ -1229,6 +1239,7 @@
                             <constraint firstItem="sEl-Lj-HlJ" firstAttribute="centerX" secondItem="rt9-4T-Enw" secondAttribute="centerX" id="eb3-MN-akq"/>
                             <constraint firstItem="bVf-9T-Y0X" firstAttribute="centerX" secondItem="1bx-Zl-FzS" secondAttribute="centerX" id="fWK-nr-zSO"/>
                             <constraint firstItem="rt9-4T-Enw" firstAttribute="centerX" secondItem="1bx-Zl-FzS" secondAttribute="centerX" id="jCA-FM-ruz"/>
+                            <constraint firstItem="v8C-i6-dA4" firstAttribute="centerX" secondItem="1bx-Zl-FzS" secondAttribute="centerX" id="kyE-fk-MKz"/>
                             <constraint firstItem="rt9-4T-Enw" firstAttribute="top" secondItem="Kr0-iD-Ebu" secondAttribute="top" constant="8" id="mnn-Hr-gUT"/>
                             <constraint firstItem="Kr0-iD-Ebu" firstAttribute="trailing" secondItem="GVW-y5-JMf" secondAttribute="trailing" constant="20" id="nvQ-T8-5Pt"/>
                             <constraint firstItem="rt9-4T-Enw" firstAttribute="centerX" secondItem="sEl-Lj-HlJ" secondAttribute="centerX" id="oMq-0r-lJG"/>
@@ -1242,6 +1253,8 @@
                     <connections>
                         <outlet property="backgroundGif" destination="sEl-Lj-HlJ" id="kbW-2N-AcJ"/>
                         <outlet property="circleProgressBar" destination="rt9-4T-Enw" id="Ey9-dl-crN"/>
+                        <outlet property="leaveButton" destination="Elf-jw-tIg" id="65m-cQ-PJo"/>
+                        <outlet property="lilfesLabel" destination="v8C-i6-dA4" id="ArI-Lo-9Q5"/>
                         <outlet property="note1Button" destination="5Dc-9b-QBS" id="wqI-8I-cSe"/>
                         <outlet property="note1ButtonView" destination="Lfn-Xt-jXo" id="DH0-VJ-UZD"/>
                         <outlet property="note2Button" destination="8UL-eq-ITU" id="JHa-cn-3eu"/>
@@ -1254,6 +1267,7 @@
                         <outlet property="note5ButtonView" destination="GVW-y5-JMf" id="Uyn-sF-CY2"/>
                         <outlet property="playButton" destination="gKr-63-wkj" id="z7f-Hy-DaG"/>
                         <outlet property="scoreLabel" destination="bVf-9T-Y0X" id="uSw-6X-xg0"/>
+                        <outlet property="scoreTitle" destination="ahI-ly-srg" id="qwa-Gw-zWF"/>
                         <outlet property="shuffleSetButton" destination="pqq-jD-Gmt" id="JsH-Gf-Pbe"/>
                         <segue destination="mI2-hl-11M" kind="show" identifier="toLocalProfile" id="O9z-j4-FT8"/>
                         <segue destination="n16-rO-qvI" kind="presentation" identifier="round2Finish" modalPresentationStyle="overFullScreen" id="74H-3z-9A2"/>
@@ -1589,6 +1603,7 @@
                     <navigationItem key="navigationItem" id="U70-QT-ZIW"/>
                     <connections>
                         <outlet property="backgroundGif" destination="JJq-K9-0Cf" id="zGh-Kp-9O2"/>
+                        <outlet property="leaveButton" destination="n6P-pt-SFe" id="KkC-x5-KLw"/>
                         <outlet property="note1Button" destination="nuH-Qd-0Pu" id="BkT-Rb-qLY"/>
                         <outlet property="note1ButtonView" destination="ZXh-uw-xrJ" id="3OW-DY-mBU"/>
                         <outlet property="note2Button" destination="xka-1m-ktS" id="kFc-Ss-UQO"/>
@@ -1605,6 +1620,7 @@
                         <outlet property="note7ButtonView" destination="1Lt-XJ-cfZ" id="9l5-En-694"/>
                         <outlet property="playButton" destination="wJb-0X-0x6" id="8mQ-3u-epf"/>
                         <outlet property="scoreLabel" destination="v9W-s5-quM" id="Gta-fH-RrR"/>
+                        <outlet property="scoreTitleLabel" destination="tX9-2h-BSH" id="WHe-0A-uej"/>
                         <outlet property="shuffleSetButton" destination="8hA-wJ-13R" id="Pll-mZ-R9A"/>
                         <segue destination="mI2-hl-11M" kind="show" identifier="toLocalProfile2" id="fKx-EV-k2C"/>
                         <segue destination="n16-rO-qvI" kind="presentation" identifier="round3Finish" modalPresentationStyle="overFullScreen" id="ncy-fg-zh2"/>
@@ -1622,7 +1638,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text=" Instruments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Ym-qyB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text=" Instruments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18G-Ym-qyB">
                                 <rect key="frame" x="20" y="128" width="209" height="46"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1640,6 +1656,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2m-aL-b63">
                                 <rect key="frame" x="72" y="64" width="138" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
                                 <state key="normal" title="Game Center">
                                     <color key="titleColor" name="beauBlue"/>
                                 </state>
@@ -2677,10 +2694,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GOe-8V-P0b"/>
-        <segue reference="KZ4-4r-X98"/>
+        <segue reference="O9z-j4-FT8"/>
+        <segue reference="G29-kI-gPt"/>
         <segue reference="jfw-HG-feo"/>
-        <segue reference="ncy-fg-zh2"/>
+        <segue reference="74H-3z-9A2"/>
         <segue reference="gO0-6J-CU9"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2691,6 +2708,9 @@
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="CeriseRed">
             <color red="0.81999999284744263" green="0.20399999618530273" blue="0.35699999332427979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="China Red">
+            <color red="0.86845642329999995" green="0.16273203489999999" blue="0.06268117577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GoldenSun">
             <color red="0.97600001096725464" green="0.86299997568130493" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

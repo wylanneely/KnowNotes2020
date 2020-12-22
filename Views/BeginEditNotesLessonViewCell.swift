@@ -25,13 +25,25 @@ class BeginEditNotesLessonViewCell: UITableViewCell {
         beginButton.layer.cornerRadius = 10
         beginButton.layer.borderWidth = 2
         beginButton.layer.borderColor = UIColor.beauBlue.cgColor
+        if ShuffleNotesViewCell.localizationLanguage == "Spanish" {
+            let font =  beginButton.titleLabel?.font
+            let newFont = UIFont(name: font?.familyName ?? "", size: 20)!
+            beginButton.titleLabel?.font = newFont
+        }
     }
+    
     
     class func createCell() -> BeginEditNotesLessonViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? BeginEditNotesLessonViewCell
-        return cell
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? BeginEditNotesLessonViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? BeginEditNotesLessonViewCell
+            return cell
+        }
     }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

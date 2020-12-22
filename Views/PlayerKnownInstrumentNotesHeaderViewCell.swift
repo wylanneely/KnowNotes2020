@@ -8,13 +8,9 @@
 import UIKit
 
 class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
-    
-    
-    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
-    
-    let nUnlockedTitle = NSLocalizedString("Notes Unlocked", comment: "no comment")
-    let headerTitle = NSLocalizedString("Regular Gameplay", comment: "no comment")
+    static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"
 
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +20,6 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
     func commonInit(image: UIImage, rank: String, completedNotes: Int ) {
         instrumentImage.image = image
         instrumentProficiencyRankingLabel.text = rank
@@ -33,17 +28,30 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     }
     
     class func createCell() -> PlayerKnownInstrumentNotesHeaderViewCell? {
-           let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
-           return cell
-       }
+        let nib = UINib(nibName: xibRID, bundle: nil)
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? PlayerKnownInstrumentNotesHeaderViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? PlayerKnownInstrumentNotesHeaderViewCell
+            return cell
+        }
+    }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+
 
     //MARK: Properties
-    
     func setProgressBar(score: Int){
         let progress = Float(score/30)
         progressBarr.setProgress(progress, animated: true)
     }
+    
+    //MARK:Language Localization Views
+    
+    let nUnlockedTitle = NSLocalizedString("Notes Unlocked", comment: "no comment")
+    let headerTitle = NSLocalizedString("Regular Gameplay", comment: "no comment")
+
+    
     
     
     @IBOutlet weak var progressBarr: UIProgressView!
@@ -51,9 +59,7 @@ class PlayerKnownInstrumentNotesHeaderViewCell: UITableViewCell {
     @IBOutlet weak var instrumentProficiencyRankingLabel: UILabel!
     @IBOutlet weak var completedNotesLabel: UILabel!
     @IBOutlet weak var notesChordsLabel: UILabel!
-    
-    static let xibRID: String = "PlayerKnownInstrumentNotesHeaderViewCell"
-    
+        
     
     
 }

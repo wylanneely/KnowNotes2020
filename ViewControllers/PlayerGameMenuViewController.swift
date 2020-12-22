@@ -22,18 +22,14 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if isOnline == true {
             //MARK:In APP PUrchase
-            
             IAP.iAPDelegate = self
-            
-            
-            
             GameCenterManager.manager.viewController = self
             localPlayerProfilePhoto.image = GameCenterManager.manager.localPlayerPhoto?.circleMasked
         } else {
-            gameCenterButton.setTitle("Offline Notes", for: .normal)
+            let title = NSLocalizedString("OfflineGameCenterButton", comment: "offline Notes")
+            gameCenterButton.setTitle(title, for: .normal)
             gameCenterButton.isEnabled = false
             gameCenterImage.isHidden = true
         }
@@ -55,6 +51,12 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         collectionView?.setCollectionViewLayout(layout, animated: false)
         collectionView.dataSource = self
         collectionView.delegate = self
+        if localizationLanguage == "Chinese"{
+            collectionView.backgroundColor = UIColor.chinaYellow
+            self.view.backgroundColor = UIColor.chinaYellow
+            gameCenterButton.setTitleColor(.black, for: .normal)
+            gameCenterButton.setTitleShadowColor(.chinaRed, for: .normal)
+        }
     }
     
     //MARK: Unlocked Instruments
@@ -77,11 +79,13 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     
     typealias SuccessHandler = (Bool) -> Void
     
-    let OkAlertAction: UIAlertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+    let OkAlertAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "ok"), style: .default, handler: nil)
+    
+    let errorBuy = NSLocalizedString("Error Purchasing", comment: "ok")
     
     func showSingleAlert(withMessage message: String) {
-           let alertController = UIAlertController(title: "Error Purchasing", message: message, preferredStyle: .alert)
-           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           let alertController = UIAlertController(title: errorBuy, message: message, preferredStyle: .alert)
+           alertController.addAction(OkAlertAction)
            self.present(alertController, animated: true, completion: nil)
        }
     
@@ -90,10 +94,13 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
          let product = IAP.getProduct(containing: "IAPAcoustic") ?? nil
         let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
         
-        let alert = UIAlertController(title: "Acoustic Locked", message: "Score 20 with the Grand Piano to unlock the Acoustic Guitar.", preferredStyle: .alert)
-        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+        let alertAcouTitle = NSLocalizedString("Acoustic Locked", comment: "Acoustic Guitar Locked")
+        let alertAcouMessage = NSLocalizedString("LockedAcouMessage", comment: "Acoustic Guitar Locked amessage")
+
+        let alert = UIAlertController(title: alertAcouTitle, message: alertAcouMessage, preferredStyle: .alert)
+        let action = (UIAlertAction(title: buyTitle + "\(price)", style: .default, handler: { (_) in
             if !IAPManager.shared.canMakePayments() {
-                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                self.showSingleAlert(withMessage: self.IAPNot)
                 return
                } else {
                 if let product = product{
@@ -107,7 +114,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                            }
                        }
                 }} else {
-                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    self.showSingleAlert(withMessage:self.errorBuy)
                     return
                 }
                    return
@@ -117,15 +124,17 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         alert.addAction(OkAlertAction)
         return alert
     }
-    
     
     var unlockViolinAlertController: UIAlertController {
              let product = IAP.getProduct(containing: "IAPViolin") ?? nil
             let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
-        let alert = UIAlertController(title: "Violin Locked", message: "Score 25 chords with the Acoustic Guitar to unlock the Violin.", preferredStyle: .alert)
-        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+        
+        let violinTitle = NSLocalizedString("Violin Locked", comment: "locked violin")
+        let violinMessage = NSLocalizedString("Violin Message", comment: "locked violin message")
+        let alert = UIAlertController(title: violinTitle, message: violinMessage, preferredStyle: .alert)
+        let action = (UIAlertAction(title: buyTitle + "\(price)", style: .default, handler: { (_) in
             if !IAPManager.shared.canMakePayments() {
-                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                self.showSingleAlert(withMessage: self.IAPNot)
                 return
                } else {
                 if let product = product{
@@ -139,7 +148,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                            }
                        }
                 }} else {
-                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    self.showSingleAlert(withMessage:self.errorBuy)
                     return
                 }
                    return
@@ -149,13 +158,16 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         alert.addAction(OkAlertAction)
         return alert
     }
+    
     var unlockSaxAlertController: UIAlertController {
         let product = IAP.getProduct(containing: "IAPSax") ?? nil
        let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
-        let alert = UIAlertController(title: "Saxophone Locked", message: "Score 25 with the Violin to unlock the Saxophone.", preferredStyle: .alert)
-        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+        let saxTitle = NSLocalizedString("Saxophone Locked", comment: "locked saxophone")
+        let saxMessage =  NSLocalizedString("Saxophone Message", comment: "locked saxophone message")
+        let alert = UIAlertController(title: saxTitle, message: saxMessage, preferredStyle: .alert)
+        let action = (UIAlertAction(title: buyTitle + "\(price)", style: .default, handler: { (_) in
             if !IAPManager.shared.canMakePayments() {
-                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                self.showSingleAlert(withMessage: self.IAPNot)
                 return
                } else {
                 if let product = product{
@@ -169,7 +181,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                            }
                        }
                 }} else {
-                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    self.showSingleAlert(withMessage:self.errorBuy)
                     return
                 }
                    return
@@ -180,11 +192,17 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         return alert
     }
     var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Exit", message: "Return to main menu", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Leave", style: .destructive) { (_) in
+        
+        let exit = NSLocalizedString("Exit", comment: "locked saxophone")
+        let exitmessage = NSLocalizedString("Return to main menu", comment: "locked saxophone")
+        let leave = NSLocalizedString("Leave", comment: "locked saxophone")
+        let cancel = NSLocalizedString("Cancel", comment: "locked saxophone")
+        
+        let alert = UIAlertController(title: exit, message: exitmessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: leave, style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLaunch", sender: self)
         }
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let action2 = UIAlertAction(title: cancel, style: .cancel) { (_) in
         }
         alert.addAction(action)
         alert.addAction(action2)
@@ -274,6 +292,14 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
             }
         }
     }
+    //MARK: Localization
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+    
+    let buyTitle = NSLocalizedString("Buy for", comment: "Buy instrument for")
+
+    let IAPNot = NSLocalizedString("In-App Purchases No", comment: "no purchases")
+    
+    
     
     //MARK: Navigation
    
@@ -307,6 +333,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
            default:
                return } }
    }
+    
 }
 
 extension PlayerGameMenuViewController: IAPDelegate{

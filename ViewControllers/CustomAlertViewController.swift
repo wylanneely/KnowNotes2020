@@ -34,21 +34,21 @@ class CustomAlertViewController: UIViewController {
         submitScoreButton.layer.borderColor = UIColor.black.cgColor
     }
     func setLabels(){
-        let instrument = Session.manager.currentInstrumentType.rawValue
-        let score = "Score: \(Session.manager.score)"
-        var noteTypes = "Regular Notes"
+        let instrument = getInstrumentType()
+        let score = scoreStr + ": \(Session.manager.score)"
+        var noteTypes = regularNotesStr
         if instrumentType == .grandPiano {
             if isUsingHalfs {
-                noteTypes = "Regular + Sharp & Flats"
+                noteTypes = regularShrFltStr
             } else {
-                noteTypes = "Regular Whole Notes"
+                noteTypes = regulrWhole
             }
 
         } else if instrumentType == .acousticGuitar {
             if isUsingHalfs {
-            noteTypes = "Major & Minor Chords"
+            noteTypes = MajMinChordStr
             } else {
-                noteTypes = "Major Chords"
+                noteTypes = majChordStr
             }
         }
         
@@ -57,14 +57,38 @@ class CustomAlertViewController: UIViewController {
         noteChordTypeLabel.text = noteTypes
     }
     
+    
+    
+    func getInstrumentType()-> String{
+        switch instrumentType {
+        case .grandPiano:
+            return grandPianoT
+        case .acousticGuitar:
+            return acousticGuitarT
+        case .violin:
+            return violinT
+        case .saxaphone:
+            return saxT
+        }
+    }
+    
+    //MARK: Localization Language
+    
+    private let grandPianoT = NSLocalizedString("Grand Piano", comment: "none")
+    private let acousticGuitarT = NSLocalizedString("Acoustic Guitar", comment: "none")
+    private let violinT = NSLocalizedString("Violin", comment: "none")
+    private let saxT = NSLocalizedString("Saxophone", comment: "none")
+    private let majChordStr = NSLocalizedString("Major Chords", comment: "none")
+    private let MajMinChordStr = NSLocalizedString("Major & Minor Chords", comment: "none")
+    private let submitScoreTitle = NSLocalizedString("Submit Score", comment: "none")
+    private let regularNotesStr = NSLocalizedString("Regular Notes", comment: "none")
+    private let regularShrFltStr = NSLocalizedString("Regular + Sharp & Flats", comment: "none")
+    private let regulrWhole = NSLocalizedString("Regular Whole Notes", comment: "none")
+    private let scoreStr = NSLocalizedString("Score", comment: "none")
 
     @IBOutlet weak var intrumentTypeLabel: UILabel!
-    
     @IBOutlet weak var scoreLabel: UILabel!
-    
     @IBOutlet weak var noteChordTypeLabel: UILabel!
-    
-    
     
     @IBOutlet weak var finishedView: UIView!
     @IBOutlet weak var sendChallengeButton: UIButton!

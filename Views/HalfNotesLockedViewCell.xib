@@ -20,13 +20,16 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybI-VT-e6b">
                         <rect key="frame" x="8" y="4" width="304" height="52"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sharps/Flats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIu-0B-EGu">
-                                <rect key="frame" x="16" y="11" width="194.5" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sharps/Flats" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIu-0B-EGu">
+                                <rect key="frame" x="16" y="8.5" width="220" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="X5g-iW-LmH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" name="polarCapBlue"/>
-                                <size key="shadowOffset" width="2" height="1"/>
+                                <color key="shadowColor" name="ChinaYellow"/>
+                                <size key="shadowOffset" width="0.5" height="0.5"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-JM-mcN">
                                 <rect key="frame" x="244" y="4.5" width="40" height="42.5"/>
@@ -66,17 +69,78 @@
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
         </tableViewCell>
+        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="lockedHalfNotes" rowHeight="60" id="A4c-zF-G8C" customClass="HalfNotesLockedViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A4c-zF-G8C" id="0zc-H4-yS0">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvS-zP-Rho">
+                        <rect key="frame" x="8" y="4" width="304" height="52"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sharps/Flats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aE-ri-52S">
+                                <rect key="frame" x="16" y="8.5" width="200" height="35"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="ChinaYellow"/>
+                                <size key="shadowOffset" width="0.5" height="0.5"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D30-co-ywC">
+                                <rect key="frame" x="244" y="4.5" width="40" height="42.5"/>
+                                <color key="tintColor" name="Banana"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Wfl-F1-Bu7"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="wcU-47-pMz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="China Red"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="D30-co-ywC" secondAttribute="bottom" constant="4" id="F1X-0V-aM9"/>
+                            <constraint firstItem="6aE-ri-52S" firstAttribute="centerY" secondItem="xvS-zP-Rho" secondAttribute="centerY" id="FgW-M7-ta4"/>
+                            <constraint firstAttribute="trailing" secondItem="D30-co-ywC" secondAttribute="trailing" constant="20" id="NAC-Xd-yaN"/>
+                            <constraint firstItem="6aE-ri-52S" firstAttribute="leading" secondItem="xvS-zP-Rho" secondAttribute="leading" constant="16" id="Wf1-5x-jjO"/>
+                            <constraint firstItem="D30-co-ywC" firstAttribute="top" secondItem="xvS-zP-Rho" secondAttribute="top" constant="4" id="uja-vY-UEM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="China Red"/>
+                <constraints>
+                    <constraint firstItem="xvS-zP-Rho" firstAttribute="leading" secondItem="0zc-H4-yS0" secondAttribute="leading" constant="8" id="Ku9-Pd-xdx"/>
+                    <constraint firstAttribute="bottom" secondItem="xvS-zP-Rho" secondAttribute="bottom" constant="4" id="dhW-pg-aiI"/>
+                    <constraint firstAttribute="trailing" secondItem="xvS-zP-Rho" secondAttribute="trailing" constant="8" id="fhl-g0-GVv"/>
+                    <constraint firstItem="xvS-zP-Rho" firstAttribute="top" secondItem="0zc-H4-yS0" secondAttribute="top" constant="4" id="o0d-aK-VxX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="uHl-31-br6"/>
+            <color key="tintColor" name="niceNight"/>
+            <gestureRecognizers/>
+            <connections>
+                <outlet property="borderView" destination="xvS-zP-Rho" id="P1D-dL-lGW"/>
+                <outlet property="lockedOrChecked" destination="D30-co-ywC" id="Fcu-sn-me5"/>
+                <outlet property="notesLabel" destination="6aE-ri-52S" id="s8C-De-fND"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="222"/>
+        </tableViewCell>
     </objects>
     <resources>
         <image name="lock.fill" catalog="system" width="128" height="128"/>
+        <namedColor name="Banana">
+            <color red="0.92900002002716064" green="0.85100001096725464" blue="0.58799999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="China Red">
+            <color red="0.86845642329999995" green="0.16273203489999999" blue="0.06268117577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChinaYellow">
+            <color red="1" green="0.86897069220000001" blue="0.0063200490549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="discoDayGreen">
             <color red="0.50199997425079346" green="1" blue="0.85900002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="niceNight">
             <color red="0.36899998784065247" green="0.37599998712539673" blue="0.80800002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="polarCapBlue">
-            <color red="0.32499998807907104" green="0.56499999761581421" blue="0.85100001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

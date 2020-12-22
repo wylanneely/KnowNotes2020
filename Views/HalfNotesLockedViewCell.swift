@@ -27,12 +27,18 @@ class HalfNotesLockedViewCell: UITableViewCell {
         if Session.manager.currentInstrumentType == .acousticGuitar {
             setGUitarChords()
         }
+        
     }
 
     func setUpViews(){
         borderView.layer.borderWidth = 2
         borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         borderView.layer.cornerRadius = 10
+        if ShuffleNotesViewCell.localizationLanguage == "Spanish" {
+          let font =  notesLabel.font
+            let newFont = UIFont(name: font?.familyName ?? "", size: 20)
+            notesLabel.font = newFont
+        }
     }
     
     func setGestureRecognizer(){
@@ -63,11 +69,18 @@ class HalfNotesLockedViewCell: UITableViewCell {
         }
     }
     
+    
     class func createCell() -> HalfNotesLockedViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
-        return cell
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? HalfNotesLockedViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
+            return cell
+        }
     }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     func setLockedState(){
         borderView.layer.backgroundColor = UIColor.beauBlue.cgColor
@@ -101,6 +114,8 @@ class HalfNotesLockedViewCell: UITableViewCell {
             }
         }
     }
+    
+    
     let addSF = NSLocalizedString("Add Sharps/Flats", comment: "none")
     let addMinorC = NSLocalizedString("Add Minor Chords", comment: "none")
 

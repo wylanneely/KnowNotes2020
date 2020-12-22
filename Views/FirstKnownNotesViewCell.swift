@@ -89,10 +89,17 @@ class FirstKnownNotesViewCell: UITableViewCell {
     
     func setSelectedView(){
         DispatchQueue.main.async {
+            if self.localizationLanguage == "Chinese" {
+                self.middleBGView.layer.borderColor = UIColor.chinaYellow.cgColor
+                self.note1Button.layer.borderColor = UIColor.chinaYellow.cgColor
+                self.note2Button.layer.borderColor = UIColor.chinaYellow.cgColor
+                self.note3Button.layer.borderColor = UIColor.chinaYellow.cgColor
+            } else {
             self.middleBGView.layer.borderColor = UIColor.sharkGreen.cgColor
             self.note1Button.layer.borderColor = UIColor.sharkGreen.cgColor
             self.note2Button.layer.borderColor = UIColor.sharkGreen.cgColor
             self.note3Button.layer.borderColor = UIColor.sharkGreen.cgColor
+            }
         }
     }
     
@@ -114,34 +121,22 @@ class FirstKnownNotesViewCell: UITableViewCell {
         note3Button.layer.borderColor = UIColor.niceNight.cgColor
     }
     
+    
     class func createCell() -> FirstKnownNotesViewCell? {
-        let nib = UINib(nibName: self.xibRID, bundle: nil)
-        
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? FirstKnownNotesViewCell
-        return cell
+        let nib = UINib(nibName: xibRID, bundle: nil)
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? FirstKnownNotesViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? FirstKnownNotesViewCell
+            return cell
+        }
     }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     static let xibRID: String = "FirstKnownNotesViewCell"
     
     var delegate: FirstRoundNotesDelegate?
-    
-//    func animateSharps(){
-//        DispatchQueue.main.async {
-//            UIView.animate(withDuration: 2.5) {
-//                self.flatLabel.textColor = UIColor.red
-//                self.sharpLabel.textColor = UIColor.red
-//            } completion: {
-//                (completed: Bool) -> Void in
-//                UIView.animateKeyframes(withDuration: 2.5, delay: 1, options: .repeat) {
-//                    self.flatLabel.textColor = UIColor.white
-//                        self.sharpLabel.textColor = UIColor.white
-//                } completion: { (completed: Bool) -> Void in
-//                    self.flatLabel.textColor = UIColor.red
-//                    self.sharpLabel.textColor = UIColor.red
-//                }
-//            }
-//        }
-//        }
 
     //MARK: Outlets
     

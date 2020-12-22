@@ -75,11 +75,18 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    
     class func createCell() -> SecondRoundKnownNotesViewCell? {
-        let nib = UINib(nibName: self.xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? SecondRoundKnownNotesViewCell
-           return cell
-       }
+        let nib = UINib(nibName: xibRID, bundle: nil)
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? SecondRoundKnownNotesViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? SecondRoundKnownNotesViewCell
+            return cell
+        }
+    }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     func setGestureRecognizer(){
         self.isUserInteractionEnabled = true
@@ -104,9 +111,15 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
     
     func setSelectedView(){
         DispatchQueue.main.async {
+            if SecondRoundKnownNotesViewCell.localizationLanguage == "Chinese" {
+                self.middleBGView.layer.borderColor = UIColor.chinaYellow.cgColor
+                self.firstNoteView.layer.borderColor = UIColor.chinaYellow.cgColor
+                self.secondSelectedNoteButton.layer.borderColor = UIColor.chinaYellow.cgColor
+            } else {
             self.middleBGView.layer.borderColor = UIColor.sharkGreen.cgColor
             self.firstNoteView.layer.borderColor = UIColor.sharkGreen.cgColor
             self.secondSelectedNoteButton.layer.borderColor = UIColor.sharkGreen.cgColor
+            }
         }
     }
     
@@ -118,11 +131,19 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         firstNoteView.layer.cornerRadius = 10
         secondSelectedNoteButton.layer.cornerRadius = 10
         lockImageView.tintColor = UIColor.clear
-        middleBGView.layer.borderColor = UIColor.niceNight.cgColor
-        firstNoteView.layer.borderColor = UIColor.niceNight.cgColor
-        secondSelectedNoteButton.layer.borderColor = UIColor.niceNight.cgColor
+        if SecondRoundKnownNotesViewCell.localizationLanguage == "Chinese" {
+            self.firstSelectedNoteLabel.textColor = UIColor.black
+            self.secondSelectedNoteButton.setTitleColor(UIColor.black, for: .normal)
+            middleBGView.layer.borderColor = UIColor.white.cgColor
+            firstNoteView.layer.borderColor = UIColor.white.cgColor
+            secondSelectedNoteButton.layer.borderColor = UIColor.white.cgColor
+        }else {
         self.firstSelectedNoteLabel.textColor = UIColor.white
         self.secondSelectedNoteButton.setTitleColor(UIColor.white, for: .normal)
+            middleBGView.layer.borderColor = UIColor.niceNight.cgColor
+            firstNoteView.layer.borderColor = UIColor.niceNight.cgColor
+            secondSelectedNoteButton.layer.borderColor = UIColor.niceNight.cgColor
+        }
     }
     
     func setLockedNotesViews(){
@@ -141,6 +162,12 @@ class SecondRoundKnownNotesViewCell: UITableViewCell {
         secondSelectedNoteButton.layer.borderColor = UIColor.black.cgColor
         secondSelectedNoteButton.setTitleColor(UIColor.darkGray, for: .normal)
         firstSelectedNoteLabel.textColor = UIColor.darkGray
+        if SecondRoundKnownNotesViewCell.localizationLanguage == "Chinese" {
+            lockImageView.tintColor = UIColor.chinaYellow
+            firstNoteView.layer.borderColor = UIColor.white.cgColor
+            secondSelectedNoteButton.layer.borderColor = UIColor.white.cgColor
+            middleBGView.layer.borderColor = UIColor.white.cgColor
+        }
     }
     
     @IBOutlet weak var secondNoteSharpFlat: UILabel!

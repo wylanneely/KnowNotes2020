@@ -19,11 +19,19 @@ class ShuffleNotesViewCell: UITableViewCell{
         setLanguageLocalization()
         }
     
+    
+    
     class func createCell() -> ShuffleNotesViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? ShuffleNotesViewCell
-        return cell
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? ShuffleNotesViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? ShuffleNotesViewCell
+            return cell
+        }
     }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     let shuffleSetsTitle = NSLocalizedString("Shuffle Sets", comment: "nope")
     let offO = NSLocalizedString("Off", comment: "nope")
@@ -36,8 +44,14 @@ class ShuffleNotesViewCell: UITableViewCell{
         optionControl.setTitle(manualO, forSegmentAt: 1)
         optionControl.setTitle(autoO, forSegmentAt: 2)
         shuffleSetsLabel.text = shuffleSetsTitle
+        if ShuffleNotesViewCell.localizationLanguage == "Spanish" {
+          let font =  shuffleSetsLabel.font
+            let newFont = UIFont(name: font?.familyName ?? "", size: 20)
+            shuffleSetsLabel.font = newFont            
+        }
     }
     
+    @IBOutlet weak var optionsControlsWidth: NSLayoutConstraint!
     func setUpViews(){
         borderView.layer.borderWidth = 2
         borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor

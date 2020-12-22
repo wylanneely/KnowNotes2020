@@ -5,7 +5,7 @@
 "LaunchScreenGif" = "KnowNotesLogoAnimation";
 "StartButtonTitle" = " Start ";
 //PlayVC
-"OfflineGameCenterButton" = "Offline Notes";
+"OfflineGameCenterButton" = "Offline Mode";
 "OK" = "Ok";
 "Error Purchasing" = "Error Purchasing";
 "Acoustic Locked" = "Acoustic Locked";
@@ -34,7 +34,7 @@
 "cR2Message" = "Complete Round 2 to Unlock";
 "cR3Message" = "Complete Round 3 to Unlock";
 "ComingSoonMessage" = "Coming Soon... Next Update Will Allow Custom Rounds!";
-"lockedHalfsMessage" = "Avialable once all of the rounds have been unlocked";
+"lockedHalfsMessage" = "Available once all of the rounds have been unlocked";
 "Attention" = "Attention";
 "half notes" = "half notes";
 "minor chords" = "minor chords";
@@ -63,9 +63,12 @@
 "Auto" = "Auto";
 "Begin Lesson" = "Begin Lesson";
 //RoundVCs
+"Finished" = "Finished";
 "Keep" = "Keep";
 "Repeat" = "Repeat";
 "Quit Game?" = "Quit Game?";
+"Yes" = "Yes";
+"No" = "No";
 //CustomAlertVC
 "Score" = "Score";
 "Submit Score" = "Submit Score";

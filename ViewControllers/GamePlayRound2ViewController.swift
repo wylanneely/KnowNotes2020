@@ -46,19 +46,18 @@ class GamePlayRound2ViewController: UIViewController {
     var currentRound: Double = 1.00
     
     //MARK: Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         assignNotesToButtons()
         setUpLabelsButtonsViews()
         self.isModalInPresentation = true
         setUpGif()
+        self.updateLifesGif()
         playButton.pulse()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         DispatchQueue.main.async {
-            self.updateLifesGif()
             self.setUpLabelsButtonsViews()
         }
         
@@ -76,17 +75,15 @@ class GamePlayRound2ViewController: UIViewController {
     
     
     func setUpGif(){
-          circleProgressBar.labelSize = 60
-          circleProgressBar.safePercent = 100
-          circleProgressBar.lineWidth = 12
-          circleProgressBar.safePercent = 100
-          circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
+        circleProgressBar.labelSize = 60
+        circleProgressBar.safePercent = 100
+        circleProgressBar.lineWidth = 12
+        circleProgressBar.safePercent = 100
+        circleProgressBar.layer.backgroundColor = UIColor.gameplayBlue.cgColor
         circleProgressBar.layer.cornerRadius = circleProgressBar.frame.size.width/2
         circleProgressBar.clipsToBounds = true
-          view.sendSubviewToBack(backgroundGif)
-          view.sendSubviewToBack(circleProgressBar)
-        updateLifesGif()
-      }
+        view.sendSubviewToBack(circleProgressBar)
+    }
     
     func getGameNotes(){
         doesGameNeedNewNote = true
@@ -134,8 +131,21 @@ class GamePlayRound2ViewController: UIViewController {
         shuffleSetButton.layer.borderColor = UIColor.discoDayGReen.cgColor
         DispatchQueue.main.async {
             self.scoreLabel.text = "\(Session.manager.score)"
-            self.playButton.setTitle("Play", for: .normal)
+            self.playButton.setTitle(self.playTitle, for: .normal)
             self.playButton.pulse()
+        }
+        if language == "Chinese" {
+            if UIDevice.modelName.contains("iPhone SE"){
+                lilfesLabel.textColor = UIColor.chinaRed
+            } else {
+                lilfesLabel.textColor = UIColor.chinaYellow
+            }
+            scoreLabel.textColor = UIColor.chinaRed
+            self.view.backgroundColor = UIColor.chinaYellow
+            circleProgressBar.backgroundColor = UIColor.chinaYellow
+            playButton.backgroundColor = UIColor.chinaRed
+            leaveButton.setTitleColor(.black, for: .normal)
+            scoreTitle.textColor = UIColor.chinaRed
         }
     }
     
@@ -169,7 +179,11 @@ class GamePlayRound2ViewController: UIViewController {
             } completion: {
                 (completed: Bool) -> Void in
                 UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    if self.language == "Chinese" {
+                        self.view.backgroundColor = UIColor.chinaYellow
+                    } else {
                     self.view.backgroundColor = UIColor.gameplayBlue
+                    }
                 }    }  }
     
     func handleCorrectAnswerWithHaptic(){
@@ -181,15 +195,18 @@ class GamePlayRound2ViewController: UIViewController {
             } completion: {
                 (completed: Bool) -> Void in
                 UIView.animateKeyframes(withDuration: 0.33, delay: 0, options: .calculationModePaced) {
+                    if self.language == "Chinese" {
+                        self.view.backgroundColor = UIColor.chinaYellow
+                    } else {
                     self.view.backgroundColor = UIColor.gameplayBlue
+                    }
                     self.playButton.pulse()
                 }  }
     }
     
     fileprivate func updateViewsWithCorrectAnswer(){
-        
         DispatchQueue.main.async {
-            self.playButton.setTitle("Play", for: .normal)
+            self.playButton.setTitle(self.playTitle, for: .normal)
             self.scoreLabel.text = "\(Session.manager.score)"
             self.updateProgressBar()
             self.handleCorrectAnswerWithHaptic()
@@ -226,13 +243,28 @@ class GamePlayRound2ViewController: UIViewController {
             self.updateLifesGif()
         }
     }
+   
+    
+    //MARK: Language Localiation
+    private let finishedTitle = NSLocalizedString("Finished", comment: "none")
+    private var language: String = NSLocalizedString("AppLanguage", comment: "to help adjust certain views/settings")
+    private let quitMessage = NSLocalizedString("QuitMessage", comment: "none")
+    private let quitGTitle = NSLocalizedString("Quit Game?", comment: "none")
+    let playTitle = NSLocalizedString("Play", comment: "none")
+    let keepTitle = NSLocalizedString("Keep", comment: "none")
+    let repeatTitle = NSLocalizedString("Repeat", comment: "none")
+    let yesTitle = NSLocalizedString("Yes", comment: "none")
+    let noTitle = NSLocalizedString("No", comment: "none")
     
     func updateLifesGif(){
         let lifesLeft = Session.manager.lifes
-        if lifesLeft == 0 {
-            return
+        lilfesLabel.text = "\(lifesLeft)"
+        var gifname = ""
+        if language == "Chinese" {
+            gifname = "chinaKnowNotes\(lifesLeft)Lifes"
+        } else {
+            gifname = "knowNotes\(lifesLeft)Lifes"
         }
-        let gifname = "knowNotes\(lifesLeft)Lifes"
         DispatchQueue.main.async {
             let gifImage = UIImage.gifImageWithName(name: gifname)
             self.backgroundGif.image = gifImage
@@ -279,7 +311,7 @@ class GamePlayRound2ViewController: UIViewController {
             self.shuffleSetButton.isHidden = false
             self.shuffleSetButton.isUserInteractionEnabled = true
             self.shuffleSetButton.pulse()
-            self.playButton.setTitle("Keep", for: .normal)
+            self.playButton.setTitle(self.keepTitle, for: .normal)
         }
     }
     
@@ -296,10 +328,10 @@ class GamePlayRound2ViewController: UIViewController {
     
     
     @IBAction func playButtonTapped(_ sender: Any) {
-        if playButton.title(for: .normal) == "Keep" {
+        if playButton.title(for: .normal) == keepTitle {
             Session.manager.reuseRound2NoteSet()
             DispatchQueue.main.async {
-                self.playButton.setTitle("Play", for: .normal)
+                self.playButton.setTitle(self.playTitle, for: .normal)
                 self.hideShuffleButton()
             }
             doesGameNeedNewNote = true
@@ -315,7 +347,7 @@ class GamePlayRound2ViewController: UIViewController {
             doesGameNeedNewNote = false
             enableNoteButtons()
             DispatchQueue.main.async {
-                self.playButton.setTitle("Repeat", for: .normal)
+                self.playButton.setTitle(self.repeatTitle, for: .normal)
                 self.pulseAllNoteButtons()
             }
         } else {
@@ -327,7 +359,7 @@ class GamePlayRound2ViewController: UIViewController {
         DispatchQueue.main.async {
                 self.shuffleNotes()
             self.hideShuffleButton()
-                self.playButton.setTitle("Play", for: .normal)
+            self.playButton.setTitle(self.playTitle, for: .normal)
                 self.pulseAllNoteButtons()
                 self.assignNotesToButtons()
         }
@@ -466,52 +498,14 @@ class GamePlayRound2ViewController: UIViewController {
             circleProgressBar.setProgress(to: 0 , withAnimation: true)
     }
     //MARK: Alerts
-    var finishedGameAlert: UIAlertController {
-        let alert = UIAlertController(title: "Finished", message: "Would you like to submit score to GameCenter?", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "Submit Score", style: .default) { (_) in
-            let score: Int = Session.manager.score
-            if self.instrumentType == .grandPiano {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularGrandPiano)
-                GameCenterManager.manager.achievementsManager.reportUnlockAcousticGuitarProgress(with: score)
-                GameCenterManager.manager.leaderboardsManager.setPersonalGranPianoHighScore(score: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .acousticGuitar {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularAcousticGuitar)
-                GameCenterManager.manager.leaderboardsManager.setPersonalAcouGuitarHighScore(score: score)
-                GameCenterManager.manager.achievementsManager.reportViolinProgress(with: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .violin {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularViolin)
-                GameCenterManager.manager.leaderboardsManager.setPersonalViolinHighScore(score: score)
-                GameCenterManager.manager.achievementsManager.reportSaxaphoneProgress(with: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            } else if self.instrumentType == .saxaphone {
-                GameCenterManager.manager.leaderboardsManager.submit(score: score, to: .regularSaxaphone)
-                GameCenterManager.manager.leaderboardsManager.setPersonalSaxaphoneHighScore(score: score)
-                self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-            }
-        }
-        let action2 = UIAlertAction(title: "Discard Round", style: .destructive) { (_) in
-            self.performSegue(withIdentifier: "toLocalProfile", sender: self)
-        }
-        let action3 = UIAlertAction(title: "Replay Round", style: .default) { (_) in
-            self.resetGame()
-       }
-        alert.addAction(action2)
-        alert.addAction(action3)
-        alert.addAction(action)
-
-        return alert
-    }
-    
+ 
     var quitGameActionSheet: UIAlertController {
-        let quitGameActionSheet = UIAlertController(title: "Quit Game?", message: "Are you sure you would like to go back? Any progress made will not be saved.", preferredStyle: .actionSheet)
-        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (_) in
+        let quitGameActionSheet = UIAlertController(title: quitGTitle, message: quitMessage, preferredStyle: .actionSheet)
+        let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (_) in
             self.isModalInPresentation = false
             self.performSegue(withIdentifier: "toLocalProfile", sender: self)
         }
-        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+        let noAction = UIAlertAction(title:noTitle, style: .cancel) { (_) in
             return
         }
         quitGameActionSheet.addAction(noAction)
@@ -526,6 +520,9 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var backgroundGif: UIImageView!
     @IBOutlet weak var circleProgressBar: CircularProgressBar!
     
+    @IBOutlet weak var lilfesLabel: UILabel!
+    
+    @IBOutlet weak var scoreTitle: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var shuffleSetButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -540,6 +537,10 @@ class GamePlayRound2ViewController: UIViewController {
     @IBOutlet weak var note2ButtonView: UIView!
     @IBOutlet weak var note3ButtonView: UIView!
     @IBOutlet weak var note4ButtonView: UIView!
+    
+    @IBOutlet weak var leaveButton: UIButton!
+
+    
     
     lazy var allNoteButtons: [UIButton] = [note1Button,note2Button,note3Button,note4Button,note5Button]
     

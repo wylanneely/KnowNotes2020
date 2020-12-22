@@ -22,24 +22,11 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         instrumentLabel.text = nil
         instrumentButton.setTitle(playTitle, for: .normal)
         instrumentButton.layer.backgroundColor = UIColor.discoDayGReen.cgColor
-        
-//        switch instrumentType {
-//        case .grandPiano:
-//            let score = leaderboardManager.getHighScoreGrandPiano()
-//            highScoreLabel.text = "High Score: \(score)"
-//        case .acousticGuitar:
-//            let score = leaderboardManager.highScoreAcousticGuitar()
-//            highScoreLabel.text = "High Score: \(score)"
-//        case .violin:
-//            let score = leaderboardManager.highScoreViolin()
-//            highScoreLabel.text = "High Score: \(score)"
-//        case .saxaphone:
-//            let score = leaderboardManager.highScoreSax()
-//            highScoreLabel.text = "High Score: \(score)"
-//        }
+     
     }
     
     //MARK: Localization
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     let lockedd = NSLocalizedString("Locked", comment: "no comment")
     let playTitle = NSLocalizedString("Play", comment: "no comment")
     let gPiano = NSLocalizedString("Grand Piano", comment: "no comment")
@@ -146,6 +133,7 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         backgroundColorView.layer.borderWidth = 2
         instrumentButton.layer.borderWidth = 2
         if isLocked {
+            
             instrumentLabel.textColor = UIColor.darkGray
             instrumentButton.setTitle(lockedd, for: .normal)
             instrumentButton.setTitleColor(.white, for: .normal)
@@ -154,15 +142,26 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
             backgroundColorView.layer.backgroundColor = UIColor.lightGray.cgColor
             backgroundColorView.layer.borderColor = UIColor.imperialRed.cgColor
         } else {
+            if localizationLanguage == "Chinese"{
+                instrumentButton.layer.backgroundColor = UIColor.chinaYellow.cgColor
+                backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
+                backgroundColorView.layer.borderColor = UIColor.black.cgColor
+                instrumentButton.setTitleColor(UIColor.black, for: .normal)
+                instrumentButton.layer.borderColor = UIColor.white.cgColor
+            } else {
             backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
             backgroundColorView.layer.borderColor = UIColor.discoDayGReen.cgColor
             instrumentButton.setTitleColor(UIColor.black, for: .normal)
             instrumentButton.layer.borderColor = UIColor.midnightPurps.cgColor
+        }
             instrumentButton.pulsate()
         }
     }
     
     private func returnInstrumentColor()-> UIColor {
+        if localizationLanguage == "Chinese"{
+            return UIColor.chinaRed
+        }
         switch self.instrumentType {
         case .acousticGuitar:
             switch leaderboardManager.acousticGuitarLevel() {

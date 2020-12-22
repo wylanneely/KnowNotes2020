@@ -9,26 +9,45 @@ import GameKit
 
 
 class LaunchPageViewController: UIViewController {
+    
+    
+   private var language: String = NSLocalizedString("AppLanguage", comment: "to help adjust certain views/settings")
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         GameCenterManager.manager.viewController = self
         registerNotification()
         setUPButtons()
+        let modelType = UIDevice.modelName
+        print(modelType)
     }
     
     
     //MARK: Set Up
     func setUPButtons(){
-        let gifImage = UIImage.gifImageWithName(name: "KnowNotesLogoAnimation")
-        gif.image = gifImage
+        let launchScreenGif = NSLocalizedString("LaunchScreenGif", comment: "gif of logo animating")
+         let gifImage = UIImage.gifImageWithName(name: launchScreenGif)
+         gif.image = gifImage
+        
+        let offlineTitle = NSLocalizedString("OfflineButtonTitle",comment: "button title for offline play")
         signInButton.layer.borderWidth = 2
         signInButton.layer.cornerRadius = 10
-        signInButton.layer.borderColor = UIColor.coralRed.cgColor
         offlineButton.layer.borderWidth = 1
-    
         offlineButton.layer.cornerRadius = 10
-        offlineButton.layer.borderColor = UIColor.discoDayGReen.cgColor
+        offlineButton.setTitle(offlineTitle, for: .normal)
+        if language == "Chinese" {
+            setUpChineseViews()
+        } else {
+            signInButton.layer.borderColor = UIColor.coralRed.cgColor
+            offlineButton.layer.borderColor = UIColor.discoDayGReen.cgColor
+        }
+    }
+    
+    func setUpChineseViews(){
+        signInButton.layer.borderColor = UIColor.chinaRed.cgColor
+        offlineButton.layer.borderColor = UIColor.white.cgColor
+        self.view.backgroundColor = UIColor.systemYellow
     }
     
     //MARK: Outlets & Actions
@@ -67,13 +86,23 @@ class LaunchPageViewController: UIViewController {
         //MARK: In App Payments Begin
         Session.manager.getIAPProducts()
         Session.manager.restorePurchases()
-        let gifImage = UIImage.gifImageWithName(name: "KnowNotesLaunchScreen")
+        
+       let launchScreenGif = NSLocalizedString("LaunchScreenGif", comment: "gif of logo animating")
+        let gifImage = UIImage.gifImageWithName(name: launchScreenGif)
         gif.image = gifImage
         signInButton.isEnabled = notification.object as? Bool ?? false
-        signInButton.setTitle("Start", for: .normal)
+        let startTitle = NSLocalizedString("StartButtonTitle", comment: "Start Learning")
+        signInButton.setTitle(startTitle, for: .normal)
         signInButton.pulsate()
+        if language == "Chinese" {
+            signInButton.backgroundColor = UIColor.white
+            signInButton.setTitleColor(UIColor.chinaRed, for: .normal)
+            offlineButton.setTitleColor(UIColor.black, for: .normal)
+            signInButton.layer.borderColor = UIColor.chinaRed.cgColor
+        } else {
         signInButton.setTitleColor(UIColor.discoDayGReen, for: .normal)
         signInButton.layer.borderColor = UIColor.discoDayGReen.cgColor
+        }
     }
     
     //MARK: Navigation
@@ -99,4 +128,6 @@ class LaunchPageViewController: UIViewController {
     //    }
     
 }
+
+
 

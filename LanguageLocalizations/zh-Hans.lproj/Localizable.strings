@@ -63,9 +63,12 @@
 "Auto" = "汽车";
 "Begin Lesson" = "开始上课";
 //RoundVCs
+"Finished" = "完了";
 "Keep" = "保持";
 "Repeat" = "重复";
 "Quit Game?" = "退出课程";
+"Yes" = "是";
+"No" = "没有";
 //CustomAlertVC
 "Score" = "得分";
 "Submit Score" = "提交成绩";

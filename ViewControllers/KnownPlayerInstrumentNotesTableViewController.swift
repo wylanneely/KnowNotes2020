@@ -19,15 +19,11 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     var instrumentType: InstrumentType = .grandPiano
     var instrumentImage: UIImage?
     var leaderboardsManager = GameCenterManager.manager.leaderboardsManager
-    
     var IAP = Session.manager.iAPurchases
-    
     var groupStartNumber: Int = 1
-    
     var hasHalfNotes: Bool {
         return  Session.manager.hasHalfNotes
     }
-    
     
     var willCustomizeRounds: Bool {
         return false
@@ -40,8 +36,14 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         registerCellXibs()
         Session.manager.shuffleMode = .off
         IAP.iAPDelegate = self
+        if localizationLanguage == "Chinese"{
+            self.tableView.backgroundColor = UIColor.chinaYellow
+            self.tableView.sectionIndexBackgroundColor = UIColor.chinaYellow
+        }
     }
     
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+
     //BugWorkaround
  
     
@@ -213,11 +215,42 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         self.present(lockedRound3Alert, animated: true, completion: nil)
     }
     
+    //MARK: Localization Language
+    
+    let lockedTitle = NSLocalizedString("Locked", comment: "no comment")
+    let cRound1 = NSLocalizedString("cR1Message", comment: "no comment")
+    let cRound2 = NSLocalizedString("cR2Message", comment: "no comment")
+    let cRound3 = NSLocalizedString("cR3Message", comment: "no comment")
+    let ok = NSLocalizedString("OK", comment: "no comment")
+    let buyTitle = NSLocalizedString("Buy for", comment: "no comment")
+    let soonMessage = NSLocalizedString("ComingSoonMessage", comment: "no comment")
+    let lockedHalfsMessage = NSLocalizedString("lockedHalfsMessage", comment: "no comment")
+    let attentionTitle = NSLocalizedString("Attention", comment: "no comment")
+    let iAPError = NSLocalizedString("Error Purchasing", comment: "no comment")
+    let halfNotesTitle = NSLocalizedString("half notes", comment: "no comment")
+    let minorChordsTitle = NSLocalizedString("minor chords", comment: "no comment")
+    let unlockHalfsMessage = NSLocalizedString("unlockHalfs", comment: "no comment")
+    let noIAPonDeviceM = NSLocalizedString("In-App Purchases No", comment: "no comment")
+    let newPianist = NSLocalizedString("New Pianist", comment: "None")
+    let pianoPlayer = NSLocalizedString("Piano Player", comment: "None")
+    let  grandPianist =  NSLocalizedString("Grand Pianist", comment: "None")
+    let  masterGuitarist = NSLocalizedString("Master Guitarist", comment: "None")
+    let  guitarPlayer = NSLocalizedString("Guitar Player", comment: "None")
+    let   newGuitarist = NSLocalizedString("New Guitarist", comment: "None")
+    let  rChords = NSLocalizedString("Regular Chords", comment: "None")
+    let  concertM = NSLocalizedString("Concert Master", comment: "None")
+    let  violinP = NSLocalizedString("Violin Player", comment: "None")
+    let  newViolinist = NSLocalizedString("New Violinist", comment: "None")
+    let  saxMaster = NSLocalizedString("Sax Master", comment: "None")
+    let  saxP = NSLocalizedString("Sax Player", comment: "None")
+    let newSaxPlayer = NSLocalizedString("New Sax Player", comment: "None")
+
+    
     //MARK: Alerts
     
     var lockedRound2Alert: UIAlertController {
-        let alert = UIAlertController(title: "Locked", message: "Complete Round 1 to Unlock", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: cRound1, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok, style: .cancel) { (_) in
             return
         }
         alert.addAction(action2)
@@ -225,16 +258,16 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     var lockedRound3Alert: UIAlertController {
-        let alert = UIAlertController(title: "Locked", message: "Complete Round 2 to Unlock", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: cRound2, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok, style: .cancel) { (_) in
             return
         }
         alert.addAction(action2)
         return alert
     }
     var lockedCustomAlert: UIAlertController {
-        let alert = UIAlertController(title: "Soon", message: "Next Version Will Have Custom Rounds!", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: soonMessage, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok, style: .cancel) { (_) in
             return
         }
         alert.addAction(action2)
@@ -242,8 +275,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     var lockedHalfsAlert: UIAlertController {
-        let alert = UIAlertController(title: "Locked", message: "Complete all rounds to unlock", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: lockedHalfsMessage, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok, style: .cancel) { (_) in
             return
         }
         alert.addAction(action2)
@@ -251,35 +284,33 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     func showSingleAlert(withMessage message: String) {
-           let alertController = UIAlertController(title: "Uh, Oh!", message: message, preferredStyle: .alert)
-           alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           let alertController = UIAlertController(title: attentionTitle, message: message, preferredStyle: .alert)
+           alertController.addAction(UIAlertAction(title: ok, style: .default, handler: nil))
            self.present(alertController, animated: true, completion: nil)
        }
     
     var lockedGPianoHalfsAlert: UIAlertController {
         
         var product: SKProduct? = nil
-        var notes = "half notes"
         if instrumentType == .acousticGuitar {
         product = IAP.getProduct(containing: "agmc")
-            notes = "minor chords"
         } else if instrumentType == .grandPiano {
          product = IAP.getProduct(containing: "gphn")
         }
         
         let price = IAPManager.shared.getPriceFormatted(for: product) ?? "0.99"
-        let alert = UIAlertController(title: "Locked", message: "Achieve 30 or more correct notes on \(instrumentType) to unlock \(notes)", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok!", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: unlockHalfsMessage, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok + "!", style: .cancel) { (_) in
             return
         }
         func showSingleAlert(withMessage message: String) {
-               let alertController = UIAlertController(title: "Error Purchasing", message: message, preferredStyle: .alert)
-               alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+               let alertController = UIAlertController(title: iAPError, message: message, preferredStyle: .alert)
+               alertController.addAction(UIAlertAction(title: ok, style: .default, handler: nil))
                self.present(alertController, animated: true, completion: nil)
            }
-        let action = (UIAlertAction(title: "Buy for \(price)", style: .default, handler: { (_) in
+        let action = (UIAlertAction(title: buyTitle + " \(price)", style: .default, handler: { (_) in
             if !IAPManager.shared.canMakePayments() {
-                self.showSingleAlert(withMessage: "In-App Purchases are not allowed in this device.")
+                self.showSingleAlert(withMessage: self.noIAPonDeviceM)
                 return
                } else {
                 if let product = product{
@@ -293,7 +324,7 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                            }
                        }
                 }} else {
-                    self.showSingleAlert(withMessage:"In-App Purchase failed to Buy Product")
+                    self.showSingleAlert(withMessage:self.iAPError)
                     return
                 }
                    return
@@ -305,8 +336,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
     }
     
     var lockedShuffleAlert: UIAlertController {
-        let alert = UIAlertController(title: "Locked", message: "Complete round 1 to unlock", preferredStyle: .alert)
-        let action2 = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+        let alert = UIAlertController(title: lockedTitle, message: cRound1, preferredStyle: .alert)
+        let action2 = UIAlertAction(title: ok, style: .cancel) { (_) in
             return
         }
         alert.addAction(action2)
@@ -367,51 +398,73 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         switch instrumentType {
                         case .grandPiano:
                             if leaderboardsManager.didFinishGrandPianoRound2 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Grand Pianist", completedNotes: 7)
+                                notesCellExample.commonInit(image: instrumentImage, rank: grandPianist, completedNotes: 7)
+                                let score = GameCenterManager.manager.leaderboardsManager.getHighScoreGrandPiano()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             } else if leaderboardsManager.didFinishGrandPianoRound1 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Piano Player", completedNotes: 5)
+                                notesCellExample.commonInit(image: instrumentImage, rank: pianoPlayer, completedNotes: 5)
+                                let score = GameCenterManager.manager.leaderboardsManager.getHighScoreGrandPiano()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             }
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Pianist", completedNotes: 3)
+                            notesCellExample.commonInit(image: instrumentImage, rank: newPianist, completedNotes: 3)
+                            let score = GameCenterManager.manager.leaderboardsManager.getHighScoreGrandPiano()
+                            notesCellExample.setProgressBar(score: score)
                             return notesCellExample
                         case .acousticGuitar:
-                            
                             if leaderboardsManager.didFinishAcousticGuitarRound2 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Master Guitarist", completedNotes: 7)
+                                notesCellExample.commonInit(image: instrumentImage, rank: masterGuitarist, completedNotes: 7)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreAcousticGuitar()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             } else if leaderboardsManager.didFinishAcousticGuitarRound1 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Guitar Player", completedNotes: 5)
+                                notesCellExample.commonInit(image: instrumentImage, rank: guitarPlayer, completedNotes: 5)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreAcousticGuitar()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             }
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Guitarist", completedNotes: 3)
-                            notesCellExample.notesChordsLabel.text = "Regular Chords"
+                            notesCellExample.commonInit(image: instrumentImage, rank: newGuitarist, completedNotes: 3)
+                            let score = GameCenterManager.manager.leaderboardsManager.highScoreAcousticGuitar()
+                            notesCellExample.setProgressBar(score: score)
+                            notesCellExample.notesChordsLabel.text = rChords
                             return notesCellExample
                         case .violin:
                             if leaderboardsManager.didFinishViolinRound2 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Concert Master", completedNotes: 7)
+                                notesCellExample.commonInit(image: instrumentImage, rank: concertM , completedNotes: 7)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreViolin()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             } else if leaderboardsManager.didFinishViolinRound1 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Violin Player", completedNotes: 5)
+                                notesCellExample.commonInit(image: instrumentImage, rank: violinP, completedNotes: 5)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreViolin()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             }
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Violinist", completedNotes: 3)
-                                return notesCellExample
-                        
+                            notesCellExample.commonInit(image: instrumentImage, rank: newViolinist, completedNotes: 3)
+                            let score = GameCenterManager.manager.leaderboardsManager.highScoreViolin()
+                            notesCellExample.setProgressBar(score: score)
+                            return notesCellExample
                         case .saxaphone:
                             if leaderboardsManager.didFinishSaxRound2 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Sax Master", completedNotes: 7)
+                                notesCellExample.commonInit(image: instrumentImage, rank: saxMaster, completedNotes: 7)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreSax()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             } else if leaderboardsManager.didFinishSaxRound1 {
-                                notesCellExample.commonInit(image: instrumentImage, rank: "Sax Player", completedNotes: 5)
+                                notesCellExample.commonInit(image: instrumentImage, rank: saxP, completedNotes: 5)
+                                let score = GameCenterManager.manager.leaderboardsManager.highScoreSax()
+                                notesCellExample.setProgressBar(score: score)
                                 return notesCellExample
                             }
-                            notesCellExample.commonInit(image: instrumentImage, rank: "Noob Sax Player", completedNotes: 3)
-                                return notesCellExample
+                            notesCellExample.commonInit(image: instrumentImage, rank: newSaxPlayer, completedNotes: 3)
+                            let score = GameCenterManager.manager.leaderboardsManager.highScoreSax()
+                            notesCellExample.setProgressBar(score: score)
+                            return notesCellExample
                         }}}
             case 1:
                 if let notesCellExample = FirstKnownNotesViewCell.createCell() {
-                        notesCellExample.setSelectedView()
+                    notesCellExample.setSelectedView()
                     notesCellExample.delegate = self
                     return notesCellExample
                 }
@@ -487,7 +540,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             return notesCellExample
                         } else {
                             notesCellExample.setLockedNotesViews()
-                            return notesCellExample  }  }
+                            return notesCellExample  }
+                    }
                 }
             case 4:
                 if let notesCellExample = BeginEditNotesLessonViewCell.createCell() {
@@ -501,7 +555,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
             }
         }
         if indexPath.section == 1 {
-            
             switch indexPath.row {
             case 0:
                 switch self.instrumentType {
@@ -531,10 +584,8 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                             shuffleViewCell.setLockedState()
                             return shuffleViewCell  }  }
                 }
-                
             case 1:
                 if let lockedHalfNotesCell = HalfNotesLockedViewCell.createCell() {
-                    
                     switch self.instrumentType {
                     case .grandPiano:
                         lockedHalfNotesCell.delegate = self
@@ -545,7 +596,6 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         lockedHalfNotesCell.delegate = self
                         lockedHalfNotesCell.setGUitarChords()
                         return lockedHalfNotesCell
-                        
                     case .violin:
                         let cell = UITableViewCell()
                         cell.backgroundColor = UIColor.clear
@@ -554,11 +604,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
                         let cell = UITableViewCell()
                         cell.backgroundColor = UIColor.clear
                         return cell  }
-                    
                 }
             case 2:
                 if let lockedCustomRoundsCell = CustomRoundsViewCell.createCell() {
-                    
                     switch self.instrumentType {
                     case .grandPiano:
                         lockedCustomRoundsCell.delegate = self
@@ -587,6 +635,9 @@ class KnownPlayerInstrumentNotesTableViewController: UITableViewController,UIAda
         }
         let cell = UITableViewCell()
         cell.backgroundColor = UIColor.clear
+        if localizationLanguage == "Chinese"{
+            cell.backgroundColor = UIColor.chinaRed
+        }
         return cell
     }
     

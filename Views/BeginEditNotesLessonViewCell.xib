@@ -23,7 +23,7 @@
                             <constraint firstAttribute="height" constant="44" id="nIe-bs-cii"/>
                             <constraint firstAttribute="width" constant="180" id="pWC-gR-V0i"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
                         <state key="normal" title="Begin Lesson">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
@@ -58,7 +58,7 @@
                             <constraint firstAttribute="width" constant="180" id="cIe-uN-o9f"/>
                             <constraint firstAttribute="height" constant="44" id="pjg-0V-koe"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
                         <state key="normal" title="Begin Lesson">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="titleShadowColor" name="China Red"/>

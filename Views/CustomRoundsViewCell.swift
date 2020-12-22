@@ -58,11 +58,18 @@ class CustomRoundsViewCell: UITableViewCell {
 //        }
     }
     
+    
     class func createCell() -> CustomRoundsViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? CustomRoundsViewCell
-        return cell
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? CustomRoundsViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? CustomRoundsViewCell
+            return cell
+        }
     }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
     
     func setNotesLabelLanguage(){
         let labelTitle = NSLocalizedString("Customize Rounds", comment: "nope")

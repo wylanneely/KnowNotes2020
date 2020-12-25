@@ -20,33 +20,30 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         instrumentLabel.text = instrumentType.rawValue
         instrumentLabel.text = nil
-        instrumentButton.setTitle("  Play  ", for: .normal)
+        instrumentButton.setTitle(playTitle, for: .normal)
         instrumentButton.layer.backgroundColor = UIColor.discoDayGReen.cgColor
-        
-        switch instrumentType {
-        case .grandPiano:
-            let score = leaderboardManager.getHighScoreGrandPiano()
-            highScoreLabel.text = "High Score: \(score)"
-        case .acousticGuitar:
-            let score = leaderboardManager.highScoreAcousticGuitar()
-            highScoreLabel.text = "High Score: \(score)"
-        case .violin:
-            let score = leaderboardManager.highScoreViolin()
-            highScoreLabel.text = "High Score: \(score)"
-        case .saxaphone:
-            let score = leaderboardManager.highScoreSax()
-            highScoreLabel.text = "High Score: \(score)"
-
-        }
+     
     }
     
+    //MARK: Localization
+    let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+    let lockedd = NSLocalizedString("Locked", comment: "no comment")
+    let playTitle = NSLocalizedString("Play", comment: "no comment")
+    let gPiano = NSLocalizedString("Grand Piano", comment: "no comment")
+    let aGUitar = NSLocalizedString("Acoustic Guitar", comment: "no comment")
+    let violin = NSLocalizedString("Violin", comment: "no comment")
+    let sax = NSLocalizedString("Saxophone", comment: "no comment")
+    let notesUn = NSLocalizedString("Notes Unlocked", comment: "no comment")
+    let chordsUn = NSLocalizedString("Chords Unlocked", comment: "no comment")
+    
+    //MARK: Outlet
+
     @IBOutlet weak var backgroundColorView: UIView!
     @IBOutlet weak var instrumentImage: UIImageView!
     @IBOutlet weak var instrumentButton: UIButton!
     @IBOutlet weak var instrumentLabel: UILabel!
     
     @IBOutlet weak var notesUnlockedLabel: UILabel!
-    @IBOutlet weak var highScoreLabel: UILabel!
     
     @IBAction func instrumentButtonTapped(_ sender: Any) {
         delegate?.instrumentCellButtonTapped(type: self.instrumentType)
@@ -56,65 +53,75 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         
         self.isLocked = !isUnlocked
 
-        instrumentButton.setTitle("  Play  ", for: .normal)
+        instrumentButton.setTitle(playTitle, for: .normal)
         switch type {
         case .grandPiano:
             self.instrumentType = type
-            instrumentLabel.text = instrumentType.rawValue
+            instrumentLabel.text = gPiano
             instrumentImage.image = UIImage.ImageWithName(name: "grand_Piano")
             setLockedState()
-            let score = leaderboardManager.getHighScoreGrandPiano()
-            highScoreLabel.text = "High Score: \(score)"
-            if leaderboardManager.didFinishGrandPianoRound1 == true {
-                notesUnlockedLabel.text = "5 Notes Unlocked"
+            if leaderboardManager.isGrandPianoHalfsNotesUnlocked {
+                notesUnlockedLabel.text = "12 " + notesUn
+            } else if leaderboardManager.didFinishGrandPianoRound2 == true {
+                notesUnlockedLabel.text = "7 " + notesUn
+            } else if leaderboardManager.didFinishGrandPianoRound1 == true {
+                notesUnlockedLabel.text = "5 " + notesUn
             }else {
-                notesUnlockedLabel.text = "3 Chords Unlocked"
-            }
-            if leaderboardManager.didFinishGrandPianoRound2 == true {
-                notesUnlockedLabel.text = "7 Notes Unlocked"
+                notesUnlockedLabel.text = "3 " + notesUn
             }
         case .acousticGuitar:
             self.instrumentType = type
-            instrumentLabel.text = "Acoustic Guitar"
+            instrumentLabel.text = aGUitar
             instrumentImage.image = UIImage.ImageWithName(name: "acoustic_Guitar")
             setLockedState()
-            let score = leaderboardManager.highScoreAcousticGuitar()
-            highScoreLabel.text = "High Score: \(score)"
-            if leaderboardManager.didFinishAcousticGuitarRound1 == true {
-                notesUnlockedLabel.text = "5 Chords Unlocked"
-            } else {
-                notesUnlockedLabel.text = "3 Chords Unlocked"
+            
+            if leaderboardManager.isAcousticGuitarUnlocked == false  {
+                notesUnlockedLabel.text = "0 " + chordsUn
+                return
             }
-            if leaderboardManager.didFinishAcousticGuitarRound2 == true {
-                notesUnlockedLabel.text = "7 Notes Unlocked"
+            if leaderboardManager.isAcousticGUitarMinorChordsUnlocked {
+                notesUnlockedLabel.text = "14 "  + chordsUn
+            } else if leaderboardManager.didFinishAcousticGuitarRound1 == true {
+                notesUnlockedLabel.text = "5 "  + chordsUn
+            } else if leaderboardManager.didFinishAcousticGuitarRound2 == true {
+                notesUnlockedLabel.text = "7 "  + chordsUn
+            } else  {
+                notesUnlockedLabel.text = "3 "  + chordsUn
             }
         case .violin:
             self.instrumentType = type
             setLockedState()
-            instrumentLabel.text = "Violin"
+            instrumentLabel.text = violin
             instrumentImage.image = UIImage.ImageWithName(name: "violin")
             let score = leaderboardManager.highScoreViolin()
-            highScoreLabel.text = "High Score: \(score)"
             if leaderboardManager.didFinishViolinRound1 == true {
-                notesUnlockedLabel.text = "5 Notes Unlocked"
+                notesUnlockedLabel.text = "5 " + notesUn
             }
             if leaderboardManager.didFinishViolinRound2 == true {
-                notesUnlockedLabel.text = "7 Notes Unlocked" }
+                notesUnlockedLabel.text = "7 " + notesUn }
+            if leaderboardManager.isViolinUnlocked == false  {
+                notesUnlockedLabel.text = "0 " + notesUn
+            }
         
         case .saxaphone:
             self.instrumentType = type
             setLockedState()
-            instrumentLabel.text = "Saxophone"
+            instrumentLabel.text = sax
             instrumentImage.image = UIImage.ImageWithName(name: "saxophone")
             let score = leaderboardManager.highScoreSax()
-            highScoreLabel.text = "High Score: \(score)"
-            
+           // highScoreLabel.text = "High Score: \(score)"//
             
             if leaderboardManager.didFinishSaxRound1 == true {
-                notesUnlockedLabel.text = "5 Notes Unlocked"
+                notesUnlockedLabel.text = "5 " + notesUn
             }
             if leaderboardManager.didFinishSaxRound2 == true {
-                notesUnlockedLabel.text = "7 Notes Unlocked" }
+                notesUnlockedLabel.text = "7 " + notesUn
+                
+            }
+            if leaderboardManager.isSaxaphoneUnlocked == false  {
+                notesUnlockedLabel.text = "0 " + notesUn
+            }
+            
         
         }
     }
@@ -126,32 +133,80 @@ class InstrumentCollectionViewCell: UICollectionViewCell {
         backgroundColorView.layer.borderWidth = 2
         instrumentButton.layer.borderWidth = 2
         if isLocked {
+            
             instrumentLabel.textColor = UIColor.darkGray
-            instrumentButton.setTitle("Locked", for: .normal)
+            instrumentButton.setTitle(lockedd, for: .normal)
             instrumentButton.setTitleColor(.white, for: .normal)
             instrumentButton.layer.backgroundColor = UIColor.darkGray.cgColor
             instrumentButton.layer.borderColor = UIColor.imperialRed.cgColor
             backgroundColorView.layer.backgroundColor = UIColor.lightGray.cgColor
             backgroundColorView.layer.borderColor = UIColor.imperialRed.cgColor
         } else {
+            if localizationLanguage == "Chinese"{
+                instrumentButton.layer.backgroundColor = UIColor.chinaYellow.cgColor
+                backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
+                backgroundColorView.layer.borderColor = UIColor.black.cgColor
+                instrumentButton.setTitleColor(UIColor.black, for: .normal)
+                instrumentButton.layer.borderColor = UIColor.white.cgColor
+            } else {
             backgroundColorView.layer.backgroundColor = self.returnInstrumentColor().cgColor
             backgroundColorView.layer.borderColor = UIColor.discoDayGReen.cgColor
             instrumentButton.setTitleColor(UIColor.black, for: .normal)
             instrumentButton.layer.borderColor = UIColor.midnightPurps.cgColor
+        }
             instrumentButton.pulsate()
         }
     }
     
     private func returnInstrumentColor()-> UIColor {
+        if localizationLanguage == "Chinese"{
+            return UIColor.chinaRed
+        }
         switch self.instrumentType {
         case .acousticGuitar:
-            return UIColor.polarCapBlue
+            switch leaderboardManager.acousticGuitarLevel() {
+            case 0:
+                return UIColor.greenLandOcean
+            case 1:
+               return UIColor.polarCapBlue
+            case 2:
+                return UIColor.roxyClubPurple
+            default:
+                return UIColor.greenLandOcean
+            }
         case .grandPiano:
-            return UIColor.greenLandOcean
+            switch leaderboardManager.pianoLevel() {
+            case 0:
+                return UIColor.greenLandOcean
+            case 1:
+               return UIColor.polarCapBlue
+            case 2:
+                return UIColor.roxyClubPurple
+            default:
+                return UIColor.greenLandOcean
+            }
         case .violin:
-            return UIColor.greenLandOcean
+            switch leaderboardManager.violinLevel() {
+            case 0:
+                return UIColor.greenLandOcean
+            case 1:
+               return UIColor.polarCapBlue
+            case 2:
+                return UIColor.roxyClubPurple
+            default:
+                return UIColor.greenLandOcean
+            }
         case .saxaphone:
-            return UIColor.greenLandOcean
+            switch leaderboardManager.saxaphoneLevel() {
+            case 0:
+                return UIColor.greenLandOcean
+            case 1:
+               return UIColor.polarCapBlue
+            case 2:
+                return UIColor.roxyClubPurple
+            default:
+                return UIColor.greenLandOcean
+            }
         }
     }
     

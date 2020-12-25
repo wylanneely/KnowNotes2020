@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="lockedHalfNotes" rowHeight="60" id="KGk-i7-Jjw" customClass="HalfNotesLockedViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybI-VT-e6b">
+                        <rect key="frame" x="8" y="4" width="304" height="52"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sharps/Flats" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIu-0B-EGu">
+                                <rect key="frame" x="16" y="8.5" width="220" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="X5g-iW-LmH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="ChinaYellow"/>
+                                <size key="shadowOffset" width="0.5" height="0.5"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-JM-mcN">
+                                <rect key="frame" x="244" y="4.5" width="40" height="42.5"/>
+                                <color key="tintColor" name="discoDayGreen"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="jUW-Bb-3Vi"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="kJH-PD-8ts"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="niceNight"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sbu-JM-mcN" secondAttribute="trailing" constant="20" id="BiG-l0-U5b"/>
+                            <constraint firstAttribute="bottom" secondItem="sbu-JM-mcN" secondAttribute="bottom" constant="4" id="CsB-3A-6Q7"/>
+                            <constraint firstItem="sIu-0B-EGu" firstAttribute="centerY" secondItem="ybI-VT-e6b" secondAttribute="centerY" id="Cxm-bv-205"/>
+                            <constraint firstItem="sIu-0B-EGu" firstAttribute="leading" secondItem="ybI-VT-e6b" secondAttribute="leading" constant="16" id="QxD-0t-1MT"/>
+                            <constraint firstItem="sbu-JM-mcN" firstAttribute="top" secondItem="ybI-VT-e6b" secondAttribute="top" constant="4" id="aeS-qC-hhV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="niceNight"/>
+                <constraints>
+                    <constraint firstItem="ybI-VT-e6b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="5dp-l1-7TV"/>
+                    <constraint firstItem="ybI-VT-e6b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="M1s-P9-JcZ"/>
+                    <constraint firstAttribute="bottom" secondItem="ybI-VT-e6b" secondAttribute="bottom" constant="4" id="Oa9-Kc-RWY"/>
+                    <constraint firstAttribute="trailing" secondItem="ybI-VT-e6b" secondAttribute="trailing" constant="8" id="jjx-Ef-EXq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="niceNight"/>
+            <color key="tintColor" name="niceNight"/>
+            <gestureRecognizers/>
+            <connections>
+                <outlet property="borderView" destination="ybI-VT-e6b" id="WSH-IB-9U8"/>
+                <outlet property="lockedOrChecked" destination="sbu-JM-mcN" id="W0A-sa-aLq"/>
+                <outlet property="notesLabel" destination="sIu-0B-EGu" id="Sum-Lf-HUd"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
+        </tableViewCell>
+        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="lockedHalfNotes" rowHeight="60" id="A4c-zF-G8C" customClass="HalfNotesLockedViewCell" customModule="Know_Notes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A4c-zF-G8C" id="0zc-H4-yS0">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xvS-zP-Rho">
+                        <rect key="frame" x="8" y="4" width="304" height="52"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Sharps/Flats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6aE-ri-52S">
+                                <rect key="frame" x="16" y="8.5" width="200" height="35"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="ChinaYellow"/>
+                                <size key="shadowOffset" width="0.5" height="0.5"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D30-co-ywC">
+                                <rect key="frame" x="244" y="4.5" width="40" height="42.5"/>
+                                <color key="tintColor" name="Banana"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Wfl-F1-Bu7"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="wcU-47-pMz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="China Red"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="D30-co-ywC" secondAttribute="bottom" constant="4" id="F1X-0V-aM9"/>
+                            <constraint firstItem="6aE-ri-52S" firstAttribute="centerY" secondItem="xvS-zP-Rho" secondAttribute="centerY" id="FgW-M7-ta4"/>
+                            <constraint firstAttribute="trailing" secondItem="D30-co-ywC" secondAttribute="trailing" constant="20" id="NAC-Xd-yaN"/>
+                            <constraint firstItem="6aE-ri-52S" firstAttribute="leading" secondItem="xvS-zP-Rho" secondAttribute="leading" constant="16" id="Wf1-5x-jjO"/>
+                            <constraint firstItem="D30-co-ywC" firstAttribute="top" secondItem="xvS-zP-Rho" secondAttribute="top" constant="4" id="uja-vY-UEM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" name="China Red"/>
+                <constraints>
+                    <constraint firstItem="xvS-zP-Rho" firstAttribute="leading" secondItem="0zc-H4-yS0" secondAttribute="leading" constant="8" id="Ku9-Pd-xdx"/>
+                    <constraint firstAttribute="bottom" secondItem="xvS-zP-Rho" secondAttribute="bottom" constant="4" id="dhW-pg-aiI"/>
+                    <constraint firstAttribute="trailing" secondItem="xvS-zP-Rho" secondAttribute="trailing" constant="8" id="fhl-g0-GVv"/>
+                    <constraint firstItem="xvS-zP-Rho" firstAttribute="top" secondItem="0zc-H4-yS0" secondAttribute="top" constant="4" id="o0d-aK-VxX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="uHl-31-br6"/>
+            <color key="tintColor" name="niceNight"/>
+            <gestureRecognizers/>
+            <connections>
+                <outlet property="borderView" destination="xvS-zP-Rho" id="P1D-dL-lGW"/>
+                <outlet property="lockedOrChecked" destination="D30-co-ywC" id="Fcu-sn-me5"/>
+                <outlet property="notesLabel" destination="6aE-ri-52S" id="s8C-De-fND"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="222"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="lock.fill" catalog="system" width="128" height="128"/>
+        <namedColor name="Banana">
+            <color red="0.92900002002716064" green="0.85100001096725464" blue="0.58799999952316284" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="China Red">
+            <color red="0.86845642329999995" green="0.16273203489999999" blue="0.06268117577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChinaYellow">
+            <color red="1" green="0.86897069220000001" blue="0.0063200490549999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="discoDayGreen">
+            <color red="0.50199997425079346" green="1" blue="0.85900002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="niceNight">
+            <color red="0.36899998784065247" green="0.37599998712539673" blue="0.80800002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

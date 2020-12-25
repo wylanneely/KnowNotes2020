@@ -21,12 +21,24 @@ class HalfNotesLockedViewCell: UITableViewCell {
         setUpViews()
         setGestureRecognizer()
         setImage()
+        if Session.manager.currentInstrumentType == .grandPiano {
+            setPianoNotes()
+        }
+        if Session.manager.currentInstrumentType == .acousticGuitar {
+            setGUitarChords()
+        }
+        
     }
 
     func setUpViews(){
         borderView.layer.borderWidth = 2
         borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
         borderView.layer.cornerRadius = 10
+        if ShuffleNotesViewCell.localizationLanguage == "Spanish" {
+          let font =  notesLabel.font
+            let newFont = UIFont(name: font?.familyName ?? "", size: 20)
+            notesLabel.font = newFont
+        }
     }
     
     func setGestureRecognizer(){
@@ -44,38 +56,79 @@ class HalfNotesLockedViewCell: UITableViewCell {
             DispatchQueue.main.async {
                 self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
                 self.delegate?.sharpsFlatsSelected(hasHalfs: true)
+                 Session.manager.hasHalfNotes = true
             }
             includesHalfNotes = true
         } else {
             DispatchQueue.main.async {
                 self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
-                self.delegate?.sharpsFlatsSelected(hasHalfs: true)
+                self.delegate?.sharpsFlatsSelected(hasHalfs: false)
+                 Session.manager.hasHalfNotes = false
             }
             includesHalfNotes = false
         }
     }
     
+    
     class func createCell() -> HalfNotesLockedViewCell? {
         let nib = UINib(nibName: xibRID, bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
-        return cell
+        if localizationLanguage == "Chinese" {
+            let cell = nib.instantiate(withOwner: self, options: nil).last as? HalfNotesLockedViewCell
+            return cell
+        } else {
+            let cell = nib.instantiate(withOwner: self, options: nil).first as? HalfNotesLockedViewCell
+            return cell
+        }
+    }
+    static let localizationLanguage = NSLocalizedString("AppLanguage", comment: "Preffered Language of localization")
+    
+    func setLockedState(){
+        borderView.layer.backgroundColor = UIColor.beauBlue.cgColor
+        borderView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    func setUnlockedState(){
+        borderView.layer.backgroundColor = UIColor.clear.cgColor
+        borderView.layer.borderColor = UIColor.seaFoamBlue.cgColor
     }
     
- 
-    
     func setImage(){
-        
-        if isLocked == false {
+        if isLocked == true {
+            setLockedState()
             self.isUserInteractionEnabled = true
             DispatchQueue.main.async {
-                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+                self.lockedOrChecked.image = UIImage.init(systemName:"lock.fill")
             }
+            return
+        } else {
+        setUnlockedState()
+        }
+        if includesHalfNotes == true {
+            DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"checkmark.rectangle.fill")
+            }
+        }else {
+            DispatchQueue.main.async {
+                self.lockedOrChecked.image = UIImage.init(systemName:"rectangle.fill")
+                self.delegate?.sharpsFlatsSelected(hasHalfs: false)
+                Session.manager.hasHalfNotes = false
+            }
+        }
+    }
+    
+    
+    let addSF = NSLocalizedString("Add Sharps/Flats", comment: "none")
+    let addMinorC = NSLocalizedString("Add Minor Chords", comment: "none")
+
+    
+    func setPianoNotes() {
+        DispatchQueue.main.async {
+            self.notesLabel.text = self.addSF
         }
     }
     
     func setGUitarChords(){
         DispatchQueue.main.async {
-            self.notesLabel.text = "Add Minor Chords"
+            self.notesLabel.text = self.addMinorC
         }
     }
     

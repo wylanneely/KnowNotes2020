@@ -46,6 +46,12 @@ extension UIColor {
     static var beauBlue: UIColor {
         return UIColor(displayP3Red: 196/255, green: 224/255, blue: 249/255, alpha: 1.0)
     }
+    static var chinaRed: UIColor {
+        return UIColor(displayP3Red: 221/255, green: 41/255, blue: 16/255, alpha: 1.0)
+    }
+    static var chinaYellow: UIColor {
+        return UIColor(displayP3Red: 255/255, green: 222/255, blue: 2/255, alpha: 1.0)
+    }
     static var imperialRed: UIColor {
         return UIColor(displayP3Red: 255/255, green: 0/255, blue: 53/255, alpha: 1.0)
     }

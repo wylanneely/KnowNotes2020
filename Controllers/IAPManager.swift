@@ -40,30 +40,41 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
             onBuyProductHandler = handler
         }
     
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+            if let error = error as? SKError {
+                
+                if error.code != .paymentCancelled {
+                    print("IAP Restore Error:", error.localizedDescription)
+                    onBuyProductHandler?(.failure(error))
+                } else {
+                    onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
+                }
+                
+            }
+        }
+    
+    //MARK: Restore Purchases
+    
+   
+    
     func restorePurchases(withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
             onBuyProductHandler = handler
-            totalRestoredPurchases = 0
+          //  totalRestoredPurchases = 0
             SKPaymentQueue.default().restoreCompletedTransactions()
         }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        
         if totalRestoredPurchases != 0 {
             onBuyProductHandler?(.success(true))
         } else {
             print("IAP: No purchases to restore!")
             onBuyProductHandler?(.success(false))
         }
+        
+        
     }
-    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
-        if let error = error as? SKError {
-            if error.code != .paymentCancelled {
-                print("IAP Restore Error:", error.localizedDescription)
-                onBuyProductHandler?(.failure(error))
-            } else {
-                onBuyProductHandler?(.failure(IAPManagerError.paymentWasCancelled))
-            }
-        }
-    }
+    
     
     // MARK: - General Methods
     

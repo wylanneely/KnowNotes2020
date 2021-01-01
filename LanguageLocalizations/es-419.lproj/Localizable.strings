@@ -19,6 +19,8 @@
 "Leave" = "Salir";
 "Cancel" = "Cancelar";
 "Return to main menu" = "Volver al menú principal";
+"Restore" = "Restaurar Compras";
+"noRestore" = "No es necesario restaurar las compras";
 //CollectionViewCell
 "Chords Unlocked" = "Acordes Disponibles";
 "Notes Unlocked" = "Notas Disponibles";

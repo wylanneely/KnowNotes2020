@@ -20,6 +20,8 @@
 "Leave" = "Leave";
 "Cancel" = "Cancel";
 "Return to main menu" = "Return to main menu";
+"Restore" = "Restore Purchases";
+"noRestore" = "No Purchases Need Restoring";
 //CollectionViewCell
 "Chords Unlocked" = "Chords Unlocked";
 "Notes Unlocked" = "Notes Unlocked";

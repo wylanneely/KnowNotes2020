@@ -20,6 +20,8 @@
 "Leave" = "离开";
 "Cancel" = "取消";
 "Return to main menu" = "返回主菜单";
+"Restore" = "恢复购买";
+"noRestore" = "无需购买即可恢复";
 //CollectionViewCell
 "Chords Unlocked" = "和弦解锁";
 "Notes Unlocked" = "音乐音调可用";

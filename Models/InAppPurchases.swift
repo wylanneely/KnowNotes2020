@@ -74,6 +74,40 @@ class InAppPurchases {
         _ =  gameData.update()
         iAPDelegate?.shouldUpdateUI()
     }
+    
+    func restoreGameDataWithPayment(_ product: SKPayment) {
+            // Update the proper game data depending on the keyword the
+            // product identifier of the give product contains.
+       
+            //Unlock Acoustic Guitar
+        if product.productIdentifier.contains("IAPAcoustic") {
+            gameData.didUnlockTheAcousticGuitar = true
+            Session.leaderboard.unlockAcousticGuitarLocally()
+        }
+        //Unlock Acoustic Guitar Minor Chords
+        if product.productIdentifier.contains("agmc") {
+            gameData.didUnlockAcouGuitarMinorChords = true
+            Session.leaderboard.unlockAcousticGuitarMinorChordsLocally()
+        }
+        //unlock Grand Piano Half Notes
+        if product.productIdentifier.contains("gphn") {
+            gameData.didUnlockGrandPianoHalfNotes = true
+            Session.leaderboard.unlockGrandPiranoHalfsLocally()
+        }
+        //Unlock Violin
+        if product.productIdentifier.contains("IAPViolin") {
+            gameData.didUnlockViolin = true
+            Session.leaderboard.unlockViolinLocally()
+        }
+        //Unlock Sax
+        if product.productIdentifier.contains("IAPSax") {
+            gameData.didUnlockSaxophone = true
+            Session.leaderboard.unlockSaxLocally()
+
+        }
+        _ =  gameData.update()
+        iAPDelegate?.shouldUpdateUI()
+    }
 }
 
 protocol IAPDelegate {

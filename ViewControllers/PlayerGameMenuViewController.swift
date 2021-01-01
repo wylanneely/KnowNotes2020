@@ -206,7 +206,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         }
         let action2 = UIAlertAction(title: cancel, style: .cancel) { (_) in
         }
-        let action3 = UIAlertAction(title: restore, style: .cancel) { (_) in
+        let action3 = UIAlertAction(title: restore, style: .default) { (_) in
             Session.manager.restorePurchases { (result) in
                 switch result {
                 case .success(let success):
@@ -218,6 +218,7 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
                 case .failure(let error):
                     DispatchQueue.main.async {
                         self.showSingleAlert(withMessage: noPurchasesToRestore)
+                       print(error)
                     }                    
                     return
                 }

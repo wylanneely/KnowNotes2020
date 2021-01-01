@@ -39,7 +39,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
             // Keep the completion handler.
             onBuyProductHandler = handler
         }
-    
+
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
             if let error = error as? SKError {
                 
@@ -65,6 +65,8 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         
+        
+            
         if totalRestoredPurchases != 0 {
             onBuyProductHandler?(.success(true))
         } else {
@@ -116,6 +118,17 @@ class IAPManager: NSObject, SKPaymentTransactionObserver{
                 onBuyProductHandler?(.success(true))
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
+                
+                print(transaction.transactionIdentifier ?? "no identifier")
+                print(transaction.original?.transactionIdentifier ?? "no identifier")
+                if let  restoredPayment = transaction.original?.payment {
+                    
+                    Session.manager.iAPurchases.restoreGameDataWithPayment(restoredPayment)
+                    
+                }
+
+
+                
                 totalRestoredPurchases += 1
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:

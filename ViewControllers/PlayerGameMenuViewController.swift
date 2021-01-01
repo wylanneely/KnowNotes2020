@@ -16,7 +16,6 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
     
     //MARK:IAP
     var IAP = Session.manager.iAPurchases
-
     
     //MARK: Lifecycle
     
@@ -197,15 +196,40 @@ class PlayerGameMenuViewController: UIViewController, UICollectionViewDataSource
         let exitmessage = NSLocalizedString("Return to main menu", comment: "locked saxophone")
         let leave = NSLocalizedString("Leave", comment: "locked saxophone")
         let cancel = NSLocalizedString("Cancel", comment: "locked saxophone")
+        let restore = NSLocalizedString("Restore", comment: "restores purchases")
+        let noPurchasesToRestore = NSLocalizedString("noRestore", comment: " no restores purchases")
         
-        let alert = UIAlertController(title: exit, message: exitmessage, preferredStyle: .alert)
+        let alert = UIAlertController(title: exit, message: exitmessage, preferredStyle: .actionSheet)
+        
         let action = UIAlertAction(title: leave, style: .destructive) { (_) in
             self.performSegue(withIdentifier: "toLaunch", sender: self)
         }
         let action2 = UIAlertAction(title: cancel, style: .cancel) { (_) in
         }
+        let action3 = UIAlertAction(title: restore, style: .cancel) { (_) in
+            Session.manager.restorePurchases { (result) in
+                switch result {
+                case .success(let success):
+                    if success {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.showSingleAlert(withMessage: noPurchasesToRestore)
+                    }                    
+                    return
+                }
+            }
+
+            
+        }
+        
         alert.addAction(action)
+        alert.addAction(action3)
         alert.addAction(action2)
+        
         return alert
     }
     

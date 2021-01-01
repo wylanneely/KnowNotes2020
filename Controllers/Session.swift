@@ -198,7 +198,7 @@ class Session {
     }
     
     
-    func restorePurchases() {
+    func restorePurchases(withHandler handler: @escaping ((_ result: Result<Bool, Error>) -> Void)) {
         iAPurchases.iAPDelegate?.willStartLongProcess()
         IAPManager.shared.restorePurchases { (result) in
             DispatchQueue.main.async {
@@ -208,11 +208,15 @@ class Session {
                 case .success(let success):
                     if success {
                         self.iAPurchases.iAPDelegate?.didFinishRestoringPurchasedProducts()
-                    } else {
-                        self.iAPurchases.iAPDelegate?.didFinishRestoringPurchasesWithZeroProducts()
+                        
                     }
-
-                case .failure(let error): self.iAPurchases.iAPDelegate?.showIAPRelatedError(error)
+                    handler(.success(true))
+                    return
+                case .failure(let error):
+                    self.iAPurchases.iAPDelegate?.didFinishRestoringPurchasesWithZeroProducts()
+                    self.iAPurchases.iAPDelegate?.showIAPRelatedError(error)
+                    handler(.failure(error))
+                    return
                 }
             }
         }

@@ -85,7 +85,6 @@ class LaunchPageViewController: UIViewController {
     @objc private func authenticationChanged(_ notification: Notification) {
         //MARK: In App Payments Begin
         Session.manager.getIAPProducts()
-        Session.manager.restorePurchases()
         
        let launchScreenGif = NSLocalizedString("LaunchScreenGif", comment: "gif of logo animating")
         let gifImage = UIImage.gifImageWithName(name: launchScreenGif)

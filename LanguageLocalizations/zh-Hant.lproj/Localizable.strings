@@ -1,0 +1,82 @@
+
+//LaunchVC
+"AppLanguage" = "Chinese";
+"OfflineButtonTitle" = "離線模式";
+"LaunchScreenGif" = "KnowNotesChinaLogoAnimation";
+"StartButtonTitle" = " 開始 ";
+//PlayVC
+"OfflineGameCenterButton" = "離線筆記";
+"OK" = "好";
+"Error Purchasing" = "購買錯誤";
+"Acoustic Locked" = "民謠吉他鎖定";
+"LockedAcouMessage" = "用大鋼琴得分20，即可解鎖原聲吉他";
+"Buy for" = "購買 ";
+"In-App Purchases No" = "此設備上不允許進行應用內購買。";
+"Violin Locked" = "小提琴鎖定";
+"Violin Message" = "用原聲吉他演奏25和弦以解鎖小提琴。";
+"Saxophone Locked" = "薩克斯管鎖定";
+"Saxophone Message" = "用小提琴得分25，即可解鎖薩克斯管。";
+"Exit" = "出口";
+"Leave" = "離開";
+"Cancel" = "取消";
+"Return to main menu" = "返回主菜单";
+"Restore" = "恢復購買";
+"noRestore" = "無需購買即可恢復";
+//CollectionViewCell
+"Chords Unlocked" = "和弦解鎖";
+"Notes Unlocked" = "音樂音調可用";
+"Acoustic Guitar" = " 原聲吉他 ";
+"Grand Piano" = " 三角鋼琴 ";
+"Violin" = " 小提琴 ";
+"Saxophone" = " 薩克斯風 ";
+"Play" = " 聽 ";
+"Locked" = "已鎖定";
+//KnownNotesVC
+"cR1Message" = "完成第一輪解鎖";
+"cR2Message" = "完成第二輪解鎖";
+"cR3Message" = "完成第3輪解鎖";
+"ComingSoonMessage" = "即將推出...下次更新將允許自定義回合！";
+"lockedHalfsMessage" = "一旦所有回合都解鎖後可用";
+"Attention" = "注意";
+"half notes" = "半色調";
+"minor chords" = "小和弦";
+"unlockHalfs" = "取得30分以上的高分才能解鎖";
+"New Pianist" = "新鋼琴家";
+"Piano Player" = "鋼琴家";
+"Grand Pianist" = "大鋼琴家";
+"Master Guitarist" = "吉他大師";
+"Guitar Player" = "吉他手";
+"New Guitarist" = "新吉他手";
+"Regular Chords" = "普通和弦";
+"Concert Master" = "音樂會大師";
+"Violin Player" = "音樂會大師";
+"New Violinist" = "新小提琴家";
+"Sax Master" = "薩克斯大師";
+"Sax Player" = "薩克斯手";
+"New Sax Player" = "新薩克斯手";
+//ViewCells
+"Regular Gameplay" = "常規課程";
+"Add Sharps/Flats" = "添加銳器/平底鍋";
+"Add Minor Chords" = "添加小和弦";
+"Customize Rounds" = "自定義回合";
+"Shuffle Sets" = "隨機組合";
+"Off" = "關";
+"Manual" = "手冊";
+"Auto" = "汽車";
+"Begin Lesson" = "開始上課";
+//RoundVCs
+"Finished" = "完了";
+"Keep" = "保持";
+"Repeat" = "重複";
+"Quit Game?" = "退出課程";
+"Yes" = "是";
+"No" = "沒有";
+//CustomAlertVC
+"Score" = "得分";
+"Submit Score" = "提交成績";
+"QuitMessage" = "您確定要離開嗎？取得的任何進展將不會保存。";
+"Major Chords" = "大和弦";
+"Regular Notes" = "常规音";
+"Major & Minor Chords" = "大和弦和小和弦";
+"Regular Whole Notes" = "常規全音";
+"Regular + Sharp & Flats" = "常規+尖銳的平坦色調";

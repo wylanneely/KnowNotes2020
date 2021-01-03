@@ -6,7 +6,7 @@
 "0HT-sk-1S7.normalTitle" = "C";
 
 /* Class = "UILabel"; text = " Instruments"; ObjectID = "18G-Ym-qyB"; */
-"18G-Ym-qyB.text" = " 仪器 ";
+"18G-Ym-qyB.text" = " 儀器 ";
 
 /* Class = "UIButton"; normalTitle = "G"; ObjectID = "1Tx-Tk-tnu"; */
 "1Tx-Tk-tnu.normalTitle" = "G";
@@ -21,10 +21,10 @@
 "2w0-bF-atN.normalTitle" = "C";
 
 /* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "37s-Bc-y5d"; */
-"37s-Bc-y5d.normalTitle" = " 启动音乐音调  ";
+"37s-Bc-y5d.normalTitle" = " 啟動音樂音調  ";
 
 /* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "4zN-jJ-Af4"; */
-"4zN-jJ-Af4.normalTitle" = " 随机音 ";
+"4zN-jJ-Af4.normalTitle" = " 隨機音 ";
 
 /* Class = "UIButton"; normalTitle = "A"; ObjectID = "5Dc-9b-QBS"; */
 "5Dc-9b-QBS.normalTitle" = "A";
@@ -36,16 +36,16 @@
 "6WK-W1-uuB.normalTitle" = "E";
 
 /* Class = "UILabel"; text = "3 Notes Unlocked"; ObjectID = "7PV-Fz-Ryj"; */
-"7PV-Fz-Ryj.text" = "3个音符已解锁";
+"7PV-Fz-Ryj.text" = "3個音符已解鎖";
 
 /* Class = "UIButton"; normalTitle = "B"; ObjectID = "7gn-Rm-8xH"; */
 "7gn-Rm-8xH.normalTitle" = "B";
 
 /* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "8CA-Tn-F3L"; */
-"8CA-Tn-F3L.normalTitle" = "离开";
+"8CA-Tn-F3L.normalTitle" = "離開";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "8JK-27-Ogq"; */
-"8JK-27-Ogq.normalTitle" = "下一个";
+"8JK-27-Ogq.normalTitle" = "下一個";
 
 /* Class = "UIButton"; normalTitle = "C"; ObjectID = "8UL-eq-ITU"; */
 "8UL-eq-ITU.normalTitle" = "C";
@@ -66,7 +66,7 @@
 "AUl-wQ-j5l.normalTitle" = "F";
 
 /* Class = "UIButton"; normalTitle = "  Play Offline  "; ObjectID = "Arj-ek-fQg"; */
-"Arj-ek-fQg.normalTitle" = "  离线模式  ";
+"Arj-ek-fQg.normalTitle" = "  離線模式  ";
 
 /* Class = "UIButton"; normalTitle = "D"; ObjectID = "CBR-W9-0vX"; */
 "CBR-W9-0vX.normalTitle" = "D";
@@ -84,10 +84,10 @@
 "EVj-0D-pzz.normalTitle" = "B";
 
 /* Class = "UILabel"; text = "  Round 1"; ObjectID = "EjZ-A4-1rm"; */
-"EjZ-A4-1rm.text" = "  第1轮  ";
+"EjZ-A4-1rm.text" = "  第1輪  ";
 
 /* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "Elf-jw-tIg"; */
-"Elf-jw-tIg.normalTitle" = "离开";
+"Elf-jw-tIg.normalTitle" = "離開";
 
 /* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "FQM-Hf-IE3"; */
 "FQM-Hf-IE3.normalTitle" = " 登入 ";
@@ -99,7 +99,7 @@
 "FqL-Cd-8Un.text" = "♭  ";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "Fub-77-SYb"; */
-"Fub-77-SYb.normalTitle" = "下一个";
+"Fub-77-SYb.normalTitle" = "下一個";
 
 /* Class = "UIButton"; normalTitle = "G"; ObjectID = "GGa-Vh-z9c"; */
 "GGa-Vh-z9c.normalTitle" = "G";
@@ -111,7 +111,7 @@
 "GeG-e6-Zgt.text" = "3/3";
 
 /* Class = "UILabel"; text = "Grand Piano"; ObjectID = "H0Y-yL-egX"; */
-"H0Y-yL-egX.text" = "大钢琴";
+"H0Y-yL-egX.text" = "大鋼琴";
 
 /* Class = "UILabel"; text = "  #  "; ObjectID = "HmW-ih-oII"; */
 "HmW-ih-oII.text" = "  #  ";
@@ -123,7 +123,7 @@
 "IIl-u3-Qv7.normalTitle" = "C";
 
 /* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "Iaq-rd-Ath"; */
-"Iaq-rd-Ath.normalTitle" = "  启动音乐音调  ";
+"Iaq-rd-Ath.normalTitle" = "  啟動音樂音調  ";
 
 /* Class = "UILabel"; text = "Score"; ObjectID = "Ix8-UU-qWk"; */
 "Ix8-UU-qWk.text" = "得分";
@@ -132,10 +132,10 @@
 "JRE-AM-FRb.text" = "3/3";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "JSY-iX-g9d"; */
-"JSY-iX-g9d.normalTitle" = "下一个";
+"JSY-iX-g9d.normalTitle" = "下一個";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "NJy-9C-y8o"; */
-"NJy-9C-y8o.normalTitle" = "听";
+"NJy-9C-y8o.normalTitle" = "聽";
 
 /* Class = "UIButton"; normalTitle = " Retry Round "; ObjectID = "NUD-P4-yyq"; */
 "NUD-P4-yyq.normalTitle" = " 重试回合 ";
@@ -150,13 +150,13 @@
 "R59-On-VRl.normalTitle" = "C";
 
 /* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "RxS-Fx-hwg"; */
-"RxS-Fx-hwg.normalTitle" = " 随机音 ";
+"RxS-Fx-hwg.normalTitle" = " 隨機音 ";
 
 /* Class = "UIButton"; normalTitle = "B"; ObjectID = "SrD-Ok-eO9"; */
 "SrD-Ok-eO9.normalTitle" = "B";
 
 /* Class = "UIButton"; normalTitle = " Shuffled Notes "; ObjectID = "TGW-4N-cWu"; */
-"TGW-4N-cWu.normalTitle" = " 随机音 ";
+"TGW-4N-cWu.normalTitle" = " 隨機音 ";
 
 /* Class = "UIButton"; normalTitle = "G"; ObjectID = "TVW-BG-ZUU"; */
 "TVW-BG-ZUU.normalTitle" = "G";
@@ -165,7 +165,7 @@
 "UJm-dI-5LU.text" = "3/3";
 
 /* Class = "UIButton"; normalTitle = "  Start Notes  "; ObjectID = "VZd-km-Hec"; */
-"VZd-km-Hec.normalTitle" = "  启动音乐音调  ";
+"VZd-km-Hec.normalTitle" = "  啟動音樂音調  ";
 
 /* Class = "UILabel"; text = "  #  "; ObjectID = "ViV-Sc-5hZ"; */
 "ViV-Sc-5hZ.text" = "  #  ";
@@ -174,7 +174,7 @@
 "W50-SL-48K.normalTitle" = "G";
 
 /* Class = "UIButton"; normalTitle = " Submit Score "; ObjectID = "WV6-Dz-TW8"; */
-"WV6-Dz-TW8.normalTitle" = " 提交成绩 ";
+"WV6-Dz-TW8.normalTitle" = " 提交成績 ";
 
 /* Class = "UIButton"; normalTitle = "D"; ObjectID = "Wq1-Vu-KEt"; */
 "Wq1-Vu-KEt.normalTitle" = "D";
@@ -198,10 +198,10 @@
 "aOw-SO-o2E.footerTitle" = " ";
 
 /* Class = "UITableViewSection"; headerTitle = "Advanced Options"; ObjectID = "aOw-SO-o2E"; */
-"aOw-SO-o2E.headerTitle" = "高级选项";
+"aOw-SO-o2E.headerTitle" = "高級選項";
 
 /* Class = "UIButton"; normalTitle = "  Shuffle  "; ObjectID = "adz-gs-SWd"; */
-"adz-gs-SWd.normalTitle" = "  随机化  ";
+"adz-gs-SWd.normalTitle" = "  隨機化  ";
 
 /* Class = "UILabel"; text = "Score"; ObjectID = "ahI-ly-srg"; */
 "ahI-ly-srg.text" = "得分";
@@ -240,7 +240,7 @@
 "g6o-gU-GM7.text" = "  #  ";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "gKr-63-wkj"; */
-"gKr-63-wkj.normalTitle" = " 听 ";
+"gKr-63-wkj.normalTitle" = " 聽 ";
 
 /* Class = "UILabel"; text = "3/3"; ObjectID = "grj-H7-f8Y"; */
 "grj-H7-f8Y.text" = "3/3";
@@ -273,7 +273,7 @@
 "mbq-R9-ieU.normalTitle" = "B";
 
 /* Class = "UIButton"; normalTitle = "Leave"; ObjectID = "n6P-pt-SFe"; */
-"n6P-pt-SFe.normalTitle" = "离开";
+"n6P-pt-SFe.normalTitle" = "離開";
 
 /* Class = "UIButton"; normalTitle = "F"; ObjectID = "nX7-ee-IGp"; */
 "nX7-ee-IGp.normalTitle" = "F";
@@ -291,7 +291,7 @@
 "pVT-mB-axO.normalTitle" = "E";
 
 /* Class = "UIButton"; normalTitle = "  Shuffle  "; ObjectID = "pqq-jD-Gmt"; */
-"pqq-jD-Gmt.normalTitle" = "  随机化  ";
+"pqq-jD-Gmt.normalTitle" = "  隨機化  ";
 
 /* Class = "UIButton"; normalTitle = "D"; ObjectID = "r1F-7x-dh6"; */
 "r1F-7x-dh6.normalTitle" = "D";
@@ -312,7 +312,7 @@
 "uPI-Di-77l.normalTitle" = "B";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "ukh-yr-8nN"; */
-"ukh-yr-8nN.normalTitle" = "听";
+"ukh-yr-8nN.normalTitle" = "聽";
 
 /* Class = "UIButton"; normalTitle = "E"; ObjectID = "uyF-DW-fBb"; */
 "uyF-DW-fBb.normalTitle" = "E";
@@ -324,13 +324,13 @@
 "w99-il-o5r.normalTitle" = "E";
 
 /* Class = "UIButton"; normalTitle = "  Discard  "; ObjectID = "wG3-Vg-o07"; */
-"wG3-Vg-o07.normalTitle" = "  丢弃  ";
+"wG3-Vg-o07.normalTitle" = "  丟棄  ";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "wJb-0X-0x6"; */
-"wJb-0X-0x6.normalTitle" = "听";
+"wJb-0X-0x6.normalTitle" = "聽";
 
 /* Class = "UILabel"; text = "Instrument"; ObjectID = "wRH-5C-awc"; */
-"wRH-5C-awc.text" = "仪器";
+"wRH-5C-awc.text" = "儀器";
 
 /* Class = "UILabel"; text = "♭  "; ObjectID = "wu6-bH-MfY"; */
 "wu6-bH-MfY.text" = "♭  ";
